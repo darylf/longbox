@@ -19,7 +19,9 @@ module Longbox
     config.active_record.raise_in_transactional_callbacks = true
 
     config.generators do |g|
-      g.stylesheets   false
-      g.javascripts   false
+      g.factory_girl    false
+      g.javascripts     false
+      g.stylesheets     false
+    end
   end
 end
