@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508005131) do
+ActiveRecord::Schema.define(version: 20150512003523) do
+
+  create_table "books", force: :cascade do |t|
+    t.string   "issue_number", null: false
+    t.date     "cover_date"
+    t.integer  "series_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "books", ["series_id"], name: "index_books_on_series_id"
 
   create_table "publishers", force: :cascade do |t|
     t.string   "name",       null: false
@@ -20,12 +30,12 @@ ActiveRecord::Schema.define(version: 20150508005131) do
   end
 
   create_table "series", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "series_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",         null: false
+    t.integer  "publisher_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "series", ["series_id"], name: "index_series_on_series_id"
+  add_index "series", ["publisher_id"], name: "index_series_on_publisher_id"
 
 end
