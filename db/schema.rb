@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512003523) do
+ActiveRecord::Schema.define(version: 20150512230823) do
 
   create_table "books", force: :cascade do |t|
     t.string   "issue_number", null: false
@@ -30,10 +30,11 @@ ActiveRecord::Schema.define(version: 20150512003523) do
   end
 
   create_table "series", force: :cascade do |t|
-    t.string   "name",         null: false
+    t.string   "name",           null: false
     t.integer  "publisher_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "disambiguation"
   end
 
   add_index "series", ["publisher_id"], name: "index_series_on_publisher_id"

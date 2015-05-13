@@ -1,1 +1,15 @@
-=
+%h2 All Books
+
+- unless @books.empty?
+  %table
+    %thead
+      %tr
+        %th &nbsp;
+        %th Book
+        %th Publisher
+    %tbody
+      - @books.each do |book|
+        %tr
+          %td= link_to '[view]', book
+          %td= book.name
+          %td= book.publisher_name

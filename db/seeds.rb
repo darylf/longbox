@@ -4,8 +4,8 @@ dc = Publisher.where(name: 'DC Comics').first_or_create
 image = Publisher.where(name: 'Image Comics').first_or_create
 
 # Add some series
-s1 = Series.where(name: 'Avengers (1963)', publisher: marvel).first_or_create
-s2 = Series.where(name: 'Batman (1940)', publisher: dc).first_or_create
+s1 = Series.where(name: 'Avengers', disambiguation: 'Avengers (1963)', publisher: marvel).first_or_create
+s2 = Series.where(name: 'Batman', disambiguation: 'Batman (1940)', publisher: dc).first_or_create
 s3 = Series.where(name: 'Saga', publisher: image).first_or_create
 
 # Add some books
