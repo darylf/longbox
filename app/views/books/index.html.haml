@@ -1,5 +1,7 @@
 %h2 All Books
 
+= link_to 'New book', books_new_path
+
 - unless @books.empty?
   %table
     %thead
@@ -13,3 +15,5 @@
           %td= link_to '[view]', book
           %td= book.name
           %td= book.publisher_name
+
+= link_to 'New book', books_new_path

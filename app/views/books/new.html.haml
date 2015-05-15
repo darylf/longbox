@@ -1,0 +1,20 @@
+%h2 New Book
+
+- if @book.errors.any?
+  #error_explanation
+    %h2 Form is invalid
+    %ul
+      -for message in  @book.errors.full_messages
+        %li= message
+
+= form_for @book, url: books_create_path do |f|
+  %p
+    = f.label :issue_number
+    %br
+    = f.text_field :issue_number
+
+  %p
+    = collection_select(:book, :series_id, Series.all, :id, :name)
+
+  %p.button
+    = f.submit
