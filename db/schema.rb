@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512230823) do
+ActiveRecord::Schema.define(version: 20150519231924) do
 
   create_table "books", force: :cascade do |t|
     t.string   "issue_number", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150512230823) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "books", ["issue_number", "series_id"], name: "index_books_on_issue_number_and_series_id", unique: true
   add_index "books", ["series_id"], name: "index_books_on_series_id"
 
   create_table "publishers", force: :cascade do |t|
