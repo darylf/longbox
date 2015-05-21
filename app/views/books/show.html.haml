@@ -4,3 +4,6 @@
   = @book.publisher_name
 
 = link_to 'View all books', root_path
+
+%p
+  = link_to 'Destroy',  @book,  method: :delete, data: { confirm: 'Are you sure?' }
