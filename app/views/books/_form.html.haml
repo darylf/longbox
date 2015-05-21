@@ -1,0 +1,18 @@
+- if @book.errors.any?
+  #error_explanation
+    %h2 Form is invalid
+    %ul
+      -for message in  @book.errors.full_messages
+        %li= message
+
+= form_for(book) do |f|
+  %p
+    = f.label :issue_number
+    %br
+    = f.text_field :issue_number
+
+  %p
+    = collection_select(:book, :series_id, Series.all, :id, :name)
+  
+  %p.button
+    = f.submit

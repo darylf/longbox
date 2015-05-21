@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'books#index'
+  resources :books
 
-  get '/books/new', to: 'books#new'
-  post '/books/create', to: 'books#create'
-  get '/books/:id', to: 'books#show', as: 'book'
+  root 'books#index'
 end

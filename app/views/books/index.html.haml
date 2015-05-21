@@ -1,6 +1,6 @@
 %h2 All Books
 
-= link_to 'New book', books_new_path
+= link_to 'New book', new_book_path
 
 - unless @books.empty?
   %table
@@ -12,8 +12,11 @@
     %tbody
       - @books.each do |book|
         %tr
-          %td= link_to '[view]', book
+          %td
+            = link_to '[view]', book_path(book)
+            |
+            = link_to '[edit]', edit_book_path(book)
           %td= book.name
           %td= book.publisher_name
 
-= link_to 'New book', books_new_path
+= link_to 'New book', new_book_path
