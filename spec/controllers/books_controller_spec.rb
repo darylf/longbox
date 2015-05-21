@@ -3,9 +3,10 @@ require 'rails_helper'
 describe BooksController do
 
   let!(:book) { FactoryGirl.create :book }
-
-  let(:valid_attributes) {
-    book.attributes.symbolize_keys.select {|_, value| !value.nil? }
+  let!(:series) { FactoryGirl.create :series }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:book, series_id: series.id) }
+  let(:invalid_attributes) { 
+    FactoryGirl.attributes_for(:book, issue_number: book.issue_number, series_id: book.series.id) 
   }
 
   describe "GET index" do
@@ -34,7 +35,7 @@ describe BooksController do
     describe "with valid params" do
       it "creates a new Book" do
         expect {
-          post :create, {:book => valid_attributes}
+          post :create, {book: valid_attributes}
         }.to change(Book, :count).by(1)
       end
 
@@ -45,14 +46,14 @@ describe BooksController do
       end
 
       it "redirects to the created book" do
-        post :create, {:book => valid_attributes}
+        post :create, {book: valid_attributes}
         expect(response).to redirect_to(Book.last)
       end
     end
 
     describe "with invalid params" do
       it "re-renders the 'new' template" do
-        post :create, :book => {}
+        post :create, {book: invalid_attributes }
         expect(response).to render_template("new")
       end
     end

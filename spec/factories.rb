@@ -10,7 +10,7 @@ FactoryGirl.define do
   end
 
   factory :book do
-    issue_number '1'
+    sequence(:issue_number) { |n| n.to_s }
     series
   end
 end
