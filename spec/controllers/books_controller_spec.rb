@@ -66,7 +66,6 @@ describe BooksController do
   end
 
   describe 'POST update' do
-
     describe 'with valid params' do
       it 'redirects to the existing Book' do
         post :update, { id: book.to_param, book: { issue_number: '100' } }
@@ -86,8 +85,27 @@ describe BooksController do
         expect(response).to render_template('edit')
       end
     end
-
   end
 
+  describe "DELETE destroy" do
+    before(:each) do
+      @book1 = FactoryGirl.create(:book)
+    end
 
+    it "destroys a book" do
+      expect {
+          delete :destroy, :id => @book1.id
+        }.to change(Book, :count).by(-1)
+    end
+
+    it "destroys the requested book" do
+      delete :destroy, :id => @book1.id
+      expect { Book.find(@book1.id) }.to raise_exception(ActiveRecord::RecordNotFound)
+    end
+
+    it "redirects to the books list" do
+      delete :destroy, :id => @book1.id
+      expect(response).to redirect_to(books_path)
+    end
+  end
 end
