@@ -10,4 +10,8 @@ RSpec.describe Series, type: :model do
     expect(subject).not_to be_valid
   end
 
+  it 'responds to publisher_name' do
+    expect(subject.publisher_name).to eq("#{subject.publisher.name}")
+  end
+
 end

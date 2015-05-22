@@ -6,4 +6,7 @@ class Series < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :publisher_id
 
+  def publisher_name
+    publisher.name
+  end
 end

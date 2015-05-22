@@ -1,0 +1,9 @@
+%h1= @series.name
+%p
+  %strong Publisher: 
+  = @series.publisher_name
+
+= link_to 'View all books', root_path
+
+%p
+  = link_to 'Destroy',  @series,  method: :delete, data: { confirm: 'Are you sure?' }

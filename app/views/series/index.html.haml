@@ -1,0 +1,22 @@
+%h2 All Series
+
+= link_to 'New series', new_series_path
+
+- unless @series.empty?
+  %table
+    %thead
+      %tr
+        %th &nbsp;
+        %th Series
+        %th Publisher
+    %tbody
+      - @series.each do |series|
+        %tr
+          %td
+            = link_to '[view]', series_path(series)
+            |
+            = link_to '[edit]', edit_series_path(series)
+          %td= series.name
+          %td= series.publisher_name
+
+= link_to 'New series', new_series_path

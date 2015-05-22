@@ -5,7 +5,8 @@ FactoryGirl.define do
   end
 
   factory :series do
-    name 'Awesome Series'
+    sequence(:name) { |n| "Series V#{n}" }
+    disambiguation 'Awesome Series Vol 1'
     publisher
   end
 

@@ -1,0 +1,18 @@
+- if @series.errors.any?
+  #error_explanation
+    %h2 Form is invalid
+    %ul
+      -for message in  @series.errors.full_messages
+        %li= message
+
+= form_for(series) do |f|
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+
+  %p
+    = collection_select(:series, :publisher_id, Publisher.all, :id, :name)
+  
+  %p.button
+    = f.submit
