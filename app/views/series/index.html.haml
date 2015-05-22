@@ -1,22 +1,17 @@
 %h2 All Series
 
-= link_to 'New series', new_series_path
+%p= link_to 'New series', new_series_path
 
 - unless @series.empty?
   %table
     %thead
       %tr
-        %th &nbsp;
-        %th Series
         %th Publisher
+        %th Series
     %tbody
       - @series.each do |series|
         %tr
-          %td
-            = link_to '[view]', series_path(series)
-            |
-            = link_to '[edit]', edit_series_path(series)
-          %td= series.name
           %td= series.publisher_name
+          %td= link_to series.name, series_path(series)
 
-= link_to 'New series', new_series_path
+%p= link_to 'New series', new_series_path

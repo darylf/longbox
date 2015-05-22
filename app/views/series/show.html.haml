@@ -1,9 +1,15 @@
 %h1= @series.name
+
 %p
   %strong Publisher: 
   = @series.publisher_name
 
-= link_to 'View all books', root_path
+- unless @series.books.empty?
+  %ul
+    - @series.books.each do |book|
+      %li= book.name
 
 %p
+  = link_to 'Edit', edit_series_path(@series)
+  |
   = link_to 'Destroy',  @series,  method: :delete, data: { confirm: 'Are you sure?' }

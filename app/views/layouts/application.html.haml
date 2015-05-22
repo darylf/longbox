@@ -8,10 +8,15 @@
 
   %body
 
-    %h1 Longbox
+    %header
+      %h1 Longbox
+
+    %nav
+      %ul
+        %li= link_to 'View All Books', books_path
+        %li= link_to 'View All Series', series_index_path
 
     = yield
 
     %footer
-      %pre
-        = debug(params)
+      %p &nbsp;

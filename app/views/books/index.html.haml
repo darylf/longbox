@@ -1,6 +1,6 @@
 %h2 All Books
 
-= link_to 'New book', new_book_path
+%p= link_to 'New book', new_book_path
 
 - unless @books.empty?
   %table
@@ -19,4 +19,4 @@
           %td= book.name
           %td= book.publisher_name
 
-= link_to 'New book', new_book_path
+%p= link_to 'New book', new_book_path
