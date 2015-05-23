@@ -21,7 +21,11 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
-      redirect_to @book, notice: 'Artist was successfully created.'
+      if(params[:redirect_to_series])
+        redirect_to @book.series, notice: 'Book was successfully created.'
+      else
+        redirect_to @book, notice: 'Book was successfully created.'
+      end
     else
       render :new
     end

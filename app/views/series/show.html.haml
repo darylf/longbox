@@ -1,13 +1,33 @@
+- content_for(:title) { "Series: #{@series.name}" }
+
 %h1= @series.name
 
 %p
   %strong Publisher: 
   = @series.publisher_name
 
-- unless @series.books.empty?
-  %ul
-    - @series.books.each do |book|
-      %li= book.name
+= form_for (@series.books.new) do |f|
+  = f.hidden_field :series_id, value: @series.id
+  = hidden_field :redirect_to_series, value: true
+  %table
+    %thead
+      %tr
+        %th Release Date
+        %th Issue
+        %th Name
+    %tbody
+      - unless @series.books.empty?
+        - @series.books.where("id is not null").each do |book|
+          %tr
+            %td &nbsp;
+            %td= book.issue_number
+            %td= book.name
+      %tr
+        %td
+        %td= f.text_field :issue_number
+        %td
+
+  = f.submit 'Add book'
 
 %p
   = link_to 'Edit', edit_series_path(@series)

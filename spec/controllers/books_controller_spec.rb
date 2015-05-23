@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pp'
 
 describe BooksController do
 
@@ -43,9 +44,14 @@ describe BooksController do
         expect(assigns(:book)).to be_persisted
       end
 
-      it "redirects to the created book" do
+      it "redirects to the created book if no redirect_to is passed" do
         post :create, {book: valid_attributes}
         expect(response).to redirect_to(Book.last)
+      end
+
+      it "redirects to the series when passed redirect_to_series params" do
+        post :create, {book: valid_attributes, redirect_to_series: true}
+        expect(response).to redirect_to(series)
       end
     end
 

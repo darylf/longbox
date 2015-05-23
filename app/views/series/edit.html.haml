@@ -1,3 +1,5 @@
+- content_for(:title) { "Edit Series: #{@series.name}" }
+
 %h2 Edit series
 
 = render partial: 'form', locals: {series: @series}
