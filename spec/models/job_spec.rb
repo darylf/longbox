@@ -20,6 +20,14 @@ RSpec.describe Job, type: :model do
     expect(subject).not_to be_valid
   end
 
+  it 'must have unique book/person/role attributes' do
+    expect(subject).to be_valid
+    
+    dupe = FactoryGirl.create(:job, 
+      book_id: subject.book_id, person_id: subject.person_id, role: subject.role)
+    
+    expect(subject).not_to be_valid
+  end
 
   it 'displays name/role in a friendly manner' do
     expect(subject.display_person).to eq("#{job.person.name} (#{job.role.humanize})")

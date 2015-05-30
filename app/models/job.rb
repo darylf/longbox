@@ -9,6 +9,8 @@ class Job < ActiveRecord::Base
   validates_presence_of :person_id
   validates_presence_of :role
 
+  validates_uniqueness_of :role, scope: [:person_id, :book_id]
+
   enum role: [:unknown, :writer, :artist]
 
   def display_person
