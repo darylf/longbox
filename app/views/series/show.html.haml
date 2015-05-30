@@ -19,15 +19,12 @@
       - unless @series.books.empty?
         - @series.books.where("id is not null").each do |book|
           %tr
-            %td &nbsp;
+            %td= book.cover_date
             %td= book.issue_number
-            %td= book.name
-      %tr
-        %td
-        %td= f.text_field :issue_number
-        %td
-
-  = f.submit 'Add book'
+            %td= link_to book.name, book
+            %td
+              - book.jobs.each do |job|
+                = job.display_name
 
 %p
   = link_to 'Edit', edit_series_path(@series)

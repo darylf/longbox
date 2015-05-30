@@ -1,0 +1,15 @@
+- if @person.errors.any?
+  #error_explanation
+    %h2 Form is invalid
+    %ul
+      -for message in  @person.errors.full_messages
+        %li= message
+
+= form_for(person) do |f|
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+
+  %p.button
+    = f.submit

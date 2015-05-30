@@ -1,18 +1,37 @@
-- if @book.errors.any?
-  #error_explanation
-    %h2 Form is invalid
-    %ul
-      -for message in  @book.errors.full_messages
-        %li= message
+%fieldset
+  %legend Book
 
-= form_for(book) do |f|
-  %p
-    = f.label :issue_number
-    %br
-    = f.text_field :issue_number
+  - if book.errors.any?
+    #error_explanation
+      %h2 Book is invalid
+      %ul
+        -for message in  book.errors.full_messages
+          %li= message
 
-  %p
-    = collection_select(:book, :series_id, Series.all, :id, :name)
-  
-  %p.button
-    = f.submit
+  = form_for(book) do |f|
+    %table
+      %tr
+        %td
+          = f.label :series_id, 'Series'
+          %br
+          = collection_select(:book, :series_id, Series.all, :id, :name)
+        %td
+          = f.label :issue_number
+          %br
+          = f.text_field :issue_number
+      %tr
+        %td{colspan: 2}
+          %p
+            %strong People
+
+          %p
+            = f.fields_for :jobs do |fj| 
+              - unless fj.object.id.nil?
+                = fj.check_box '_destroy'
+                = fj.label :_destroy
+              = fj.collection_select :person_id, Person.all, :id, :name, include_blank: true
+              = fj.select(:role, Job.roles.keys.map {|role| [role.titleize,role]})
+              %br
+    
+    %p.button
+      = f.submit

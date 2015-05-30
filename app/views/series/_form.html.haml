@@ -12,7 +12,7 @@
     = f.text_field :name
 
   %p
-    = collection_select(:series, :publisher_id, Publisher.all, :id, :name)
+    = collection_select(:series, :publisher_id, Publisher.all, :id, :name, include_blank: true)
   
   %p.button
     = f.submit

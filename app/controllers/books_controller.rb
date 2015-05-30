@@ -11,10 +11,12 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @jobs = @book.jobs.build
   end
 
   def edit
     @book = Book.joins(series: :publisher).find(params[:id])
+    @jobs = @book.jobs.build
   end
 
   def create
@@ -48,6 +50,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:issue_number, :series_id)
+    params.require(:book).permit(:issue_number, :series_id, 
+      jobs_attributes: [:id, :book_id, :person_id, :role, :_destroy])
   end
 end

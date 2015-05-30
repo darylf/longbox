@@ -5,7 +5,18 @@
   %strong Publisher: 
   = @book.publisher_name
 
+- unless @book.jobs.empty?
+  %h2 People
+  %ul
+    - @book.jobs.each do |job|
+      %li
+        = job.person.name
+        %em= "(#{job.role.humanize})"
+
+
 = link_to 'View all books', root_path
 
 %p
+  = link_to 'Edit', edit_book_path(@book)
+  |
   = link_to 'Destroy',  @book,  method: :delete, data: { confirm: 'Are you sure?' }

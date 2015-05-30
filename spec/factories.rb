@@ -1,5 +1,20 @@
 FactoryGirl.define do
 
+  factory :book do
+    sequence(:issue_number) { |n| n.to_s }
+    series
+  end
+
+  factory :job do
+    person
+    book
+    role 0
+  end
+
+  factory :person do
+    name 'Stan Lee'
+  end
+
   factory :publisher do
     name 'Acme Publishing'
   end
@@ -10,8 +25,4 @@ FactoryGirl.define do
     publisher
   end
 
-  factory :book do
-    sequence(:issue_number) { |n| n.to_s }
-    series
-  end
 end

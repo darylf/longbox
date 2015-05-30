@@ -1,0 +1,5 @@
+- content_for(:title) { 'New person' }
+
+%h2 New person
+
+= render partial: 'form', locals: {person: @person}
