@@ -8,7 +8,7 @@ FactoryGirl.define do
   factory :job do
     person
     book
-    role 0
+    role 'artist'
   end
 
   factory :person do

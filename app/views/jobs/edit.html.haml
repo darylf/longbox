@@ -1,0 +1,5 @@
+- content_for(:title) { "Edit Job: #{@job.display_book} - #{@job.display_person}" }
+
+%h2 Edit job
+
+= render partial: 'form', locals: {job: @job}

@@ -11,7 +11,11 @@ class Job < ActiveRecord::Base
 
   enum role: [:unknown, :writer, :artist]
 
-  def display_name
+  def display_person
     "#{person.name} (#{role.humanize})"
+  end
+
+  def display_book
+    book.name
   end
 end

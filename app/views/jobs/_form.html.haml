@@ -1,0 +1,25 @@
+- if job.errors.any?
+  #error_explanation
+    %h2 Form is invalid
+    %ul
+      -for message in  job.errors.full_messages
+        %li= message
+
+= form_for(job) do |f|
+  %p
+    = f.label :book_id
+    %br
+    = f.collection_select :book_id, Book.all, :id, :name, include_blank: true
+
+  %p
+    = f.label :person_id
+    %br
+    = f.collection_select :person_id, Person.all, :id, :name, include_blank: true
+
+  %p
+    = f.label :role
+    %br
+    = f.select(:role, Job.roles.keys.map {|role| [role.titleize,role]})
+
+  %p.button
+    = f.submit

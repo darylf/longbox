@@ -22,7 +22,10 @@ RSpec.describe Job, type: :model do
 
 
   it 'displays name/role in a friendly manner' do
-    expect(subject.display_name).to eq("#{job.person.name} (#{job.role.humanize})")
+    expect(subject.display_person).to eq("#{job.person.name} (#{job.role.humanize})")
   end
 
+  it 'displays book name in a friendly manner' do
+    expect(subject.display_book).to eq(job.book.name)
+  end
 end
