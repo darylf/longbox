@@ -24,7 +24,7 @@
             %td= link_to book.name, book
             %td
               - book.jobs.each do |job|
-                = job.display_name
+                = job.display_person
 
 %p
   = link_to 'Edit', edit_series_path(@series)
