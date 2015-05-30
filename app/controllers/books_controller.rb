@@ -11,6 +11,8 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book.series_id = params[:series_id] unless params[:series_id].nil?
+    @book.issue_number = params[:next_issue] unless params[:next_issue].nil?
     @jobs = @book.jobs.build
   end
 
@@ -50,7 +52,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:issue_number, :series_id, 
+    params.require(:book).permit(:issue_number, :series_id, :cover_date, 
       jobs_attributes: [:id, :book_id, :person_id, :role, :_destroy])
   end
 end

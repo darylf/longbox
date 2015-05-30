@@ -14,7 +14,7 @@
     %tbody
       - @jobs.each do |job|
         %tr
-          %td= link_to '[view]', job
+          %td= link_to '[edit]', edit_job_path(job)
           %td= job.display_book
           %td= job.display_person
 

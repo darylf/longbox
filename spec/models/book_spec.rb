@@ -1,10 +1,21 @@
 require 'rails_helper'
-require 'pp'
 
 RSpec.describe Book, type: :model do
 
   let(:book) { FactoryGirl.build(:book) }
   subject { book }
+
+  it 'provides next issue number' do
+    series = FactoryGirl.create(:series, name: 'B11')
+    book1 = FactoryGirl.create(:book, series_id: series.id, issue_number: 1)
+    expect(Book.next_issue(series_id: series.id)).to eq("2")
+  end
+
+  it 'provides next issue number as "1" if Series has no books' do
+    series = FactoryGirl.create(:series, name: 'B12')
+    expect(Book.next_issue(series_id: series.id)).to eq("1")
+  end
+
 
   it 'is invalid without an issue number' do
     subject.issue_number = nil

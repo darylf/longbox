@@ -26,6 +26,8 @@
               - book.jobs.each do |job|
                 = job.display_person
 
+%p= link_to 'Add a book', new_book_path(:series_id => @series.id, :next_issue => @next_book_issue)
+
 %p
   = link_to 'Edit', edit_series_path(@series)
   |

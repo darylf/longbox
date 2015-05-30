@@ -27,6 +27,16 @@ describe BooksController do
       get :new
       expect(assigns(:book)).to be_a_new(Book)
     end
+
+    it 'prepopulates series_id when params[:series_id]' do
+      get :new, :series_id => 1
+      expect(assigns(:book).series_id).to eq(1)
+    end
+
+    it 'prepopulates issue_number when params[:next_issue]' do
+      get :new, :next_issue => 1
+      expect(assigns(:book).issue_number).to eq("1")
+    end
   end
 
   describe "POST create" do

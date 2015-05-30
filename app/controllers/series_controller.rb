@@ -6,6 +6,7 @@ class SeriesController < ApplicationController
 
   def show
     @series = Series.find(params[:id])
+    @next_book_issue = Book.next_issue(series_id: @series.id)
   end
 
   def new

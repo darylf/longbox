@@ -12,6 +12,15 @@ class Book < ActiveRecord::Base
   validates_presence_of :series_id
   validates_uniqueness_of :issue_number, scope: :series_id
 
+  def self.next_issue(series_id:)
+    books = where(series_id: series_id)
+    unless books.empty?
+      books.maximum(:issue_number).next
+    else
+      "1"
+    end
+  end
+
   def name
     "#{series.name} ##{issue_number}"
   end

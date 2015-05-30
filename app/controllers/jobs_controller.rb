@@ -2,7 +2,7 @@ class JobsController < ApplicationController
   # respond_to :html
   
   def index
-    @jobs = Job.all
+    @jobs = Job.includes([book: :series], :person).sort_by &:display_book
   end
 
   def show
