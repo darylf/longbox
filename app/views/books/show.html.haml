@@ -8,7 +8,7 @@
 - unless @book.jobs.empty?
   %h2 People
   %ul
-    - @book.jobs.each do |job|
+    - @book.jobs.sort_by(&:role).each do |job|
       %li
         = job.person.name
         %em= "(#{job.role.humanize})"
