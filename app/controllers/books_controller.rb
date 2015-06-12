@@ -50,7 +50,27 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def edit_multiple
+    @books = Book.find(params[:book_ids])
+    @jobs = Job.select(:person_id, :role).distinct.includes(:person).where(book_id: params[:book_ids])
+  end
+
+  def update_multiple
+    books = Book.find(params[:book_ids])
+    books.each do |book|
+      params[:jobs].each do |job|
+        logger.debug "\nDARYL IS LOGGING: Jobs.find_or_initialize_by(book_id: #{book.id}, person_id: #{job[:person_id]}, role: #{job[:role]})"
+        @jobs = Job.find_or_initialize_by(book_id: book.id, person_id: job[:person_id], role: job[:role])
+      end
+      book.jobs.destroy_all
+      book.jobs << @jobs
+      book.save!
+    end
+    redirect_to books_path
+  end
+
   private
+
   def book_params
     params.require(:book).permit(:issue_number, :series_id, :cover_date, 
       jobs_attributes: [:id, :book_id, :person_id, :role, :_destroy])

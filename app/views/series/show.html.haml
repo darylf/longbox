@@ -6,12 +6,11 @@
   %strong Publisher: 
   = @series.publisher_name
 
-= form_for (@series.books.new) do |f|
-  = f.hidden_field :series_id, value: @series.id
-  = hidden_field :redirect_to_series, value: true
+= form_tag edit_multiple_books_path, method: :get do
   %table
     %thead
       %tr
+        %th &nbsp;
         %th Release Date
         %th Issue
         %th Name
@@ -19,13 +18,16 @@
       - unless @series.books.empty?
         - @series.books.where("id is not null").each do |book|
           %tr
+            %td= check_box_tag "book_ids[]", book.id
             %td= book.cover_date
             %td= book.issue_number
             %td= link_to book.name, book
             %td
               - book.jobs.each do |job|
                 = job.display_person
+                %br
 
+  = submit_tag "Edit Books"
 %p= link_to 'Add a book', new_book_path(:series_id => @series.id, :next_issue => @next_book_issue)
 
 %p
