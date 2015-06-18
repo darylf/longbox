@@ -53,20 +53,23 @@ class BooksController < ApplicationController
   def edit_multiple
     @books = Book.find(params[:book_ids])
     @jobs = Job.select(:person_id, :role).distinct.includes(:person).where(book_id: params[:book_ids])
+    @jobs << Job.new
   end
 
   def update_multiple
     books = Book.find(params[:book_ids])
-    books.each do |book|
-      params[:jobs].each do |job|
-        logger.debug "\nDARYL IS LOGGING: Jobs.find_or_initialize_by(book_id: #{book.id}, person_id: #{job[:person_id]}, role: #{job[:role]})"
-        @jobs = Job.find_or_initialize_by(book_id: book.id, person_id: job[:person_id], role: job[:role])
-      end
+
+    books.each_with_index do |book, i|
       book.jobs.destroy_all
-      book.jobs << @jobs
+      params[:jobs].each_with_index do |job, j|
+        if !job[:person_id].blank? && !job[:_destroy].present?
+          @jobs = Job.find_or_initialize_by(book_id: book.id, person_id: job[:person_id], role: job[:role])
+          book.jobs << @jobs
+        end
+      end
       book.save!
     end
-    redirect_to books_path
+    redirect_to books.first.series
   end
 
   private
