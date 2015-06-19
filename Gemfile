@@ -9,8 +9,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 
+gem 'database_cleaner', group: :test
+
 group :development, :test do
-	gem 'factory_girl_rails'
+  gem 'factory_girl_rails'
 	gem 'rspec-rails'
   gem 'sqlite3'
 end

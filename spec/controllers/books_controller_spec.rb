@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pp'
 
 describe BooksController do
 
@@ -124,4 +123,46 @@ describe BooksController do
       expect(response).to redirect_to(books_path)
     end
   end
+
+  describe "GET edit_multiple" do
+    it "assigns requested books as @books" do
+      get :edit_multiple, book_ids: [book.to_param]
+      expect(assigns(:books)).to eq([book])
+    end
+
+    it "assigns distrinct jobs from the provided books as @jobs" do
+      jobs = FactoryGirl.create(:job, book_id: book.id)
+
+      get :edit_multiple, book_ids: [book.to_param]
+
+      selected_jobs = Job.select(:person_id, :role).distinct.includes(:person).where(book_id: [book.to_param])
+      selected_jobs << Job.new
+      
+      expect(assigns(:jobs)).to eq(selected_jobs)
+    end
+  end
+
+  describe "POST update_multiple" do
+    it "update jobs for book" do
+      book1 = FactoryGirl.create :book
+      person = FactoryGirl.create :person
+      job1 = FactoryGirl.create(:job, book_id: book1.id)
+
+      post :update_multiple, book_ids: [book1.to_param], jobs: [{person_id: person.id, role: job1.role}]
+
+      expect(book1.jobs.find_by_person_id(person.id).role).to eq(job1.role)
+    end
+
+    it "delete job for book when _destroy is true" do
+      book1 = FactoryGirl.create :book
+      person = FactoryGirl.create :person
+      job1 = FactoryGirl.create(:job, book_id: book1.id)
+
+      post :update_multiple, book_ids: [book1.to_param], jobs: [{person_id: person.id, role: job1.role, _destroy: true}]
+
+      expect(book1.jobs.find_by_person_id(person.id)).to be_nil
+    end
+
+  end
+
 end
