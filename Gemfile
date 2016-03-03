@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.1.3'
+ruby '2.3.0'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.5'
 
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
@@ -13,7 +13,7 @@ gem 'database_cleaner', group: :test
 
 group :development, :test do
   gem 'factory_girl_rails'
-	gem 'rspec-rails'
+  gem 'rspec-rails'
   gem 'sqlite3'
 end
 
