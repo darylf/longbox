@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20150530171000) do
 
-  create_table "books", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "books", id: :serial, force: :cascade do |t|
     t.string "issue_number", null: false
     t.date "cover_date"
     t.integer "series_id"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150530171000) do
     t.index ["series_id"], name: "index_books_on_series_id"
   end
 
-  create_table "jobs", force: :cascade do |t|
+  create_table "jobs", id: :serial, force: :cascade do |t|
     t.integer "book_id"
     t.integer "person_id"
     t.integer "role", default: 0, null: false
@@ -31,19 +34,19 @@ ActiveRecord::Schema.define(version: 20150530171000) do
     t.index ["role", "book_id", "person_id"], name: "index_jobs_on_role_and_book_id_and_person_id", unique: true
   end
 
-  create_table "people", force: :cascade do |t|
+  create_table "people", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "publishers", force: :cascade do |t|
+  create_table "publishers", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "series", force: :cascade do |t|
+  create_table "series", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.integer "publisher_id"
     t.datetime "created_at", null: false
