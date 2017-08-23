@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.4.1'
 
-gem 'rails', '4.2.5'
+gem 'rails', '5.1.2'
 
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
