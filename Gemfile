@@ -13,6 +13,10 @@ gem 'slim-rails'
 gem 'database_cleaner', group: :test
 gem 'listen', group: :development
 
+group :development do
+  gem 'rubocop'
+end
+
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.7'

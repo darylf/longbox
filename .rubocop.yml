@@ -1,9 +1,21 @@
 AllCops:
   Exclude:
+    - bin/*
+    - db/migrate/*
     - db/schema.rb
+    - db/seeds.rb
+
+Rails:
+  Enabled: true
 
 Metrics/LineLength:
-  Max: 99
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 20
+
+Style/Documentation:
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
