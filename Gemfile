@@ -12,14 +12,14 @@ gem 'sass-rails', '~> 5.0'
 gem 'slim-rails', '~> 3.1.3'
 
 group :development do
-  gem 'rubocop'
   gem 'listen'
+  gem 'rubocop'
 end
 
 group :development, :test do
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 3.7'
   gem 'fuubar'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :production do
