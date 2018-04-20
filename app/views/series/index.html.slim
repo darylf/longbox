@@ -1,0 +1,8 @@
+h2 Browse Series
+
+=link_to 'Create a New Series', new_series_path
+
+- unless @series.empty?
+  ul
+    - @series.each do |series|
+      li= link_to series.name, series_path(series)
