@@ -85,7 +85,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.1.0)
       ast (~> 2.4.0)
-    pg (0.21.0)
+    pg (1.0.0)
     powerpack (0.1.1)
     rack (2.0.4)
     rack-test (1.0.0)
@@ -194,7 +194,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails (~> 4.3.3)
   listen
-  pg (~> 0.21)
+  pg (~> 1.0.0)
   rails (~> 5.1.2)
   rails_12factor
   rspec-rails (~> 3.7)
