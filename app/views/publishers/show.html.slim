@@ -1,0 +1,29 @@
+header.main-content__header
+  h1.main-content__page-title= @publisher.name
+  div= link_to "Edit #{@publisher.name}", edit_publisher_path(@publisher)
+
+section.main-content__body
+  dl
+    - unless @publisher.series.empty?
+      dt.attribute-label Series
+      dd.attribute-data
+        table
+          thead
+            tr
+              th Name
+              th Publisher
+              th
+          tbody
+            - @publisher.series.each do |series|
+              tr
+                td= link_to series.name, series_path(series)
+                td= series.publisher_name
+                td= link_to 'Edit', edit_series_path(series)
+
+    dt.attribute-label Created At
+    dd.attribute-data
+      = @publisher.created_at
+
+    dt.attribute-label Updated At
+    dd.attribute-data
+      = @publisher.updated_at

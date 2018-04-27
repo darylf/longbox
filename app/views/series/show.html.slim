@@ -1,5 +1,40 @@
-h2= @series.name
+header.main-content__header
+  h1.main-content__page-title= @series.name
+  div= link_to "Edit #{@series.name}", edit_series_path(@series)
 
-ul
-  li= link_to 'Home', root_path
-  li= link_to 'Edit', edit_series_path(@series)
+section.main-content__body
+  dl
+    dt.attribute-label Publisher
+    dd.attribute-data
+      = @series.publisher_name
+
+    dt.attribute-label Books
+    dd.attribute-data
+      = link_to 'New book', new_series_book_path(series_id: @series.id)
+      - unless @series.books.empty?
+        table
+          thead
+            tr
+              th Name
+              th Issue
+              th Type
+              th Creator
+              th
+          tbody
+            - @series.books.each do |book|
+              tr
+                td= link_to book.display_name, series_book_path(book)
+                td= book.issue
+                td= book.book_type
+                td
+                  -book.relations.each do |relation|
+                    = relation.display_creator
+                td= link_to 'Edit', edit_series_book_path(@series, book)
+
+    dt.attribute-label Created At
+    dd.attribute-data
+      = @series.created_at
+
+    dt.attribute-label Updated At
+    dd.attribute-data
+      = @series.updated_at

@@ -1,0 +1,10 @@
+h1.main-content__page-title= @creator.display_name
+
+= link_to "Edit #{@creator.display_name}", edit_creator_path(@creator)
+
+dl
+  dt Created At
+  dd= @creator.created_at
+
+  dt Updated At
+  dd= @creator.updated_at

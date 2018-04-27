@@ -6,14 +6,17 @@
         li= message
 
 = form_for(series) do |f|
-  p
-    = f.label :name
-    br
-    = f.text_field :name
+  .field_unit
+    .field-unit__label
+      label for="series_publisher_id" Publisher
+    .field-unit__field
+      = collection_select(:series, :publisher_id, Publisher.all, :id, :name, include_blank: true)
 
-  p
-    = collection_select(:series, :publisher_id, Publisher.all, :id, :name, include_blank: true)
+  .field-unit
+    .field-unit__label
+      = f.label :name
+    .field-unit__field
+      = f.text_field :name
 
-  p.button
-
-  = f.submit
+  .form-actions
+    = f.submit

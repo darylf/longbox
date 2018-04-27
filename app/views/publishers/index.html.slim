@@ -1,0 +1,16 @@
+header.main-content__header
+  h1.main-content__page-title Publishers
+  div= link_to 'New publisher', new_publisher_path
+
+section.main-content__body
+  - unless @publishers.empty?
+    table
+      thead
+        tr
+          th Name
+          th
+      tbody
+        - @publishers.each do |publisher|
+          tr
+            td= link_to publisher.name, publisher_path(publisher)
+            td= link_to 'Edit', edit_publisher_path(publisher)

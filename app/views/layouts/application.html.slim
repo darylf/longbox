@@ -6,8 +6,18 @@ html
     = stylesheet_link_tag 'application', media: 'all'
 
   body
-    header
-      h1 Long Box
+    .wrapper
+      header.app-header
+        h1 Long Box
 
-    main
-      = yield
+      nav.navigation
+        ul
+          li= link_to 'Series', root_path, {class: 'navigation__link'}
+          li= link_to 'Publishers', publishers_path, {class: 'navigation__link'}
+          li= link_to 'Creators', creators_path, {class: 'navigation__link'}
+
+      main.main-content
+        = yield
+
+      footer
+        p &copy; 2018 Long Box

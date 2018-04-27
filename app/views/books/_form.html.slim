@@ -1,0 +1,38 @@
+- if book.errors.any?
+  #error_explanation
+    h2 Form is invalid
+    ul
+      -for message in  book.errors.full_messages
+        li= message
+
+= form_for([series, book]) do |f|
+  .field-unit
+    .field-unit__label
+      label Series
+    .field-unit__field
+      input(type="text" disabled value=series.name)
+
+  .field-unit
+    .field-unit__label
+      = f.label :issue
+    .field-unit__field
+      = f.text_field :issue
+
+  .field-unit
+    .field-unit__label
+      = f.label :book_type
+    .field-unit__field.field-unit--select
+      = f.select :book_type, options_for_select(Book.book_types.keys.to_a)
+
+  .field-unit
+    .field-unit__label
+      = f.label :name
+    .field-unit__field
+      = f.text_field :name
+
+  .field-unit
+    .field-unit__label
+      = f.label :creators
+
+  .form-actions
+    = f.submit
