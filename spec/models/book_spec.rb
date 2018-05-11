@@ -13,6 +13,10 @@ RSpec.describe Book, type: :model do
     expect(subject.series_name).to eq(book.series.name)
   end
 
+  it 'should respond to publisher_name' do
+    expect(subject.publisher_name).to eq(book.series.publisher.name)
+  end
+
   it 'should respond to display_name with the name field when applicable' do
     subject.name = 'Ahoy!'
     expect(subject.display_name).to eq('Ahoy!')

@@ -30,9 +30,12 @@
     .field-unit__field
       = f.text_field :name
 
-  .field-unit
-    .field-unit__label
-      = f.label :creators
+  fieldset
+    legend Creators
+    = link_to_add_association 'add creator', f, :relations
+    - unless book.relations.empty?
+      = f.fields_for :relations do |relation|
+        = render 'relation_fields', f: relation
 
   .form-actions
     = f.submit

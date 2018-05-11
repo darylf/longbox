@@ -7,6 +7,7 @@ section.main-content__body
     - unless @publisher.series.empty?
       dt.attribute-label Series
       dd.attribute-data
+        = link_to 'Add Series', new_series_path(publisher: @publisher.id)
         table
           thead
             tr
@@ -19,6 +20,7 @@ section.main-content__body
                 td= link_to series.name, series_path(series)
                 td= series.publisher_name
                 td= link_to 'Edit', edit_series_path(series)
+
 
     dt.attribute-label Created At
     dd.attribute-data

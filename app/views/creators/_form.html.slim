@@ -6,14 +6,17 @@
         li= message
 
 = form_for(creator) do |f|
-  p
-    = f.label :first_name
-    br
-    = f.text_field :first_name
+  .field-unit
+    .field-unit__label
+      = f.label :first_name
+    .field-unit__field
+      = f.text_field :first_name
 
-  p
-    = f.label :last_name
-    br
-    = f.text_field :last_name
+  .field-unit
+    .field-unit__label
+      = f.label :last_name
+    .field-unit__field
+      = f.text_field :last_name
 
-  p.button= f.submit
+  .form-actions
+    = f.submit

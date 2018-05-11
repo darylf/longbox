@@ -5,7 +5,7 @@ header.main-content__header
 section.main-content__body
   dl
     dt.attribute-label Series
-    dd.attribute-data= @book.series_name
+    dd.attribute-data= link_to @book.series_name, @book.series
 
     dt.attribute-label Name
     dd.attribute-data= @book.name
@@ -18,7 +18,6 @@ section.main-content__body
 
     dt.attribute-label Creators
     dd.attribute-data
-      = link_to 'New relationship', '#'
       - unless @book.relations.empty?
         table
           thead
@@ -29,9 +28,9 @@ section.main-content__body
           tbody
             - @book.relations.each do |relation|
               tr
-                td= link_to relation.creator, creator_path(creator)
+                td= link_to relation.creator.display_name, creator_path(relation.creator)
                 td= relation.role
-                td= link_to 'Edit', edit_series_book_path(@series, book)
+                td= link_to 'Edit', edit_series_book_path(@book.series, @book)
 
     dt.attribute-label Created At
     dd.attribute-data= @book.created_at

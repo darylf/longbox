@@ -32,13 +32,13 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       redirect_to [@book.series, @book], notice: 'Book was successfully updated.'
     else
-      render edit_series_book_path(@series, @book)
+      render :edit
     end
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:name, :issue, :book_type, :series_id)
+    params.require(:book).permit(:name, :issue, :book_type, :series_id, relations_attributes: [:id, :creator_id, :role, :_destroy])
   end
 end
