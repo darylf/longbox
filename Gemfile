@@ -15,6 +15,7 @@ gem 'slim-rails', '~> 3.1.3'
 
 group :development do
   gem 'byebug'
+  gem 'faker'
   gem 'listen'
   gem 'rubocop'
 end
