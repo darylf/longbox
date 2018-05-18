@@ -39,6 +39,12 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:name, :issue, :book_type, :series_id, relations_attributes: [:id, :creator_id, :role, :_destroy])
+    params.require(:book).permit(
+      :name,
+      :issue,
+      :book_type,
+      :series_id,
+      relations_attributes: %i[id creator_id role _destroy]
+    )
   end
 end

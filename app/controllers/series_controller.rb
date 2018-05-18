@@ -10,7 +10,7 @@ class SeriesController < ApplicationController
 
   def new
     @series = Series.new
-    @selected_value = params[:publisher] ? {} : {selected: params[:publisher]}
+    @selected_value = params[:publisher] ? {} : { selected: params[:publisher] }
   end
 
   def create
