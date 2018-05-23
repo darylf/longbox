@@ -1,8 +1,21 @@
-h2 Browse Series
+header.main-content__header
+  h1.main-content__page-title Series
+  div= link_to 'New series', new_series_path
 
-=link_to 'Create a New Series', new_series_path
-
-- unless @series.empty?
-  ul
-    - @series.each do |series|
-      li= link_to series.name, series_path(series)
+section.main-content__body.main-content__body--flush
+  - unless @series.empty?
+    table
+      thead
+        tr
+          th class="cell-label cell-label--string cell-label--false" scope="col" Name
+          th scope="col" Publisher
+          th
+      tbody
+        - @series.each do |series|
+          tr
+            td class="cell-data cell-data--string"
+              = link_to series.name, series_path(series)
+            td class="cell-data cell-data--string"
+              = series.publisher_name
+            td class="cell-data cell-data--has-one"
+              = link_to 'Edit', edit_series_path(series)

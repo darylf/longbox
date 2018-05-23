@@ -1,0 +1,22 @@
+- if @creator.errors.any?
+  #error_explanation
+    h2 Form is invalid
+    ul
+      -for message in  @creator.errors.full_messages
+        li= message
+
+= form_for(creator) do |f|
+  .field-unit
+    .field-unit__label
+      = f.label :first_name
+    .field-unit__field
+      = f.text_field :first_name
+
+  .field-unit
+    .field-unit__label
+      = f.label :last_name
+    .field-unit__field
+      = f.text_field :last_name
+
+  .form-actions
+    = f.submit

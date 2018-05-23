@@ -1,0 +1,22 @@
+.wrapper {
+  display: grid;
+  grid-template-areas: 'header header header header' 'navigation main main main' 'navigation footer footer  footer';
+  grid-gap: $base-spacing;
+  padding: 0 $base-spacing*10;
+}
+
+header {
+  grid-area: header;
+}
+
+nav {
+  grid-area: navigation;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}

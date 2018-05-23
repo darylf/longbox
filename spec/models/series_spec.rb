@@ -19,4 +19,8 @@ RSpec.describe Series, type: :model do
     create(:series, name: subject.name)
     expect(subject).not_to be_valid
   end
+
+  it 'must respond to publisher_name' do
+    expect(subject.publisher_name).to eq(subject.publisher.name)
+  end
 end

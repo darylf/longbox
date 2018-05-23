@@ -6,4 +6,8 @@ class Relation < ApplicationRecord
   enum role: { unknown: 0, writer: 1, artist: 2 }
 
   validates :role, uniqueness: { scope: %i[book creator] }
+
+  def display_creator
+    "#{creator.display_name} (#{role})"
+  end
 end

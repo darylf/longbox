@@ -13,4 +13,8 @@ RSpec.describe Creator, type: :model do
     subject.last_name = nil
     expect(subject).not_to be_valid
   end
+
+  it 'should have a display_name' do
+    expect(subject.display_name).to eq("#{creator.first_name} #{creator.last_name}")
+  end
 end

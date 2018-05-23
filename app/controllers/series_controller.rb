@@ -1,4 +1,4 @@
-# Application controller
+# Series controller
 class SeriesController < ApplicationController
   def index
     @series = Series.all
@@ -10,6 +10,7 @@ class SeriesController < ApplicationController
 
   def new
     @series = Series.new
+    @selected_value = params[:publisher] ? {} : { selected: params[:publisher] }
   end
 
   def create
@@ -26,9 +27,19 @@ class SeriesController < ApplicationController
     @series = Series.find(params[:id])
   end
 
+  def update
+    @series = Series.find(params[:id])
+
+    if @series.update(series_params)
+      redirect_to @series, notice: 'Series was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
   private
 
   def series_params
-    params.require(:series).permit(:name, :disambiguation, :publisher_id)
+    params.require(:series).permit(:name, :publisher_id)
   end
 end

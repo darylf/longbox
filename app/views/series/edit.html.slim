@@ -1,3 +1,5 @@
-h2= "Edit series: #{@series.name}"
+header.main-content__header
+  h1.main-content__page-title= "Edit series: #{@series.name}"
 
-= render partial: 'form', locals: {series: @series}
+section.main-content__body
+  = render partial: 'form', locals: {series: @series}
