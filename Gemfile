@@ -2,8 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-gem 'rails', '~> 5.1.2'
+gem 'rails', '~> 5.2.0'
 
+gem 'bootsnap', require: false
 gem 'pg', '~> 1.0.0'
 gem 'puma', '~> 3.7'
 
