@@ -23,7 +23,7 @@ section.main-content__body
           tbody
             - @series.books.each do |book|
               tr
-                td= link_to book.display_name, series_book_path(book)
+                td= link_to book.display_name, series_book_path(@series, book)
                 td= book.issue
                 td= book.book_type
                 td
