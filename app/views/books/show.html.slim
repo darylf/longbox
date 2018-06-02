@@ -33,3 +33,5 @@ section.main-content__body
 
   aside
     = image_tag @book.image_url
+    br
+    = link_to 'Remove image', delete_attachment_path(@book.image.id, redirect: request.original_url), :method => :delete if @book.image.attached?
