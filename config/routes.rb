@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :series do
     resources :books, except: [:index]
   end
+
   root 'series#index'
 end

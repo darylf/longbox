@@ -30,6 +30,18 @@
     .field-unit__field
       = f.text_field :name
 
+  .field-unit
+    .field-unit__label
+      = f.label :image
+    .field-unit__field
+      = f.file_field :image, direct_upload: true
+
+  .field-unit
+    .field-unit__label
+      = label_tag :remove_attachment, 'Remove image?'
+    .field-unit__field
+      = check_box_tag :remove_attachment
+
   fieldset
     legend Creators
     = link_to_add_association 'add creator', f, :relations

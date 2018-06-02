@@ -1,6 +1,7 @@
 FROM ruby:2.5.1
 
 RUN apt-get update && apt-get install -y \
+    imagemagick \
     libpq-dev \
     build-essential \
     nodejs \

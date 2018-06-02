@@ -3,7 +3,7 @@ header.main-content__header
   div= link_to "Edit #{@book.display_name}", edit_series_book_path(@book.series, @book)
 
 section.main-content__body
-  dl
+  dl(style='flex-grow:2')
     dt.attribute-label Series
     dd.attribute-data= link_to @book.series_name, @book.series
 
@@ -19,21 +19,17 @@ section.main-content__body
     dt.attribute-label Creators
     dd.attribute-data
       - unless @book.relations.empty?
-        table
-          thead
-            tr
-              th Creator
-              th Role
-              th
-          tbody
-            - @book.relations.each do |relation|
-              tr
-                td= link_to relation.creator.display_name, creator_path(relation.creator)
-                td= relation.role
-                td= link_to 'Edit', edit_series_book_path(@book.series, @book)
+        ul
+          - @book.relations.each do |relation|
+            li
+              = link_to relation.creator.display_name, creator_path(relation.creator)
+              = " (#{relation.role})"
 
     dt.attribute-label Created At
     dd.attribute-data= @book.created_at
 
     dt.attribute-label Updated At
     dd.attribute-data= @book.updated_at
+
+  aside
+    = image_tag @book.image_url
