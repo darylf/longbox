@@ -1,0 +1,34 @@
+- if user.errors.any?
+  #error_explanation
+    h2 Form is invalid
+    ul
+      -for message in  user.errors.full_messages
+        li= message
+
+= form_for(user) do |f|
+  .field-unit
+    .field-unit__label
+      = f.label :name
+    .field-unit__field
+      = f.text_field :name
+
+  .field-unit
+    .field-unit__label
+      = f.label :email
+    .field-unit__field
+      = f.text_field :email
+
+  .field-unit
+    .field-unit__label
+      = f.label :password
+    .field-unit__field
+      = f.password_field :password
+
+  .field-unit
+    .field-unit__label
+      = f.label :password_confirmation
+    .field-unit__field
+      = f.password_field :password_confirmation
+
+  .form-actions
+    = f.submit

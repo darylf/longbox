@@ -1,0 +1,25 @@
+header.main-content__header
+  h1.main-content__page-title Log In
+
+section.main-content__body
+
+  = form_for(:session, url: login_path) do |f|
+    .field-unit
+      .field-unit__label
+        = f.label :email
+      .field-unit__field
+        = f.text_field :email
+
+    .field-unit
+      .field-unit__label
+        = f.label :password
+      .field-unit__field
+        = f.password_field :password
+
+    .form-actions
+      = f.submit 'Log in'
+
+    p
+      | New User?
+      '
+      = link_to 'Sign Up', new_user_path
