@@ -1,0 +1,20 @@
+header.main-content__header
+  h1.main-content__page-title Users
+
+section.main-content__body.main-content__body--flush
+  - unless @users.empty?
+    table
+      thead
+        tr
+          th class="cell-label cell-label--string cell-label--false" scope="col" Id
+          th class="cell-label cell-label--string cell-label--false" scope="col" Name
+          th scope="col"
+      tbody
+        - @users.each do |user|
+          tr
+            td class="cell-data cell-data--string"
+              = user.id
+            td class="cell-data cell-data--string"
+              = link_to user.email, user
+            td class="cell-data cell-data--has-one"
+              = link_to 'Edit', edit_user_path(user)
