@@ -1,0 +1,5 @@
+header.main-content__header
+  h1.main-content__page-title= " Edit Creator: #{@creator.display_name}"
+
+section.main-content__body
+  = render partial: 'form', locals: {creator: @creator}

@@ -8,6 +8,7 @@ gem 'bootsnap', require: false
 gem 'pg', '~> 1.0.0'
 gem 'puma', '~> 3.7'
 
+gem 'bcrypt', '~> 3.1.12'
 gem 'cocoon', '~> 1.2.11'
 gem 'image_processing', '~> 1.2'
 gem 'jbuilder', '~> 2.0'

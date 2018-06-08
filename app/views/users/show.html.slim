@@ -1,0 +1,25 @@
+header.main-content__header
+  h1.main-content__page-title= @user.name
+
+section.main-content__body
+  dl
+    - unless @creator.books.empty?
+      dt.attribute-label Work
+      dd.attribute-data
+        table
+          thead
+            tr
+              th Book
+              th Publisher
+              th
+          tbody
+            - @creator.books.each do |book|
+              tr
+                td= link_to book.display_name, [book.series,book]
+                td= book.publisher_name
+
+    dt Created At
+    dd= @creator.created_at
+
+    dt Updated At
+    dd= @creator.updated_at
