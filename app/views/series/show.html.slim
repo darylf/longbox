@@ -1,6 +1,9 @@
+- content_for(:page_title) { @series.name }
+
 header.main-content__header
   h1.main-content__page-title= @series.name
-  div= link_to "Edit #{@series.name}", edit_series_path(@series)
+  - if logged_in?
+    div= link_to "Edit #{@series.name}", edit_series_path(@series)
 
 section.main-content__body
   dl
@@ -10,7 +13,8 @@ section.main-content__body
 
     dt.attribute-label Books
     dd.attribute-data
-      = link_to 'New book', new_series_book_path(series_id: @series.id)
+      - if logged_in?
+        = link_to 'New book', new_series_book_path(series_id: @series.id)
       - unless @series.books.empty?
         table
           thead
@@ -29,7 +33,9 @@ section.main-content__body
                 td
                   -book.relations.each do |relation|
                     = relation.display_creator
-                td= link_to 'Edit', edit_series_book_path(@series, book)
+                td
+                  - if logged_in?
+                    = link_to 'Edit', edit_series_book_path(@series, book)
 
     dt.attribute-label Created At
     dd.attribute-data

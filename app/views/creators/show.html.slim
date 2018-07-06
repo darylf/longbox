@@ -1,6 +1,9 @@
+- content_for(:page_title) { @creator.display_name }
+
 header.main-content__header
   h1.main-content__page-title= @creator.display_name
-  = link_to "Edit #{@creator.display_name}", edit_creator_path(@creator)
+  - if logged_in?
+    = link_to "Edit #{@creator.display_name}", edit_creator_path(@creator)
 
 section.main-content__body
   dl

@@ -1,8 +1,8 @@
 # Book controller
 class BooksController < ApplicationController
-  def show
-    @book = Book.find(params[:id])
-  end
+  before_action :find_book, only: %i[edit update show]
+
+  def show; end
 
   def new
     @series = Series.find(params[:series_id])
@@ -23,12 +23,10 @@ class BooksController < ApplicationController
 
   def edit
     @series = Series.find(params[:series_id])
-    @book = Book.find(params[:id])
   end
 
   def update
     @series = Series.find(params[:series_id])
-    @book = Book.find(params[:id])
     @book.image.attach(params[:image])
 
     if @book.update(book_params)
@@ -49,5 +47,9 @@ class BooksController < ApplicationController
       :series_id,
       relations_attributes: %i[id creator_id role _destroy]
     )
+  end
+
+  def find_book
+    @book = Book.find(params[:id])
   end
 end

@@ -1,6 +1,9 @@
+- content_for(:page_title) { @book.display_name }
+
 header.main-content__header
   h1.main-content__page-title= @book.display_name
-  div= link_to "Edit #{@book.display_name}", edit_series_book_path(@book.series, @book)
+  - if logged_in?
+    div= link_to "Edit #{@book.display_name}", edit_series_book_path(@book.series, @book)
 
 section.main-content__body
   dl(style='flex-grow:2')
@@ -34,4 +37,5 @@ section.main-content__body
   aside
     = image_tag @book.image_url
     br
-    = link_to 'Remove image', delete_attachment_path(@book.image.id, redirect: request.original_url), :method => :delete if @book.image.attached?
+    - if logged_in?
+      = link_to 'Remove image', delete_attachment_path(@book.image.id, redirect: request.original_url), :method => :delete if @book.image.attached?
