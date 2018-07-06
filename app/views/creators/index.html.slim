@@ -1,6 +1,9 @@
+- content_for(:_pagetitle) { 'List of Creators' }
+
 header.main-content__header
   h1.main-content__page-title Creators
-  div= link_to 'New creator', new_creator_path
+  - if logged_in?
+    div= link_to 'New creator', new_creator_path
 
 section.main-content__body.main-content__body--flush
   - unless @creators.empty?

@@ -1,6 +1,9 @@
+- content_for(:page_title) { 'List of Series' }
+
 header.main-content__header
   h1.main-content__page-title Series
-  div= link_to 'New series', new_series_path
+  - if logged_in?
+    div= link_to 'New series', new_series_path
 
 section.main-content__body.main-content__body--flush
   - unless @series.empty?
