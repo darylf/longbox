@@ -1,7 +1,7 @@
 # Creator controller
 class CreatorsController < ApplicationController
   def index
-    @creators = Creator.all
+    @creators = Creator.order(:first_name, :last_name)
   end
 
   def show
