@@ -11,14 +11,19 @@ section.main-content__body.main-content__body--flush
       thead
         tr
           th class="cell-label cell-label--string cell-label--false" scope="col" Name
-          th scope="col" Publisher
           th
+          th scope="col" Publisher
+          - if logged_in?
+            th
       tbody
         - @series.each do |series|
           tr
             td class="cell-data cell-data--string"
               = link_to series.name, series_path(series)
+            td  class="cell-data cell-data--string"
+              = pluralize(series.books.length, 'book')
             td class="cell-data cell-data--string"
               = series.publisher_name
-            td class="cell-data cell-data--has-one"
-              = link_to 'Edit', edit_series_path(series)
+            - if logged_in?
+              td class="cell-data cell-data--has-one"
+                = link_to 'Edit', edit_series_path(series)

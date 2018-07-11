@@ -10,8 +10,12 @@ section.main-content__body
         tr
           th Name
           th
+          - if logged_in?
+            th
       tbody
         - @publishers.each do |publisher|
           tr
             td= link_to publisher.name, publisher_path(publisher)
-            td= link_to 'Edit', edit_publisher_path(publisher)
+            td= pluralize(publisher.series.length, 'series')
+            - if logged_in?
+              td= link_to 'Edit', edit_publisher_path(publisher)

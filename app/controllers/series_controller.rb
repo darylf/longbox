@@ -1,11 +1,13 @@
 # Series controller
 class SeriesController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create, :edit, :update]
+
   def index
-    @series = Series.all
+    @series = Series.order('name')
   end
 
   def show
-    @series = Series.find(params[:id])
+    @series = Series.includes(:publisher, books: [:relations, :creators]).find(params[:id])
   end
 
   def new
