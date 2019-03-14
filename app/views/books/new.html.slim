@@ -1,7 +1,0 @@
-- content_for(:page_title) { 'New Book' }
-
-header.main-content__header
-  h1.main-content__page-title New Book
-
-section.main-content__body
-  = render partial: 'form', locals: {series: @series, book: @book}

@@ -1,18 +1,14 @@
 version: '3'
-
 services:
   db:
     image: postgres
-
-  web:
-    build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    environment:
-      RAILS_ENV: $RAILS_ENV
-      DATABASE_URL: postgres://postgres:@db
-      SECRET_KEY_BASE: $SECRET_KEY_BASE
     volumes:
-      - .:/srv
+    - ./db:/var/lib/postgresql/data
+  web:
+    build: ./api
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./api:/srv
     ports:
       - "3000:3000"
     depends_on:
