@@ -2,6 +2,8 @@ version: '3'
 services:
   db:
     image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
     volumes:
     - ./db:/var/lib/postgresql/data
   web:
@@ -11,5 +13,10 @@ services:
       - ./api:/srv
     ports:
       - "3000:3000"
+    environment:
+      PG_PASSWORD: password
     depends_on:
       - db
+
+volumes:
+  db:
