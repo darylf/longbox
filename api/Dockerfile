@@ -1,10 +1,10 @@
 FROM ruby:2.6.6
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-WORKDIR /srv
-COPY Gemfile /srv/Gemfile
-COPY Gemfile.lock /srv/Gemfile.lock
+WORKDIR /srv/www-api
+COPY Gemfile /srv/www-api/Gemfile
+COPY Gemfile.lock /srv/www-api/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY . /srv/www-api
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
