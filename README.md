@@ -20,10 +20,10 @@ Note: For development purposes, PostgreSQL runs in a docker container. In produc
 ## Technical Overview
 
 ### API Container
-  * Ruby 2.3.3
+  * Ruby 2.6
   * PostgreSQL
   * Puma
-  * Rails 5.x
+  * Rails 6.x
   * Rspec
   * GraphQL
 
