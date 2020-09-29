@@ -17,9 +17,13 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.3'
   gem 'spring', '~> 2.1'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'rubocop-performance', '~> 1.8', require: false
+  gem 'rubocop-rails', '~> 2.8', require: false
+  gem 'rubocop-rspec', '~> 1.43', require: false
 end
 
 group :development, :test do
   gem 'rspec-graphql_matchers'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 4.0.1'
 end
