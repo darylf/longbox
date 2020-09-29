@@ -18,8 +18,9 @@ Similar tracking sites for movies/television/anime/games:
 - [Trakt](https://trakt.tv)
 - [vglist](https://vglist.co)
 
-## TODO
+## Entities
 
+User
 - [ ] Users
   - [ ] Authentication with Devise
   - [ ] 2FA (via devise-two-factor probably)
@@ -37,6 +38,8 @@ Similar tracking sites for movies/television/anime/games:
 - [ ] Book Library
   - [ ] A wishlist
   - [ ] Score (e.g. have 1/10, 1.0/10, 10/100, and thumbs-up/thumbs-down)
+
+Book
 - [ ] Books (General): Books are an entity with a name, publisher, creator, a cover image, release dates, etc.
   - [ ] Name
   - [ ] Publisher(s) (Marvel, DC, Image, etc.)
@@ -50,9 +53,6 @@ Similar tracking sites for movies/television/anime/games:
   - [ ] Average Score
     - Maybe also Median or a more detailed bar graph of the scores?
   - [ ] Number of users who own the book / have read it / wishlisted it
-- [ ] Publishers
-  - [ ] Name
-  - [ ] Official website
 - [ ] Books (In Library): A book in someone's library can be rated, can have format indicated (physical, digital, etc). It is essentially a subclass of Books (General).
   - [ ] Score/Rating
   - [ ] Format (physical, digital)
@@ -63,6 +63,26 @@ Similar tracking sites for movies/television/anime/games:
   - [ ] Favorite (you can favorite books in your library, which is tracked separately from your Score)
   - [ ] Physical/Digital
     - You can own a copy from Kindle or Comixology digitally as well as physically.
+
+Publisher
+- [ ] Publishers
+  - [ ] Name
+  - [ ] Official website
+
+Series
+- [ ] Series
+  - [ ] Name
+
+Creator
+- [ ] Creators
+  - [ ] First name
+  - [ ] Last name
+  - [ ] Books
+  - [ ] Roles (author, penciler, colorer, etc)
+
+
+## TODO
+
 - [ ] Exporter (export your books list, probably as JSON)
 - [ ] Build the initial system for importing book information from another source (build the book database from the Wikipedia/Wikidata? Somewhere else?)
 - [ ] API?
