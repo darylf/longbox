@@ -1,5 +1,5 @@
 module Types
-  class Publisher < Types::BaseObject
+  class PublisherType < Types::BaseObject
     description 'A book publishing company'
 
     field :id, ID, null: false

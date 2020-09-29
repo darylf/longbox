@@ -1,0 +1,82 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.6
+  Exclude:
+    - "bin/*"
+    - "db/schema.rb"
+    - "vendor/bundle/**/*"
+    - "storage/**/*"
+    - "tmp/**/*"
+    - ".git/**/*"
+
+###################### Layout ##############################
+
+Layout/LineLength:
+  Enabled: false
+
+#################### Metrics ###############################
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+#################### Rails #################################
+
+Rails/Output:
+  Enabled: true
+  Exclude:
+    - "db/seeds.rb"
+    - "db/seeds/*.rb"
+
+#################### Style ###############################
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+#################### RSpec ###############################
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/HookArgument:
+  Enabled: true
+  EnforcedStyle: each
+
+RSpec/ImplicitExpect:
+  Enabled: true
+  EnforcedStyle: 'should'
+
+RSpec/MultipleExpectations:
+  Enabled: true
+  Max: 3
+
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/EmptyLineAfterExample:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
