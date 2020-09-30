@@ -71,12 +71,14 @@ Publisher
 
 Series
 - [ ] Series
-  - [ ] Name
+  - [x] Name
+  - [ ] Books
+  - [ ] Publisher
 
 Creator
 - [ ] Creators
-  - [ ] First name
-  - [ ] Last name
+  - [x] First name
+  - [x] Last name
   - [ ] Books
   - [ ] Roles (author, penciler, colorer, etc)
 

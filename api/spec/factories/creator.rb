@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :creator do
-    name { "Stan Lee" }
+    first_name { "Stan" }
+    last_name { "Lee" }
   end
 end
