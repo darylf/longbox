@@ -1,4 +1,4 @@
 class LongboxSchema < GraphQL::Schema
-  query Types::Query
-  mutation Types::Mutation
+  query Types::QueryType
+  mutation Types::MutationType
 end
