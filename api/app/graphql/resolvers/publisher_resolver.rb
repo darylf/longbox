@@ -1,6 +1,6 @@
 module Resolvers
   class PublisherResolver < Resolvers::BaseResolver
-    type Types::Publisher, null: false
+    type Types::PublisherType, null: false
     argument :id, ID, required: false
 
     def resolve(**args)
