@@ -4,6 +4,6 @@ module Types
 
     field :id, ID, null: false
     field :name, String, null: false
-    field :series, [Types::Series], null: false
+    field :series, [Types::SeriesType], null: false
   end
 end

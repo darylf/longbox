@@ -1,5 +1,5 @@
 module Types
-  class Query < Types::BaseObject
+  class QueryType < Types::BaseObject
     field :publishers, resolver: Resolvers::PublishersResolver
     field :publisher, resolver: Resolvers::PublisherResolver
   end
