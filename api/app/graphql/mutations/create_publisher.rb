@@ -2,7 +2,7 @@ module Mutations
   class CreatePublisher < Mutations::BaseMutation
     graphql_name 'CreatePublisher'
 
-    field :publisher, Types::Publisher, null: true
+    field :publisher, Types::PublisherType, null: true
     field :result, Boolean, null: true
 
     argument :name, String, required: true
