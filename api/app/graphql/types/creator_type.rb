@@ -1,5 +1,5 @@
 module Types
-  class Creator < Types::BaseObject
+  class CreatorType < Types::BaseObject
     description 'A person representing someone involved in the creation process of a book'
     field :id, ID, null: false
     field :first_name, String, null: true
