@@ -1,6 +1,6 @@
 module Resolvers
   class PublishersResolver < Resolvers::BaseResolver
-    type [Types::Publisher], null: false
+    type [Types::PublisherType], null: false
 
     def resolve
       Publisher.all
