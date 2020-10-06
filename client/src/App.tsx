@@ -1,11 +1,7 @@
-import React from "react";
+import * as React from "react";
 
-function App() {
-  return (
-      <div className="App">
-        <h1>Hello World!</h1>
-      </div>
-  );
-}
-
-export default App;
+export const App  = (
+  <h1>
+    Hi World
+  </h1>
+);

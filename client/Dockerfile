@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:12.18-alpine
 
 WORKDIR /srv/www/
 
@@ -7,4 +7,4 @@ RUN yarn install --silent
 
 COPY . .
 
-CMD ["yarn", "run", "start"]
+CMD ["yarn", "run", "start:dev"]
