@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Series, type: :model do
-  subject(:series) { build(:series) }
+RSpec.describe Credit, type: :model do
+  subject(:credit) { build(:credit) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(series).to be_valid
+      expect(credit).to be_valid
     end
   end
 end

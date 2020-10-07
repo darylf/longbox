@@ -1,4 +1,4 @@
 class Book < ApplicationRecord
-  has_many :book_creators, dependent: :destroy
-  has_many :creators, through: :book_creators
+  has_many :credits, dependent: :destroy
+  has_many :creators, through: :credits
 end
