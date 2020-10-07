@@ -103,6 +103,8 @@ GEM
     puma (5.0.2)
       nio4r (~> 2.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.3.3)
@@ -212,6 +214,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.3)
   pg (>= 0.18, < 2.0)
   puma (~> 5.0.2)
+  rack-cors
   rails (~> 6.0.3, >= 6.0.3.3)
   rspec-graphql_matchers
   rspec-rails (~> 4.0.1)
