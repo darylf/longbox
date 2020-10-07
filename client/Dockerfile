@@ -7,4 +7,4 @@ RUN yarn install --silent
 
 COPY . .
 
-CMD ["yarn", "run", "start:dev"]
+CMD ["yarn", "run", "start"]

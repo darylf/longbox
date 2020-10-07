@@ -4,8 +4,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:dev": "webpack-dev-server --host 0.0.0.0",
-    "build": "webpack",
+    "start": "webpack-dev-server --host 0.0.0.0 --mode development",
+    "build": "webpack --mode production",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "prettier:save": "prettier '*/**/*.{js,ts,tsx}' --write"
   },
