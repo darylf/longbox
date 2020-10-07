@@ -29,12 +29,12 @@ services:
       - ./api:/srv/www-api
 
   web:
-    build: ./client
+    build: ./web
     stdin_open: true
     networks:
       - frontend
     volumes:
-      - ./client:/srv/www
+      - ./web:/srv/www
       - "/srv/www/node_modules"
     ports:
       - "3000:3000"
