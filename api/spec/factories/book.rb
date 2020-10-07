@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :book do
-    name { "Fantastic Four" }
+    issue { 1 }
   end
 end

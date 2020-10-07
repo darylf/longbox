@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :book_creator do
+  factory :credit do
     book
     creator
   end

@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_224159) do
+ActiveRecord::Schema.define(version: 2020_10_07_170922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "book_creators", force: :cascade do |t|
-    t.bigint "book_id"
-    t.bigint "creator_id"
-    t.integer "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_book_creators_on_book_id"
-    t.index ["creator_id"], name: "index_book_creators_on_creator_id"
-  end
 
   create_table "books", force: :cascade do |t|
     t.string "issue"
@@ -34,11 +24,27 @@ ActiveRecord::Schema.define(version: 2019_02_20_224159) do
     t.index ["series_id"], name: "index_books_on_series_id"
   end
 
+  create_table "creator_roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "creators", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "credits", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "creator_id"
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_credits_on_book_id"
+    t.index ["creator_id"], name: "index_credits_on_creator_id"
   end
 
   create_table "publishers", force: :cascade do |t|
@@ -55,8 +61,8 @@ ActiveRecord::Schema.define(version: 2019_02_20_224159) do
     t.index ["publisher_id"], name: "index_series_on_publisher_id"
   end
 
-  add_foreign_key "book_creators", "books"
-  add_foreign_key "book_creators", "creators"
   add_foreign_key "books", "series"
+  add_foreign_key "credits", "books"
+  add_foreign_key "credits", "creators"
   add_foreign_key "series", "publishers"
 end
