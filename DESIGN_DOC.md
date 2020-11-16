@@ -5,6 +5,7 @@ The goal of the site is to let users track their comic book and graphic novel li
 ## Similar works
 
 Existing book tracking sites:
+
 - [Grand Comic Database](https://www.comics.org/)
 - [League of Comic Geeks](https://leagueofcomicgeeks.com/)
 
@@ -21,6 +22,7 @@ Similar tracking sites for movies/television/anime/games:
 ## Entities
 
 User
+
 - [ ] Users
   - [ ] Authentication with Devise
   - [ ] 2FA (via devise-two-factor probably)
@@ -40,6 +42,7 @@ User
   - [ ] Score (e.g. have 1/10, 1.0/10, 10/100, and thumbs-up/thumbs-down)
 
 Book
+
 - [ ] Books (General): Books are an entity with a name, publisher, creator, a cover image, release dates, etc.
   - [ ] Name
   - [ ] Publisher(s) (Marvel, DC, Image, etc.)
@@ -65,23 +68,25 @@ Book
     - You can own a copy from Kindle or Comixology digitally as well as physically.
 
 Publisher
+
 - [ ] Publishers
   - [ ] Name
   - [ ] Official website
 
 Series
+
 - [ ] Series
   - [x] Name
   - [ ] Books
   - [ ] Publisher
 
 Creator
+
 - [ ] Creators
   - [x] First name
   - [x] Last name
   - [ ] Books
   - [ ] Roles (author, penciler, colorer, etc)
-
 
 ## TODO
 
@@ -97,3 +102,7 @@ Some decisions that need to be made:
 
 - Should scores be a scale out of 10? To what precision? Or just thumbs up/down?
 - Should there be an API? If so, should it be a REST API or use GraphQL?
+
+Notes:
+
+- Consider this UI design: https://preview.themeforest.net/item/boighor-books-library-ecommerce-store/full_screen_preview/22173065

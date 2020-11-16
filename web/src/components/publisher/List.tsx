@@ -17,6 +17,7 @@ function PublisherList(): JSX.Element {
   const { loading, error, data } = useQuery(GET_PUBLISHERS);
 
   if (loading) return <p>Loading...</p>;
+
   if (error) return <p>Error :(</p>;
 
   const PublisherItems = data.publishers.map(({ name }: IPublisher) => (

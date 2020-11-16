@@ -1,5 +1,10 @@
 import * as React from 'react';
+import { PublisherList } from '../components/publisher';
 
-const HomePage = (): JSX.Element => <h1>Home Page</h1>;
+const HomePage = (): JSX.Element => (
+  <>
+    <PublisherList />
+  </>
+);
 
 export default HomePage;
