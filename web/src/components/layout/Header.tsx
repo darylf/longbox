@@ -57,7 +57,7 @@ const navigation = (
         <Link to="/my-books">My Books</Link>
       </li>
       <li>
-        <Link to="/books">Browse</Link>
+        <Link to="/publishers">Browse</Link>
       </li>
       <li>
         <Link to="/users">Users</Link>

@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_170922) do
+ActiveRecord::Schema.define(version: 2020_11_24_213412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "issue"
@@ -21,13 +27,9 @@ ActiveRecord::Schema.define(version: 2020_10_07_170922) do
     t.integer "book_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "book_type_id"
+    t.index ["book_type_id"], name: "index_books_on_book_type_id"
     t.index ["series_id"], name: "index_books_on_series_id"
-  end
-
-  create_table "creator_roles", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "creators", force: :cascade do |t|
@@ -37,14 +39,21 @@ ActiveRecord::Schema.define(version: 2020_10_07_170922) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "credit_roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "credits", force: :cascade do |t|
     t.bigint "book_id"
     t.bigint "creator_id"
-    t.integer "role"
+    t.bigint "credit_role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_credits_on_book_id"
     t.index ["creator_id"], name: "index_credits_on_creator_id"
+    t.index ["credit_role_id"], name: "index_credits_on_credit_role_id"
   end
 
   create_table "publishers", force: :cascade do |t|
@@ -61,8 +70,10 @@ ActiveRecord::Schema.define(version: 2020_10_07_170922) do
     t.index ["publisher_id"], name: "index_series_on_publisher_id"
   end
 
+  add_foreign_key "books", "book_types"
   add_foreign_key "books", "series"
   add_foreign_key "credits", "books"
   add_foreign_key "credits", "creators"
+  add_foreign_key "credits", "credit_roles"
   add_foreign_key "series", "publishers"
 end

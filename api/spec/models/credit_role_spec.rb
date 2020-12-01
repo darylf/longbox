@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe CreatorRole, type: :model do
-  subject(:role) { build(:creator_role) }
+RSpec.describe CreditRole, type: :model do
+  subject(:role) { build(:credit_role) }
 
   describe "Validations" do
     it "is valid with valid attributes" do

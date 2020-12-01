@@ -1,0 +1,87 @@
+@startuml GraphQL Entities
+hide circle
+
+skinparam LineType ortho
+skinparam RoundCorner 20
+skinparam ClassFontSize 15
+skinparam ClassFontStyle bold
+skinparam ClassBackgroundColor #c0c0c0
+skinparam ClassBorderColor #000
+skinparam ArrowColor #000
+skinparam Padding 3
+skinparam MinClassWidth 150
+
+together {
+  class Publisher {
+    id : number
+    ---
+    name : string
+  }
+
+  class Series {
+    id : number
+    ---
+    name : string
+  }
+
+  class Book {
+    id : number
+    ---
+    issue : string
+  }
+
+  class BookFormat {
+    id : number
+    ---
+    type : string
+  }
+
+  class Creator  {
+    id : number
+    ---
+    first_name : string
+    last_name : string
+  }
+
+  class CreditRole {
+    id : number
+    ---
+    name : string
+  }
+
+  class Credit {
+    book_id : number
+    creator_id : number
+    ---
+    role_id : number
+  }
+}
+
+class User {
+  id : number
+  ---
+  name : string
+}
+
+class Collection {
+  collection_item_id : number
+  user_id : number
+}
+
+class ReadList {
+  book_id : number
+  user_id : number
+  ---
+  read_on : date
+}
+
+Publisher ||..o{ Series
+Series ||..o{ Book
+Book ||..o{ Credit
+Credit ||..o{ Creator
+Credit ||..|| CreditRole
+User ||..o| Collection
+User ||..o| ReadList
+Collection }o..|| BookFormat
+ReadList |o..|{ Book
+@enduml

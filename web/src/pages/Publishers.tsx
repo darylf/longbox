@@ -1,25 +1,24 @@
 import * as React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { BookForm, BookList } from '../components/books';
+import { PublisherList } from '../components/publisher';
 
-const Books = (): JSX.Element => {
+const Publishers = (): JSX.Element => {
   const match = useRouteMatch();
 
   return (
     <>
       <Switch>
         <Route path={`${match.path}/new`}>
-          <h1>create a book</h1>
-          <BookForm />
+          <h1>create a publisher</h1>
         </Route>
 
         <Route path={`${match.path}`}>
-          <h1>browse books</h1>
-          <BookList />
+          <h1>browse</h1>
+          <PublisherList />
         </Route>
       </Switch>
     </>
   );
 };
 
-export default Books;
+export default Publishers;

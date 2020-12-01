@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :creator_role do
+  factory :credit_role do
     name { "Author" }
   end
 end

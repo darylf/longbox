@@ -29,6 +29,9 @@ const App = (): JSX.Element => {
               <Route path="/books">
                 <Pages.Books />
               </Route>
+              <Route path="/publishers">
+                <Pages.Publishers />
+              </Route>
               <Route path="/">
                 <Pages.HomePage />
               </Route>
