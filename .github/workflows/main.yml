@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [master, develop]
   pull_request:
-    branches: [ master, develop ]
+    branches: [master, develop]
 
   workflow_dispatch:
 
@@ -17,14 +17,14 @@ jobs:
     services:
       db:
         image: postgres:11
-        ports: ['5432:5432']
+        ports: ["5432:5432"]
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup Ruby
-       uses: ruby/setup-ruby@v1.45.0
+        uses: ruby/setup-ruby@v1.45.0
         with:
           ruby-version: 2.6.6
 
