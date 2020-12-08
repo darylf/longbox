@@ -28,9 +28,13 @@ jobs:
         with:
           ruby-version: 2.6.6
 
+      - uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
       - name: Install Dependencies
         run: |
-          # sudo apt install -yqq libpq-dev
+          sudo apt install -yqq libpq-dev
           gem install bundler
 
       - name: Install Gems
@@ -43,31 +47,31 @@ jobs:
 
       - name: Run Tests
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/databasename
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/databasename
           RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
         run: |
           bundle exec rails test
 
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+  # security:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.45.0
-        with:
-          ruby-version: 2.6.6
+  #     - name: Setup Ruby
+  #       uses: ruby/setup-ruby@v1.45.0
+  #       with:
+  #         ruby-version: 2.6.6
 
-      - name: Install Brakeman
-        run: |
-          gem install brakeman
+  #     - name: Install Brakeman
+  #       run: |
+  #         gem install brakeman
 
-      - name: Run Brakeman
-        run: |
-          brakeman -f json > tmp/brakeman.json || exit 0
+  #     - name: Run Brakeman
+  #       run: |
+  #         brakeman -f json > tmp/brakeman.json || exit 0
 
-      - name: Brakeman Report
-        uses: devmasx/brakeman-linter-action@v1.0.0
-        env:
-          REPORT_PATH: tmp/brakeman.json
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  #     - name: Brakeman Report
+  #       uses: devmasx/brakeman-linter-action@v1.0.0
+  #       env:
+  #         REPORT_PATH: tmp/brakeman.json
+  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
