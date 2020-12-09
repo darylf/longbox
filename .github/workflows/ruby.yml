@@ -30,7 +30,7 @@ jobs:
       - name: Install rubocop
         run: gem install rubocop
       - name: Check code
-        run: rubocop
+        run: rubocop rubocop-rails rubocop-rspec rubocop-performance
 
   # test:
   #   runs-on: ubuntu-latest
