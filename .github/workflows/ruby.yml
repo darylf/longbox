@@ -13,6 +13,7 @@ defaults:
     working-directory: api
 
 env:
+  RAILS_VERSION: 2.6.6
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: ""
   POSTGRES_DB: postgres
@@ -30,6 +31,8 @@ jobs:
         run: git fetch origin master:master --no-tags --quiet --depth 1
 
       - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RAILS_VERSION }}
 
       - name: "Rubocop: install"
         run: gem install -N rubocop rubocop-performance rubocop-rails
@@ -84,18 +87,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RAILS_VERSION }}
 
-      - name: Install Brakeman
+      - name: "Brakeman: install"
         run: |
           gem install brakeman
 
-      - name: Run Brakeman
+      - name: "Brakeman: run"
         run: |
           brakeman -f json > tmp/brakeman.json || exit 0
 
-      - name: Brakeman Report
+      - name: "Brakeman: report"
         uses: devmasx/brakeman-linter-action@v1.0.0
         env:
           REPORT_PATH: tmp/brakeman.json
