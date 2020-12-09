@@ -12,48 +12,67 @@ defaults:
   run:
     working-directory: api
 
+env:
+  RUBY_VERSION: 2.6.6
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: ""
+  POSTGRES_DB: postgres
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:11
-        ports: ["5432:5432"]
-        env:
-          POSTGRES_PASSWORD: postgres
-
+  rubocop-test:
+    name: rubocop
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.6.6
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Install rubocop
+        run: gem install rubocop
+      - name: Check code
+        run: rubocop
 
-      - uses: Borales/actions-yarn@v2
-        with:
-          cmd: install
+  # test:
+  #   runs-on: ubuntu-latest
 
-      - name: Install Dependencies
-        run: |
-          sudo apt install -yqq libpq-dev
-          gem install bundler
+  #   services:
+  #     postgres:
+  #       image: postgres:11
+  #       ports: ["5432:5432"]
+  #       env:
+  #         POSTGRES_PASSWORD: postgres
 
-      - name: Install Gems
-        run: |
-          bundle install
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Prepare Database
-        run: |
-          bundle exec rails db:prepare
+  #     - name: Setup Ruby
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: 2.6.6
 
-      - name: Run Tests
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/databasename
-          RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
-        run: |
-          bundle exec rails test
+  #     - uses: Borales/actions-yarn@v2.3.0
+  #       with:
+  #         cmd: install
+
+  #     - name: Install Dependencies
+  #       run: |
+  #         sudo apt install -yqq libpq-dev
+  #         gem install bundler
+
+  #     - name: Install Gems
+  #       run: |
+  #         bundle install
+
+  #     - name: Prepare Database
+  #       run: |
+  #         bundle exec rails db:prepare
+
+  #     - name: Run Tests
+  #       env:
+  #         DATABASE_URL: postgres://postgres:postgres@localhost:5432/databasename
+  #         RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
+  #       run: |
+  #         bundle exec rails test
 
   # security:
   #   runs-on: ubuntu-latest
