@@ -1,4 +1,4 @@
-name: CI
+name: Ruby API CI
 
 on:
   push:
@@ -14,21 +14,24 @@ defaults:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
+
     services:
-      db:
+      postgres:
         image: postgres:11
         ports: ["5432:5432"]
-    runs-on: ubuntu-latest
+        env:
+          POSTGRES_PASSWORD: postgres
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.45.0
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.6
 
-      - uses: Borales/actions-yarn@v2.3.0
+      - uses: Borales/actions-yarn@v2
         with:
           cmd: install
 
