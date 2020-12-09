@@ -1,0 +1,25 @@
+# name: Rubocop
+
+# on:
+#   pull_request:
+#     branches:
+#       - "master"
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 5
+
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: "Checkout master (base is needed to detect changed files)"
+#         run: git fetch origin master:master --no-tags --quiet --depth 1
+
+#       - uses: ruby/setup-ruby@v1
+
+#       - name: "Rubocop: install"
+#         run: gem install -N rubocop rubocop-performance rubocop-rails
+
+#       - name: "Rubocop: run"
+#         run: git diff --diff-filter=ACM --name-only master | xargs rubocop --format s

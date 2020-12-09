@@ -1,4 +1,4 @@
-name: Ruby API CI
+name: API CI
 
 on:
   push:
@@ -19,18 +19,24 @@ env:
   POSTGRES_DB: postgres
 
 jobs:
-  rubocop-test:
-    name: rubocop
-    runs-on: ubuntu-18.04
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-      - name: Install rubocop
-        run: gem install rubocop rubocop-rails rubocop-rspec rubocop-performance
-      - name: Check code
-        run: rubocop
+      - uses: actions/checkout@v2
+
+      - name: "Checkout master (base is needed to detect changed files)"
+        run: git fetch origin master:master --no-tags --quiet --depth 1
+
+      - uses: ruby/setup-ruby@v1
+
+      - name: "Rubocop: install"
+        run: gem install -N rubocop rubocop-performance rubocop-rails
+
+      - name: "Rubocop: run"
+        run: git diff --diff-filter=ACM --name-only master | xargs rubocop --format s
 
   # test:
   #   runs-on: ubuntu-latest
@@ -74,26 +80,26 @@ jobs:
   #       run: |
   #         bundle exec rails test
 
-  # security:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Setup Ruby
-  #       uses: ruby/setup-ruby@v1.45.0
-  #       with:
-  #         ruby-version: 2.6.6
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.45.0
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
 
-  #     - name: Install Brakeman
-  #       run: |
-  #         gem install brakeman
+      - name: Install Brakeman
+        run: |
+          gem install brakeman
 
-  #     - name: Run Brakeman
-  #       run: |
-  #         brakeman -f json > tmp/brakeman.json || exit 0
+      - name: Run Brakeman
+        run: |
+          brakeman -f json > tmp/brakeman.json || exit 0
 
-  #     - name: Brakeman Report
-  #       uses: devmasx/brakeman-linter-action@v1.0.0
-  #       env:
-  #         REPORT_PATH: tmp/brakeman.json
-  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Brakeman Report
+        uses: devmasx/brakeman-linter-action@v1.0.0
+        env:
+          REPORT_PATH: tmp/brakeman.json
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
