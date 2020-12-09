@@ -97,10 +97,4 @@ jobs:
 
       - name: "Brakeman: run"
         run: |
-          brakeman -f json > tmp/brakeman.json || exit 0
-
-      - name: "Brakeman: report"
-        uses: devmasx/brakeman-linter-action@v1.0.0
-        env:
-          REPORT_PATH: tmp/brakeman.json
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          brakeman
