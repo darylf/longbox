@@ -1,12 +1,10 @@
-name: API CI
+name: Ruby API
 
 on:
   push:
     branches: [master, develop]
   pull_request:
     branches: [master, develop]
-
-  workflow_dispatch:
 
 defaults:
   run:
@@ -39,6 +37,24 @@ jobs:
 
       - name: "Rubocop: run"
         run: git diff --diff-filter=ACM --name-only master | xargs rubocop --format s
+
+    brakeman:
+      name: Brakeman
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - uses: ruby/setup-ruby@v1
+          with:
+            ruby-version: ${{ env.RAILS_VERSION }}
+
+        - name: "Brakeman: install"
+          run: |
+            gem install brakeman
+
+        - name: "Brakeman: run"
+          run: |
+            brakeman
 
   # test:
   #   runs-on: ubuntu-latest
@@ -81,20 +97,3 @@ jobs:
   #         RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
   #       run: |
   #         bundle exec rails test
-
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RAILS_VERSION }}
-
-      - name: "Brakeman: install"
-        run: |
-          gem install brakeman
-
-      - name: "Brakeman: run"
-        run: |
-          brakeman
