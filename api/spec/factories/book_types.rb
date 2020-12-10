@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :book_type do
-    name { "MyString" }
+    name { "comic" }
   end
 end
