@@ -3,8 +3,12 @@ name: Ruby API
 on:
   push:
     branches: [master, develop]
+    paths:
+      - "api/**"
   pull_request:
     branches: [master, develop]
+    paths:
+      - "api/**"
 
 defaults:
   run:
@@ -25,36 +29,35 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: "Checkout master (base is needed to detect changed files)"
-        run: git fetch origin master:master --no-tags --quiet --depth 1
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RAILS_VERSION }}
 
       - name: "Rubocop: install"
-        run: gem install -N rubocop rubocop-performance rubocop-rails
+        run: |
+          gem install -N rubocop rubocop-performance rubocop-rails
 
       - name: "Rubocop: run"
-        run: git diff --diff-filter=ACM --name-only master | xargs rubocop --format s
+        run: |
+          rubocop --format s
 
-    brakeman:
-      name: Brakeman
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-        - uses: ruby/setup-ruby@v1
-          with:
-            ruby-version: ${{ env.RAILS_VERSION }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RAILS_VERSION }}
 
-        - name: "Brakeman: install"
-          run: |
-            gem install brakeman
+      - name: "Brakeman: install"
+        run: |
+          gem install brakeman
 
-        - name: "Brakeman: run"
-          run: |
-            brakeman
+      - name: "Brakeman: run"
+        run: |
+          brakeman
 
   # test:
   #   runs-on: ubuntu-latest
