@@ -15,7 +15,7 @@ defaults:
     working-directory: api
 
 env:
-  RAILS_VERSION: 2.6.6
+  RUBY_VERSION: 2.7.2
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: ""
   POSTGRES_DB: postgres
@@ -31,7 +31,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RAILS_VERSION }}
+          ruby-version: ${{ env.RUBY_VERSION }}
 
       - name: "Rubocop: install"
         run: |
@@ -49,7 +49,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RAILS_VERSION }}
+          ruby-version: ${{ env.RUBY_VERSION }}
 
       - name: "Brakeman: install"
         run: |
@@ -75,7 +75,7 @@ jobs:
   #     - name: Setup Ruby
   #       uses: ruby/setup-ruby@v1
   #       with:
-  #         ruby-version: 2.6.6
+  #         ruby-version: ${{ env.RUBY_VERSION }}
 
   #     - uses: Borales/actions-yarn@v2.3.0
   #       with:
