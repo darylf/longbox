@@ -1,4 +1,4 @@
-name: Typescript Web
+name: "Web: Typescript"
 
 on:
   push:

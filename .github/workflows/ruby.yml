@@ -1,4 +1,4 @@
-name: Ruby API
+name: "API: Ruby"
 
 on:
   push:
