@@ -1,4 +1,14 @@
 import * as React from 'react';
+import { useQuery, gql } from '@apollo/client';
+
+const SERIES_DROPDOWN_QUERY = gql`
+  {
+    seriesList {
+      id
+      name
+    }
+  }
+`;
 
 function useFormFields<T>(initialValues: T) {
   const [formFields, setFormFields] = React.useState<T>(initialValues);
@@ -13,8 +23,11 @@ function useFormFields<T>(initialValues: T) {
 
 function BookForm(): JSX.Element {
   const { formFields, createChangeHandler } = useFormFields({
-    name: ''
+    name: '',
+    seriesId: 0
   });
+
+  const { data } = useQuery(SERIES_DROPDOWN_QUERY);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +37,20 @@ function BookForm(): JSX.Element {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="series">Name</label>
+        <label htmlFor="series">Series</label>
+        <select name="series_id" id="series_id">
+          {data && (
+            <>
+              {data.seriesList.map((s: { id: number; name: string }) => (
+                <option key={s.id}>{s.name}</option>
+              ))}
+            </>
+          )}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="name">Name</label>
         <input
           type="name"
           id="name"

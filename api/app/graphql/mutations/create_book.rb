@@ -13,7 +13,7 @@ module Mutations
       if book.save
         {
           book: book,
-          errors: [],
+          errors: []
         }
       else
         # Convert Rails model errors into GraphQL-ready error hashes
@@ -22,12 +22,12 @@ module Mutations
           path = ["attributes", attribute.to_s.camelize(:lower)]
           {
             path: path,
-            message: message,
+            message: message
           }
         end
         {
           book: book,
-          errors: user_errors,
+          errors: user_errors
         }
       end
     end

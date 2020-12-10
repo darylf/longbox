@@ -4,9 +4,7 @@ class Book < ApplicationRecord
   has_many :credits, dependent: :destroy
   has_many :creators, through: :credits
 
-  def series_name
-    series.name
-  end
+  delegate :name, to: :series, prefix: true
 
   def publisher_name
     series.publisher.name

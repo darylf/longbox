@@ -11,13 +11,13 @@ module Mutations
     def resolve(**args)
       series = Series.new do |s|
         s.publisher_id = args[:publisher_id]
-        s.name= args[:name]
+        s.name = args[:name]
       end
 
       if series.save
         {
           series: series,
-          errors: [],
+          errors: []
         }
       else
         series.id = 0
@@ -29,13 +29,13 @@ module Mutations
           path = ["attributes", attribute.to_s.camelize(:lower)]
           {
             path: path,
-            message: message,
+            message: message
           }
         end
 
         {
           series: series,
-          errors: user_errors,
+          errors: user_errors
         }
       end
     end

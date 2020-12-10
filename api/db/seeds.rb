@@ -14,7 +14,7 @@ def generate_publisher_name
   end
 end
 
-['Creator','Writer','Penciller','Colorist','Inker','Cover Artist','Letterer','Editor','Assistant Editor'].each do |c|
+['Creator', 'Writer', 'Penciller', 'Colorist', 'Inker', 'Cover Artist', 'Letterer', 'Editor', 'Assistant Editor'].each do |c|
   CreditRole.find_or_create_by(name: c)
 end
 
