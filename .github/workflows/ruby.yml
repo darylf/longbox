@@ -35,11 +35,11 @@ jobs:
 
       - name: "Rubocop: install"
         run: |
-          gem install -N rubocop rubocop-performance rubocop-rails
+          gem install -N rubocop rubocop-rails rubocop-rspec rubocop-performance
 
       - name: "Rubocop: run"
         run: |
-          rubocop --format s
+          rubocop --format github
 
   brakeman:
     name: Brakeman
