@@ -21,7 +21,6 @@ module Mutations
         }
       else
         series.id = 0
-        puts series.errors.full_messages
 
         # Convert Rails model errors into GraphQL-ready error hashes
         user_errors = series.errors.map do |attribute, message|
