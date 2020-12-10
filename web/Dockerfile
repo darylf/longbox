@@ -1,4 +1,4 @@
-FROM node:12.18-alpine
+FROM node:15.4-alpine
 
 WORKDIR /srv/www/
 
