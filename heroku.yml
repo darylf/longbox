@@ -10,6 +10,11 @@ build:
   config:
     RAILS_ENV: development
 
+release:
+  image: api
+  command:
+    - rails db:setup
+
 run:
   api: rails server -b 0.0.0.0
   web: yarn run start
