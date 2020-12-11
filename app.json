@@ -8,8 +8,16 @@
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
     },
-    "WEB_CONCURRENCY": {
-      "description": "The number of processes to run.",
+    "DATABASE_URL": {
+      "description": "The database location",
+      "value": "5"
+    },
+    "DATABASE_USERNAME": {
+      "description": "The database user profile",
+      "value": "5"
+    },
+    "DATABASE_PASSWORD": {
+      "description": "The password for the database user",
       "value": "5"
     }
   },
