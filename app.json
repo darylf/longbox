@@ -12,6 +12,10 @@
       "description": "The database location",
       "value": "5"
     },
+    "DATABASE_NAME": {
+      "description": "The database user profile",
+      "value": "5"
+    },
     "DATABASE_USERNAME": {
       "description": "The database user profile",
       "value": "5"
