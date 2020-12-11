@@ -13,7 +13,7 @@ build:
 release:
   image: api
   command:
-    - rails db:setup
+    - rails db:schema:load db:seed
 
 run:
   api: rails server -b 0.0.0.0
