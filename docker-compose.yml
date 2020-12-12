@@ -32,6 +32,8 @@ services:
   web:
     build: ./web
     stdin_open: true
+    environment:
+      API_URL: "${API_URL}"
     networks:
       - frontend
     volumes:

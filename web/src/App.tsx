@@ -12,7 +12,7 @@ import {
 import * as Pages from './pages';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  uri: process.env.API_URL,
   cache: new InMemoryCache()
 });
 
