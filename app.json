@@ -1,7 +1,7 @@
 {
-  "name": "Small Sharp Tool",
-  "description": "This app does one little thing, and does it well.",
-  "repository": "https://github.com/jane-doe/small-sharp-tool",
+  "name": "Longbox",
+  "description": "A site for comic book collectors to track their collections.",
+  "repository": "https://github.com/darylf/longbox",
   "stack": "container",
   "env": {
     "SECRET_TOKEN": {
@@ -9,19 +9,19 @@
       "generator": "secret"
     },
     "DATABASE_URL": {
-      "description": "The database location",
+      "description": "The database host",
       "value": "5"
     },
     "DATABASE_NAME": {
-      "description": "The database user profile",
+      "description": "The database name",
       "value": "5"
     },
     "DATABASE_USERNAME": {
-      "description": "The database user profile",
+      "description": "The database user, used for authentication",
       "value": "5"
     },
     "DATABASE_PASSWORD": {
-      "description": "The password for the database user",
+      "description": "The database user's password, used for authentication",
       "value": "5"
     }
   },
@@ -37,10 +37,7 @@
   },
   "addons": [
     {
-      "plan": "heroku-postgresql",
-      "options": {
-        "version": "9.5"
-      }
+      "plan": "heroku-postgresql"
     }
   ]
 }
