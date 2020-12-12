@@ -3,8 +3,8 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_USERNAME: "${DATABASE_USERNAME}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
     networks:
       - backend
     volumes:
@@ -16,9 +16,10 @@ services:
       - db
     environment:
       RAILS_ENV: "${RAILS_ENV}"
-      DATABASE_URL: postgres://postgres:@db
-      DATABASE_USER: "${POSTGRES_USER}"
-      DATABASE_PASSWORD: "${POSTGRES_PASSWORD}"
+      DATABASE_URL: "${DATABASE_URL}"
+      DATABASE_NAME: "${DATABASE_NAME}"
+      DATABASE_USERNAME: "${DATABASE_USERNAME}"
+      DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
       SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
     networks:

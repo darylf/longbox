@@ -7,6 +7,9 @@ default: &default
   password: <%= ENV.fetch("DATABASE_PASSWORD") %>
   pool: 5
 
+development:
+  <<: *default
+
 test:
   <<: *default
   database: longbox_test
