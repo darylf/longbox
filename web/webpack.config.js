@@ -36,7 +36,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public')
   },
   devServer: {
-    port: 3000,
+    port: process.env.PORT,
     contentBase: path.join(__dirname, 'public'),
     historyApiFallback: true
   }
