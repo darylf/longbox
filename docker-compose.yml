@@ -30,7 +30,11 @@ services:
       - ./api:/srv/www-api
 
   web:
-    build: ./web
+    build:
+      context: ./web
+      target: build
+      args:
+        - "API_URL=${API_URL}"
     stdin_open: true
     environment:
       API_URL: "${API_URL}"
@@ -42,6 +46,7 @@ services:
       - "/srv/www/node_modules"
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
+    command: "yarn run start:dev"
 
 networks:
   backend:

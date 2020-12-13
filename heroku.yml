@@ -17,4 +17,4 @@ release:
 
 run:
   api: rails server -b 0.0.0.0
-  web: yarn run start
+  web: nginx -g daemon off;

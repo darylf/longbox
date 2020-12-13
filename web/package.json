@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack serve --host 0.0.0.0 --mode development",
+    "start:dev": "webpack serve --host 0.0.0.0 --mode development",
     "build": "webpack --mode production",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "prettier:save": "prettier '*/**/*.{js,ts,tsx}' --write"
