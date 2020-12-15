@@ -42,7 +42,6 @@ services:
   web:
     build:
       context: ./web
-      # target: build
       args:
         - "API_URL=${API_URL}"
         - "PORT=${WEB_PORT}"
@@ -56,7 +55,6 @@ services:
     volumes:
       - ./web:/srv/www
       - "/srv/www/node_modules"
-    # command: "yarn run start:dev"
 
 networks:
   proxy:
