@@ -10,6 +10,17 @@ services:
     volumes:
       - ./db:/var/lib/postgresql/data
 
+  proxy:
+    build: ./proxy
+    restart: always
+    depends_on:
+      - api
+      - web
+    ports:
+      - "80:80"
+    networks:
+      - proxy
+
   api:
     build: ./api
     depends_on:
@@ -23,32 +34,32 @@ services:
       SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p ${API_PORT} -b '0.0.0.0'"
     networks:
+      - proxy
       - backend
-    ports:
-      - "${API_PORT}:${API_PORT}"
     volumes:
       - ./api:/srv/www-api
 
   web:
     build:
       context: ./web
-      target: build
+      # target: build
       args:
         - "API_URL=${API_URL}"
+        - "PORT=${WEB_PORT}"
     stdin_open: true
     environment:
       API_URL: "${API_URL}"
       PORT: "${WEB_PORT}"
     networks:
+      - proxy
       - frontend
     volumes:
       - ./web:/srv/www
       - "/srv/www/node_modules"
-    ports:
-      - "${WEB_PORT}:${WEB_PORT}"
-    command: "yarn run start:dev"
+    # command: "yarn run start:dev"
 
 networks:
+  proxy:
   backend:
   frontend:
 
