@@ -34,5 +34,5 @@ module LongboxApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.hosts.clear
-    end
+  end
 end
