@@ -1,8 +1,9 @@
 FROM ruby:2.7.2
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client \
+    && apt-get clean autoclean && apt-get autoremove -y \
+    && rm -rf /var/lib/apt /var/lib/dpkg /var/lib/cache /var/lib/log
 WORKDIR /srv/www-api
-COPY Gemfile /srv/www-api/Gemfile
-COPY Gemfile.lock /srv/www-api/Gemfile.lock
+COPY Gemfile Gemfile.lock /srv/www-api/
 RUN bundle install
 COPY . /srv/www-api
 
