@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
-  belongs_to :series
-  belongs_to :book_type
+  belongs_to :series, optional: true
+  belongs_to :book_type, optional: true
   has_many :credits, dependent: :destroy
   has_many :creators, through: :credits
 
