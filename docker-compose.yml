@@ -3,12 +3,23 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_USERNAME: "${DATABASE_USERNAME}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
     networks:
       - backend
     volumes:
       - ./db:/var/lib/postgresql/data
+
+  proxy:
+    build: ./proxy
+    restart: always
+    depends_on:
+      - api
+      - web
+    ports:
+      - "80:80"
+    networks:
+      - proxy
 
   api:
     build: ./api
@@ -16,30 +27,37 @@ services:
       - db
     environment:
       RAILS_ENV: "${RAILS_ENV}"
-      DATABASE_URL: postgres://postgres:@db
-      DATABASE_USER: "${POSTGRES_USER}"
-      DATABASE_PASSWORD: "${POSTGRES_PASSWORD}"
+      DATABASE_URL: "${DATABASE_URL}"
+      DATABASE_NAME: "${DATABASE_NAME}"
+      DATABASE_USERNAME: "${DATABASE_USERNAME}"
+      DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
       SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p ${API_PORT} -b '0.0.0.0'"
     networks:
+      - proxy
       - backend
-    ports:
-      - "3001:3001"
     volumes:
       - ./api:/srv/www-api
 
   web:
-    build: ./web
+    build:
+      context: ./web
+      args:
+        - "API_URL=${API_URL}"
+        - "PORT=${WEB_PORT}"
     stdin_open: true
+    environment:
+      API_URL: "${API_URL}"
+      PORT: "${WEB_PORT}"
     networks:
+      - proxy
       - frontend
     volumes:
       - ./web:/srv/www
       - "/srv/www/node_modules"
-    ports:
-      - "3000:3000"
 
 networks:
+  proxy:
   backend:
   frontend:
 
