@@ -5,6 +5,7 @@ module Types
     field :created_at, Types::DateTimeType, null: false
     field :updated_at, Types::DateTimeType, null: false
 
+    field :title, String, null: true
     field :credits, [Types::CreditType], null: true
     field :format, String, null: true
     field :issue, String, null: true

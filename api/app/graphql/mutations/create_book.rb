@@ -5,11 +5,10 @@ module Mutations
     field :book, Types::BookType, null: true
     field :errors, [Types::UserError], null: false
 
-    argument :name, String, required: true
+    argument :title, String, required: true
 
     def resolve(**args)
-      book = Book.build(name: args[:name])
-
+      book = Book.new(title: args[:title])
       if book.save
         {
           book: book,
@@ -17,12 +16,12 @@ module Mutations
         }
       else
         # Convert Rails model errors into GraphQL-ready error hashes
-        user_errors = book.errors.map do |attribute, message|
+        user_errors = book.errors.map do |error|
           # This is the GraphQL argument which corresponds to the validation error:
-          path = ["attributes", attribute.to_s.camelize(:lower)]
+          # path = ["attributes", error.attribute.to_s.camelize(:lower)]
           {
-            path: path,
-            message: message
+            # path: path,
+            message: error.message
           }
         end
         {
