@@ -1,14 +1,29 @@
 import * as React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 
-const SERIES_DROPDOWN_QUERY = gql`
-  {
-    seriesList {
-      id
-      name
+const SAVE_BOOK = gql`
+  mutation CreateBook($title: String!) {
+    createBook(title: $title) {
+      book {
+        id
+        title
+      }
+      errors {
+        message
+      }
     }
   }
 `;
+
+interface BookResult {
+  book: {
+    id: number;
+    title: string;
+  };
+}
+interface NewBookDetails {
+  title: string;
+}
 
 function useFormFields<T>(initialValues: T) {
   const [formFields, setFormFields] = React.useState<T>(initialValues);
@@ -23,41 +38,37 @@ function useFormFields<T>(initialValues: T) {
 
 function BookForm(): JSX.Element {
   const { formFields, createChangeHandler } = useFormFields({
-    name: '',
-    seriesId: 0
+    title: ''
   });
 
-  const { data } = useQuery(SERIES_DROPDOWN_QUERY);
+  const [saveBook, { data }] = useMutation<
+    { createBook: BookResult },
+    { title: string }
+  >(SAVE_BOOK, {
+    variables: { title: formFields.title },
+    onCompleted({ createBook }) {
+      console.log('Book Created', createBook);
+    }
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(`Book submitted`);
+    saveBook({ variables: { title: formFields.title } });
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {data && data.createBook ? <p>Saved!</p> : null}
       <div>
-        <label htmlFor="series">Series</label>
-        <select name="series_id" id="series_id">
-          {data && (
-            <>
-              {data.seriesList.map((s: { id: number; name: string }) => (
-                <option key={s.id}>{s.name}</option>
-              ))}
-            </>
-          )}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="title">Name</label>
         <input
-          type="name"
-          id="name"
-          value={formFields.name}
-          onChange={createChangeHandler('name')}
+          type="textbox"
+          id="title"
+          value={formFields.title}
+          onChange={createChangeHandler('title')}
         />
       </div>
+      <button>Save</button>
     </form>
   );
 }

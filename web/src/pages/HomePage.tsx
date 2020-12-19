@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { PublisherList } from '../components/publisher';
+import { BookList } from '../components/books';
 
 const HomePage = (): JSX.Element => (
   <>
-    <PublisherList />
+    <BookList />
   </>
 );
 

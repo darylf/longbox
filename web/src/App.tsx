@@ -32,7 +32,7 @@ const App = (): JSX.Element => {
               <Route path="/publishers">
                 <Pages.Publishers />
               </Route>
-              <Route path="/">
+              <Route exact path="/">
                 <Pages.HomePage />
               </Route>
             </Switch>
