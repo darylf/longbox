@@ -1,5 +1,9 @@
 version: "3"
 services:
+  api:
+    ports:
+      - "3000:3000"
+
   web:
     build:
       target: build

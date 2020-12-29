@@ -26,15 +26,9 @@ const App = (): JSX.Element => {
           <Sidebar />
           <Content>
             <Switch>
-              <Route path="/books">
-                <Pages.Books />
-              </Route>
-              <Route path="/publishers">
-                <Pages.Publishers />
-              </Route>
-              <Route exact path="/">
-                <Pages.HomePage />
-              </Route>
+              <Route path="/books" component={Pages.Books} />
+              <Route path="/publishers" component={Pages.Publishers} />
+              <Route exact path="/" component={Pages.HomePage} />
             </Switch>
           </Content>
           <Footer />
