@@ -5,15 +5,21 @@ ruby '~> 2.7.2'
 
 gem 'rails', '~> 6.1.0'
 
+gem 'pg', '>= 0.18', '< 2.0'
+
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql'
-gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.1.1'
 gem 'rack-cors'
 
 group :development do
   gem 'faker'
   gem 'listen', '>= 3.3'
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
+  gem 'simplecov', require: false
   gem 'spring', '~> 2.1'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

@@ -4,15 +4,18 @@ require:
   - rubocop-rails
 
 AllCops:
-  NewCops: enable
-  TargetRubyVersion: 2.6
+  Include:
+    - "**/*.rb"
+    - "**/Rakefile"
+    - "**/config.ru"
+    - "**/*.rake"
   Exclude:
-    - "bin/*"
-    - "db/schema.rb"
-    - "vendor/bundle/**/*"
-    - "storage/**/*"
-    - "tmp/**/*"
-    - ".git/**/*"
+    - Gemfile
+    - "bin/**/*"
+    - "db/**/*"
+    - "vendor/**/*"
+  NewCops: enable
+  UseCache: false
 
 ###################### Layout ##############################
 
@@ -66,7 +69,7 @@ RSpec/HookArgument:
 
 RSpec/ImplicitExpect:
   Enabled: true
-  EnforcedStyle: 'should'
+  EnforcedStyle: "should"
 
 RSpec/MultipleExpectations:
   Enabled: true
@@ -76,7 +79,4 @@ RSpec/DescribedClass:
   Enabled: false
 
 RSpec/EmptyLineAfterExample:
-  Enabled: false
-
-RSpec/MultipleMemoizedHelpers:
   Enabled: false
