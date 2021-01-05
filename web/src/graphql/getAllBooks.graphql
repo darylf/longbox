@@ -1,0 +1,26 @@
+query GetAllBooks {
+  books {
+    ...BookDetails
+  }
+}
+
+fragment BookDetails on Book {
+  id
+  title
+  createdAt
+  credits {
+    ...CreditDetails
+  }
+  format
+  issue
+  updatedAt
+  seriesName
+  publisherName
+}
+
+fragment CreditDetails on Credit {
+  id
+  book {
+    id
+  }
+}

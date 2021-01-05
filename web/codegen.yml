@@ -1,0 +1,17 @@
+overwrite: true
+schema: 'http://api:3000/graphql'
+documents: 'src/**/*.graphql'
+generates:
+  src/graphql/generated.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      avoidOptionals: true
+      skipTypename: true
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'
+    config:
+      descriptions: false

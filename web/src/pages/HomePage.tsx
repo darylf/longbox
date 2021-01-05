@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { PublisherList } from '../components/publisher';
+import { Link } from 'react-router-dom';
+import { BookList } from '../components/books';
 
 const HomePage = (): JSX.Element => (
   <>
-    <PublisherList />
+    <h1>Welcome</h1>
+    <Link to={'/books'}>View Book List</Link>
   </>
 );
 

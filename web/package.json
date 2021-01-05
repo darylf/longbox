@@ -7,7 +7,8 @@
     "start:dev": "webpack serve --host 0.0.0.0 --mode development",
     "build": "webpack --mode production",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
-    "prettier:save": "prettier '*/**/*.{js,ts,tsx}' --write"
+    "prettier:save": "prettier '*/**/*.{js,ts,tsx}' --write",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "^3.3.5",
@@ -21,6 +22,13 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
+    "@graphql-codegen/cli": "^1.19.4",
+    "@graphql-codegen/fragment-matcher": "2.0.1",
+    "@graphql-codegen/import-types-preset": "^1.18.1",
+    "@graphql-codegen/introspection": "^1.18.1",
+    "@graphql-codegen/typescript": "^1.19.0",
+    "@graphql-codegen/typescript-operations": "^1.17.12",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@types/html-webpack-plugin": "^3.2.4",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
