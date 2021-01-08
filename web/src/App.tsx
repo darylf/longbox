@@ -23,7 +23,6 @@ const App = (): JSX.Element => {
         <GlobalStyle />
         <Layout>
           <Header title="Longbox" />
-          <Sidebar />
           <Content>
             <Switch>
               <Route path="/books" component={Pages.Books} />
@@ -31,6 +30,7 @@ const App = (): JSX.Element => {
               <Route exact path="/" component={Pages.HomePage} />
             </Switch>
           </Content>
+          <Sidebar />
           <Footer />
         </Layout>
       </Router>

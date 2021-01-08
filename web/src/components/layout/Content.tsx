@@ -5,10 +5,7 @@ interface ContentProps {
   children: React.ReactNode;
 }
 
-const StyledContent = styled.div`
-  grid-area: content;
-  padding: 2rem;
-`;
+const StyledContent = styled.div``;
 
 const Content: React.FunctionComponent<ContentProps> = ({
   children

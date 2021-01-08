@@ -2,9 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledSidebar = styled.div`
-  grid-area: sidebar;
-`;
+const StyledSidebar = styled.div``;
 
 interface SidebarProps {
   children?: React.ReactNode;

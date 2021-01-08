@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { BookList } from '../components/books';
 
 const HomePage = (): JSX.Element => (
   <>

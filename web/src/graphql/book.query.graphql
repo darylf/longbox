@@ -1,4 +1,4 @@
-query GetBook($id: ID!) {
+query Book($id: ID!) {
   book(id: $id) {
     ...BookDetails
   }
