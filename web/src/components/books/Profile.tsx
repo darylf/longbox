@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetBookQuery } from '../../graphql/generated';
+import { useBookQuery } from '../../graphql/generated';
 
 function BookProfile(): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  const { loading, error, data } = useGetBookQuery({
+  const { loading, error, data } = useBookQuery({
     variables: { id }
   });
 
