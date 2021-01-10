@@ -1,29 +1,5 @@
 import * as React from 'react';
-import { useMutation, gql } from '@apollo/client';
-
-const SAVE_BOOK = gql`
-  mutation CreateBook($title: String!) {
-    createBook(title: $title) {
-      book {
-        id
-        title
-      }
-      errors {
-        message
-      }
-    }
-  }
-`;
-
-interface BookResult {
-  book: {
-    id: number;
-    title: string;
-  };
-}
-interface NewBookDetails {
-  title: string;
-}
+import { useCreateBookMutation } from '../../../graphql/generated';
 
 function useFormFields<T>(initialValues: T) {
   const [formFields, setFormFields] = React.useState<T>(initialValues);
@@ -41,19 +17,15 @@ function BookForm(): JSX.Element {
     title: ''
   });
 
-  const [saveBook, { data }] = useMutation<
-    { createBook: BookResult },
-    { title: string }
-  >(SAVE_BOOK, {
-    variables: { title: formFields.title },
-    onCompleted({ createBook }) {
-      console.log('Book Created', createBook);
+  const [createBookMutation, { data, loading, error }] = useCreateBookMutation({
+    variables: {
+      title: formFields.title
     }
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    saveBook({ variables: { title: formFields.title } });
+    createBookMutation();
   };
 
   return (
