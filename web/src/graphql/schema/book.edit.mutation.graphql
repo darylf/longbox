@@ -1,0 +1,10 @@
+mutation EditBook($id: ID!, $title: String!) {
+  editBook(id: $id, title: $title) {
+    book {
+      ...BookDetails
+    }
+    errors {
+      message
+    }
+  }
+}

@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { Book, useBooksQuery } from '../../../graphql/generated';
-import Card from '../Card';
-import { List, ListItem } from './styles/List';
+import styled from 'styled-components';
+import { Book, useBooksQuery } from '../../graphql/generated';
+import Card from './Card';
 
 function BookList(): JSX.Element {
   const { data, loading, error } = useBooksQuery();
@@ -24,3 +23,16 @@ function BookList(): JSX.Element {
 }
 
 export default BookList;
+
+const List = styled.ol`
+  margin: 1em 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const ListItem = styled.li`
+  list-style-type: none;
+  width: 20rem;
+`;

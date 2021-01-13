@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { useBookQuery } from '../../../graphql/generated';
+import { Link, useParams } from 'react-router-dom';
+import { useBookQuery } from '../../graphql/generated';
 
 function BookProfile(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -12,7 +12,12 @@ function BookProfile(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
-  return <h1>{data?.book.title}</h1>;
+  return (
+    <>
+      <h1>{data?.book.title}</h1>
+      <Link to={`/books/${data?.book.id}/edit`}>Edit</Link>
+    </>
+  );
 }
 
 export default BookProfile;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCreateBookMutation } from '../../../graphql/generated';
+import { useCreateBookMutation } from '../../graphql/generated';
 
 function useFormFields<T>(initialValues: T) {
   const [formFields, setFormFields] = React.useState<T>(initialValues);

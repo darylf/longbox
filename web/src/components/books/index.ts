@@ -1,3 +1,4 @@
-export { default as BookProfile } from './Profile';
-export { default as BookForm } from './Form';
-export { default as BookList } from './List';
+export { default as Profile } from './Profile';
+export { default as EditForm } from './EditForm';
+export { default as NewForm } from './NewForm';
+export { default as List } from './List';
