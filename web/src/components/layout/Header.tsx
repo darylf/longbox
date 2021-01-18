@@ -1,9 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Navigation from './Navigation';
 
 const StyledHeader = styled.div`
-  background-color: #fff;
+  grid-area: header;
 `;
 
 const Logo = styled.div``;
@@ -23,7 +22,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     <Logo>
       <Title>{title}</Title>
     </Logo>
-    <Navigation />
     <ActionButtons></ActionButtons>
   </StyledHeader>
 );

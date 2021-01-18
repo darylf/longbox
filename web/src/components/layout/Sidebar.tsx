@@ -1,22 +1,14 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Navigation } from '.';
 
-const StyledSidebar = styled.div``;
+const StyledSidebar = styled.div`
+  grid-area: sidebar;
+`;
 
-interface SidebarProps {
-  children?: React.ReactNode;
-}
-
-const Sidebar: React.FunctionComponent<SidebarProps> = ({}: SidebarProps) => (
+const Sidebar: React.FunctionComponent = () => (
   <StyledSidebar>
-    <div>
-      <ul>
-        <li>
-          <Link to="/books/new">Create New Book</Link>
-        </li>
-      </ul>
-    </div>
+    <Navigation />
   </StyledSidebar>
 );
 
