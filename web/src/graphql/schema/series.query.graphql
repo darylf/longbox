@@ -1,0 +1,8 @@
+query SeriesList {
+  seriesList {
+    nodes {
+      id
+      name
+    }
+  }
+}

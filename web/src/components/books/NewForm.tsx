@@ -1,48 +1,93 @@
 import * as React from 'react';
-import { useCreateBookMutation } from '../../graphql/generated';
-
-function useFormFields<T>(initialValues: T) {
-  const [formFields, setFormFields] = React.useState<T>(initialValues);
-  const createChangeHandler = (key: keyof T) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = e.target.value;
-    setFormFields((prev: T) => ({ ...prev, [key]: value }));
-  };
-  return { formFields, createChangeHandler };
-}
+import {
+  useCreateBookMutation,
+  useSeriesListQuery
+} from '../../graphql/generated';
+import styled from 'styled-components';
+import { useInput, useSelectInput } from '../../hooks/useInput';
+import { FormField } from './FormField';
+import DropDown, { ListItem } from '../DropDown';
+import { Link } from 'react-router-dom';
 
 function BookForm(): JSX.Element {
-  const { formFields, createChangeHandler } = useFormFields({
-    title: ''
-  });
+  // const { formFields, createChangeHandler } = useFormFields(defaultValues);
+  const { value: titleValue, bind: bindTitle } = useInput();
+  const { value: issueValue, bind: bindIssue } = useInput();
+  const { value: formatValue, bind: bindFormat } = useInput();
+  const { value: seriesValue, bind: bindSeries } = useSelectInput();
 
-  const [createBookMutation, { data, loading, error }] = useCreateBookMutation({
+  const { data: dataSeries } = useSeriesListQuery();
+  const itemData: Array<ListItem> =
+    dataSeries?.seriesList.nodes?.map((item) => {
+      return { label: `${item?.name}`, value: `${item?.id}` } as ListItem;
+    }) || [];
+
+  const [createBookMutation, { data }] = useCreateBookMutation({
     variables: {
-      title: formFields.title
+      attributes: {
+        alternateTitle: titleValue,
+        issue: issueValue,
+        seriesId: seriesValue
+      }
     }
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createBookMutation();
+    console.log({
+      title: titleValue,
+      issue: issueValue,
+      seriesId: seriesValue
+    });
+    createBookMutation().then((data) => console.log(data));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {data && data.createBook ? <p>Saved!</p> : null}
-      <div>
-        <label htmlFor="title">Name</label>
-        <input
-          type="textbox"
-          id="title"
-          value={formFields.title}
-          onChange={createChangeHandler('title')}
-        />
-      </div>
+    <Form onSubmit={handleSubmit}>
+      <h1>Create a Book</h1>
+
+      {data && data.createBook ? (
+        <p>
+          Saved! <Link to={`/book/${data.createBook.book?.id}`}>View here</Link>
+        </p>
+      ) : null}
+
+      <DropDown
+        label="Series"
+        defaultSelected={''}
+        items={itemData}
+        bind={bindSeries}
+      />
+
+      <FormField
+        type="text"
+        label="Issue"
+        value={issueValue}
+        bind={bindIssue}
+      />
+
+      <FormField
+        type="text"
+        label="Alternate Title"
+        value={titleValue}
+        bind={bindTitle}
+      />
+
+      <FormField
+        type="text"
+        label="Format"
+        value={formatValue}
+        bind={bindFormat}
+      />
+
       <button>Save</button>
-    </form>
+    </Form>
   );
 }
 
 export default BookForm;
+
+const Form = styled.form`
+  text-align: left;
+  margin: 0 2em 2em 2em;
+`;

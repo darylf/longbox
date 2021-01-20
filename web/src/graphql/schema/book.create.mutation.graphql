@@ -1,5 +1,5 @@
-mutation CreateBook($title: String!) {
-  createBook(title: $title) {
+mutation CreateBook($attributes: BookAttributes!) {
+  createBook(attributes: $attributes) {
     book {
       ...BookDetails
     }
@@ -7,4 +7,11 @@ mutation CreateBook($title: String!) {
       message
     }
   }
+}
+
+input BookAttributes {
+  title: String
+  credit_ids: [ID]
+  issue: String
+  series_id: ID
 }

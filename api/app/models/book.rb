@@ -12,6 +12,6 @@ class Book < ApplicationRecord
   alias_attribute :format, :book_type_name
 
   def title
-    super || "#{series_name} ##{issue}".strip
+    alternate_title.blank? ? "#{series_name} ##{issue}".strip : alternate_title
   end
 end

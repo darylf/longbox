@@ -20,21 +20,13 @@ function BookForm(): JSX.Element {
     title: ''
   });
 
-  const [createBookMutation, { data, loading, error }] = useCreateBookMutation({
-    variables: {
-      title: formFields.title
-    }
-  });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createBookMutation();
   };
 
   return (
     <form onSubmit={handleSubmit}>
       EDIT FORM
-      {data && data.createBook ? <p>Saved!</p> : null}
       <div>
         <label htmlFor="title">Name</label>
         <input

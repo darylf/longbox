@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_193605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "book_type_id"
-    t.string "title"
+    t.string "alternate_title"
     t.index ["book_type_id"], name: "index_books_on_book_type_id"
     t.index ["series_id"], name: "index_books_on_series_id"
   end

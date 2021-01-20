@@ -5,10 +5,10 @@ module Mutations
     field :book, Types::BookType, null: true
     field :errors, [Types::UserError], null: false
 
-    argument :title, String, required: true
+    argument :attributes, Types::BookAttributesType, required: true
 
-    def resolve(**args)
-      book = Book.new(title: args[:title])
+    def resolve(attributes:)
+      book = Book.new(attributes.to_hash)
       if book.save
         {
           book: book,

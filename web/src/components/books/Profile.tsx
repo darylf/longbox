@@ -15,6 +15,9 @@ function BookProfile(): JSX.Element {
   return (
     <>
       <h1>{data?.book.title}</h1>
+      <p>
+        <b>Issue:</b> {data?.book.issue}
+      </p>
       <Link to={`/books/${data?.book.id}/edit`}>Edit</Link>
     </>
   );
