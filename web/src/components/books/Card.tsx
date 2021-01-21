@@ -7,18 +7,27 @@ interface Props {
   book: BookDetailsFragment;
 }
 
+function getDisplayName({
+  alternateTitle,
+  issue,
+  seriesName
+}: BookDetailsFragment): string {
+  return alternateTitle ? alternateTitle : `${seriesName} #${issue}`;
+}
+
 export default function Card({ book }: Props): JSX.Element {
+  const displayName = getDisplayName(book);
   return (
     <StyledCard>
       <StyledLink to={`/books/${book.id}`}>
         <StyledImg
           src={`https://via.placeholder.com/504x771?text=${encodeURIComponent(
-            book.title + ''
+            book.alternateTitle + ''
           )}`}
-          alt={`${book.title} cover image`}
-          title={`${book.title}`}
+          alt={`${displayName} cover image`}
+          title={`${displayName}`}
         />
-        {book.title}
+        {displayName}
       </StyledLink>
     </StyledCard>
   );

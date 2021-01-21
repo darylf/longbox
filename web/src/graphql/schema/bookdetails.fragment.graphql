@@ -1,6 +1,6 @@
 fragment BookDetails on Book {
   id
-  title
+  alternateTitle
   createdAt
   credits {
     ...CreditDetails

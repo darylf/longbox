@@ -1,0 +1,2 @@
+class BookFormat < ApplicationRecord
+end

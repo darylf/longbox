@@ -17,6 +17,7 @@ export type Scalars = {
 /** A comic book or trade paperback */
 export type Book = {
   __typename?: 'Book';
+  alternateTitle?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
   credits?: Maybe<Array<Credit>>;
   format?: Maybe<Scalars['String']>;
@@ -25,7 +26,6 @@ export type Book = {
   publisherName?: Maybe<Scalars['String']>;
   series?: Maybe<Series>;
   seriesName?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -321,7 +321,7 @@ export type BookQuery = (
 
 export type BookDetailsFragment = (
   { __typename?: 'Book' }
-  & Pick<Book, 'id' | 'title' | 'createdAt' | 'format' | 'issue' | 'updatedAt' | 'seriesName' | 'publisherName'>
+  & Pick<Book, 'id' | 'alternateTitle' | 'createdAt' | 'format' | 'issue' | 'updatedAt' | 'seriesName' | 'publisherName'>
   & { credits?: Maybe<Array<(
     { __typename?: 'Credit' }
     & CreditDetailsFragment
@@ -376,7 +376,7 @@ export const CreditDetailsFragmentDoc = gql`
 export const BookDetailsFragmentDoc = gql`
     fragment BookDetails on Book {
   id
-  title
+  alternateTitle
   createdAt
   credits {
     ...CreditDetails

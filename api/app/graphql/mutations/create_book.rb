@@ -9,6 +9,7 @@ module Mutations
 
     def resolve(attributes:)
       book = Book.new(attributes.to_hash)
+
       if book.save
         {
           book: book,
