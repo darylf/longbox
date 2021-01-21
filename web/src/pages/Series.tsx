@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Form, List } from '../components/publisher';
+import { Form, List } from '../components/series';
 
-const Publishers = (): JSX.Element => {
+const Series = (): JSX.Element => {
   return (
     <>
       <Switch>
-        <Route path="/publishers/new">
+        <Route path="/series/new">
           <Form />
         </Route>
 
-        <Route path="/publishers">
+        <Route path="/series">
           <List />
         </Route>
       </Switch>
@@ -18,4 +18,4 @@ const Publishers = (): JSX.Element => {
   );
 };
 
-export default Publishers;
+export default Series;

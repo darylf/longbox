@@ -5,8 +5,8 @@ module Mutations
     field :series, Types::SeriesType, null: true
     field :errors, [Types::UserError], null: false
 
-    argument :publisher_id, ID, required: true
     argument :name, String, required: true
+    argument :publisher_id, ID, required: true
 
     def resolve(**args)
       series = Series.new do |s|

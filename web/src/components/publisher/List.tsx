@@ -8,7 +8,9 @@ interface IPublisher {
 const GET_PUBLISHERS = gql`
   query GetPublishers {
     publishers {
-      name
+      nodes {
+        name
+      }
     }
   }
 `;
@@ -20,7 +22,7 @@ function PublisherList(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
-  const PublisherItems = data.publishers.map(({ name }: IPublisher) => (
+  const PublisherItems = data.publishers.nodes.map(({ name }: IPublisher) => (
     <li key={name}>{name}</li>
   ));
 

@@ -1,0 +1,11 @@
+mutation CreatePublisher($name: String!) {
+  createPublisher(name: $name) {
+    publisher {
+      id
+      name
+    }
+    errors {
+      message
+    }
+  }
+}
