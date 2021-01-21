@@ -19,22 +19,22 @@ end
 end
 
 ['Comic', 'Trade Paperback', 'Hard Cover'].each do |t|
-  BookType.find_or_create_by(name: t)
+  BookFormat.find_or_create_by(name: t)
 end
 
-@comic = BookType.find_by(name: 'Comic')
+@comic = BookFormat.find_by(name: 'Comic')
 
 ['Marvel Comics', 'DC Comics', 'Image Comics'].each do |t|
   Publisher.find_or_create_by(name: t)
 end
 
-10.times do
+5.times do
   Creator.find_or_create_by(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
 end
 
-5.times do
+4.times do
   series = Series.find_or_create_by(name: generate_series_name, publisher: Publisher.order(Arel.sql('RANDOM()')).first)
-  (1..10).each do |n|
+  (1..5).each do |n|
     book = Book.create(series: series, issue: n, book_type: @comic)
     Credit.create(book_id: book.id, creator: Creator.order(Arel.sql('RANDOM()')).first, credit_role: CreditRole.order(Arel.sql('RANDOM()')).first)
     Credit.create(book_id: book.id, creator: Creator.order(Arel.sql('RANDOM()')).first, credit_role: CreditRole.order(Arel.sql('RANDOM()')).first)

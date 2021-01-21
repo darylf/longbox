@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :book_type do
+  factory :book_format do
     name { "comic" }
   end
 end

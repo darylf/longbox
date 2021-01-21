@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_193605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "book_types", force: :cascade do |t|
+  create_table "book_formats", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 2020_12_18_193605) do
     t.integer "book_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "book_type_id"
-    t.string "title"
-    t.index ["book_type_id"], name: "index_books_on_book_type_id"
+    t.bigint "book_format_id"
+    t.string "alternate_title"
+    t.index ["book_format_id"], name: "index_books_on_book_format_id"
     t.index ["series_id"], name: "index_books_on_series_id"
   end
 
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_193605) do
     t.index ["publisher_id"], name: "index_series_on_publisher_id"
   end
 
-  add_foreign_key "books", "book_types"
+  add_foreign_key "books", "book_formats"
   add_foreign_key "books", "series"
   add_foreign_key "credits", "books"
   add_foreign_key "credits", "creators"

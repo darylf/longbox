@@ -1,0 +1,17 @@
+mutation CreateBook($attributes: BookAttributes!) {
+  createBook(attributes: $attributes) {
+    book {
+      ...BookDetails
+    }
+    errors {
+      message
+    }
+  }
+}
+
+input BookAttributes {
+  title: String
+  credit_ids: [ID]
+  issue: String
+  series_id: ID
+}

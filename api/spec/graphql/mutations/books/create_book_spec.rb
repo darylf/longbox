@@ -18,7 +18,7 @@ module Mutations
 
         expect(data['book']).to include(
           'id' => be_present,
-          'title' => 'Tripwire'
+          'alternateTitle' => 'Tripwire'
         )
       end
     end
@@ -29,11 +29,11 @@ module Mutations
       <<~GQL
         mutation {
           createBook(
-            title: "Tripwire"
+            attributes: {alternateTitle: "Tripwire"}
           ) {
             book {
-            id
-            title
+              id
+              alternateTitle
             }
             errors {
               message

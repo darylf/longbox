@@ -1,29 +1,6 @@
 import * as React from 'react';
-import { useMutation, gql } from '@apollo/client';
-
-const SAVE_BOOK = gql`
-  mutation CreateBook($title: String!) {
-    createBook(title: $title) {
-      book {
-        id
-        title
-      }
-      errors {
-        message
-      }
-    }
-  }
-`;
-
-interface BookResult {
-  book: {
-    id: number;
-    title: string;
-  };
-}
-interface NewBookDetails {
-  title: string;
-}
+import { useParams } from 'react-router-dom';
+import { useCreateBookMutation } from '../../graphql/generated';
 
 function useFormFields<T>(initialValues: T) {
   const [formFields, setFormFields] = React.useState<T>(initialValues);
@@ -37,28 +14,19 @@ function useFormFields<T>(initialValues: T) {
 }
 
 function BookForm(): JSX.Element {
+  const { id } = useParams<{ id: string }>();
+  if (!id) return <>Error, missing ID</>;
   const { formFields, createChangeHandler } = useFormFields({
     title: ''
   });
 
-  const [saveBook, { data }] = useMutation<
-    { createBook: BookResult },
-    { title: string }
-  >(SAVE_BOOK, {
-    variables: { title: formFields.title },
-    onCompleted({ createBook }) {
-      console.log('Book Created', createBook);
-    }
-  });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    saveBook({ variables: { title: formFields.title } });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {data && data.createBook ? <p>Saved!</p> : null}
+      EDIT FORM
       <div>
         <label htmlFor="title">Name</label>
         <input

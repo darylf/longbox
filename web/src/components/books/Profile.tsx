@@ -1,10 +1,18 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetBookQuery } from '../../graphql/generated';
+import { Link, useParams } from 'react-router-dom';
+import { BookDetailsFragment, useBookQuery } from '../../graphql/generated';
+
+function getDisplayName({
+  alternateTitle,
+  issue,
+  seriesName
+}: BookDetailsFragment): string {
+  return alternateTitle ? alternateTitle : `${seriesName} #${issue}`;
+}
 
 function BookProfile(): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  const { loading, error, data } = useGetBookQuery({
+  const { loading, error, data } = useBookQuery({
     variables: { id }
   });
 
@@ -12,7 +20,18 @@ function BookProfile(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
-  return <h1>{data?.book.title}</h1>;
+  const book = data?.book || ({} as BookDetailsFragment);
+  const title = getDisplayName(book);
+
+  return (
+    <>
+      <h1>{title}</h1>
+      <p>
+        <b>Issue:</b> {book.issue}
+      </p>
+      <Link to={`/books/${book.id}/edit`}>Edit</Link>
+    </>
+  );
 }
 
 export default BookProfile;

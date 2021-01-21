@@ -7,7 +7,6 @@ interface ContentProps {
 
 const StyledContent = styled.div`
   grid-area: content;
-  padding: 2rem;
 `;
 
 const Content: React.FunctionComponent<ContentProps> = ({
