@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useBookQuery } from '../../graphql/generated';
+import { BookDetailsFragment, useBookQuery } from '../../graphql/generated';
+
+function getDisplayName({
+  alternateTitle,
+  issue,
+  seriesName
+}: BookDetailsFragment): string {
+  return alternateTitle ? alternateTitle : `${seriesName} #${issue}`;
+}
 
 function BookProfile(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -12,13 +20,16 @@ function BookProfile(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
+  const book = data?.book || ({} as BookDetailsFragment);
+  const title = getDisplayName(book);
+
   return (
     <>
-      <h1>{data?.book.title}</h1>
+      <h1>{title}</h1>
       <p>
-        <b>Issue:</b> {data?.book.issue}
+        <b>Issue:</b> {book.issue}
       </p>
-      <Link to={`/books/${data?.book.id}/edit`}>Edit</Link>
+      <Link to={`/books/${book.id}/edit`}>Edit</Link>
     </>
   );
 }

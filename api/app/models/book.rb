@@ -9,5 +9,5 @@ class Book < ApplicationRecord
   delegate :name, to: :publisher, prefix: true, allow_nil: true
   delegate :name, to: :book_format, prefix: true, allow_nil: true
 
-  alias_attribute :format, :book_type_name
+  alias_attribute :format, :book_format_name
 end
