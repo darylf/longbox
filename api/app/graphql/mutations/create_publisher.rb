@@ -30,7 +30,6 @@ module Mutations
           errors: user_errors
         }
       end
-
     end
   end
 end

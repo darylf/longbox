@@ -12,7 +12,7 @@ RSpec.describe Publisher, type: :model do
 
     it { should validate_length_of(:name).is_at_most(120) }
 
-    it "should be unique" do
+    it ".name is unique" do
       publisher.save
 
       duplicate = build(:publisher)
