@@ -26,5 +26,6 @@ module.exports = {
   },
   rules: {
     semi: 'error'
-  }
+  },
+  ignorePatterns: ['**/generated/*.tsx']
 };

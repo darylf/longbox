@@ -1,6 +1,13 @@
 import * as React from 'react';
 
-export function useFormFields<T>(initialValues: T) {
+interface ReturnType<T> {
+  formFields: T;
+  createChangeHandler: (
+    key: keyof T
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export function useFormFields<T>(initialValues: T): ReturnType<T> {
   const [formFields, setFormFields] = React.useState<T>(initialValues);
   const createChangeHandler = (key: keyof T) => (
     e: React.ChangeEvent<HTMLInputElement>
