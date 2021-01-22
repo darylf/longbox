@@ -1,18 +1,14 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Form, List } from '../components/series';
+import { Form, List, Show } from '../components/series';
 
 const Series = (): JSX.Element => {
   return (
     <>
       <Switch>
-        <Route path="/series/new">
-          <Form />
-        </Route>
-
-        <Route path="/series">
-          <List />
-        </Route>
+        <Route path="/series/new" component={Form} />
+        <Route path="/series/:id" component={Show} />
+        <Route path="/series" component={List} />
       </Switch>
     </>
   );

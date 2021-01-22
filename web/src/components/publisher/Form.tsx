@@ -5,7 +5,7 @@ import { useCreatePublisherMutation } from '../../graphql/generated';
 import { Link } from 'react-router-dom';
 
 const PublisherForm = (): JSX.Element => {
-  const { value: nameValue, bind: bindName } = useInput();
+  const { value: nameValue, bind: bindName, reset: resetName } = useInput();
 
   const [createPublisherMutation, { data }] = useCreatePublisherMutation({
     variables: {
@@ -15,7 +15,9 @@ const PublisherForm = (): JSX.Element => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createPublisherMutation().then((data) => console.log(data));
+    createPublisherMutation().then(() => {
+      resetName();
+    });
   };
 
   return (
@@ -25,7 +27,7 @@ const PublisherForm = (): JSX.Element => {
       {data && data.createPublisher ? (
         <p>
           Saved!{' '}
-          <Link to={`/book/${data.createPublisher.publisher?.id}`}>
+          <Link to={`/publishers/${data.createPublisher.publisher?.id}`}>
             View here
           </Link>
         </p>

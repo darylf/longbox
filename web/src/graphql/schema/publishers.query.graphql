@@ -1,0 +1,8 @@
+query PublisherList {
+  publishers {
+    nodes {
+      id
+      name
+    }
+  }
+}

@@ -1,18 +1,14 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Form, List } from '../components/publisher';
+import { Form, List, Show } from '../components/publisher';
 
 const Publishers = (): JSX.Element => {
   return (
     <>
       <Switch>
-        <Route path="/publishers/new">
-          <Form />
-        </Route>
-
-        <Route path="/publishers">
-          <List />
-        </Route>
+        <Route path="/publishers/new" component={Form} />
+        <Route path="/publishers/:id" component={Show} />
+        <Route path="/publishers" component={List} />
       </Switch>
     </>
   );

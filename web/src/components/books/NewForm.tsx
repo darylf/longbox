@@ -46,7 +46,8 @@ function BookForm(): JSX.Element {
 
       {data && data.createBook ? (
         <p>
-          Saved! <Link to={`/book/${data.createBook.book?.id}`}>View here</Link>
+          Saved!
+          <Link to={`/books/${data.createBook.book?.id}`}>View here</Link>
         </p>
       ) : null}
 

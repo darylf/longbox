@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNavigation = styled.nav`
@@ -9,45 +9,13 @@ const StyledNavigation = styled.nav`
   }
   a:hover {
   }
-  li {
+  > ul > li {
     list-style-type: none;
     border-bottom: 1px dotted #3e3e3e;
   }
 `;
 
-function PublisherNavigation(): JSX.Element {
-  return (
-    <ul>
-      <li>
-        <Link to="/publishers/new">Create publisher</Link>
-      </li>
-    </ul>
-  );
-}
-
-function SeriesNavigation(): JSX.Element {
-  return (
-    <ul>
-      <li>
-        <Link to="/series/new">Create series</Link>
-      </li>
-    </ul>
-  );
-}
-
-function BookNavigation(): JSX.Element {
-  return (
-    <ul>
-      <li>
-        <Link to="/books/new">Create book</Link>
-      </li>
-    </ul>
-  );
-}
-
 function MainNavigation(): JSX.Element {
-  const { pathname: currentPath } = useLocation();
-
   return (
     <StyledNavigation>
       <ul>
@@ -56,15 +24,27 @@ function MainNavigation(): JSX.Element {
         </li>
         <li>
           <Link to="/publishers">Publishers</Link>
-          {currentPath.startsWith('/publishers') ? <PublisherNavigation /> : ''}
+          <ul>
+            <li>
+              <Link to="/publishers/new">Create publisher</Link>
+            </li>
+          </ul>
         </li>
         <li>
           <Link to="/series">Series</Link>
-          {currentPath.startsWith('/series') ? <SeriesNavigation /> : ''}
+          <ul>
+            <li>
+              <Link to="/series/new">Create series</Link>
+            </li>
+          </ul>
         </li>
         <li>
           <Link to="/books">Books</Link>
-          {currentPath.startsWith('/books') ? <BookNavigation /> : ''}
+          <ul>
+            <li>
+              <Link to="/books/new">Create book</Link>
+            </li>
+          </ul>
         </li>
       </ul>
     </StyledNavigation>
