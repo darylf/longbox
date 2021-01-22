@@ -2,15 +2,6 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-type NavigationItem = { url: string; title: string };
-
-const NAVIGATION_ITEMS: Array<NavigationItem> = [
-  { url: '/', title: 'Home' },
-  { url: '/my-books', title: 'My Books' },
-  { url: '/books', title: 'Browse' },
-  { url: '/users', title: 'Users' }
-];
-
 const StyledNavigation = styled.nav`
   a {
     display: block;
@@ -18,24 +9,46 @@ const StyledNavigation = styled.nav`
   }
   a:hover {
   }
-  li {
+  > ul > li {
     list-style-type: none;
     border-bottom: 1px dotted #3e3e3e;
   }
 `;
 
-function Navigation(): JSX.Element {
+function MainNavigation(): JSX.Element {
   return (
     <StyledNavigation>
       <ul>
-        {NAVIGATION_ITEMS.map((item, key) => (
-          <li key={key}>
-            <Link to={item.url}>{item.title}</Link>
-          </li>
-        ))}
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/publishers">Publishers</Link>
+          <ul>
+            <li>
+              <Link to="/publishers/new">Create publisher</Link>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Link to="/series">Series</Link>
+          <ul>
+            <li>
+              <Link to="/series/new">Create series</Link>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Link to="/books">Books</Link>
+          <ul>
+            <li>
+              <Link to="/books/new">Create book</Link>
+            </li>
+          </ul>
+        </li>
       </ul>
     </StyledNavigation>
   );
 }
 
-export default Navigation;
+export default MainNavigation;

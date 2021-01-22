@@ -1,8 +1,9 @@
-query SeriesList {
-  seriesList {
-    nodes {
-      id
-      name
+query Series($id: ID!) {
+  series(id: $id) {
+    id
+    name
+    books {
+      ...BookDetails
     }
   }
 }

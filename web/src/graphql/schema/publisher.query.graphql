@@ -1,0 +1,10 @@
+query Publisher($id: ID!) {
+  publisher(id: $id) {
+    id
+    name
+    series {
+      id
+      name
+    }
+  }
+}

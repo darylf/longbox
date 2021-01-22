@@ -1,21 +1,14 @@
 import * as React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { PublisherList } from '../components/publisher';
+import { Route, Switch } from 'react-router-dom';
+import { Form, List, Show } from '../components/publisher';
 
 const Publishers = (): JSX.Element => {
-  const match = useRouteMatch();
-
   return (
     <>
       <Switch>
-        <Route path={`${match.path}/new`}>
-          <h1>create a publisher</h1>
-        </Route>
-
-        <Route path={`${match.path}`}>
-          <h1>browse</h1>
-          <PublisherList />
-        </Route>
+        <Route path="/publishers/new" component={Form} />
+        <Route path="/publishers/:id" component={Show} />
+        <Route path="/publishers" component={List} />
       </Switch>
     </>
   );

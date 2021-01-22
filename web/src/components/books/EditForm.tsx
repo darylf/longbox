@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { useCreateBookMutation } from '../../graphql/generated';
 
 function useFormFields<T>(initialValues: T) {
   const [formFields, setFormFields] = React.useState<T>(initialValues);

@@ -39,7 +39,6 @@ export const useSelectInput = (
     bind: {
       value,
       onChange: (event) => {
-        console.log(`useInput Hook: ${event.currentTarget.value}`);
         setValue(event.currentTarget.value);
       }
     }

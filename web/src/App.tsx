@@ -23,6 +23,7 @@ const App = (): JSX.Element => {
               <Switch>
                 <Route path="/books" component={Pages.Books} />
                 <Route path="/publishers" component={Pages.Publishers} />
+                <Route path="/series" component={Pages.Series} />
                 <Route exact path="/" component={Pages.HomePage} />
               </Switch>
             </Content>

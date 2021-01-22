@@ -3,18 +3,16 @@ import {
   useCreateBookMutation,
   useSeriesListQuery
 } from '../../graphql/generated';
-import styled from 'styled-components';
-import { useInput, useSelectInput } from '../../hooks/useInput';
-import { FormField } from './FormField';
-import DropDown, { ListItem } from '../DropDown';
+import { useInput } from '../../hooks/useInput';
 import { Link } from 'react-router-dom';
+import { DropDown, ListItem, Form, FormField } from '../form';
 
 function BookForm(): JSX.Element {
   // const { formFields, createChangeHandler } = useFormFields(defaultValues);
   const { value: titleValue, bind: bindTitle } = useInput();
   const { value: issueValue, bind: bindIssue } = useInput();
   const { value: formatValue, bind: bindFormat } = useInput();
-  const { value: seriesValue, bind: bindSeries } = useSelectInput();
+  const { value: seriesValue, bind: bindSeries } = useInput();
 
   const { data: dataSeries } = useSeriesListQuery();
   const itemData: Array<ListItem> =
@@ -48,16 +46,12 @@ function BookForm(): JSX.Element {
 
       {data && data.createBook ? (
         <p>
-          Saved! <Link to={`/book/${data.createBook.book?.id}`}>View here</Link>
+          Saved!
+          <Link to={`/books/${data.createBook.book?.id}`}>View here</Link>
         </p>
       ) : null}
 
-      <DropDown
-        label="Series"
-        defaultSelected={''}
-        items={itemData}
-        bind={bindSeries}
-      />
+      <DropDown label="Series" items={itemData} bind={bindSeries} />
 
       <FormField
         type="text"
@@ -86,8 +80,3 @@ function BookForm(): JSX.Element {
 }
 
 export default BookForm;
-
-const Form = styled.form`
-  text-align: left;
-  margin: 0 2em 2em 2em;
-`;
