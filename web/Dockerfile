@@ -1,5 +1,5 @@
 # build environment
-FROM node:15.4-alpine as build
+FROM node:15.6.0-alpine as build
 ARG API_URL
 ENV API_URL=$API_URL
 WORKDIR /srv/www/
