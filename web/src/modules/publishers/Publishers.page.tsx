@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Form, List, Show } from '../components/publisher';
+import { Form, List, Show } from '.';
 
 const Publishers = (): JSX.Element => {
   return (

@@ -1,10 +1,11 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import * as React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Content, Footer, Header, Layout, Sidebar } from './components/layout';
-import * as Pages from './pages';
-import { GlobalStyle, theme } from './theme';
+import * as Pages from '../../modules/pages';
+import { GlobalStyle, theme } from '../../theme';
+import { Content, Footer, HeaderBar, Layout, Navigation } from '../layout';
+import HomePage from '.';
 
 const client = new ApolloClient({
   uri: process.env.API_URL,
@@ -18,17 +19,17 @@ const App = (): JSX.Element => {
         <Router>
           <GlobalStyle />
           <Layout>
-            <Header title="Longbox" />
+            <Navigation />
             <Content>
+              <HeaderBar />
               <Switch>
                 <Route path="/books" component={Pages.Books} />
                 <Route path="/publishers" component={Pages.Publishers} />
                 <Route path="/series" component={Pages.Series} />
-                <Route exact path="/" component={Pages.HomePage} />
+                <Route exact path="/" component={HomePage} />
               </Switch>
+              <Footer />
             </Content>
-            <Sidebar />
-            <Footer />
           </Layout>
         </Router>
       </ApolloProvider>

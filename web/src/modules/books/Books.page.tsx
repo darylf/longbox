@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import { EditForm, NewForm, List, Show } from '../components/books';
+import { EditForm, List, NewForm, Show } from '.';
 
 const Books = (): JSX.Element => {
   return (

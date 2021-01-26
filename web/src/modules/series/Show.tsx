@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import ItemList from '../../components/shared/ItemList';
 import { Book, Series, useSeriesQuery } from '../../graphql/generated';
-import ItemList from '../shared/ItemList';
 
 function getDisplayName({ alternateTitle, issue, seriesName }: Book): string {
   return alternateTitle ? alternateTitle : `${seriesName} #${issue}`;
