@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { useInput } from '../../hooks/useInput';
-import { DropDown, Form, FormField, ListItem } from '../form';
+import { Link } from 'react-router-dom';
+import { DropDown, Form, FormField, ListItem } from '../../components/form';
 import {
   useCreateSeriesMutation,
   usePublisherListQuery
 } from '../../graphql/generated';
-import { Link } from 'react-router-dom';
+import { useInput } from '../../hooks/useInput';
 
 const SeriesForm = (): JSX.Element => {
   const { value: nameValue, bind: bindName } = useInput();

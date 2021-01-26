@@ -2,6 +2,10 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const StyledSidebar = styled.div`
+  grid-area: sidebar;
+`;
+
 const StyledNavigation = styled.nav`
   a {
     display: block;
@@ -51,4 +55,25 @@ function MainNavigation(): JSX.Element {
   );
 }
 
-export default MainNavigation;
+const StyledLogo = styled.div``;
+
+const Logo: React.FunctionComponent = () => (
+  <StyledLogo>
+    <a href="/">
+      <img
+        src="https://via.placeholder.com/200x100?text=Logo"
+        alt="Logo"
+        title="Logo"
+      />
+    </a>
+  </StyledLogo>
+);
+
+const Navigation: React.FunctionComponent = () => (
+  <StyledSidebar>
+    <Logo />
+    <MainNavigation />
+  </StyledSidebar>
+);
+
+export default Navigation;
