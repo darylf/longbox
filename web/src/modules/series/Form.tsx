@@ -4,7 +4,7 @@ import { DropDown, Form, FormField, ListItem } from '../../components/form';
 import {
   useCreateSeriesMutation,
   usePublisherListQuery
-} from '../../graphql/generated';
+} from '../../hooks/graphql';
 import { useInput } from '../../hooks/useInput';
 
 const SeriesForm = (): JSX.Element => {

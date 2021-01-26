@@ -267,24 +267,6 @@ export type UserError = {
   path?: Maybe<Array<Scalars['String']>>;
 };
 
-export type BookDetailsFragment = (
-  { __typename?: 'Book' }
-  & Pick<Book, 'id' | 'alternateTitle' | 'createdAt' | 'format' | 'issue' | 'updatedAt' | 'seriesName' | 'publisherName'>
-  & { credits?: Maybe<Array<(
-    { __typename?: 'Credit' }
-    & CreditDetailsFragment
-  )>> }
-);
-
-export type CreditDetailsFragment = (
-  { __typename?: 'Credit' }
-  & Pick<Credit, 'id'>
-  & { book: (
-    { __typename?: 'Book' }
-    & Pick<Book, 'id'>
-  ) }
-);
-
 export type CreateBookMutationVariables = Exact<{
   attributes: BookAttributes;
 }>;
@@ -348,6 +330,24 @@ export type BooksQuery = (
       { __typename?: 'Book' }
       & BookDetailsFragment
     )>>> }
+  ) }
+);
+
+export type BookDetailsFragment = (
+  { __typename?: 'Book' }
+  & Pick<Book, 'id' | 'alternateTitle' | 'createdAt' | 'format' | 'issue' | 'updatedAt' | 'seriesName' | 'publisherName'>
+  & { credits?: Maybe<Array<(
+    { __typename?: 'Credit' }
+    & CreditDetailsFragment
+  )>> }
+);
+
+export type CreditDetailsFragment = (
+  { __typename?: 'Credit' }
+  & Pick<Credit, 'id'>
+  & { book: (
+    { __typename?: 'Book' }
+    & Pick<Book, 'id'>
   ) }
 );
 

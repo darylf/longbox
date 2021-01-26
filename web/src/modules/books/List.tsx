@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Book, useBooksQuery } from '../../graphql/generated';
+import { Book, useBooksQuery } from '../../hooks/graphql';
 import Card from './Card';
 
 function BookList(): JSX.Element {
