@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import * as Pages from '../../modules/pages';
 import { GlobalStyle, theme } from '../../theme';
 import { Content, Footer, HeaderBar, Layout, Navigation } from '../layout';
-import HomePage from '.';
+import HomePage from './HomePage';
 
 const client = new ApolloClient({
   uri: process.env.API_URL,
