@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Publisher, usePublisherListQuery } from '../../graphql/generated';
+import { Publisher, usePublisherListQuery } from '../../hooks/graphql';
 
 function PublisherList(): JSX.Element {
   const { loading, error, data } = usePublisherListQuery();

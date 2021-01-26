@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BookDetailsFragment, useBookQuery } from '../../graphql/generated';
+import { BookDetailsFragment, useBookQuery } from '../../hooks/graphql';
 
 function getDisplayName({
   alternateTitle,

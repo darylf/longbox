@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { DropDown, Form, FormField, ListItem } from '../../components/form';
-import {
-  useCreateBookMutation,
-  useSeriesListQuery
-} from '../../graphql/generated';
+import { useCreateBookMutation, useSeriesListQuery } from '../../hooks/graphql';
 import { useInput } from '../../hooks/useInput';
 
 function BookForm(): JSX.Element {

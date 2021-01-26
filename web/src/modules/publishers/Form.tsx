@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, FormField } from '../../components/form';
-import { useCreatePublisherMutation } from '../../graphql/generated';
+import { useCreatePublisherMutation } from '../../hooks/graphql';
 import { useInput } from '../../hooks/useInput';
 
 const PublisherForm = (): JSX.Element => {

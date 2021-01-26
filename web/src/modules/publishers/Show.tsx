@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ItemList from '../../components/shared/ItemList';
-import { Publisher, usePublisherQuery } from '../../graphql/generated';
+import { Publisher, usePublisherQuery } from '../../hooks/graphql';
 
 function Show(): JSX.Element {
   const { id: paramId } = useParams<{ id: string }>();

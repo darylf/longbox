@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { BookDetailsFragment } from '../../graphql/generated';
+import { BookDetailsFragment } from '../../hooks/graphql';
 
 interface Props {
   book: BookDetailsFragment;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Series, useSeriesListQuery } from '../../graphql/generated';
+import { Series, useSeriesListQuery } from '../../hooks/graphql';
 
 function SeriesList(): JSX.Element {
   const { loading, error, data } = useSeriesListQuery();
