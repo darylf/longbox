@@ -9,7 +9,7 @@ function SeriesList(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
-  const seriesList = data?.seriesList.nodes;
+  const seriesList = data?.seriesList.nodes ?? [];
 
   const SeriesItems = seriesList.map((item) => {
     const { id, name } = Object.assign({} as Series, item);
