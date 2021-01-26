@@ -7,7 +7,6 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.1em;
     line-height: 1.5;
-    text-align: center;
   }
 
   h1, h2, h3, h4, h5, h6, ul, li {

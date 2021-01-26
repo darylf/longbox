@@ -12,6 +12,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+const ComingSoon = () => <h1>Coming Soon</h1>;
+
 const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
@@ -26,6 +28,11 @@ const App = (): JSX.Element => {
                 <Route path="/books" component={Pages.Books} />
                 <Route path="/publishers" component={Pages.Publishers} />
                 <Route path="/series" component={Pages.Series} />
+                <Route path="/trending" component={ComingSoon} />
+                <Route path="/my-wishlist" component={ComingSoon} />
+                <Route path="/my-accout" component={ComingSoon} />
+                <Route path="/about" component={ComingSoon} />
+                <Route path="/contribute" component={ComingSoon} />
                 <Route exact path="/" component={HomePage} />
               </Switch>
               <Footer />

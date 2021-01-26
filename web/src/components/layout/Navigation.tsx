@@ -4,6 +4,9 @@ import styled from 'styled-components';
 
 const StyledSidebar = styled.div`
   grid-area: sidebar;
+  border-right: 1px dotted #c1c1c1;
+  height: 100vh;
+  padding: 1em;
 `;
 
 const StyledNavigation = styled.nav`
@@ -13,42 +16,45 @@ const StyledNavigation = styled.nav`
   }
   a:hover {
   }
+  > ul + ul {
+    border-top: 1px dotted #3e3e3e;
+  }
   > ul > li {
     list-style-type: none;
-    border-bottom: 1px dotted #3e3e3e;
   }
 `;
 
-function MainNavigation(): JSX.Element {
+function Navigation(): JSX.Element {
   return (
     <StyledNavigation>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/series">Browse Books</Link>
         </li>
         <li>
-          <Link to="/publishers">Publishers</Link>
-          <ul>
-            <li>
-              <Link to="/publishers/new">Create publisher</Link>
-            </li>
-          </ul>
+          <Link to="/publishers">Browse Publishers</Link>
         </li>
         <li>
-          <Link to="/series">Series</Link>
-          <ul>
-            <li>
-              <Link to="/series/new">Create series</Link>
-            </li>
-          </ul>
+          <Link to="/trending">Trending</Link>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <Link to="/my-collection">My Collection</Link>
         </li>
         <li>
-          <Link to="/books">Books</Link>
-          <ul>
-            <li>
-              <Link to="/books/new">Create book</Link>
-            </li>
-          </ul>
+          <Link to="/my-wishlist">My Wishlist</Link>
+        </li>
+        <li>
+          <Link to="/my-account">My Account</Link>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/contribute">Contribute</Link>
         </li>
       </ul>
     </StyledNavigation>
@@ -69,11 +75,11 @@ const Logo: React.FunctionComponent = () => (
   </StyledLogo>
 );
 
-const Navigation: React.FunctionComponent = () => (
+const Sidebar: React.FunctionComponent = () => (
   <StyledSidebar>
     <Logo />
-    <MainNavigation />
+    <Navigation />
   </StyledSidebar>
 );
 
-export default Navigation;
+export default Sidebar;

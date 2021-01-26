@@ -9,7 +9,9 @@ function SeriesList(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
-  const SeriesItems = data?.seriesList.nodes?.map((item) => {
+  const seriesList = data?.seriesList.nodes;
+
+  const SeriesItems = seriesList.map((item) => {
     const { id, name } = Object.assign({} as Series, item);
     return (
       <li key={id}>
@@ -18,7 +20,12 @@ function SeriesList(): JSX.Element {
     );
   });
 
-  return <ol>{SeriesItems}</ol>;
+  return (
+    <>
+      <h1>Browse Books</h1>
+      <ol>{SeriesItems}</ol>
+    </>
+  );
 }
 
 export default SeriesList;
