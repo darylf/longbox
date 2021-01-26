@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useInput } from '../../hooks/useInput';
-import { Form, FormField } from '../form';
-import { useCreatePublisherMutation } from '../../graphql/generated';
 import { Link } from 'react-router-dom';
+import { Form, FormField } from '../../components/form';
+import { useCreatePublisherMutation } from '../../graphql/generated';
+import { useInput } from '../../hooks/useInput';
 
 const PublisherForm = (): JSX.Element => {
   const { value: nameValue, bind: bindName, reset: resetName } = useInput();

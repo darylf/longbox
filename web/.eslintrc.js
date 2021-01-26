@@ -18,14 +18,23 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint', 'import'],
   settings: {
     react: {
       version: 'detect'
     }
   },
   rules: {
-    semi: 'error'
+    semi: 'error',
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
+        alphabetize: {
+          order: 'asc'
+        }
+      }
+    ]
   },
   ignorePatterns: ['**/generated/*.tsx']
 };
