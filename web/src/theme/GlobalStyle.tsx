@@ -2,9 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 import { ThemeType } from './theme';
 
 const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
   body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 1.1em;
     line-height: 1.5;
   }
