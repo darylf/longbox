@@ -5,7 +5,6 @@ import { EditForm, List, NewForm, Show } from '.';
 const Books = (): JSX.Element => {
   return (
     <>
-      <Link to={'/books/new'}>Create a book</Link>
       <Switch>
         <Route exact path="/books/new" component={NewForm} />
         <Route exact path="/books/:id/edit" component={EditForm} />

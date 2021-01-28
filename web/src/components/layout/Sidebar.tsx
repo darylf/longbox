@@ -1,18 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBook,
-  faArchive,
-  faChartLine,
-  faHeart,
-  faAward,
-  faCog,
-  faInfoCircle,
-  faHandsHelping,
-  faTools
-} from '@fortawesome/free-solid-svg-icons';
+import Icon from '../shared/Icon';
 
 const StyledSidebar = styled.div`
   grid-area: sidebar;
@@ -39,28 +28,24 @@ const StyledNavigation = styled.nav`
   }
 `;
 
-const Icon = styled(FontAwesomeIcon)`
-  margin-right: 1em;
-  font-size: 0.8em;
-`;
 function Navigation(): JSX.Element {
   return (
     <StyledNavigation>
       <ul>
         <li>
           <Link to="/series">
-            <Icon icon={faBook} /> Browse Books
+            <Icon name={'book'} /> Browse Series
           </Link>
         </li>
         <li>
           <Link to="/publishers">
-            <Icon icon={faArchive} />
+            <Icon name={'archive'} />
             Browse Publishers
           </Link>
         </li>
         <li>
           <Link to="/trending">
-            <Icon icon={faChartLine} />
+            <Icon name={'chart-line'} />
             Trending
           </Link>
         </li>
@@ -68,19 +53,19 @@ function Navigation(): JSX.Element {
       <ul>
         <li>
           <Link to="/my-collection">
-            <Icon icon={faHeart} />
+            <Icon name={'heart'} />
             My Collection
           </Link>
         </li>
         <li>
           <Link to="/my-wishlist">
-            <Icon icon={faAward} />
+            <Icon name={'list'} />
             My Wishlist
           </Link>
         </li>
         <li>
           <Link to="/my-account">
-            <Icon icon={faCog} />
+            <Icon name={'cog'} />
             My Account
           </Link>
         </li>
@@ -88,13 +73,13 @@ function Navigation(): JSX.Element {
       <ul>
         <li>
           <Link to="/about">
-            <Icon icon={faInfoCircle} />
+            <Icon name={'info-circle'} />
             About
           </Link>
         </li>
         <li>
           <Link to="/contribute">
-            <Icon icon={faHandsHelping} />
+            <Icon name={'github'} type="brand" />
             Contribute
           </Link>
         </li>
@@ -102,7 +87,7 @@ function Navigation(): JSX.Element {
       <ul>
         <li>
           <Link to="/admin">
-            <Icon icon={faTools} />
+            <Icon name={'tools'} />
             Admin
           </Link>
         </li>

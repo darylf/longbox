@@ -18,7 +18,13 @@ function PublisherList(): JSX.Element {
     );
   });
 
-  return <ol>{PublisherItems}</ol>;
+  return (
+    <>
+      <h1>Publishers</h1>
+      <p>Browse publishers and discover a great series!</p>
+      <ol>{PublisherItems}</ol>
+    </>
+  );
 }
 
 export default PublisherList;

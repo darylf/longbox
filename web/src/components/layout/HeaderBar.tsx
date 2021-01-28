@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import SearchBox from '../shared/SearchBox';
 
 const StyledHeaderBar = styled.div`
   text-align: left;
@@ -7,23 +8,26 @@ const StyledHeaderBar = styled.div`
   margin-bottom: 3em;
 `;
 
-const StyledSearchBar = styled.div`
-  flex-grow: 3;
-`;
+const StyledSearchBar = styled.div``;
 
 const StyledLink = styled.a`
   margin: 1em;
 `;
 
+const ActionBar = styled.div`
+  text-align: right;
+  flex-grow: 2;
+`;
+
 const HeaderBar: React.FunctionComponent = () => (
   <StyledHeaderBar>
     <StyledSearchBar>
-      <input placeholder="Search" />
+      <SearchBox />
     </StyledSearchBar>
-    <div>
+    <ActionBar>
       <StyledLink href="/">Sign up</StyledLink>
       <StyledLink href="/">Login</StyledLink>
-    </div>
+    </ActionBar>
   </StyledHeaderBar>
 );
 

@@ -1,17 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { BookDetailsFragment } from '../../hooks/graphql';
+import { Book } from '../../hooks/graphql';
 
 interface Props {
-  book: BookDetailsFragment;
+  book: Book;
 }
 
-function getDisplayName({
-  alternateTitle,
-  issue,
-  seriesName
-}: BookDetailsFragment): string {
+function getDisplayName({ alternateTitle, issue, seriesName }: Book): string {
   return alternateTitle ? alternateTitle : `${seriesName} #${issue}`;
 }
 

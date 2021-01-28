@@ -1,14 +1,24 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import ItemList from '../../components/shared/ItemList';
 import { Book, Series, useSeriesListQuery } from '../../hooks/graphql';
+import Card from '../books/Card';
 
-function addName<T>(
+type BookExtended = Book & { name: string };
+
+function addNames<T>(
   items: Array<T> = [],
   fn?: (arg0: T) => string
 ): Array<T & { name: string }> {
+  return items.map((item) => addName(item, fn));
+}
+
+function addName<T extends {}>(
+  item: T,
+  fn?: (arg0: T) => string
+): T & { name: string } {
   const xx = fn ? fn : (arg0: T) => '';
-  const result = items.map((item) => ({ ...item, name: xx(item) }));
-  return result;
+  return { ...item, name: xx(item) };
 }
 
 function SeriesList(): JSX.Element {
@@ -22,7 +32,7 @@ function SeriesList(): JSX.Element {
 
   const SeriesItems = seriesList.map((item) => {
     const { id, name, books } = Object.assign({} as Series, item);
-    const modBooks = addName(
+    const modBooks = addNames(
       books as Array<Book>,
       ({ seriesName, issue }: Book) => `${seriesName} #${issue}`
     );
@@ -31,7 +41,8 @@ function SeriesList(): JSX.Element {
 
   return (
     <>
-      <h1>Browse Books</h1>
+      <h1>Series</h1>
+      <p>Browse through an entire series</p>
       {SeriesItems}
     </>
   );
