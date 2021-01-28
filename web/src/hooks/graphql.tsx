@@ -448,6 +448,10 @@ export type SeriesListQuery = (
     & { nodes?: Maybe<Array<Maybe<(
       { __typename?: 'Series' }
       & Pick<Series, 'id' | 'name'>
+      & { books?: Maybe<Array<(
+        { __typename?: 'Book' }
+        & BookDetailsFragment
+      )>> }
     )>>> }
   ) }
 );
@@ -810,10 +814,13 @@ export const SeriesListDocument = gql`
     nodes {
       id
       name
+      books {
+        ...BookDetails
+      }
     }
   }
 }
-    `;
+    ${BookDetailsFragmentDoc}`;
 
 /**
  * __useSeriesListQuery__

@@ -3,6 +3,9 @@ query SeriesList {
     nodes {
       id
       name
+      books {
+        ...BookDetails
+      }
     }
   }
 }
