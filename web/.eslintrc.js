@@ -36,5 +36,5 @@ module.exports = {
       }
     ]
   },
-  ignorePatterns: ['**/generated/*.tsx']
+  ignorePatterns: ['**/hooks/graphql.tsx']
 };

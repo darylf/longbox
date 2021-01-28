@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Surface = styled.div`
   background-color: #eee;
@@ -26,21 +26,12 @@ interface ListProps<T extends Item> {
   title?: string;
   linkTo: string;
   list: Array<T> | null | undefined;
-  renderer?: typeof defaultRenderer;
 }
-
-const defaultRenderer = <T extends Item>(
-  { id, name }: T,
-  linkTo: string
-): JSX.Element => {
-  return <Link to={linkTo.replace(':id', id)}>{name}</Link>;
-};
 
 export default function ItemList<T extends Item>({
   title = 'List',
   linkTo,
-  list,
-  renderer = defaultRenderer
+  list
 }: ListProps<T>): JSX.Element {
   if (!linkTo.includes(':id')) throw new Error('linkTo is missing :id');
 

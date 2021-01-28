@@ -17,12 +17,7 @@ const SearchInput = styled.input`
   width: 30rem;
 `;
 
-const StyledIcon = styled(Icon)`
-  margin: 0;
-  padding: 0;
-`;
-
-const SearchBox = () => {
+const SearchBox = (): JSX.Element => {
   return (
     <SearchFrame>
       <Icon name="search" size="2rem" />

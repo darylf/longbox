@@ -1,10 +1,6 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import ItemList from '../../components/shared/ItemList';
 import { Book, Series, useSeriesListQuery } from '../../hooks/graphql';
-import Card from '../books/Card';
-
-type BookExtended = Book & { name: string };
 
 function addNames<T>(
   items: Array<T> = [],
@@ -13,11 +9,8 @@ function addNames<T>(
   return items.map((item) => addName(item, fn));
 }
 
-function addName<T extends {}>(
-  item: T,
-  fn?: (arg0: T) => string
-): T & { name: string } {
-  const xx = fn ? fn : (arg0: T) => '';
+function addName<T>(item: T, fn?: (arg0: T) => string): T & { name: string } {
+  const xx = fn ? fn : () => '';
   return { ...item, name: xx(item) };
 }
 
@@ -36,7 +29,14 @@ function SeriesList(): JSX.Element {
       books as Array<Book>,
       ({ seriesName, issue }: Book) => `${seriesName} #${issue}`
     );
-    return <ItemList title={name} linkTo="/books/:id" list={modBooks} />;
+    return (
+      <ItemList
+        key={`series-${id}`}
+        title={name}
+        linkTo="/books/:id"
+        list={modBooks}
+      />
+    );
   });
 
   return (

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import ItemList from '../../components/shared/ItemList';
 import { Publisher, Series, usePublisherQuery } from '../../hooks/graphql';
 
 const AdminControls = styled.div`
@@ -18,12 +17,12 @@ function Show(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
-  const { id, name, series } = Object.assign({} as Publisher, data?.publisher);
+  const { id, name } = Object.assign({} as Publisher, data?.publisher);
 
   const SeriesList = data?.publisher.series.map((item) => {
     const { id, name } = Object.assign({} as Series, item);
     return (
-      <li>
+      <li key={`series-${id}`}>
         <Link to={`/series/${id}`}>{name}</Link>
       </li>
     );
