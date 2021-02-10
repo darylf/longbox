@@ -17,23 +17,34 @@ export type Scalars = {
 /** A comic book or trade paperback */
 export type Book = {
   __typename?: 'Book';
+  ageRating?: Maybe<Scalars['String']>;
   alternateTitle?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
   credits?: Maybe<Array<Credit>>;
   format?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   issue?: Maybe<Scalars['String']>;
+  pageCount?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
+  publicationDate?: Maybe<Scalars['String']>;
   publisherName?: Maybe<Scalars['String']>;
   series?: Maybe<Series>;
   seriesName?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
 
 export type BookAttributes = {
+  ageRating?: Maybe<Scalars['String']>;
   alternateTitle?: Maybe<Scalars['String']>;
   creditIds?: Maybe<Array<Scalars['ID']>>;
+  format?: Maybe<Scalars['String']>;
   issue?: Maybe<Scalars['String']>;
+  pageCount?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
+  publicationDate?: Maybe<Scalars['String']>;
   seriesId?: Maybe<Scalars['ID']>;
+  summary?: Maybe<Scalars['String']>;
 };
 
 /** The connection type for Book. */
