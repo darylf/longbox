@@ -1,5 +1,19 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+interface SSProps {
+  successUrl: string;
+}
+
+/**
+ * @deprecated This component is tempoary and should be replaced
+ */
+export const SaveSuccess = ({ successUrl }: SSProps): JSX.Element => (
+  <div>
+    Successfully Saved! <Link to={successUrl}>View here</Link>
+  </div>
+);
 
 type TFormInputProps = {
   label: string;

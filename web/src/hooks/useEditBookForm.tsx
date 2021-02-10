@@ -1,29 +1,26 @@
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { useCreateBookMutation } from './graphql';
+import { useEditBookMutation } from './graphql';
 
 export interface BookFormData {
-  alternateTitle: string;
-  issue: string;
-  seriesId: string;
+  alternateTitle?: string;
+  issue?: string;
+  seriesId?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function useCreateBookForm() {
-  const [
-    createBookMutation,
-    { data, loading, error }
-  ] = useCreateBookMutation();
-
+function useEditBookForm(id: string) {
+  const [editBookMutation, { data, loading, error }] = useEditBookMutation();
   const { register, handleSubmit } = useForm<BookFormData>();
   const onSubmit = useCallback((formData: BookFormData) => {
-    createBookMutation({
+    editBookMutation({
       variables: {
+        id,
         attributes: {
           ...formData
         }
       }
-    }).then((data) => console.log('Book created!', data));
+    }).then((data) => console.log('Book saved!', data));
     console.log(formData);
   }, []);
 
@@ -34,4 +31,4 @@ function useCreateBookForm() {
   };
 }
 
-export default useCreateBookForm;
+export default useEditBookForm;

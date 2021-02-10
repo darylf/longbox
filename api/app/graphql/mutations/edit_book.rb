@@ -6,11 +6,13 @@ module Mutations
     field :errors, [Types::UserError], null: false
 
     argument :id, ID, required: true
-    argument :title, String, required: true
+    argument :attributes, Types::BookAttributesType, required: true
 
     def resolve(**args)
       book = Book.find(args[:id])
-      book.title = args[:title]
+      book.alternate_title = args[:attributes][:alternate_title]
+      book.issue = args[:attributes][:issue]
+      book.series_id = args[:attributes][:series_id]
       if book.save
         {
           book: book,

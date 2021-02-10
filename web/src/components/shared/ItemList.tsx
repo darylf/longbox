@@ -47,6 +47,11 @@ export default function ItemList<T extends Item>({
       </ul>
     </Surface>
   ) : (
-    <></>
+    <Surface>
+      <h2>{title}</h2>
+      <p>
+        <em>No books have been added.</em>
+      </p>
+    </Surface>
   );
 }
