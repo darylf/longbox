@@ -1,79 +1,47 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { DropDown, Form, FormField, ListItem } from '../../components/form';
-import { useCreateBookMutation, useSeriesListQuery } from '../../hooks/graphql';
-import { useInput } from '../../hooks/useInput';
+import { FormInput } from '../../components/form/FormField';
+import useCreateBookForm from '../../hooks/useCreateBookForm';
 
 function BookForm(): JSX.Element {
-  // const { formFields, createChangeHandler } = useFormFields(defaultValues);
-  const { value: titleValue, bind: bindTitle } = useInput();
-  const { value: issueValue, bind: bindIssue } = useInput();
-  const { value: formatValue, bind: bindFormat } = useInput();
-  const { value: seriesValue, bind: bindSeries } = useInput();
-
-  const { data: dataSeries } = useSeriesListQuery();
-  const itemData: Array<ListItem> =
-    dataSeries?.seriesList.nodes?.map((item) => {
-      return { label: `${item?.name}`, value: `${item?.id}` } as ListItem;
-    }) || [];
-
-  const [createBookMutation, { data }] = useCreateBookMutation({
-    variables: {
-      attributes: {
-        alternateTitle: titleValue,
-        issue: issueValue,
-        seriesId: seriesValue
-      }
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({
-      title: titleValue,
-      issue: issueValue,
-      seriesId: seriesValue
-    });
-    createBookMutation().then((data) => console.log(data));
-  };
+  const {
+    register,
+    onSubmit,
+    createBookMutationVariables
+  } = useCreateBookForm();
+  const { data } = createBookMutationVariables;
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <h1>Create a Book</h1>
 
-      {data && data.createBook ? (
-        <p>
-          Saved!
-          <Link to={`/books/${data.createBook.book?.id}`}>View here</Link>
-        </p>
-      ) : null}
+      <SaveSuccess id={data?.createBook?.book?.id} />
 
-      <DropDown label="Series" items={itemData} bind={bindSeries} />
+      <FormInput name="alternateTitle" label="Title" register={register} />
 
-      <FormField
-        type="text"
-        label="Issue"
-        value={issueValue}
-        bind={bindIssue}
-      />
+      <FormInput name="issue" label="Issue" register={register} />
 
-      <FormField
-        type="text"
-        label="Alternate Title"
-        value={titleValue}
-        bind={bindTitle}
-      />
+      <FormInput name="seriesId" label="Series" register={register} />
 
-      <FormField
-        type="text"
-        label="Format"
-        value={formatValue}
-        bind={bindFormat}
-      />
-
-      <button>Save</button>
-    </Form>
+      <button type="submit">Save</button>
+    </form>
   );
 }
 
 export default BookForm;
+
+interface SSProps {
+  id: string | undefined;
+}
+
+/**
+ * @deprecated This component is tempoary and should be replaced
+ */
+const SaveSuccess = ({ id }: SSProps): JSX.Element =>
+  id ? (
+    <div>
+      Successfully Saved! <Link to={`'/books/${id}`}>View here</Link>
+    </div>
+  ) : (
+    <></>
+  );
