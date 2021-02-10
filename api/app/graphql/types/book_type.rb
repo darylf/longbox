@@ -19,3 +19,4 @@ module Types
     field :created_at, Types::DateTimeType, null: false
     field :updated_at, Types::DateTimeType, null: false
   end
+end
