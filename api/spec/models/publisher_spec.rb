@@ -15,7 +15,7 @@ RSpec.describe Publisher, type: :model do
     it ".name is unique" do
       publisher.save
 
-      duplicate = build(:publisher)
+      duplicate = build(:publisher, name: publisher.name)
       expect(duplicate).to be_invalid
     end
   end
