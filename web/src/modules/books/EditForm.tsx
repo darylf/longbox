@@ -1,43 +1,22 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
+import useEditBookForm from '../../hooks/useEditBookForm';
+import BookForm from './Form';
 
-function useFormFields<T>(initialValues: T) {
-  const [formFields, setFormFields] = React.useState<T>(initialValues);
-  const createChangeHandler = (key: keyof T) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = e.target.value;
-    setFormFields((prev: T) => ({ ...prev, [key]: value }));
-  };
-  return { formFields, createChangeHandler };
+function generatePath(data: any): string {
+  return `/books/${data?.editBook?.book?.id}`;
 }
 
-function BookForm(): JSX.Element {
+function EditForm(): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  if (!id) return <>Error, missing ID</>;
-  const { formFields, createChangeHandler } = useFormFields({
-    title: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
+  const formProps = useEditBookForm(id);
 
   return (
-    <form onSubmit={handleSubmit}>
-      EDIT FORM
-      <div>
-        <label htmlFor="title">Name</label>
-        <input
-          type="textbox"
-          id="title"
-          value={formFields.title}
-          onChange={createChangeHandler('title')}
-        />
-      </div>
-      <button>Save</button>
-    </form>
+    <div>
+      <h1>Edit Book {id}</h1>
+      <BookForm {...formProps} successUrl={generatePath} />
+    </div>
   );
 }
 
-export default BookForm;
+export default EditForm;

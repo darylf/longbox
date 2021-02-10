@@ -1,79 +1,20 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { DropDown, Form, FormField, ListItem } from '../../components/form';
-import { useCreateBookMutation, useSeriesListQuery } from '../../hooks/graphql';
-import { useInput } from '../../hooks/useInput';
+import useCreateBookForm from '../../hooks/useCreateBookForm';
+import BookForm from './Form';
 
-function BookForm(): JSX.Element {
-  // const { formFields, createChangeHandler } = useFormFields(defaultValues);
-  const { value: titleValue, bind: bindTitle } = useInput();
-  const { value: issueValue, bind: bindIssue } = useInput();
-  const { value: formatValue, bind: bindFormat } = useInput();
-  const { value: seriesValue, bind: bindSeries } = useInput();
+function generatePath(data: any): string {
+  return `/books/${data?.createBook?.book?.id}`;
+}
 
-  const { data: dataSeries } = useSeriesListQuery();
-  const itemData: Array<ListItem> =
-    dataSeries?.seriesList.nodes?.map((item) => {
-      return { label: `${item?.name}`, value: `${item?.id}` } as ListItem;
-    }) || [];
-
-  const [createBookMutation, { data }] = useCreateBookMutation({
-    variables: {
-      attributes: {
-        alternateTitle: titleValue,
-        issue: issueValue,
-        seriesId: seriesValue
-      }
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({
-      title: titleValue,
-      issue: issueValue,
-      seriesId: seriesValue
-    });
-    createBookMutation().then((data) => console.log(data));
-  };
+function NewForm(): JSX.Element {
+  const formProps = useCreateBookForm();
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <div>
       <h1>Create a Book</h1>
-
-      {data && data.createBook ? (
-        <p>
-          Saved!
-          <Link to={`/books/${data.createBook.book?.id}`}>View here</Link>
-        </p>
-      ) : null}
-
-      <DropDown label="Series" items={itemData} bind={bindSeries} />
-
-      <FormField
-        type="text"
-        label="Issue"
-        value={issueValue}
-        bind={bindIssue}
-      />
-
-      <FormField
-        type="text"
-        label="Alternate Title"
-        value={titleValue}
-        bind={bindTitle}
-      />
-
-      <FormField
-        type="text"
-        label="Format"
-        value={formatValue}
-        bind={bindFormat}
-      />
-
-      <button>Save</button>
-    </Form>
+      <BookForm {...formProps} successUrl={generatePath} />
+    </div>
   );
 }
 
-export default BookForm;
+export default NewForm;

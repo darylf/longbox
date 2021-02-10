@@ -1,5 +1,19 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+interface SSProps {
+  successUrl: string;
+}
+
+/**
+ * @deprecated This component is tempoary and should be replaced
+ */
+export const SaveSuccess = ({ successUrl }: SSProps): JSX.Element => (
+  <div>
+    Successfully Saved! <Link to={successUrl}>View here</Link>
+  </div>
+);
 
 type TFormInputProps = {
   label: string;
@@ -13,6 +27,9 @@ interface TextBoxProps extends TFormInputProps {
   value: string;
 }
 
+/**
+ * @deprecated This component should be replaced with FormInput
+ */
 export const FormField = ({
   label,
   type,
@@ -26,6 +43,35 @@ export const FormField = ({
         <Input type={type} value={value} {...bind} />
       </Label>
     </Field>
+  );
+};
+
+interface InputProps {
+  label: string;
+  name: string;
+  register: any;
+  required?: boolean;
+}
+
+export const FormInput = ({
+  label,
+  name,
+  register,
+  required = false
+}: InputProps): JSX.Element => {
+  const cleanName = name.toLowerCase().trim().replace(/ /g, '_');
+  return (
+    <>
+      <Field>
+        <Label htmlFor={`book_${cleanName}`}>{label}:</Label>
+        <Input
+          id={`book_${cleanName}`}
+          type="text"
+          name={name}
+          ref={register({ required })}
+        />
+      </Field>
+    </>
   );
 };
 

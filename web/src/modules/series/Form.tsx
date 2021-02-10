@@ -1,48 +1,25 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { DropDown, Form, FormField, ListItem } from '../../components/form';
-import {
-  useCreateSeriesMutation,
-  usePublisherListQuery
-} from '../../hooks/graphql';
-import { useInput } from '../../hooks/useInput';
+import { Form } from '../../components/form';
+import { FormInput, SaveSuccess } from '../../components/form/FormField';
+import useCreateSeriesForm from '../../hooks/useCreateSeriesForm';
+
+function generatePath(data: any): string {
+  return `/series/${data?.createSeries?.series?.id}`;
+}
 
 const SeriesForm = (): JSX.Element => {
-  const { value: nameValue, bind: bindName } = useInput();
-  const { value: publisherValue, bind: bindPublisher } = useInput();
-
-  const { data: dataPublisher } = usePublisherListQuery();
-  const itemData =
-    dataPublisher?.publishers.nodes?.map((item) => {
-      return { label: item?.name, value: item?.id } as ListItem;
-    }) || [];
-
-  const [createSeriesMutation, { data }] = useCreateSeriesMutation({
-    variables: {
-      name: nameValue,
-      publisherId: publisherValue
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    createSeriesMutation().then((data) => console.log(data));
-  };
+  const { register, onSubmit, variables } = useCreateSeriesForm();
+  const { data } = variables;
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={onSubmit}>
       <h1>Create a Series</h1>
 
-      {data && data.createSeries ? (
-        <p>
-          Saved!
-          <Link to={`/series/${data.createSeries.series?.id}`}>View here</Link>
-        </p>
-      ) : null}
+      <SaveSuccess successUrl={generatePath(data)} />
 
-      <DropDown label="Publisher" items={itemData} bind={bindPublisher} />
+      <FormInput name="name" label="Name" register={register} />
 
-      <FormField type="text" label="Name" value={nameValue} bind={bindName} />
+      <FormInput name="publisherId" label="Publisher" register={register} />
 
       <button>Save</button>
     </Form>
