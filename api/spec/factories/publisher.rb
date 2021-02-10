@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :publisher do
-    name { "Marvel Comics" }
+    sequence :name do |n|
+      "Publisher #{n}"
+    end
   end
 end
