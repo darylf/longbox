@@ -144,7 +144,7 @@ export type MutationCreateSeriesArgs = {
 
 export type MutationEditBookArgs = {
   id: Scalars['ID'];
-  title: Scalars['String'];
+  attributes: BookAttributes;
 };
 
 /** Information about pagination in a connection. */
@@ -299,7 +299,7 @@ export type CreateBookMutation = (
 
 export type EditBookMutationVariables = Exact<{
   id: Scalars['ID'];
-  title: Scalars['String'];
+  attributes: BookAttributes;
 }>;
 
 
@@ -528,8 +528,8 @@ export type CreateBookMutationHookResult = ReturnType<typeof useCreateBookMutati
 export type CreateBookMutationResult = Apollo.MutationResult<CreateBookMutation>;
 export type CreateBookMutationOptions = Apollo.BaseMutationOptions<CreateBookMutation, CreateBookMutationVariables>;
 export const EditBookDocument = gql`
-    mutation EditBook($id: ID!, $title: String!) {
-  editBook(id: $id, title: $title) {
+    mutation EditBook($id: ID!, $attributes: BookAttributes!) {
+  editBook(id: $id, attributes: $attributes) {
     book {
       ...BookDetails
     }
@@ -555,7 +555,7 @@ export type EditBookMutationFn = Apollo.MutationFunction<EditBookMutation, EditB
  * const [editBookMutation, { data, loading, error }] = useEditBookMutation({
  *   variables: {
  *      id: // value for 'id'
- *      title: // value for 'title'
+ *      attributes: // value for 'attributes'
  *   },
  * });
  */

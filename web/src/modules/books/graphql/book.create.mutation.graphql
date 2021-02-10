@@ -8,15 +8,3 @@ mutation CreateBook($attributes: BookAttributes!) {
     }
   }
 }
-
-input BookAttributes {
-  ageRating: String
-  alternateTitle: String
-  creditIds: [ID]
-  format: String
-  issue: String
-  pageCount: String
-  price: String
-  seriesId: ID
-  summary: String
-}

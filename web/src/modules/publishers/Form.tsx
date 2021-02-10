@@ -1,39 +1,23 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { Form, FormField } from '../../components/form';
-import { useCreatePublisherMutation } from '../../hooks/graphql';
-import { useInput } from '../../hooks/useInput';
+import { Form } from '../../components/form';
+import { FormInput, SaveSuccess } from '../../components/form/FormField';
+import useCreatePublisherForm from '../../hooks/useCreatePublisherForm';
+
+function generatePath(data: any): string {
+  return `/books/${data?.createPublisher?.publisher?.id}`;
+}
 
 const PublisherForm = (): JSX.Element => {
-  const { value: nameValue, bind: bindName, reset: resetName } = useInput();
-
-  const [createPublisherMutation, { data }] = useCreatePublisherMutation({
-    variables: {
-      name: nameValue
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    createPublisherMutation().then(() => {
-      resetName();
-    });
-  };
+  const { register, onSubmit, variables } = useCreatePublisherForm();
+  const { data } = variables;
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={onSubmit}>
       <h1>Create a Publisher</h1>
 
-      {data && data.createPublisher ? (
-        <p>
-          Saved!{' '}
-          <Link to={`/publishers/${data.createPublisher.publisher?.id}`}>
-            View here
-          </Link>
-        </p>
-      ) : null}
+      <SaveSuccess successUrl={generatePath(data)} />
 
-      <FormField type="text" label="Name" value={nameValue} bind={bindName} />
+      <FormInput name="name" label="Name" register={register} />
 
       <button>Save</button>
     </Form>

@@ -1,5 +1,5 @@
-mutation EditBook($id: ID!, $title: String!) {
-  editBook(id: $id, title: $title) {
+mutation EditBook($id: ID!, $attributes: BookAttributes!) {
+  editBook(id: $id, attributes: $attributes) {
     book {
       ...BookDetails
     }
