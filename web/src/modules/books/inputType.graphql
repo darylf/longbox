@@ -1,6 +1,11 @@
 input BookAttributes {
-  title: String
-  credit_ids: [ID]
+  ageRating: String
+  alternateTitle: String
+  creditIds: [ID]
+  format: String
   issue: String
-  series_id: ID
+  pageCount: String
+  price: String
+  seriesId: ID
+  summary: String
 }
