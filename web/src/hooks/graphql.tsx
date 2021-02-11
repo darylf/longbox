@@ -21,6 +21,7 @@ export type Book = {
   alternateTitle?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
   credits?: Maybe<Array<Credit>>;
+  displayName: Scalars['String'];
   format?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   issue?: Maybe<Scalars['String']>;
@@ -347,10 +348,10 @@ export type BooksQuery = (
 
 export type BookDetailsFragment = (
   { __typename?: 'Book' }
-  & Pick<Book, 'id' | 'alternateTitle' | 'format' | 'issue' | 'publisherName' | 'seriesName' | 'summary' | 'createdAt' | 'updatedAt'>
+  & Pick<Book, 'id' | 'alternateTitle' | 'displayName' | 'format' | 'issue' | 'publisherName' | 'seriesName' | 'summary' | 'createdAt' | 'updatedAt'>
   & { credits?: Maybe<Array<(
     { __typename?: 'Credit' }
-    & CreditDetailsFragment
+    & Pick<Credit, 'id'>
   )>>, publisher?: Maybe<(
     { __typename?: 'Publisher' }
     & Pick<Publisher, 'id'>
@@ -358,15 +359,6 @@ export type BookDetailsFragment = (
     { __typename?: 'Series' }
     & Pick<Series, 'id'>
   )> }
-);
-
-export type CreditDetailsFragment = (
-  { __typename?: 'Credit' }
-  & Pick<Credit, 'id'>
-  & { book: (
-    { __typename?: 'Book' }
-    & Pick<Book, 'id'>
-  ) }
 );
 
 export type CreatePublisherMutationVariables = Exact<{
@@ -474,25 +466,18 @@ export type SeriesListQuery = (
   ) }
 );
 
-export const CreditDetailsFragmentDoc = gql`
-    fragment CreditDetails on Credit {
-  id
-  book {
-    id
-  }
-}
-    `;
 export const BookDetailsFragmentDoc = gql`
     fragment BookDetails on Book {
   id
   alternateTitle
+  displayName
   format
   issue
   publisherName
   seriesName
   summary
   credits {
-    ...CreditDetails
+    id
   }
   publisher {
     id
@@ -503,7 +488,7 @@ export const BookDetailsFragmentDoc = gql`
   createdAt
   updatedAt
 }
-    ${CreditDetailsFragmentDoc}`;
+    `;
 export const CreateBookDocument = gql`
     mutation CreateBook($attributes: BookAttributes!) {
   createBook(attributes: $attributes) {

@@ -10,4 +10,8 @@ class Book < ApplicationRecord
   delegate :name, to: :book_format, prefix: true, allow_nil: true
 
   alias_attribute :format, :book_format_name
+
+  def display_name
+    "#{series.name} ##{issue}"
+  end
 end

@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BookDetailsFragment, useBookQuery } from '../../hooks/graphql';
-
-function getDisplayName({ issue, seriesName }: BookDetailsFragment): string {
-  return `${seriesName} #${issue}`;
-}
+import { Book, useBookQuery } from '../../hooks/graphql';
+import Card from './Card';
 
 function BookProfile(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -16,12 +13,14 @@ function BookProfile(): JSX.Element {
 
   if (error) return <p>Error :(</p>;
 
-  const book = data?.book || ({} as BookDetailsFragment);
-  const title = getDisplayName(book);
+  const book = data?.book || ({} as Book);
 
   return (
     <>
-      <h1>{title}</h1>
+      <h1>{book.displayName}</h1>
+      <div style={{ width: '300px' }}>
+        <Card bookId={book.id} bookName={book.displayName} />
+      </div>
       <p>
         <b>Publisher:</b>
         <Link to={`/publishers/${book.publisher?.id}`}>
