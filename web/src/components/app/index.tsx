@@ -5,14 +5,13 @@ import { ThemeProvider } from 'styled-components';
 import * as Pages from '../../modules/pages';
 import { GlobalStyle, theme } from '../../theme';
 import { Content, Footer, HeaderBar, Layout, Sidebar } from '../layout';
+import ComingSoon from './ComingSoon';
 import HomePage from './HomePage';
 
 const client = new ApolloClient({
   uri: process.env.API_URL,
   cache: new InMemoryCache()
 });
-
-const ComingSoon = () => <h1>Coming Soon</h1>;
 
 const Admin = () => (
   <div>
