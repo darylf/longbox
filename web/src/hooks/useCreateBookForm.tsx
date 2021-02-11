@@ -3,9 +3,15 @@ import { useForm } from 'react-hook-form';
 import { useCreateBookMutation } from './graphql';
 
 export interface BookFormData {
+  ageRating: string;
   alternateTitle: string;
+  format: string;
   issue: string;
+  pageCount: string;
+  price: string;
+  publicateDate: string;
   seriesId: string;
+  summary: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

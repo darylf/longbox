@@ -1,15 +1,22 @@
 fragment BookDetails on Book {
   id
   alternateTitle
-  createdAt
+  format
+  issue
+  publisherName
+  seriesName
+  summary
   credits {
     ...CreditDetails
   }
-  format
-  issue
+  publisher {
+    id
+  }
+  series {
+    id
+  }
+  createdAt
   updatedAt
-  seriesName
-  publisherName
 }
 
 fragment CreditDetails on Credit {

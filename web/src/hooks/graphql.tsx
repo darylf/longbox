@@ -27,6 +27,7 @@ export type Book = {
   pageCount?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['String']>;
   publicationDate?: Maybe<Scalars['String']>;
+  publisher?: Maybe<Publisher>;
   publisherName?: Maybe<Scalars['String']>;
   series?: Maybe<Series>;
   seriesName?: Maybe<Scalars['String']>;
@@ -346,11 +347,17 @@ export type BooksQuery = (
 
 export type BookDetailsFragment = (
   { __typename?: 'Book' }
-  & Pick<Book, 'id' | 'alternateTitle' | 'createdAt' | 'format' | 'issue' | 'updatedAt' | 'seriesName' | 'publisherName'>
+  & Pick<Book, 'id' | 'alternateTitle' | 'format' | 'issue' | 'publisherName' | 'seriesName' | 'summary' | 'createdAt' | 'updatedAt'>
   & { credits?: Maybe<Array<(
     { __typename?: 'Credit' }
     & CreditDetailsFragment
-  )>> }
+  )>>, publisher?: Maybe<(
+    { __typename?: 'Publisher' }
+    & Pick<Publisher, 'id'>
+  )>, series?: Maybe<(
+    { __typename?: 'Series' }
+    & Pick<Series, 'id'>
+  )> }
 );
 
 export type CreditDetailsFragment = (
@@ -479,15 +486,22 @@ export const BookDetailsFragmentDoc = gql`
     fragment BookDetails on Book {
   id
   alternateTitle
-  createdAt
+  format
+  issue
+  publisherName
+  seriesName
+  summary
   credits {
     ...CreditDetails
   }
-  format
-  issue
+  publisher {
+    id
+  }
+  series {
+    id
+  }
+  createdAt
   updatedAt
-  seriesName
-  publisherName
 }
     ${CreditDetailsFragmentDoc}`;
 export const CreateBookDocument = gql`

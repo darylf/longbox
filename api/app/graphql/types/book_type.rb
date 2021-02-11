@@ -11,6 +11,7 @@ module Types
     field :page_count, String, null: true
     field :price, String, null: true
     field :publication_date, String, null: true
+    field :publisher, Types::PublisherType, null: true
     field :publisher_name, String, null: true
     field :series, Types::SeriesType, null: true
     field :series_name, String, null: true
