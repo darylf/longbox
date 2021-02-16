@@ -21,7 +21,7 @@ const SearchBox = (): JSX.Element => {
   return (
     <SearchFrame>
       <Icon name="search" size="2rem" />
-      <SearchInput placeholder="Search..." />
+      <SearchInput type="search" placeholder="Search..." />
     </SearchFrame>
   );
 };

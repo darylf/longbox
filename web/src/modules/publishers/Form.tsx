@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Form } from '../../components/form';
-import { FormInput, SaveSuccess } from '../../components/form/FormField';
+import { Form, InputBox, SaveSuccess } from '../../components/form';
 import useCreatePublisherForm from '../../hooks/useCreatePublisherForm';
 
 function generatePath(data: any): string {
@@ -15,9 +14,9 @@ const PublisherForm = (): JSX.Element => {
     <Form onSubmit={onSubmit}>
       <h1>Create a Publisher</h1>
 
-      <SaveSuccess successUrl={generatePath(data)} />
+      {data && <SaveSuccess successUrl={generatePath(data)} />}
 
-      <FormInput name="name" label="Name" register={register} />
+      <InputBox name="name" label="Name" register={register} />
 
       <button>Save</button>
     </Form>

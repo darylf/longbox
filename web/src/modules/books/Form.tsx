@@ -1,50 +1,57 @@
 import * as React from 'react';
-import { FormInput, SaveSuccess } from '../../components/form/FormField';
+import { Form, InputBox, SaveSuccess } from '../../components/form';
 
 interface FormProps<T> {
   register: unknown;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   variables: { data?: T };
   successUrl: string | ((data?: T) => string);
+  seriesId?: string;
 }
 
 function BookForm<T>({
   register,
   onSubmit,
   variables,
-  successUrl
+  successUrl,
+  seriesId
 }: FormProps<T>): JSX.Element {
   const { data } = variables;
   const path = typeof successUrl === 'string' ? successUrl : successUrl(data);
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       {data && <SaveSuccess successUrl={path} />}
 
-      <FormInput name="ageRating" label="Age Rating" register={register} />
+      <InputBox name="ageRating" label="Age Rating" register={register} />
 
-      <FormInput name="alternateTitle" label="Title" register={register} />
+      <InputBox name="alternateTitle" label="Title" register={register} />
 
-      <FormInput name="format" label="Format" register={register} />
+      <InputBox name="format" label="Format" register={register} />
 
-      <FormInput name="issue" label="Issue" register={register} />
+      <InputBox name="issue" label="Issue" register={register} />
 
-      <FormInput name="pageCount" label="Page Count" register={register} />
+      <InputBox name="pageCount" label="Page Count" register={register} />
 
-      <FormInput name="price" label="Price" register={register} />
+      <InputBox name="price" label="Price" register={register} />
 
-      <FormInput
+      <InputBox
         name="publicationDate"
         label="Publication Date"
         register={register}
       />
 
-      <FormInput name="seriesId" label="Series" register={register} />
+      <InputBox
+        name="seriesId"
+        label="Series"
+        defaultValue={seriesId}
+        register={register}
+      />
 
-      <FormInput name="summary" label="Summary" register={register} />
+      <InputBox name="summary" label="Summary" register={register} />
 
       <button type="submit">Save</button>
-    </form>
+    </Form>
   );
 }
 

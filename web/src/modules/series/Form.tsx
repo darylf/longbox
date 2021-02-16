@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Form } from '../../components/form';
-import { FormInput, SaveSuccess } from '../../components/form/FormField';
+import { Form, InputBox, SaveSuccess } from '../../components/form';
 import useCreateSeriesForm from '../../hooks/useCreateSeriesForm';
 
 function generatePath(data: any): string {
@@ -17,9 +16,9 @@ const SeriesForm = (): JSX.Element => {
 
       <SaveSuccess successUrl={generatePath(data)} />
 
-      <FormInput name="name" label="Name" register={register} />
+      <InputBox name="name" label="Name" register={register} />
 
-      <FormInput name="publisherId" label="Publisher" register={register} />
+      <InputBox name="publisherId" label="Publisher" register={register} />
 
       <button>Save</button>
     </Form>

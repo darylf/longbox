@@ -25,7 +25,8 @@ function Show(): JSX.Element {
       <h1>{name}</h1>
 
       <ItemList linkTo="/books/:id" list={extended} />
-      <Link to={`/series/${id}/edit`}>Edit</Link>
+      <Link to={`/series/${id}/edit`}>Edit Series Details</Link>
+      <button>Add Book</button>
     </>
   );
 }
