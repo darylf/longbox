@@ -25,11 +25,10 @@ services:
     build:
       context: ./api
       args:
-        - RUBY_VERSION=3.0.0
-        - ADDITIONAL_PACKAGES=nodejs-current yarn
-        - EXECJS_RUNTIME=Node
-        - RAILS_ENV=development
-        - NODE_ENV=development
+        RUBY_VERSION: "3.0.0"
+        EXECJS_RUNTIME: Node
+        RAILS_ENV: development
+        NODE_ENV: development
     depends_on:
       - db
     environment:
@@ -50,8 +49,8 @@ services:
     build:
       context: ./web
       args:
-        - "API_URL=${API_URL}"
-        - "PORT=${WEB_PORT}"
+        API_URL: "${API_URL}"
+        PORT: "${WEB_PORT}"
     stdin_open: true
     environment:
       API_URL: "${API_URL}"
