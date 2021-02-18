@@ -33,3 +33,7 @@ Note: For development purposes, PostgreSQL runs in a docker container. In produc
 - Typescript
 - React
 - Apollo GraphQL Client
+
+### Database Container
+
+- Postgres

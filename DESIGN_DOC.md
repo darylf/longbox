@@ -70,7 +70,7 @@ Book
 Publisher
 
 - [ ] Publishers
-  - [ ] Name
+  - [x] Name
   - [ ] Official website
 
 Series
@@ -92,7 +92,7 @@ Creator
 
 - [ ] Exporter (export your books list, probably as JSON)
 - [ ] Build the initial system for importing book information from another source (build the book database from the Wikipedia/Wikidata? Somewhere else?)
-- [ ] API?
+- [x] API? _(This is a work in progress and the graphql is being built as we go along)_
 - [ ] Book creation / modification
   - Implement "moderators" that can update information, e.g. adding missing genres or tags, changing the titles, etc.
   - We'll need some way for the user to create a book when a new one comes out.
