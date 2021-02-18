@@ -39,7 +39,7 @@ services:
       DATABASE_USERNAME: "${DATABASE_USERNAME}"
       DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
       SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
-    command: bash -c "rm -f tmp/pids/server.pid && rails s -p ${API_PORT} -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p ${API_PORT} -b '0.0.0.0'"
     networks:
       - proxy
       - backend
