@@ -39,7 +39,7 @@ export const InputBox = ({
           type={type}
           name={name}
           ref={register({ required })}
-          defaultValue={defaultValue}
+          // value={defaultValue}
         />
       </Field>
     </>
