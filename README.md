@@ -27,12 +27,33 @@ its own environment and the `config/database.yml` file should be updated.
 We run on a [Rails](https://rubyonrails.org/) backend, a [PostgreSQL](https://www.postgresql.org/) database,
 with a [React](https://reactjs.com/) frontend written in [TypeScript](https://www.typescriptlang.org/).
 
+Installing to your local machine can be troublesome for many reasons such as a conflicting database and runtime versions.
+The best way to get a development environment up and running is with containers. They will set up everything you need in
+an isolated environment, and you need not worry about the details of setting everything up locally.
+
 #### Containers
 
-**Linux**
+**Prerequisites**
 
 - [Docker](https://github.com/containers/libpod) 20.10.3 or higher
 - [Docker Compose](https://github.com/containers/podman-compose) 1.27.4 or higher
+
+**Setting up Longbox**
+
+1. Fork our repository, e.g. https://github.com/darylf/longbox/fork
+2. Clone your forked repository, eg. git clone https://github.com/<your-username>/longbox.git
+3. Set up your environment variables/secrets
+4. Create `.env` by copying from the provided template `.env_sample`
+
+
+    `.env` is a personal file that is ignored in git.<br/>
+    `.env` lists all the `ENV` variables we use and provides a fake default for any missing keys.
+
+**Running Longbox**
+
+1. Run docker-compose build
+2. Run docker-compose up
+3. Navigate to http://localhost
 
 ## Core team
 
