@@ -2,9 +2,7 @@ version: "3"
 services:
   db:
     image: postgres
-    environment:
-      POSTGRES_USERNAME: "${DATABASE_USERNAME}"
-      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+    env_file: .env-db
     networks:
       - backend
     volumes:
@@ -18,6 +16,7 @@ services:
       - web
     ports:
       - "80:80"
+      - "443:443"
     networks:
       - proxy
 
@@ -31,14 +30,8 @@ services:
         NODE_ENV: development
     depends_on:
       - db
-    environment:
-      RAILS_ENV: "${RAILS_ENV}"
-      DATABASE_URL: "${DATABASE_URL}"
-      DATABASE_NAME: "${DATABASE_NAME}"
-      DATABASE_USERNAME: "${DATABASE_USERNAME}"
-      DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
-      SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p ${API_PORT} -b '0.0.0.0'"
+    env_file: .env-api
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     networks:
       - proxy
       - backend
@@ -48,13 +41,8 @@ services:
   web:
     build:
       context: ./web
-      args:
-        API_URL: "${API_URL}"
-        PORT: "${WEB_PORT}"
     stdin_open: true
-    environment:
-      API_URL: "${API_URL}"
-      PORT: "${WEB_PORT}"
+    env_file: .env-web
     networks:
       - proxy
       - frontend

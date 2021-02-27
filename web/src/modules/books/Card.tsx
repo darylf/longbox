@@ -1,35 +1,30 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Book } from '../../hooks/graphql';
 
 interface Props {
-  book: Book;
+  bookId: string;
+  bookName: string;
 }
 
-function getDisplayName({ alternateTitle, issue, seriesName }: Book): string {
-  return alternateTitle ? alternateTitle : `${seriesName} #${issue}`;
-}
-
-export default function Card({ book }: Props): JSX.Element {
-  const displayName = getDisplayName(book);
+export default function Card({ bookId, bookName }: Props): JSX.Element {
   return (
     <StyledCard>
-      <StyledLink to={`/books/${book.id}`}>
+      <StyledLink to={`/books/${bookId}`}>
         <StyledImg
           src={`https://via.placeholder.com/504x771?text=${encodeURIComponent(
-            book.alternateTitle + ''
+            bookName
           )}`}
-          alt={`${displayName} cover image`}
-          title={`${displayName}`}
+          alt={`${bookName} cover image`}
+          title={`${bookName}`}
         />
-        {displayName}
+        {bookName}
       </StyledLink>
     </StyledCard>
   );
 }
 
-export const StyledCard = styled.div`
+const StyledCard = styled.div`
   margin: 3em 0;
   padding: 0 1em;
 `;

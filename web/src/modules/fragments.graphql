@@ -1,20 +1,30 @@
 fragment BookDetails on Book {
   id
   alternateTitle
-  createdAt
-  credits {
-    ...CreditDetails
-  }
+  displayName
   format
   issue
-  updatedAt
-  seriesName
+  pageCount
+  price
+  publicationDate
   publisherName
-}
-
-fragment CreditDetails on Credit {
-  id
-  book {
+  seriesName
+  summary
+  credits {
+    id
+    role
+    creator {
+      id
+      firstName
+      lastName
+    }
+  }
+  publisher {
     id
   }
+  series {
+    id
+  }
+  createdAt
+  updatedAt
 }

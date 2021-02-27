@@ -17,23 +17,36 @@ export type Scalars = {
 /** A comic book or trade paperback */
 export type Book = {
   __typename?: 'Book';
+  ageRating?: Maybe<Scalars['String']>;
   alternateTitle?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
   credits?: Maybe<Array<Credit>>;
+  displayName: Scalars['String'];
   format?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   issue?: Maybe<Scalars['String']>;
+  pageCount?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
+  publicationDate?: Maybe<Scalars['String']>;
+  publisher?: Maybe<Publisher>;
   publisherName?: Maybe<Scalars['String']>;
   series?: Maybe<Series>;
   seriesName?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
 
 export type BookAttributes = {
+  ageRating?: Maybe<Scalars['String']>;
   alternateTitle?: Maybe<Scalars['String']>;
   creditIds?: Maybe<Array<Scalars['ID']>>;
+  format?: Maybe<Scalars['String']>;
   issue?: Maybe<Scalars['String']>;
+  pageCount?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
+  publicationDate?: Maybe<Scalars['String']>;
   seriesId?: Maybe<Scalars['ID']>;
+  summary?: Maybe<Scalars['String']>;
 };
 
 /** The connection type for Book. */
@@ -335,20 +348,21 @@ export type BooksQuery = (
 
 export type BookDetailsFragment = (
   { __typename?: 'Book' }
-  & Pick<Book, 'id' | 'alternateTitle' | 'createdAt' | 'format' | 'issue' | 'updatedAt' | 'seriesName' | 'publisherName'>
+  & Pick<Book, 'id' | 'alternateTitle' | 'displayName' | 'format' | 'issue' | 'pageCount' | 'price' | 'publicationDate' | 'publisherName' | 'seriesName' | 'summary' | 'createdAt' | 'updatedAt'>
   & { credits?: Maybe<Array<(
     { __typename?: 'Credit' }
-    & CreditDetailsFragment
-  )>> }
-);
-
-export type CreditDetailsFragment = (
-  { __typename?: 'Credit' }
-  & Pick<Credit, 'id'>
-  & { book: (
-    { __typename?: 'Book' }
-    & Pick<Book, 'id'>
-  ) }
+    & Pick<Credit, 'id' | 'role'>
+    & { creator: (
+      { __typename?: 'Creator' }
+      & Pick<Creator, 'id' | 'firstName' | 'lastName'>
+    ) }
+  )>>, publisher?: Maybe<(
+    { __typename?: 'Publisher' }
+    & Pick<Publisher, 'id'>
+  )>, series?: Maybe<(
+    { __typename?: 'Series' }
+    & Pick<Series, 'id'>
+  )> }
 );
 
 export type CreatePublisherMutationVariables = Exact<{
@@ -456,29 +470,38 @@ export type SeriesListQuery = (
   ) }
 );
 
-export const CreditDetailsFragmentDoc = gql`
-    fragment CreditDetails on Credit {
-  id
-  book {
-    id
-  }
-}
-    `;
 export const BookDetailsFragmentDoc = gql`
     fragment BookDetails on Book {
   id
   alternateTitle
-  createdAt
-  credits {
-    ...CreditDetails
-  }
+  displayName
   format
   issue
-  updatedAt
-  seriesName
+  pageCount
+  price
+  publicationDate
   publisherName
+  seriesName
+  summary
+  credits {
+    id
+    role
+    creator {
+      id
+      firstName
+      lastName
+    }
+  }
+  publisher {
+    id
+  }
+  series {
+    id
+  }
+  createdAt
+  updatedAt
 }
-    ${CreditDetailsFragmentDoc}`;
+    `;
 export const CreateBookDocument = gql`
     mutation CreateBook($attributes: BookAttributes!) {
   createBook(attributes: $attributes) {

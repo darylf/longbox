@@ -14,7 +14,7 @@ function BookList(): JSX.Element {
     const book = Object.assign({} as Book, bookResult);
     return (
       <ListItem key={`books-${book.id}`}>
-        <Card book={book} />
+        <Card bookId={book.id} bookName={book.displayName} />
       </ListItem>
     );
   });

@@ -3,12 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import ItemList from '../../components/shared/ItemList';
 import { Book, Series, useSeriesQuery } from '../../hooks/graphql';
 
-function getDisplayName({ alternateTitle, issue, seriesName }: Book): string {
-  return alternateTitle ? alternateTitle : `${seriesName} #${issue}`;
-}
-
 function convertBookToListItem(book: Book): { id: string; name: string } {
-  return { id: book.id, name: getDisplayName(book) };
+  return { id: book.id, name: book.displayName };
 }
 
 function Show(): JSX.Element {
@@ -29,7 +25,8 @@ function Show(): JSX.Element {
       <h1>{name}</h1>
 
       <ItemList linkTo="/books/:id" list={extended} />
-      <Link to={`/series/${id}/edit`}>Edit</Link>
+      <Link to={`/series/${id}/edit`}>Edit Series Details</Link>
+      <button>Add Book</button>
     </>
   );
 }

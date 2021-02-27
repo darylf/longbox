@@ -9,7 +9,7 @@ import ComingSoon from './ComingSoon';
 import HomePage from './HomePage';
 
 const client = new ApolloClient({
-  uri: process.env.API_URL,
+  uri: 'http://localhost/backend/graphql',
   cache: new InMemoryCache()
 });
 

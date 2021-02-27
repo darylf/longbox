@@ -4,7 +4,6 @@ ARG RUBY_VERSION
 # Stage: Builder
 FROM ruby:$RUBY_VERSION-alpine as Builder
 
-ARG FOLDERS_TO_REMOVE
 ARG BUNDLE_WITHOUT
 ARG RAILS_ENV
 ARG NODE_ENV
@@ -28,8 +27,7 @@ WORKDIR /app
 
 # Install gems
 ADD Gemfile* /app/
-RUN bundle config --global frozen 1 \
- && bundle install -j4 --retry 3 \
+RUN bundle install -j4 --retry 3 \
  # Remove unneeded files (cached *.gem, *.o, *.c)
  && rm -rf /usr/local/bundle/cache/*.gem \
  && find /usr/local/bundle/gems/ -name "*.c" -delete \
@@ -38,22 +36,19 @@ RUN bundle config --global frozen 1 \
 # Add the Rails app
 ADD . /app
 
-# Remove folders not needed in resulting image
-RUN rm -rf $FOLDERS_TO_REMOVE
-
 
 ###############################
 # Stage Final
 FROM ruby:$RUBY_VERSION-alpine
 
-ARG ADDITIONAL_PACKAGES
 ARG EXECJS_RUNTIME
 
 # Add Alpine packages
 RUN apk add --update --no-cache bash \
     postgresql-client \
     imagemagick \
-    $ADDITIONAL_PACKAGES \
+    nodejs-current \
+    yarn \
     tzdata \
     file
 

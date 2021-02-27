@@ -35,6 +35,7 @@ function SeriesList(): JSX.Element {
         title={name}
         linkTo="/books/:id"
         list={modBooks}
+        seriesId={id}
       />
     );
   });

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Icon from './Icon';
 
 const Surface = styled.div`
   background-color: #eee;
@@ -17,6 +18,11 @@ const Surface = styled.div`
   }
 `;
 
+const ListFooter = styled.div`
+  font-size: 0.8em;
+  margin-top: 0.8em;
+`;
+
 interface Item {
   id: string;
   name: string;
@@ -25,19 +31,20 @@ interface Item {
 interface ListProps<T extends Item> {
   title?: string;
   linkTo: string;
+  seriesId?: string;
   list: Array<T> | null | undefined;
 }
 
 export default function ItemList<T extends Item>({
   title = 'List',
   linkTo,
-  list
+  list,
+  seriesId
 }: ListProps<T>): JSX.Element {
   if (!linkTo.includes(':id')) throw new Error('linkTo is missing :id');
 
-  return list && list.length > 0 ? (
-    <Surface>
-      <h2>{title}</h2>
+  const viewList =
+    list && list.length > 0 ? (
       <ul>
         {list.map(({ id, name }) => (
           <li key={id}>
@@ -45,13 +52,20 @@ export default function ItemList<T extends Item>({
           </li>
         ))}
       </ul>
-    </Surface>
-  ) : (
-    <Surface>
-      <h2>{title}</h2>
+    ) : (
       <p>
         <em>No books have been added.</em>
       </p>
+    );
+  return (
+    <Surface>
+      <h2>{title}</h2>
+      {viewList}
+      <ListFooter>
+        <Link to={`/series/${seriesId}/create`}>
+          <Icon name={'plus'} /> Add book
+        </Link>
+      </ListFooter>
     </Surface>
   );
 }
