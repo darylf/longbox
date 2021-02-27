@@ -46,5 +46,5 @@ module Mutations
       book.age_rating = attributes.age_rating
       book
     end
-end
+  end
 end
