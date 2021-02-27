@@ -4,11 +4,20 @@ fragment BookDetails on Book {
   displayName
   format
   issue
+  pageCount
+  price
+  publicationDate
   publisherName
   seriesName
   summary
   credits {
     id
+    role
+    creator {
+      id
+      firstName
+      lastName
+    }
   }
   publisher {
     id

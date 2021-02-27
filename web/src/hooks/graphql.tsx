@@ -348,10 +348,14 @@ export type BooksQuery = (
 
 export type BookDetailsFragment = (
   { __typename?: 'Book' }
-  & Pick<Book, 'id' | 'alternateTitle' | 'displayName' | 'format' | 'issue' | 'publisherName' | 'seriesName' | 'summary' | 'createdAt' | 'updatedAt'>
+  & Pick<Book, 'id' | 'alternateTitle' | 'displayName' | 'format' | 'issue' | 'pageCount' | 'price' | 'publicationDate' | 'publisherName' | 'seriesName' | 'summary' | 'createdAt' | 'updatedAt'>
   & { credits?: Maybe<Array<(
     { __typename?: 'Credit' }
-    & Pick<Credit, 'id'>
+    & Pick<Credit, 'id' | 'role'>
+    & { creator: (
+      { __typename?: 'Creator' }
+      & Pick<Creator, 'id' | 'firstName' | 'lastName'>
+    ) }
   )>>, publisher?: Maybe<(
     { __typename?: 'Publisher' }
     & Pick<Publisher, 'id'>
@@ -473,11 +477,20 @@ export const BookDetailsFragmentDoc = gql`
   displayName
   format
   issue
+  pageCount
+  price
+  publicationDate
   publisherName
   seriesName
   summary
   credits {
     id
+    role
+    creator {
+      id
+      firstName
+      lastName
+    }
   }
   publisher {
     id

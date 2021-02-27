@@ -1,0 +1,5 @@
+# should NOT be checked in to source control
+
+# Frontend Settings
+API_URL=http://localhost/backend/graphql
+WEB_PORT=3001

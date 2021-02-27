@@ -8,7 +8,7 @@ module Mutations
     argument :attributes, Types::BookAttributesType, required: true
 
     def resolve(attributes:)
-      book = Book.new(attributes.to_hash)
+      book = book_from_attributes(attributes.to_hash)
 
       if book.save
         {
@@ -31,5 +31,20 @@ module Mutations
         }
       end
     end
-  end
+
+    def book_from_attributes(attributes:)
+      book = Book.new
+      book.issue = attributes.issue
+      # book.series_id
+      # book.book_type
+      # book.book_format_id
+      book.alternate_title = attributes.alternate_title
+      book.summary = attributes.summary
+      book.page_count = attributes.page_count
+      book.price = attributes.price
+      book.publication_date = attributes.publication_date
+      book.age_rating = attributes.age_rating
+      book
+    end
+end
 end

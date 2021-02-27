@@ -1,0 +1,10 @@
+# should NOT be checked in to source control
+
+# Backend Settings
+DATABASE_URL=postgres://postgres:@db
+DATABASE_NAME=longbox_development
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=
+RAILS_ENV=development
+RAILS_MASTER_KEY=
+SECRET_KEY_BASE=

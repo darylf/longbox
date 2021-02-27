@@ -41,6 +41,9 @@ function BookProfile(): JSX.Element {
         <b>Format:</b> {book.format}
       </p>
       <p>
+        <b>Publication date:</b> {book.publicationDate}
+      </p>
+      <p>
         <b>Summary:</b> {book.summary}
       </p>
       <p>
@@ -49,6 +52,14 @@ function BookProfile(): JSX.Element {
       <p>
         <b>Updated:</b> {book.updatedAt}
       </p>
+      <h2>Credits</h2>
+      <ul>
+        {book.credits?.map(({ id, creator, role }) => (
+          <li
+            key={id}
+          >{`${creator.firstName} ${creator.lastName} (${role})`}</li>
+        ))}
+      </ul>
       <Link to={`/books/${book.id}/edit`}>Edit</Link>
     </>
   );
