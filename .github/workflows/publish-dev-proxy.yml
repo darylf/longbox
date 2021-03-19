@@ -5,6 +5,10 @@ on:
     branches: [develop]
     paths:
       - "proxy/**"
+  workflow_dispatch:
+    branches: [develop]
+    paths:
+      - "proxy/**"
 
 defaults:
   run:
