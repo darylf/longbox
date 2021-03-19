@@ -5,6 +5,10 @@ on:
     branches: [develop]
     paths:
       - "api/**"
+  workflow_dispatch:
+    branches: [develop]
+    paths:
+      - "api/**"
 
 defaults:
   run:
