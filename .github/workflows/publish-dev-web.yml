@@ -1,0 +1,29 @@
+name: "Publish Dev Web Package"
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - "web/**"
+
+defaults:
+  run:
+    working-directory: web
+
+jobs:
+  build-container:
+    name: Build Docker container image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Publish to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: ${{ github.repository}}/web
+          tags: dev, ${{ github.run_number }}
