@@ -2,11 +2,11 @@ name: "Web: Typescript"
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
     paths:
       - "web/**"
   pull_request:
-    branches: [main]
+    branches: [main, develop]
     paths:
       - "web/**"
 
