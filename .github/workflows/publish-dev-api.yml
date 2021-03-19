@@ -30,4 +30,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           repository: ${{ github.repository}}/api
+          dockerfile: ./api/Dockerfile
           tags: dev, ${{ github.run_number }}
