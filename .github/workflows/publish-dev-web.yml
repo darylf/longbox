@@ -1,4 +1,4 @@
-name: "Publish Dev Web Package"
+name: "Publish: Web package [dev]"
 
 on:
   push:

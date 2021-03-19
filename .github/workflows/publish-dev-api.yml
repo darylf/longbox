@@ -1,4 +1,4 @@
-name: "Publish Dev API Package"
+name: "Publish: API package [dev]"
 
 on:
   push:

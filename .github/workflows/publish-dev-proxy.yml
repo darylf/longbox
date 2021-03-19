@@ -1,4 +1,4 @@
-name: "Publish Dev Proxy Package"
+name: "Publish: Proxy package [dev]"
 
 on:
   push:
