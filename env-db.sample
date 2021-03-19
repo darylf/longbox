@@ -1,5 +1,0 @@
-# should NOT be checked in to source control
-
-# Database Settings
-POSTGRES_USERNAME=postgres
-POSTGRES_PASSWORD=

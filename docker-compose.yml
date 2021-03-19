@@ -2,7 +2,8 @@ version: "3"
 services:
   db:
     image: postgres
-    env_file: .env-db
+    env_file:
+      - ./config/db.env
     networks:
       - backend
     volumes:
@@ -26,12 +27,10 @@ services:
       args:
         RUBY_VERSION: "3.0.0"
         EXECJS_RUNTIME: Node
-        RAILS_ENV: development
-        NODE_ENV: development
     depends_on:
       - db
-    env_file: .env-api
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    env_file:
+      - ./config/api.env
     networks:
       - proxy
       - backend
@@ -42,7 +41,12 @@ services:
     build:
       context: ./web
     stdin_open: true
-    env_file: .env-web
+    env_file:
+      - ./config/web.env
+    environment:
+      - API_URL=http://localhost/backend/graphql
+      - "WEB_PORT=${LONGBOX_WEB_PORT}"
+
     networks:
       - proxy
       - frontend

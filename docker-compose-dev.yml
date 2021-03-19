@@ -1,0 +1,30 @@
+version: "3"
+services:
+  db:
+    env_file:
+      - ./config/db.env
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    ports:
+      - "${LONGBOX_DB_PORT}:5432"
+
+  api:
+    build:
+      context: ./api
+      args:
+        RAILS_ENV: development
+        NODE_ENV: development
+    env_file:
+      - ./config/api.env
+    ports:
+      - "${LONGBOX_API_PORT}:3000"
+
+  web:
+    env_file:
+      - ./config/web.env
+  web:
+    build:
+      target: build
+    command: yarn start:dev
+    ports:
+      - "${LONGBOX_WEB_PORT}:3001"
