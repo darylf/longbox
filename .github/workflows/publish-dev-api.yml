@@ -35,7 +35,7 @@ jobs:
           push: true
           context: "./api"
           build-args: |
-            RUBY_VERSION="3.0.0"
+            RUBY_VERSION=3.0.0
             EXECJS_RUNTIME=Node
             RAILS_ENV=development
             NODE_ENV=development
