@@ -1,12 +1,12 @@
-name: "API: Ruby"
+name: "Test: API ruby code"
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
     paths:
       - "api/**"
   pull_request:
-    branches: [main]
+    branches: [main, develop]
     paths:
       - "api/**"
 

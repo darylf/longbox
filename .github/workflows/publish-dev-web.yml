@@ -1,0 +1,39 @@
+name: "Publish: Web package [dev]"
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - "web/**"
+  workflow_dispatch:
+    branches: [develop]
+    paths:
+      - "web/**"
+
+jobs:
+  build-container:
+    name: Build Docker container image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Packages
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and Publish
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: "./web"
+          tags: |
+            ghcr.io/${{ github.repository}}/web:latest-dev
+            ghcr.io/${{ github.repository}}/web:1.${{ github.run_number }}-dev

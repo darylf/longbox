@@ -1,12 +1,12 @@
-name: "Web: Typescript"
+name: "Test: Web typescript code"
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
     paths:
       - "web/**"
   pull_request:
-    branches: [main]
+    branches: [main, develop]
     paths:
       - "web/**"
 
