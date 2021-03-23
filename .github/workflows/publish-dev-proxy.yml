@@ -1,14 +1,18 @@
 name: "Publish: Proxy package [dev]"
 
+env:
+  app_name: proxy
+  version: 1
+
 on:
   push:
     branches: [develop]
     paths:
-      - "proxy/**"
+      - "${{ env.app_name }}/**"
   workflow_dispatch:
     branches: [develop]
     paths:
-      - "proxy/**"
+      - "${{ env.app_name }}/**"
 
 jobs:
   build-container:
@@ -33,6 +37,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./proxy
+          context: "./${{ env.app_name }}"
           tags: |
-            ghcr.io/${{ github.repository}}/proxy:${{ github.run_number }}-dev
+            ghcr.io/${{ github.repository}}/${{ env.app_name }}:${{ env.version }}.${{ github.run_number }}-dev
