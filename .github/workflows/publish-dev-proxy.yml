@@ -34,5 +34,4 @@ jobs:
         with:
           push: true
           context: ./proxy
-          registry: docker.pkg.github.com
-          tags: ${{ github.repository}}/proxy, dev, ${{ github.run_number }}
+          tags: ghcr.io/${{ github.repository}}/proxy
