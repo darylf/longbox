@@ -1,18 +1,14 @@
 name: "Publish: Web package [dev]"
 
-env:
-  app_name: web
-  version: 1
-
 on:
   push:
     branches: [develop]
     paths:
-      - "${{ env.app_name }}/**"
+      - "web/**"
   workflow_dispatch:
     branches: [develop]
     paths:
-      - "${{ env.app_name }}/**"
+      - "web/**"
 
 jobs:
   build-container:
@@ -37,6 +33,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: "./${{ env.app_name }}"
+          context: "./web"
           tags: |
-            ghcr.io/${{ github.repository}}/${{ env.app_name }}:${{ env.version }}.${{ github.run_number }}-dev
+            ghcr.io/${{ github.repository}}/web:1.${{ github.run_number }}-dev

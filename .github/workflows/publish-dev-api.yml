@@ -1,18 +1,14 @@
 name: "Publish: API package [dev]"
 
-env:
-  app_name: api
-  version: 1
-
 on:
   push:
     branches: [develop]
     paths:
-      - "${{ env.app_name }}/**"
+      - "api/**"
   workflow_dispatch:
     branches: [develop]
     paths:
-      - "${{ env.app_name }}/**"
+      - "api/**"
 
 jobs:
   build-container:
@@ -37,6 +33,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: "./${{ env.app_name }}"
+          context: "./api"
           tags: |
-            ghcr.io/${{ github.repository}}/${{ env.app_name }}:${{ env.version }}.${{ github.run_number }}-dev
+            ghcr.io/${{ github.repository}}/api:1.${{ github.run_number }}-dev
