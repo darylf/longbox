@@ -34,5 +34,10 @@ jobs:
         with:
           push: true
           context: "./api"
+          buildArgs:
+            RUBY_VERSION: "3.0.0"
+            EXECJS_RUNTIME: Node
+            RAILS_ENV: development
+            NODE_ENV: development
           tags: |
             ghcr.io/${{ github.repository}}/api:1.${{ github.run_number }}-dev
