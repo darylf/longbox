@@ -34,4 +34,4 @@ jobs:
         with:
           push: true
           context: ./proxy
-          tags: ghcr.io/${{ github.repository}}/proxy
+          tags: ghcr.io/${{ github.repository}}/proxy, ${{ github.run_number }}, dev
