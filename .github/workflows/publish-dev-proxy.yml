@@ -26,6 +26,8 @@ jobs:
       - name: Publish to GitHub Packages
         uses: docker/build-push-action@v1
         with:
+          context: ./proxy
+          # file: ./proxy/Dockerfile
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
