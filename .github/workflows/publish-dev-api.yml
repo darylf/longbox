@@ -40,4 +40,5 @@ jobs:
             RAILS_ENV=development
             NODE_ENV=development
           tags: |
+            ghcr.io/${{ github.repository}}/api:latest-dev
             ghcr.io/${{ github.repository}}/api:1.${{ github.run_number }}-dev
