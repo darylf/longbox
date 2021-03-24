@@ -35,8 +35,8 @@ an isolated environment, and you need not worry about the details of setting eve
 
 **Prerequisites**
 
-- [Docker](https://github.com/containers/libpod) 20.10.3 or higher
-- [Docker Compose](https://github.com/containers/podman-compose) 1.27.4 or higher
+- [Docker](https://www.docker.com/) 20.10.5 or higher
+- [Docker Compose](https://docs.docker.com/compose/) 1.27.4 or higher
 
 **Setting up Longbox for local development**
 
