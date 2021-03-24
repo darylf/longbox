@@ -1,0 +1,30 @@
+version: "3"
+services:
+  db:
+    volumes:
+      - ./db/local:/var/lib/postgresql/data
+    ports:
+      - "${LONGBOX_DB_PORT}:5432"
+
+  proxy:
+    build: ./proxy
+
+  api:
+    build:
+      context: ./api
+      args:
+        RUBY_VERSION: "3.0.0"
+        RAILS_ENV: development
+        NODE_ENV: development
+    ports:
+      - "${LONGBOX_API_PORT}:3000"
+    volumes:
+      - ./api:/srv/www-api
+
+  web:
+    build:
+      context: ./web
+      target: build
+    command: yarn start:dev
+    ports:
+      - "${LONGBOX_WEB_PORT}:3001"

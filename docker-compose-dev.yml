@@ -1,0 +1,20 @@
+version: "3"
+services:
+  db:
+    volumes:
+      - ./db/dev:/var/lib/postgresql/data
+    ports:
+      - "${LONGBOX_DB_PORT}:5432"
+
+  proxy:
+    image: ghcr.io/darylf/longbox/proxy:latest-dev
+
+  api:
+    image: ghcr.io/darylf/longbox/api:latest-dev
+    ports:
+      - "${LONGBOX_API_PORT}:3000"
+
+  web:
+    image: ghcr.io/darylf/longbox/web:latest-dev
+    ports:
+      - "${LONGBOX_WEB_PORT}:3001"
