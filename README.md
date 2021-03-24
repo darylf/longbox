@@ -42,7 +42,16 @@ an isolated environment, and you need not worry about the details of setting eve
 
 1. Fork our repository, e.g. [https://github.com/darylf/longbox/fork](https://github.com/darylf/longbox/fork)
 2. Clone your forked repository, eg. git clone https://github.com/<your-username>/longbox.git
-3. Configure your environment variables/secrets. The entire _config_ directory is ignored in git.
+3. Configure the docker build environment by creating a .env file in the root directory.
+
+```
+# Container ports to publish
+LONGBOX_API_PORT=3001
+LONGBOX_DB_PORT=5432
+LONGBOX_WEB_PORT=3000
+```
+
+4. Configure your environment variables/secrets. The entire _config_ directory is ignored in git.
 
    1. Create `/config/api.env` and add the following block (note: values are examples only):
       ```
