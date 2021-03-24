@@ -1,69 +1,57 @@
-# Adapated from Roman Krudlay's makefile code
-# https://github.com/krom/docker-compose-makefile
-
-# REQUIRED SECTION
-ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-
-#COLORS
-GREEN  := $(shell tput -Txterm setaf 2)
-WHITE  := $(shell tput -Txterm setaf 7)
-YELLOW := $(shell tput -Txterm setaf 3)
-RED := $(shell tput -Txterm setaf 1)
-RESET  := $(shell tput -Txterm sgr0)
-
-# Add the following 'help' target to your Makefile
-# And add help text after each target name starting with '\#\#'
-# A category can be added with @category
-HELP_FUN = \
-    %help; \
-    while(<>) { push @{$$help{$$2 // 'options'}}, [$$1, $$3] if /^([a-zA-Z\-]+)\s*:.*\#\#(?:@([a-zA-Z\-]+))?\s(.*)$$/ }; \
-    print "usage: make [target]\n\n"; \
-    for (sort keys %help) { \
-    print "${WHITE}$$_:${RESET}\n"; \
-    for (@{$$help{$$_}}) { \
-    $$sep = " " x (32 - length $$_->[0]); \
-    print "  ${YELLOW}$$_->[0]${RESET}$$sep${GREEN}$$_->[1]${RESET}\n"; \
-    }; \
-    print "\n"; }
-
 #DEFAULT variables
+ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 DOCKER_COMPOSE := docker-compose
 DOCKER_COMPOSE_FILE := $(ROOT_DIR)/docker-compose.yml
 
-.PHONY: help up start stop restart status ps clean
+check-var-%:
+	@: $(if $(value $*),,$(error $* is undefined))
 
-.DEFAULT_GOAL := help
+build:| check-var-e
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml build ${c}
 
-help: ##@other Show this help.
-	@perl -e '$(HELP_FUN)' $(MAKEFILE_LIST)
+build-%:
+	@make build e=$* c=${c}
 
-confirm:
-	@( read -p "$(RED)Are you sure? [y/N]$(RESET): " sure && case "$$sure" in [yY]) true;; *) false;; esac )
+up:| check-var-e
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml up ${c} -d
 
-build: ## Start all or c=<name> containers in foreground
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) build $(c)
+up-%:
+	@make up e=$* c=${c}
 
+down:| check-var-e
+	@( read -p "Are you sure? [y/N]: " sure && case "$$sure" in [yY]) true;; *) false;; esac )
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml up ${c} -d
 
-up: ## Start all or c=<name> containers in foreground
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up $(c)
+down-%:
+	@make down e=$* c=${c}
 
-start: ## Start all or c=<name> containers in background
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up -d $(c)
+start:| check-var-e
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml start ${c}
 
-stop: ## Stop all or c=<name> containers
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) stop $(c)
+start-%:
+	@make start e=$* c=${c}
 
-restart: ## Restart all or c=<name> containers
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) stop $(c)
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up $(c) -d
+stop:| check-var-e
+	@( read -p "Are you sure? [y/N]: " sure && case "$$sure" in [yY]) true;; *) false;; esac )
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml stop ${c}
 
-logs: ## Show logs for all or c=<name> containers
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) logs --tail=100 -f $(c)
+stop-%:
+	@make stop e=$* c=${c}
 
-status: ## Show status of containers
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) ps
+status:| check-var-e
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml ps
 
-ps: status ## Alias of status
+status-%:
+	@make status e=$* c=${c}
 
-clean: confirm ## Clean all data
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) down
+logs:| check-var-e
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml logs -f ${c}
+
+logs-%:
+	@make logs e=$* c=${c}
+
+sh:| check-var-e
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml run ${c} sh
+
+sh-%:| check-var-c
+	@make sh e=$* c=${c}

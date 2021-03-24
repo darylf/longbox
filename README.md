@@ -38,22 +38,35 @@ an isolated environment, and you need not worry about the details of setting eve
 - [Docker](https://github.com/containers/libpod) 20.10.3 or higher
 - [Docker Compose](https://github.com/containers/podman-compose) 1.27.4 or higher
 
-**Setting up Longbox**
+**Setting up Longbox for local development**
 
-1. Fork our repository, e.g. https://github.com/darylf/longbox/fork
+1. Fork our repository, e.g. [https://github.com/darylf/longbox/fork](https://github.com/darylf/longbox/fork)
 2. Clone your forked repository, eg. git clone https://github.com/<your-username>/longbox.git
-3. Set up your environment variables/secrets
-4. Create `.env` by copying from the provided template `.env_sample`
+3. Configure your environment variables/secrets. The entire _config_ directory is ignored in git.
 
+   1. Create `/config/api.env` and add the following block (note: values are examples only):
+      ```
+      RUBY_VERSION="3.0.0"
+      DATABASE_URL=postgres://postgres:@db
+      DATABASE_NAME=longbox
+      DATABASE_USERNAME=postgres
+      DATABASE_PASSWORD=postgres
+      RAILS_ENV=development
+      RAILS_MASTER_KEY=183bf7c8c90863427474c200766b1b4c
+      SECRET_KEY_BASE=00401dc240ad276fb9bf8282343d1f33f0a8412ebe1c271726864c38a89cbb0559dad1d451ba8cdfa0b25740284f0b91efa9c3621bbe981cf51f4ccf5d08d2f3
+      ```
+   2. Create `/config/db.env` and add the following block (note: values are examples only):
+      ```
+      POSTGRES_USERNAME=postgres
+      POSTGRES_PASSWORD=postgres
+      ```
 
-    `.env` is a personal file that is ignored in git.<br/>
-    `.env` lists all the `ENV` variables we use and provides a fake default for any missing keys.
+**Running Longbox locally**
 
-**Running Longbox**
-
-1. Run docker-compose build
-2. Run docker-compose up
-3. Navigate to http://localhost
+1. Run `make build-local`
+2. Run `make up-local`
+3. Run `make logs-local`
+4. Navigate to [http://localhost](http://localhost)
 
 ## Core team
 

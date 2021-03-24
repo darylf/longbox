@@ -1,29 +1,29 @@
 version: "3"
 services:
   db:
-    env_file:
-      - ./config/db.env
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./db/local:/var/lib/postgresql/data
     ports:
       - "${LONGBOX_DB_PORT}:5432"
+
+  proxy:
+    build: ./proxy
 
   api:
     build:
       context: ./api
       args:
+        RUBY_VERSION: "3.0.0"
         RAILS_ENV: development
         NODE_ENV: development
-    env_file:
-      - ./config/api.env
     ports:
       - "${LONGBOX_API_PORT}:3000"
+    volumes:
+      - ./api:/srv/www-api
 
   web:
-    env_file:
-      - ./config/web.env
-  web:
     build:
+      context: ./web
       target: build
     command: yarn start:dev
     ports:
