@@ -13,9 +13,6 @@ services:
     depends_on:
       - api
       - web
-    ports:
-      - "80:80"
-      - "443:443"
     networks:
       - proxy
 
@@ -37,14 +34,8 @@ services:
     networks:
       - proxy
       - frontend
-    volumes:
-      - ./web:/srv/www
-      - "/srv/www/node_modules"
 
 networks:
   proxy:
   backend:
   frontend:
-
-volumes:
-  db:
