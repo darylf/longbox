@@ -13,14 +13,14 @@ build-%:
 	@make build e=$* c=${c}
 
 up:| check-var-e
-	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml up ${c} -d
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml up -d ${c}
 
 up-%:
 	@make up e=$* c=${c}
 
 down:| check-var-e
 	@( read -p "Are you sure? [y/N]: " sure && case "$$sure" in [yY]) true;; *) false;; esac )
-	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml up ${c} -d
+	@${DOCKER_COMPOSE} -p longbox-${e} -f $(DOCKER_COMPOSE_FILE) -f docker-compose-${e}.yml down ${c}
 
 down-%:
 	@make down e=$* c=${c}

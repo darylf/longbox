@@ -1,0 +1,32 @@
+services:
+  db:
+    volumes:
+      - ./db/dev:/var/lib/postgresql/data
+
+  proxy:
+    image: ghcr.io/darylf/longbox/proxy:latest
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  api:
+    image: ghcr.io/darylf/longbox/api:latest
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  web:
+    image: ghcr.io/darylf/longbox/web:latest
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure

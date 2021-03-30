@@ -12,5 +12,5 @@ RUN yarn build
 FROM nginx:stable-alpine as production
 COPY --from=build /srv/www/public /usr/share/nginx/html
 COPY --from=build /srv/www/nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE $PORT
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

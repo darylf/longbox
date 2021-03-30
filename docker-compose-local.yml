@@ -1,13 +1,15 @@
-version: "3"
 services:
   db:
     volumes:
       - ./db/local:/var/lib/postgresql/data
     ports:
-      - "${LONGBOX_DB_PORT}:5432"
+      - ${LONGBOX_DB_PORT}:5432
 
   proxy:
     build: ./proxy
+    ports:
+      - ${LONGBOX_PROXY_PORT}:80
+      - ${LONGBOX_PROXY_PORT_SSL}:443
 
   api:
     build:
@@ -19,7 +21,7 @@ services:
     ports:
       - "${LONGBOX_API_PORT}:3000"
     volumes:
-      - ./api:/srv/www-api
+      - api:/srv/www-api
 
   web:
     build:
@@ -27,4 +29,12 @@ services:
       target: build
     command: yarn start:dev
     ports:
-      - "${LONGBOX_WEB_PORT}:3001"
+      - "${LONGBOX_WEB_PORT}:8080"
+    volumes:
+      - ./web:/srv/www
+      - /srv/www/node_modules
+
+volumes:
+  api:
+  web:
+  db:
