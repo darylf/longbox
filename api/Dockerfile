@@ -23,10 +23,10 @@ RUN apk add --update --no-cache \
     yarn \
     tzdata
 
-WORKDIR /app
+WORKDIR /build
 
 # Install gems
-ADD Gemfile* /app/
+ADD Gemfile* /build/
 RUN bundle install -j4 --retry 3 \
  # Remove unneeded files (cached *.gem, *.o, *.c)
  && rm -rf /usr/local/bundle/cache/*.gem \
@@ -34,34 +34,34 @@ RUN bundle install -j4 --retry 3 \
  && find /usr/local/bundle/gems/ -name "*.o" -delete
 
 # Add the Rails app
-ADD . /app
+ADD . /build
 
 
-###############################
-# Stage Final
-FROM ruby:$RUBY_VERSION-alpine
+# ###############################
+# # Stage Final
+# FROM ruby:$RUBY_VERSION-alpine
 
-ARG EXECJS_RUNTIME
+# ARG EXECJS_RUNTIME
 
-# Add Alpine packages
-RUN apk add --update --no-cache bash \
-    postgresql-client \
-    imagemagick \
-    nodejs-current \
-    yarn \
-    tzdata \
-    file
+# # Add Alpine packages
+# RUN apk add --update --no-cache bash \
+#     postgresql-client \
+#     imagemagick \
+#     nodejs-current \
+#     yarn \
+#     tzdata \
+#     file
 
-# Add user
-RUN addgroup -g 1000 -S app \
-    && adduser -u 1000 -S app -G app
-USER app
+# # Add user
+# RUN addgroup -g 1000 -S app \
+#     && adduser -u 1000 -S app -G app
+# USER app
 
-# Copy app with gems from former build stage
-COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
-COPY --from=Builder --chown=app:app /app /app
+# # Copy app with gems from former build stage
+# COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
+# COPY --from=Builder --chown=app:app /app /app
 
-WORKDIR /app
+# WORKDIR /app
 EXPOSE 3000
 RUN date -u > BUILD_TIME
 

@@ -21,7 +21,7 @@ services:
     ports:
       - "${LONGBOX_API_PORT}:3000"
     volumes:
-      - api:/srv/www-api
+      - ./api:/build
 
   web:
     build:
