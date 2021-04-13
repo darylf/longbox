@@ -235,6 +235,7 @@ export type QuerySeriesArgs = {
 
 
 export type QuerySeriesListArgs = {
+  limit?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -249,6 +250,12 @@ export type Series = {
   id: Scalars['ID'];
   name: Scalars['String'];
   publisher?: Maybe<Publisher>;
+};
+
+
+/** A collection of related books */
+export type SeriesBooksArgs = {
+  limit?: Maybe<Scalars['Int']>;
 };
 
 /** The connection type for Series. */
@@ -449,6 +456,27 @@ export type SeriesQuery = (
       { __typename?: 'Book' }
       & BookDetailsFragment
     )>> }
+  ) }
+);
+
+export type SeriesOverviewListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  bookLimit?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type SeriesOverviewListQuery = (
+  { __typename?: 'Query' }
+  & { seriesList: (
+    { __typename?: 'SeriesConnection' }
+    & { nodes?: Maybe<Array<Maybe<(
+      { __typename?: 'Series' }
+      & Pick<Series, 'id' | 'name'>
+      & { books?: Maybe<Array<(
+        { __typename?: 'Book' }
+        & Pick<Book, 'id' | 'displayName'>
+      )>> }
+    )>>> }
   ) }
 );
 
@@ -831,6 +859,47 @@ export function useSeriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ser
 export type SeriesQueryHookResult = ReturnType<typeof useSeriesQuery>;
 export type SeriesLazyQueryHookResult = ReturnType<typeof useSeriesLazyQuery>;
 export type SeriesQueryResult = Apollo.QueryResult<SeriesQuery, SeriesQueryVariables>;
+export const SeriesOverviewListDocument = gql`
+    query SeriesOverviewList($limit: Int, $bookLimit: Int) {
+  seriesList(limit: $limit) {
+    nodes {
+      id
+      name
+      books(limit: $bookLimit) {
+        id
+        displayName
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSeriesOverviewListQuery__
+ *
+ * To run a query within a React component, call `useSeriesOverviewListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSeriesOverviewListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSeriesOverviewListQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      bookLimit: // value for 'bookLimit'
+ *   },
+ * });
+ */
+export function useSeriesOverviewListQuery(baseOptions?: Apollo.QueryHookOptions<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>) {
+        return Apollo.useQuery<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>(SeriesOverviewListDocument, baseOptions);
+      }
+export function useSeriesOverviewListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>) {
+          return Apollo.useLazyQuery<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>(SeriesOverviewListDocument, baseOptions);
+        }
+export type SeriesOverviewListQueryHookResult = ReturnType<typeof useSeriesOverviewListQuery>;
+export type SeriesOverviewListLazyQueryHookResult = ReturnType<typeof useSeriesOverviewListLazyQuery>;
+export type SeriesOverviewListQueryResult = Apollo.QueryResult<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>;
 export const SeriesListDocument = gql`
     query SeriesList {
   seriesList {

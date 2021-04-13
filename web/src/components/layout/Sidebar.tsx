@@ -20,6 +20,9 @@ const StyledNavigation = styled.nav`
   a:hover {
     color: #666;
   }
+  ul {
+    padding: 0;
+  }
   > ul + ul {
     border-top: 1px dotted #3e3e3e;
   }

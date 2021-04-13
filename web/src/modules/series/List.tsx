@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ItemList from '../../components/shared/ItemList';
-import { Book, Series, useSeriesListQuery } from '../../hooks/graphql';
+import { Book, Series, useSeriesOverviewListQuery } from '../../hooks/graphql';
 
 function addNames<T>(
   items: Array<T> = [],
@@ -15,7 +15,9 @@ function addName<T>(item: T, fn?: (arg0: T) => string): T & { name: string } {
 }
 
 function SeriesList(): JSX.Element {
-  const { loading, error, data } = useSeriesListQuery();
+  const { loading, error, data } = useSeriesOverviewListQuery({
+    variables: { bookLimit: 4 }
+  });
 
   if (loading) return <p>Loading...</p>;
 
@@ -27,7 +29,7 @@ function SeriesList(): JSX.Element {
     const { id, name, books } = Object.assign({} as Series, item);
     const modBooks = addNames(
       books as Array<Book>,
-      ({ seriesName, issue }: Book) => `${seriesName} #${issue}`
+      ({ displayName }: Book) => `${displayName}`
     );
     return (
       <ItemList
@@ -44,7 +46,11 @@ function SeriesList(): JSX.Element {
     <>
       <h1>Series</h1>
       <p>Browse through an entire series</p>
-      {SeriesItems}
+      {SeriesItems.sort((a, b) => {
+        if (a.props.title > b.props.title) return 1;
+        if (a.props.title < b.props.title) return -1;
+        return 0;
+      })}
     </>
   );
 }

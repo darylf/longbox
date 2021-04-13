@@ -11,7 +11,7 @@ const StyledFooter = styled.footer`
   border-top: 2px solid #000;
 
   p {
-    font-size: 0.8em;
+    font-size: var(--smallestFontSize);
     color: #c0c0c0;
     text-align: right;
   }

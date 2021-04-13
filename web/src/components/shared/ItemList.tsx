@@ -9,17 +9,12 @@ const Surface = styled.div`
   padding: 0.5em 1.2em;
   margin-bottom: 1.2em;
 
-  h2 {
-    font-size: 1.2rem;
-  }
-
   ul > li {
     list-style-type: none;
   }
 `;
 
 const ListFooter = styled.div`
-  font-size: 0.8em;
   margin-top: 0.8em;
 `;
 

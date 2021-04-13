@@ -14,7 +14,8 @@ const SearchInput = styled.input`
   border: 0;
   font-size: 1rem;
   padding: 0.5rem;
-  width: 30rem;
+  width: 40%
+  min-width: 14rem;
 `;
 
 const SearchBox = (): JSX.Element => {

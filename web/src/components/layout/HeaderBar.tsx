@@ -10,8 +10,15 @@ const StyledHeaderBar = styled.div`
 
 const StyledSearchBar = styled.div``;
 
+const Button = styled.div`
+  display: inline-block;
+  text-align: center;
+  background-color: #ccc;
+`;
+
 const StyledLink = styled.a`
   margin: 1em;
+  padding: 3px;
 `;
 
 const ActionBar = styled.div`
@@ -25,8 +32,12 @@ const HeaderBar: React.FunctionComponent = () => (
       <SearchBox />
     </StyledSearchBar>
     <ActionBar>
-      <StyledLink href="/">Sign up</StyledLink>
-      <StyledLink href="/">Login</StyledLink>
+      <Button>
+        <StyledLink href="/">Sign up</StyledLink>
+      </Button>
+      <Button>
+        <StyledLink href="/">Login</StyledLink>
+      </Button>
     </ActionBar>
   </StyledHeaderBar>
 );

@@ -1,0 +1,12 @@
+query SeriesOverviewList($limit: Int, $bookLimit: Int) {
+  seriesList(limit: $limit) {
+    nodes {
+      id
+      name
+      books(limit: $bookLimit) {
+        id
+        displayName
+      }
+    }
+  }
+}
