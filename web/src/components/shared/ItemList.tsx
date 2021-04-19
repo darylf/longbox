@@ -28,13 +28,15 @@ interface ListProps<T extends Item> {
   linkTo: string;
   seriesId?: string;
   list: Array<T> | null | undefined;
+  titleLink?: string;
 }
 
 export default function ItemList<T extends Item>({
   title = 'List',
   linkTo,
   list,
-  seriesId
+  seriesId,
+  titleLink
 }: ListProps<T>): JSX.Element {
   if (!linkTo.includes(':id')) throw new Error('linkTo is missing :id');
 
@@ -43,7 +45,11 @@ export default function ItemList<T extends Item>({
       <ul>
         {list.map(({ id, name }) => (
           <li key={id}>
-            <Link to={linkTo.replace(':id', id)}>{name}</Link>
+            <Link to={linkTo.replace(':id', id)}>
+              {/* <img src="https://via.placeholder.com/276x424" />
+              <br /> */}
+              {name}
+            </Link>
           </li>
         ))}
       </ul>
@@ -57,6 +63,12 @@ export default function ItemList<T extends Item>({
       <h2>{title}</h2>
       {viewList}
       <ListFooter>
+        {titleLink && (
+          <>
+            <Link to={titleLink}>View More</Link>
+            <br />
+          </>
+        )}
         <Link to={`/series/${seriesId}/create`}>
           <Icon name={'plus'} /> Add book
         </Link>

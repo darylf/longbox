@@ -16,7 +16,7 @@ function addName<T>(item: T, fn?: (arg0: T) => string): T & { name: string } {
 
 function SeriesList(): JSX.Element {
   const { loading, error, data } = useSeriesOverviewListQuery({
-    variables: { bookLimit: 4 }
+    variables: { bookLimit: 5 }
   });
 
   if (loading) return <p>Loading...</p>;
@@ -38,6 +38,7 @@ function SeriesList(): JSX.Element {
         linkTo="/books/:id"
         list={modBooks}
         seriesId={id}
+        titleLink={`/series/${id}`}
       />
     );
   });
