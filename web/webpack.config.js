@@ -39,6 +39,7 @@ module.exports = {
   },
   devServer: {
     port: process.env.PORT,
+    sockPort: 3001,
     contentBase: path.join(__dirname, 'public'),
     historyApiFallback: true
   }
