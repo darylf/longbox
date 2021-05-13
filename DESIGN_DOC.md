@@ -105,4 +105,4 @@ Some decisions that need to be made:
 
 Notes:
 
-- Consider this UI design: https://preview.themeforest.net/item/boighor-books-library-ecommerce-store/full_screen_preview/22173065
+- Consider this UI design: <https://preview.themeforest.net/item/boighor-books-library-ecommerce-store/full_screen_preview/22173065>

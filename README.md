@@ -1,6 +1,6 @@
 # Longbox
 
-**The comic book collection community**
+**The comic book collection community!**
 
 Welcome to the Longbox codebase, the platform that powers comic book collectors
 to track their reading habits across various platforms. This code is a work in
@@ -38,23 +38,23 @@ environment up and running is with containers. They will set up everything you
 need in an isolated environment, and you need not worry about the details of
 setting everything up locally.
 
-#### Containers
+### Containers
 
-**Prerequisites**
+#### Prerequisites
 
 - [Docker](https://www.docker.com/) 20.10.5 or higher
 - [Docker Compose](https://docs.docker.com/compose/) 1.27.4 or higher
 
-**Setting up Longbox for local development**
+#### Setting up Longbox for local development
 
 1. Fork our repository, e.g. [https://github.com/darylf/longbox/fork](https://github.com/darylf/longbox/fork)
 2. Clone your forked repository, eg. git clone
-   https://github.com/<your-username>/longbox.git
+   <https://github.com/{your-username}/longbox.git>
 3. Configure the docker build environment by editing the .env file in the root
    directory. These settings configure which ports are exposed to the host
    machine.
 
-   ```
+   ```bash
    ## API
    LONGBOX_API_PORT=3001
    LONGBOX_DB_PORT=5432
@@ -72,7 +72,8 @@ setting everything up locally.
 
    1. Create `/config/api.env` and add the following block (note: values are
       examples only):
-      ```
+
+      ```bash
       RUBY_VERSION="3.0.0"
       DATABASE_URL=postgres://postgres:@db
       DATABASE_NAME=longbox
@@ -82,14 +83,16 @@ setting everything up locally.
       RAILS_MASTER_KEY=1234567890abcdef1234567890abcdef
       SECRET_KEY_BASE=1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
       ```
+
    2. Create `/config/db.env` and add the following block (note: values are
       examples only):
-      ```
+
+      ```bash
       POSTGRES_USERNAME=postgres
       POSTGRES_PASSWORD=postgres
       ```
 
-**Running Longbox locally**
+#### Running Longbox locally
 
 1. Run `make build-local`
 2. Run `make up-local`
