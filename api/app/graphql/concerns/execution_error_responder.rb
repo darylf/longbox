@@ -1,4 +1,4 @@
-module ExecturionErrorResponder
+module ExectutionErrorResponder
   extend ActiveSupport::Concern
 
   private

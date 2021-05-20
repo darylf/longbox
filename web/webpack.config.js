@@ -24,7 +24,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/assets/index.html',
+      favicon: 'src/assets/favicon.webp'
     }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
@@ -41,6 +42,11 @@ module.exports = {
     port: process.env.PORT,
     sockPort: 3001,
     contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    }
   }
 };

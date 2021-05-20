@@ -2,13 +2,13 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: <%= ENV.fetch("DATABASE_URL") %>
-  database: <%= ENV.fetch("DATABASE_NAME") %>
   username: <%= ENV.fetch("DATABASE_USERNAME") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") %>
   pool: 5
 
 development:
   <<: *default
+  database: longbox
 
 test:
   <<: *default

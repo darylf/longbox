@@ -4,5 +4,8 @@ module Types
     field :create_series, mutation: Mutations::CreateSeries
     field :create_book, mutation: Mutations::CreateBook
     field :edit_book, mutation: Mutations::EditBook
+    field :login, mutation: Mutations::CreateSession
+    field :logout, mutation: Mutations::DestroySession
+    field :register, mutation: Mutations::CreateUser
   end
 end
