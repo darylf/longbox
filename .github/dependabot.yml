@@ -4,4 +4,17 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
+      interval: "weekly"
+      day: "sunday"
+
+  # Maintain dependencies for Ruby API back-end
+  - package-ecosystem: "bundler"
+    directory: "/api"
+    schedule:
+      interval: "daily"
+
+  # Maintain dependencies for JS front-end
+  - package-ecosystem: "npm"
+    directory: "/web"
+    schedule:
       interval: "daily"
