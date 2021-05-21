@@ -4,7 +4,7 @@ module Mutations
 
     graphql_name 'Logout'
 
-    def resolve(**args)
+    def resolve(**_args)
       Rails.logger.debug "Current user: #{context[:current_user]}"
       Rails.logger.debug "JWT Token: #{context[:jwt]}"
 

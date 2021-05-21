@@ -9,7 +9,7 @@ class GraphqlController < ApplicationController
     }
     result = LongboxSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
-  rescue => e
+  rescue StandardError => e
     raise e unless Rails.env.development?
 
     handle_error_in_development e
@@ -19,8 +19,10 @@ class GraphqlController < ApplicationController
 
   def current_user
     return nil if request.headers['Authorization'].blank?
-    token = request.headers['Authorization'].split(' ').last
+
+    token = request.headers['Authorization'].split.last
     return nil if token.blank?
+
     AuthToken.verify(token)
   end
 

@@ -10,37 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_133537) do
+ActiveRecord::Schema.define(version: 2021_05_21_145150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  create_table "blacklisted_tokens", force: :cascade do |t|
+    t.string "jti"
+    t.bigint "user_id", null: false
+    t.datetime "exp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["jti"], name: "index_blacklisted_tokens_on_jti", unique: true
+    t.index ["user_id"], name: "index_blacklisted_tokens_on_user_id"
   end
 
   create_table "book_formats", force: :cascade do |t|
@@ -55,14 +37,14 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.integer "book_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "book_format_id"
+    t.bigint "book_formats_id"
     t.string "alternate_title"
     t.text "summary"
     t.string "page_count"
     t.string "price"
     t.string "publication_date"
     t.string "age_rating"
-    t.index ["book_format_id"], name: "index_books_on_book_format_id"
+    t.index ["book_formats_id"], name: "index_books_on_book_formats_id"
     t.index ["series_id"], name: "index_books_on_series_id"
   end
 
@@ -97,6 +79,15 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.index ["name"], name: "index_publishers_on_name", unique: true
   end
 
+  create_table "refresh_tokens", force: :cascade do |t|
+    t.string "crypted_token"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["crypted_token"], name: "index_refresh_tokens_on_crypted_token", unique: true
+    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
+  end
+
   create_table "series", force: :cascade do |t|
     t.string "name"
     t.bigint "publisher_id"
@@ -111,14 +102,26 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "books", "book_formats"
+  create_table "whitelisted_tokens", force: :cascade do |t|
+    t.string "jti"
+    t.bigint "user_id", null: false
+    t.datetime "exp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["jti"], name: "index_whitelisted_tokens_on_jti", unique: true
+    t.index ["user_id"], name: "index_whitelisted_tokens_on_user_id"
+  end
+
+  add_foreign_key "blacklisted_tokens", "users"
+  add_foreign_key "books", "book_formats", column: "book_formats_id"
   add_foreign_key "books", "series"
   add_foreign_key "credits", "books"
   add_foreign_key "credits", "creators"
   add_foreign_key "credits", "credit_roles"
+  add_foreign_key "refresh_tokens", "users"
   add_foreign_key "series", "publishers"
+  add_foreign_key "whitelisted_tokens", "users"
 end
