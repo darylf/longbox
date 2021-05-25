@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_145150) do
+ActiveRecord::Schema.define(version: 2021_04_29_133537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "blacklisted_tokens", force: :cascade do |t|
-    t.string "jti"
-    t.bigint "user_id", null: false
-    t.datetime "exp"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["jti"], name: "index_blacklisted_tokens_on_jti", unique: true
-    t.index ["user_id"], name: "index_blacklisted_tokens_on_user_id"
-  end
 
   create_table "book_formats", force: :cascade do |t|
     t.string "name"
@@ -79,15 +69,6 @@ ActiveRecord::Schema.define(version: 2021_05_21_145150) do
     t.index ["name"], name: "index_publishers_on_name", unique: true
   end
 
-  create_table "refresh_tokens", force: :cascade do |t|
-    t.string "crypted_token"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["crypted_token"], name: "index_refresh_tokens_on_crypted_token", unique: true
-    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
-  end
-
   create_table "series", force: :cascade do |t|
     t.string "name"
     t.bigint "publisher_id"
@@ -97,31 +78,18 @@ ActiveRecord::Schema.define(version: 2021_05_21_145150) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "whitelisted_tokens", force: :cascade do |t|
-    t.string "jti"
-    t.bigint "user_id", null: false
-    t.datetime "exp"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["jti"], name: "index_whitelisted_tokens_on_jti", unique: true
-    t.index ["user_id"], name: "index_whitelisted_tokens_on_user_id"
-  end
-
-  add_foreign_key "blacklisted_tokens", "users"
   add_foreign_key "books", "book_formats", column: "book_formats_id"
   add_foreign_key "books", "series"
   add_foreign_key "credits", "books"
   add_foreign_key "credits", "creators"
   add_foreign_key "credits", "credit_roles"
-  add_foreign_key "refresh_tokens", "users"
   add_foreign_key "series", "publishers"
-  add_foreign_key "whitelisted_tokens", "users"
 end
