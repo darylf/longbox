@@ -55,3 +55,6 @@ sh:| check-var-e
 
 sh-%:| check-var-c
 	@make sh e=$* c=${c}
+
+docker-prune:
+	docker system prune -f
