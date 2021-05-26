@@ -27,7 +27,7 @@ module Mutations
 
       Rails.logger.debug "*******************USER SAVED!*******************"
 
-      payload  = { user_id: user.id }
+      payload = { user_id: user.id }
       session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
       tokens = session.login
 
@@ -35,7 +35,6 @@ module Mutations
       Rails.logger.debug "User id: #{user.id}"
       Rails.logger.debug "CSRF: #{tokens[:access]}"
       Rails.logger.debug "*******************USER ERRORS*******************"
-
 
       response.set_cookie(JWTSessions.access_cookie,
                           value: tokens[:access],

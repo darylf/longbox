@@ -23,6 +23,7 @@ module Mutations
     end
   end
 end
+
 module Mutations
   class UpdateSession < Mutations::BaseMutation
     class AuthenticationError < StandardError; end
@@ -46,7 +47,6 @@ module Mutations
                           secure: Rails.env.production?)
 
       { csrf: tokens[:csrf] }
-
     rescue AuthenticationError
       GraphQL::ExecutionError.new('Invalid credentials', options: { status: :unprocessable_entity, code: 401 })
     end
