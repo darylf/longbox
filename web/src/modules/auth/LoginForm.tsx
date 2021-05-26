@@ -31,9 +31,9 @@ function LoginForm(): JSX.Element {
         if (errors) {
           console.error(errors);
         }
-        if (data?.login?.token !== null && data?.login?.token !== undefined) {
+        if (data?.login?.csrf !== null && data?.login?.csrf !== undefined) {
           console.log('Set auth token');
-          setToken(data.login.token);
+          setToken(data.login.csrf);
         }
       }
     );

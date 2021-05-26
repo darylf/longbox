@@ -2,9 +2,14 @@ module Mutations
   class DestroySession < Mutations::BaseMutation
     class AuthenticationError < StandardError; end
 
+    field :exit, String, null: true
+
     graphql_name 'Logout'
 
     def resolve(**_args)
+      session = JWTSessions::Session.new(payload: payload)
+      session.flush_by_access_payload
+
       Rails.logger.debug "Current user: #{context[:current_user]}"
       Rails.logger.debug "JWT Token: #{context[:jwt]}"
 

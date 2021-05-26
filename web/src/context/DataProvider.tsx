@@ -20,7 +20,7 @@ const authLink = setContext((_, { headers }) => {
   // get the authentication token if it exists
   const token = sessionStorage.getItem(AUTH_TOKEN);
   const authorization_header = token
-    ? { authorization: `Bearer ${token}` }
+    ? { authorization: `X-CSRF-TOKEN ${token}` }
     : null;
   // return the headers to the context so httpLink can read them
   return {

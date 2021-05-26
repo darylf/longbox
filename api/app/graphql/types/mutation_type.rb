@@ -7,6 +7,7 @@ module Types
     field :edit_book, mutation: Mutations::EditBook
     field :login, mutation: Mutations::CreateSession
     field :logout, mutation: Mutations::DestroySession
+    field :refresh_session, mutation: Mutations::UpdateSession
     field :register, mutation: Mutations::CreateUser
   end
 end

@@ -4,8 +4,15 @@ class ApplicationController < ActionController::API
 
   private
 
+  def current_user
+    Rails.logger.debug "*******************PAYLOAD*******************"
+    # Rails.logger.debug "Payload: #{payload}"
+    Rails.logger.debug "*******************PAYLOAD*******************"
+
+    @current_user ||= User.find(payload['user_id'])
+  end
+
   def not_authorized
-    # render json: { error: "Not authorized" }, status: :unauthorized
-    GraphQL::ExecutionError.new("Unauthorized")
+    render json: { error: 'Not authorized' }, status: :unauthorized
   end
 end
