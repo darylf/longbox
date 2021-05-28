@@ -15,7 +15,7 @@
     "graphql": "^15.5.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-hook-form": "^7.6.7",
+    "react-hook-form": "^7.6.9",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1"
   },
