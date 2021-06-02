@@ -62,50 +62,36 @@ jobs:
         run: |
           brakeman -f sarif -o output.sarif.json .
 
-    # Upload the SARIF file generated in the previous step
-    - name: "Cleanup: Upload SARIF"
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: output.sarif.json
+      - name: "Cleanup: Upload SARIF"
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: output.sarif.json
 
-  # test:
-  #   runs-on: ubuntu-latest
+  rspec-test:
+    name: RSpec
+    needs: [rubocop, brakeman]
+    runs-on: ubuntu-18.04
+    steps:
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v2.3.4
 
-  #   services:
-  #     postgres:
-  #       image: postgres:11
-  #       ports: ["5432:5432"]
-  #       env:
-  #         POSTGRES_PASSWORD: postgres
+      - name: "Setup: Ruby"
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
 
-  #   steps:
-  #     - uses: actions/checkout@v2.3.4
+      - name: "Setup: Install postgres client"
+        run: sudo apt-get install libpq-dev
 
-  #     - name: Setup Ruby
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: ${{ env.RUBY_VERSION }}
+      - name: "Setup: Install gem dependencies"
+        run: |
+          gem install bundler
+          bundler install
 
-  #     - uses: Borales/actions-yarn@v2.3.0
-  #       with:
-  #         cmd: install
+      - name: "Setup: Create database"
+        run: |
+          bundler exec rails db:create RAILS_ENV=test
+          bundler exec rails db:migrate RAILS_ENV=test
 
-  #     - name: Install Dependencies
-  #       run: |
-  #         sudo apt install -yqq libpq-dev
-  #         gem install bundler
-
-  #     - name: Install Gems
-  #       run: |
-  #         bundle install
-
-  #     - name: Prepare Database
-  #       run: |
-  #         bundle exec rails db:prepare
-
-  #     - name: Run Tests
-  #       env:
-  #         DATABASE_URL: postgres://postgres:postgres@localhost:5432/databasename
-  #         RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
-  #       run: |
-  #         bundle exec rails test
+      - name: "Rspec: Run tests"
+        run: bundler exec rake
