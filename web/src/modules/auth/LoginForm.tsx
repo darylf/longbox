@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ChangeEvent, Dispatch, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useLoginMutation } from '../../hooks/graphql';
 import useAuthenticationToken from './useAuthenticationToken';
 
 type StatesIndex = {
@@ -16,7 +15,7 @@ function Greeting({ name }: GreetingProps): JSX.Element {
 }
 
 function LoginForm(): JSX.Element {
-  const { setToken } = useAuthenticationToken();
+  const { token, setToken } = useAuthenticationToken();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const states: StatesIndex = {
@@ -24,36 +23,30 @@ function LoginForm(): JSX.Element {
     password: setPassword
   };
 
-  function submitForm(e: FormEvent) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    login({ variables: { email: `${email}`, password: `${password}` } }).then(
-      ({ data, errors }) => {
-        if (errors) {
-          console.error(errors);
-        }
-        if (data?.login?.csrf !== null && data?.login?.csrf !== undefined) {
-          console.log('Set auth token');
-          setToken(data.login.csrf);
-        }
-      }
-    );
+    // const response = await fetch('/backend/login', {
+    //   method: 'post',
+    //   body: JSON.stringify({ email, password })
+    // });
+
+    // const { jwt_token } = await response.json();
   }
 
   function onChange(name: string, e: ChangeEvent<HTMLInputElement>) {
     states[name](e.target.value);
   }
-  const [login, { data, error }] = useLoginMutation();
-  const displayError = error ? <div>Error: {error?.message}</div> : <></>;
+  const displayError = <></>; // error ? <div>Error: {error?.message}</div> : <></>;
 
   return (
     <div>
-      {data?.login?.user?.name ? (
+      {token ? (
         <>
-          <Greeting name={data?.login?.user?.name} />
+          <Greeting name={token} />
           <Link to="/logout">Logout</Link>
         </>
       ) : (
-        <form onSubmit={submitForm}>
+        <form onSubmit={handleSubmit}>
           <h1>Login</h1>
           {displayError}
           <div>

@@ -15,7 +15,7 @@ const UnauthenticatedRoutes = (): JSX.Element => {
       <Route path="/my-accout" component={Pages.ComingSoon} />
       <Route path="/about" component={Pages.ComingSoon} />
       <Route path="/contribute" component={Pages.ComingSoon} />
-      <Route path="/login" component={Pages.LoginForm} />
+      <Route path="/login" component={Pages.ComingSoon} />
       <Route path="/register" component={Pages.RegistrationForm} />
       <Route path="/admin" component={Pages.AdminPage} />
       <Route exact path="/" component={Pages.HomePage} />

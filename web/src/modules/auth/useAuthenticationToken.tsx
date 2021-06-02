@@ -13,7 +13,7 @@ export default function useAuthenticationToken(): AuthenticationTokenHook {
     setToken(token);
   };
 
-  const getAuthenticationToken = () => {
+  const getAuthenticationToken = (): string | null => {
     return sessionStorage.getItem(AUTH_TOKEN);
   };
 

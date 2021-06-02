@@ -5,11 +5,11 @@ class ApplicationController < ActionController::API
   private
 
   def current_user
-    Rails.logger.debug "*******************PAYLOAD*******************"
+    # Rails.logger.debug "*******************PAYLOAD*******************"
     # Rails.logger.debug "Payload: #{payload}"
-    Rails.logger.debug "*******************PAYLOAD*******************"
+    # Rails.logger.debug "*******************PAYLOAD*******************"
 
-    @current_user ||= User.find(payload['user_id'])
+    # @current_user ||= User.find(payload['user_id'])
   end
 
   def not_authorized

@@ -6,6 +6,10 @@ module Mutations
 
     field :user, Types::UserType, null: true
     field :csrf, String, null: false
+    field :jwt, String, null: false
+    field :expires_at, String, null: false
+    field :refresh, String, null: false
+    field :refresh_expires_at, String, null: false
 
     argument :email, String, required: true
     argument :password, String, required: true
@@ -18,16 +22,16 @@ module Mutations
       session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
       tokens = session.login
 
-      # jwt = AuthenticationTokenService.generate(user.id)
       context[:current_user] = user
-      context[:jwt] = tokens[:access]
-
-      Rails.logger.debug "Current user: #{context[:current_user]}"
-      Rails.logger.debug "JWT Token: #{context[:jwt]}"
+      context[:session_tokens] = tokens
 
       {
         user: user,
-        csrf: tokens[:csrf]
+        csrf: tokens[:csrf],
+        jwt: tokens[:access],
+        expires_at: tokens[:access_expires_at],
+        refresh: tokens[:refresh],
+        refresh_expires_at: tokens[:refresh_expires_at]
       }
     rescue AuthenticationError
       GraphQL::ExecutionError.new('Invalid credentials', options: { status: :unprocessable_entity, code: 401 })
