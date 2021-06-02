@@ -1,11 +1,15 @@
 name: "Test: Web typescript code"
 
 on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "web/**"
   push:
     branches: [main, develop]
     paths:
       - "web/**"
-  pull_request:
+  workflow_dispatch:
     branches: [main, develop]
     paths:
       - "web/**"
