@@ -12,7 +12,7 @@ Series.all.each do |series|
     book = Book.create(
       series_id: series.id,
       issue: n+1,
-      book_type: comic,
+      book_format: comic,
       summary: Faker::Lorem.paragraph,
       page_count: 23,
       price: 2.99,

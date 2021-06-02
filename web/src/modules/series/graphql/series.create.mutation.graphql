@@ -1,11 +1,6 @@
 mutation CreateSeries($name: String!, $publisherId: ID!) {
   createSeries(name: $name, publisherId: $publisherId) {
-    series {
-      id
-      name
-    }
-    errors {
-      message
-    }
+    id
+    name
   }
 }

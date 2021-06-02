@@ -8,10 +8,9 @@ require "active_record/railtie"
 require "active_storage/engine"
 require "action_controller/railtie"
 require "action_mailer/railtie"
-require "action_mailbox/engine"
-require "action_text/engine"
-require "action_view/railtie"
-require "action_cable/engine"
+# require "action_mailbox/engine"
+# require "action_text/engine"
+# require "action_view/railtie"
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -34,5 +33,9 @@ module LongboxApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.hosts.clear
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::Flash # required for cookies, for some reason [?]
   end
 end

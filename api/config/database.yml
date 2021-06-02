@@ -12,4 +12,4 @@ development:
 
 test:
   <<: *default
-  database: longbox_test
+  database: <%= ENV.fetch("DATABASE_NAME") + "_test" %>
