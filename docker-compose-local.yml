@@ -1,7 +1,7 @@
 services:
   db:
     volumes:
-      - ./db/local:/var/lib/postgresql/data
+      - ./db/local:/var/lib/postgresql/data:delegated
     ports:
       - ${LONGBOX_DB_PORT:-5432}:5432
 

@@ -45,9 +45,11 @@ jobs:
     name: Brakeman
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v2.3.4
 
-      - uses: ruby/setup-ruby@v1
+      - name: "Setup: Ruby"
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
 
@@ -56,8 +58,9 @@ jobs:
           gem install brakeman
 
       - name: "Brakeman: run"
+        continue-on-error: true
         run: |
-          brakeman
+          brakeman -f sarif -o output.sarif.json .
 
   # test:
   #   runs-on: ubuntu-latest

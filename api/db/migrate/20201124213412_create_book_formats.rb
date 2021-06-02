@@ -6,6 +6,6 @@ class CreateBookFormats < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_reference :books, :book_formats, foreign_key: true
+    add_reference :books, :book_format, foreign_key: true
   end
 end

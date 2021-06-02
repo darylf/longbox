@@ -27,14 +27,14 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.integer "book_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "book_formats_id"
+    t.bigint "book_format_id"
     t.string "alternate_title"
     t.text "summary"
     t.string "page_count"
     t.string "price"
     t.string "publication_date"
     t.string "age_rating"
-    t.index ["book_formats_id"], name: "index_books_on_book_formats_id"
+    t.index ["book_format_id"], name: "index_books_on_book_format_id"
     t.index ["series_id"], name: "index_books_on_series_id"
   end
 
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "books", "book_formats", column: "book_formats_id"
+  add_foreign_key "books", "book_formats"
   add_foreign_key "books", "series"
   add_foreign_key "credits", "books"
   add_foreign_key "credits", "creators"
