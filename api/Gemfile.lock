@@ -222,16 +222,15 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
-  factory_bot_rails
-  faker
-  graphql
-  jwt_sessions
+  factory_bot_rails (~> 6.2.0)
+  faker (~> 2.18.0)
+  graphql (~> 1.12.12)
   listen (>= 3.3)
   pg (>= 0.18, < 2.0)
   puma (~> 5.3.2)
-  rack-cors
+  rack-cors (~> 1.1.1)
   rails (~> 6.1.3)
-  rspec-graphql_matchers
+  rspec-graphql_matchers (~> 1.3.0)
   rspec-rails (~> 5.0.1)
   rubocop
   rubocop-performance
