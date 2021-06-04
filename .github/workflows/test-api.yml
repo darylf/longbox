@@ -66,10 +66,19 @@ jobs:
         run: |
           brakeman -f sarif -o output.sarif.json .
 
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "output.sarif.json"
+      - name: File exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: echo All files exists!
+
       - name: "Cleanup: Upload SARIF"
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: output.sarif.json
+          sarif_file: api/output.sarif.json
 
   rspec-test:
     name: RSpec
