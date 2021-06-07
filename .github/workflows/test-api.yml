@@ -109,7 +109,7 @@ jobs:
       - name: "Rspec: Run tests"
         env:
           RAILS_ENV: test
-          DATABASE_URL: ${{ env.DATABASE_HOST }}
+          DATABASE_URL: ${{ env.DATABASE_URL }}
           DATABASE_USERNAME: ${{ env.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
           DATABASE_NAME: ${{ env.DATABASE_NAME }}
