@@ -20,9 +20,10 @@ defaults:
 
 env:
   RUBY_VERSION: 3.0.0
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: ""
-  POSTGRES_DB: postgres
+  DATABASE_URL: localhost
+  DATABASE_USERNAME: postgres
+  DATABASE_PASSWORD: ""
+  DATABASE_NAME: longbox
 
 jobs:
   rubocop:
@@ -66,15 +67,6 @@ jobs:
         run: |
           brakeman -f sarif -o output.sarif.json .
 
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "api/output.sarif.json"
-      - name: File exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: echo All files exists!
-
       - name: "Cleanup: Upload SARIF"
         uses: github/codeql-action/upload-sarif@v1
         with:
@@ -84,21 +76,25 @@ jobs:
     name: RSpec
     needs: [rubocop, brakeman]
     runs-on: ubuntu-18.04
+
+    services:
+      postgres:
+        image: postgres:11.6
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - name: "Setup: Checkout"
         uses: actions/checkout@v2.3.4
 
       - name: "Setup: Ruby"
-<<<<<<< HEAD
-        uses: actions/setup-ruby@v1
-=======
         uses: ruby/setup-ruby@v1
->>>>>>> origin/develop
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
 
       - name: "Setup: Install postgres client"
-        run: sudo apt-get install libpq-dev
+        run: |
+          sudo apt-get install libpq-dev
 
       - name: "Setup: Install gem dependencies"
         run: |
@@ -111,4 +107,11 @@ jobs:
           bundler exec rails db:migrate RAILS_ENV=test
 
       - name: "Rspec: Run tests"
-        run: bundler exec rake
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: ${{ env.DATABASE_HOST }}
+          DATABASE_USERNAME: ${{ env.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+          DATABASE_NAME: ${{ env.DATABASE_NAME }}
+        run: |
+          bundler exec rake
