@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import useAuthenticationToken from '../../modules/auth/useAuthenticationToken';
-import SearchBox from '../shared/SearchBox';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import useAuthenticationToken from "../../components/auth/useAuthenticationToken";
+import SearchBox from "../shared/SearchBox";
 
 const StyledHeaderBar = styled.div`
   text-align: left;
@@ -37,7 +37,7 @@ const HeaderBar: React.FunctionComponent = () => {
       </StyledSearchBar>
       <ActionBar>
         <Button>
-          <StyledLink to="/login">{token ?? 'Login'}</StyledLink>
+          <StyledLink to="/login">{token ?? "Login"}</StyledLink>
         </Button>
       </ActionBar>
     </StyledHeaderBar>

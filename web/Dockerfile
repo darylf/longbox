@@ -11,6 +11,6 @@ RUN yarn build
 # production environment
 FROM nginx:stable-alpine as production
 COPY --from=build /srv/www/public /usr/share/nginx/html
-COPY --from=build /srv/www/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /srv/www/config/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
