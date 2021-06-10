@@ -1,14 +1,14 @@
-name: "Publish: API package [dev]"
+name: "Publish: Web package [dev]"
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
     paths:
-      - "api/**"
+      - "web/**"
   workflow_dispatch:
-    branches: [develop]
+    branches: [main]
     paths:
-      - "api/**"
+      - "web/**"
 
 jobs:
   build-container:
@@ -33,12 +33,7 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           push: true
-          context: "./api"
-          build-args: |
-            RUBY_VERSION=3.0.0
-            EXECJS_RUNTIME=Node
-            RAILS_ENV=development
-            NODE_ENV=development
+          context: "./web"
           tags: |
-            ghcr.io/${{ github.repository}}/api:latest-dev
-            ghcr.io/${{ github.repository}}/api:1.${{ github.run_number }}-dev
+            ghcr.io/${{ github.repository}}/web:latest-dev
+            ghcr.io/${{ github.repository}}/web:1.${{ github.run_number }}-dev

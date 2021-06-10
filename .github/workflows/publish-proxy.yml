@@ -2,11 +2,11 @@ name: "Publish: Proxy package [dev]"
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
     paths:
       - "proxy/**"
   workflow_dispatch:
-    branches: [develop]
+    branches: [main]
     paths:
       - "proxy/**"
 
