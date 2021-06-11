@@ -1,7 +1,8 @@
-const webpack = require('webpack');
+/* eslint @typescript-eslint/no-var-requires: "off" */
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: path.resolve(__dirname, '../src/index.tsx'),
