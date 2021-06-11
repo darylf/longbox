@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Layout } from "./components/layout/";
-import { AppProvider } from "./providers";
 import * as Pages from "./components/pages";
+import { AppProvider } from "./providers";
 
 const UnauthenticatedRoutes = (): JSX.Element => {
   return (
