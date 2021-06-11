@@ -16,7 +16,13 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint', 'import'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'jest-dom',
+    'react',
+    'testing-library'
+  ],
   settings: {
     react: {
       version: 'detect'
