@@ -4,6 +4,7 @@ module.exports = {
     es2021: true
   },
   extends: [
+    'plugin:jest-dom/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'prettier'
@@ -16,7 +17,13 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint', 'import'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'jest-dom',
+    'react',
+    'testing-library'
+  ],
   settings: {
     react: {
       version: 'detect'
