@@ -10,9 +10,6 @@ module Mutations
       session = JWTSessions::Session.new(payload: payload)
       session.flush_by_access_payload
 
-      Rails.logger.debug "Current user: #{context[:current_user]}"
-      Rails.logger.debug "JWT Token: #{context[:jwt]}"
-
       context[:current_user] = nil
       context[:jwt] = nil
 

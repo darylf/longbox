@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
+  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: 'graphql#execute' if Rails.env.development?
   post '/graphql', to: 'graphql#execute', format: false
-  post '/session', to: 'session#create', format: false
-  patch '/session', to: 'session#update', format: false
-  delete '/session', to: 'session#destroy', format: false
 end
