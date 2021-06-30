@@ -58,7 +58,12 @@ Style/FrozenStringLiteralComment:
 Style/StringLiterals:
   Enabled: false
 
-#################### RSpec ###############################
+#################### Naming ###############################
+
+Naming/InclusiveLanguage:
+  Enabled: false
+
+  #################### RSpec ###############################
 
 RSpec/ExampleLength:
   Enabled: false
