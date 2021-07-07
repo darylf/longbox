@@ -2005,10 +2005,10 @@
     "@types/relateurl" "*"
     "@types/uglify-js" "*"
 
-"@types/html-webpack-plugin@^3.2.4":
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/@types/html-webpack-plugin/-/html-webpack-plugin-3.2.5.tgz#58e94c0d57801903b2b77674d2b9ef6c4a65a6db"
-  integrity sha512-DhC7NTte+Ikw/zxp2w9qjcWtHqpShbUx7ASPUZ00trn1EOftoRtMmy8nS7F/mW8ASTA2JGMFX2bbuqqxiqs6mQ==
+"@types/html-webpack-plugin@^3.2.6":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@types/html-webpack-plugin/-/html-webpack-plugin-3.2.6.tgz#07951aaf0fa260dbf626f9644f1d13106d537625"
+  integrity sha512-U8uJSvlf9lwrKG6sKFnMhqY4qJw2QXad+PHlX9sqEXVUMilVt96aVvFde73tzsdXD+QH9JS6kEytuGO2JcYZog==
   dependencies:
     "@types/html-minifier" "*"
     "@types/tapable" "^1"
@@ -7858,10 +7858,10 @@ react-dom@^17.0.0:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-hook-form@^7.10.0:
-  version "7.10.0"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.10.0.tgz#665c9897957a2a8bbf720cef9e913ba1b22b0e86"
-  integrity sha512-J6jJDw61TDNG0cEyLlYKUTPTwJH1Gfp8S8+m5Dt3mLY5vEy7UwKr60rl11ESofKmliFH8DconTVFnZgblhGvyg==
+react-hook-form@^7.10.1:
+  version "7.10.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.10.1.tgz#fd7c78ab72402c2f4a7ac4f6184e84ff0df129b2"
+  integrity sha512-YRSkOZ0DJKjJ+PuCB6caFbFSbz6I4JQcGXVb/OeEIVE3YuXXYYJ/YQwodRy8HsZ5WA+DryoThWIeZZzPd5f9lQ==
 
 "react-is@^16.12.0 || ^17.0.0", react-is@^17.0.1, react-is@^17.0.2:
   version "17.0.2"
