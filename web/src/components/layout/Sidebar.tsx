@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Icon from '../shared/Icon';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Icon from "../shared/Icon";
 
 const StyledSidebar = styled.div`
   grid-area: sidebar;
@@ -20,84 +20,20 @@ const StyledNavigation = styled.nav`
   a:hover {
     color: #666;
   }
-  ul {
-    padding: 0;
-  }
-  > ul + ul {
-    border-top: 1px dotted #3e3e3e;
-  }
-  > ul > li {
-    list-style-type: none;
-  }
 `;
 
-function Navigation(): JSX.Element {
-  return (
-    <StyledNavigation>
-      <ul>
-        <li>
-          <Link to="/series">
-            <Icon name={'book'} /> Browse Series
-          </Link>
-        </li>
-        <li>
-          <Link to="/publishers">
-            <Icon name={'archive'} />
-            Browse Publishers
-          </Link>
-        </li>
-        <li>
-          <Link to="/trending">
-            <Icon name={'chart-line'} />
-            Trending
-          </Link>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <Link to="/my-collection">
-            <Icon name={'heart'} />
-            My Collection
-          </Link>
-        </li>
-        <li>
-          <Link to="/my-wishlist">
-            <Icon name={'list'} />
-            My Wishlist
-          </Link>
-        </li>
-        <li>
-          <Link to="/my-account">
-            <Icon name={'cog'} />
-            My Account
-          </Link>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <Link to="/about">
-            <Icon name={'info-circle'} />
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to="/contribute">
-            <Icon name={'github'} type="brand" />
-            Contribute
-          </Link>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <Link to="/admin">
-            <Icon name={'tools'} />
-            Admin
-          </Link>
-        </li>
-      </ul>
-    </StyledNavigation>
-  );
-}
+const SidebarMenu = styled.ul`
+  &:not(:first-of-type) {
+    border-top: 1px dotted #3e3e3e;
+  }
+  padding: 0;
+`;
+
+const SidebarMenuItem = styled.li`
+  list-style-type: none;
+`;
+
+const SidebarMenuItemLabel = styled.span``;
 
 const StyledLogo = styled.div``;
 
@@ -112,6 +48,75 @@ const Logo: React.FunctionComponent = () => (
     </a>
   </StyledLogo>
 );
+
+function Navigation(): JSX.Element {
+  return (
+    <StyledNavigation>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <Link to="/series">
+            <Icon name={"book"} />
+            <SidebarMenuItemLabel>Browse Books</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <Link to="/publishers">
+            <Icon name={"archive"} />
+            <SidebarMenuItemLabel>Browse Publishers</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <Link to="/trending">
+            <Icon name={"chart-line"} />
+            <SidebarMenuItemLabel>Trending</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+      </SidebarMenu>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <Link to="/my-collection">
+            <Icon name={"heart"} />
+            <SidebarMenuItemLabel>My Collection</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <Link to="/my-wishlist">
+            <Icon name={"list"} />
+            <SidebarMenuItemLabel>My Wishlist</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <Link to="/my-account">
+            <Icon name={"cog"} />
+            <SidebarMenuItemLabel>My Account</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+      </SidebarMenu>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <Link to="/about">
+            <Icon name={"info-circle"} />
+            <SidebarMenuItemLabel>About</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <Link to="/contribute">
+            <Icon name={"github"} type="brand" />
+            <SidebarMenuItemLabel>Contribute</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+      </SidebarMenu>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <Link to="/admin">
+            <Icon name={"tools"} />
+            <SidebarMenuItemLabel>Admin</SidebarMenuItemLabel>
+          </Link>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </StyledNavigation>
+  );
+}
 
 const Sidebar: React.FunctionComponent = () => (
   <StyledSidebar>

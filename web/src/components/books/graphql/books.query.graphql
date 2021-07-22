@@ -1,7 +1,14 @@
 query Books {
   books {
     nodes {
-      ...BookDetails
+      id
+      publisherName
+      seriesName
+      issue
+      format
+      publicationDate
+      price
+      pageCount
     }
   }
 }

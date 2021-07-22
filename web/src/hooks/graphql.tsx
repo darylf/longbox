@@ -442,7 +442,7 @@ export type BooksQuery = (
     { __typename?: 'BookConnection' }
     & { nodes?: Maybe<Array<Maybe<(
       { __typename?: 'Book' }
-      & BookDetailsFragment
+      & Pick<Book, 'id' | 'publisherName' | 'seriesName' | 'issue' | 'format' | 'publicationDate' | 'price' | 'pageCount'>
     )>>> }
   ) }
 );
@@ -810,11 +810,18 @@ export const BooksDocument = gql`
     query Books {
   books {
     nodes {
-      ...BookDetails
+      id
+      publisherName
+      seriesName
+      issue
+      format
+      publicationDate
+      price
+      pageCount
     }
   }
 }
-    ${BookDetailsFragmentDoc}`;
+    `;
 
 /**
  * __useBooksQuery__
