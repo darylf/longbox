@@ -6,5 +6,7 @@ module Types
     field :updated_at, Types::DateTimeType, null: false
     field :name, String, null: false
     field :series, [Types::SeriesType], null: false
+    field :series_count, Int, null: false
+    field :book_count, Int, null: false
   end
 end

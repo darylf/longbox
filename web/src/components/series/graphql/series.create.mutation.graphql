@@ -1,6 +1,0 @@
-mutation CreateSeries($name: String!, $publisherId: ID!) {
-  createSeries(name: $name, publisherId: $publisherId) {
-    id
-    name
-  }
-}

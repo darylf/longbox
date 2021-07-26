@@ -201,10 +201,12 @@ export type PageInfo = {
 /** A book publishing company */
 export type Publisher = {
   __typename?: 'Publisher';
+  bookCount: Scalars['Int'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   name: Scalars['String'];
   series: Array<Series>;
+  seriesCount: Scalars['Int'];
   updatedAt: Scalars['DateTime'];
 };
 
@@ -245,6 +247,8 @@ export type QueryBookArgs = {
 
 
 export type QueryBooksArgs = {
+  sortBy?: Maybe<SortAttributes>;
+  limit?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -258,6 +262,8 @@ export type QueryPublisherArgs = {
 
 
 export type QueryPublishersArgs = {
+  sortBy?: Maybe<SortAttributes>;
+  limit?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -271,6 +277,7 @@ export type QuerySeriesArgs = {
 
 
 export type QuerySeriesListArgs = {
+  sortBy?: Maybe<SortAttributes>;
   limit?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -293,11 +300,13 @@ export type RegisterPayload = {
 /** A collection of related books */
 export type Series = {
   __typename?: 'Series';
+  bookCount: Scalars['Int'];
   /** A list of books released in this series */
   books?: Maybe<Array<Book>>;
   id: Scalars['ID'];
   name: Scalars['String'];
   publisher?: Maybe<Publisher>;
+  publisherName?: Maybe<Scalars['String']>;
 };
 
 
@@ -325,6 +334,21 @@ export type SeriesEdge = {
   /** The item at the end of the edge. */
   node?: Maybe<Series>;
 };
+
+/** Attributes for defining the sorting of the query results */
+export type SortAttributes = {
+  /** name of the field */
+  field: Scalars['String'];
+  /** direction of the sort */
+  direction: SortDirectionEnum;
+};
+
+export enum SortDirectionEnum {
+  /** Ascending */
+  Asc = 'ASC',
+  /** Descending */
+  Desc = 'DESC'
+}
 
 /** A website user */
 export type User = {
@@ -381,59 +405,9 @@ export type RegisterMutation = (
   )> }
 );
 
-export type CreateBookMutationVariables = Exact<{
-  attributes: BookAttributes;
+export type BooksQueryVariables = Exact<{
+  last?: Maybe<Scalars['Int']>;
 }>;
-
-
-export type CreateBookMutation = (
-  { __typename?: 'Mutation' }
-  & { createBook?: Maybe<(
-    { __typename?: 'CreateBookPayload' }
-    & { book?: Maybe<(
-      { __typename?: 'Book' }
-      & BookDetailsFragment
-    )>, errors: Array<(
-      { __typename?: 'UserError' }
-      & Pick<UserError, 'message'>
-    )> }
-  )> }
-);
-
-export type EditBookMutationVariables = Exact<{
-  id: Scalars['ID'];
-  attributes: BookAttributes;
-}>;
-
-
-export type EditBookMutation = (
-  { __typename?: 'Mutation' }
-  & { editBook?: Maybe<(
-    { __typename?: 'EditBookPayload' }
-    & { book?: Maybe<(
-      { __typename?: 'Book' }
-      & BookDetailsFragment
-    )>, errors: Array<(
-      { __typename?: 'UserError' }
-      & Pick<UserError, 'message'>
-    )> }
-  )> }
-);
-
-export type BookQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type BookQuery = (
-  { __typename?: 'Query' }
-  & { book: (
-    { __typename?: 'Book' }
-    & BookDetailsFragment
-  ) }
-);
-
-export type BooksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type BooksQuery = (
@@ -447,177 +421,61 @@ export type BooksQuery = (
   ) }
 );
 
-export type BookDetailsFragment = (
-  { __typename?: 'Book' }
-  & Pick<Book, 'id' | 'alternateTitle' | 'displayName' | 'format' | 'issue' | 'pageCount' | 'price' | 'publicationDate' | 'publisherName' | 'seriesName' | 'summary' | 'createdAt' | 'updatedAt'>
-  & { credits?: Maybe<Array<(
-    { __typename?: 'Credit' }
-    & Pick<Credit, 'id' | 'role'>
-    & { creator: (
-      { __typename?: 'Creator' }
-      & Pick<Creator, 'id' | 'firstName' | 'lastName'>
-    ) }
-  )>>, publisher?: Maybe<(
-    { __typename?: 'Publisher' }
-    & Pick<Publisher, 'id'>
-  )>, series?: Maybe<(
-    { __typename?: 'Series' }
-    & Pick<Series, 'id'>
-  )> }
-);
-
-export type CreatePublisherMutationVariables = Exact<{
-  name: Scalars['String'];
+export type RankedBookListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  field: Scalars['String'];
+  direction: SortDirectionEnum;
 }>;
 
 
-export type CreatePublisherMutation = (
-  { __typename?: 'Mutation' }
-  & { createPublisher?: Maybe<(
-    { __typename?: 'CreatePublisherPayload' }
-    & { publisher?: Maybe<(
-      { __typename?: 'Publisher' }
-      & Pick<Publisher, 'id' | 'name'>
-    )>, errors: Array<(
-      { __typename?: 'UserError' }
-      & Pick<UserError, 'message'>
-    )> }
-  )> }
-);
-
-export type PublisherQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type PublisherQuery = (
+export type RankedBookListQuery = (
   { __typename?: 'Query' }
-  & { publisher: (
-    { __typename?: 'Publisher' }
-    & Pick<Publisher, 'id' | 'name'>
-    & { series: Array<(
-      { __typename?: 'Series' }
-      & Pick<Series, 'id' | 'name'>
-    )> }
+  & { books: (
+    { __typename?: 'BookConnection' }
+    & { nodes?: Maybe<Array<Maybe<(
+      { __typename?: 'Book' }
+      & Pick<Book, 'id' | 'displayName' | 'publicationDate' | 'publisherName'>
+    )>>> }
   ) }
 );
 
-export type PublisherListQueryVariables = Exact<{ [key: string]: never; }>;
+export type RankedPublisherListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  field: Scalars['String'];
+  direction: SortDirectionEnum;
+}>;
 
 
-export type PublisherListQuery = (
+export type RankedPublisherListQuery = (
   { __typename?: 'Query' }
   & { publishers: (
     { __typename?: 'PublisherConnection' }
     & { nodes?: Maybe<Array<Maybe<(
       { __typename?: 'Publisher' }
-      & Pick<Publisher, 'id' | 'name'>
+      & Pick<Publisher, 'id' | 'name' | 'seriesCount'>
     )>>> }
   ) }
 );
 
-export type CreateSeriesMutationVariables = Exact<{
-  name: Scalars['String'];
-  publisherId: Scalars['ID'];
-}>;
-
-
-export type CreateSeriesMutation = (
-  { __typename?: 'Mutation' }
-  & { createSeries?: Maybe<(
-    { __typename?: 'Series' }
-    & Pick<Series, 'id' | 'name'>
-  )> }
-);
-
-export type SeriesQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type SeriesQuery = (
-  { __typename?: 'Query' }
-  & { series: (
-    { __typename?: 'Series' }
-    & Pick<Series, 'id' | 'name'>
-    & { books?: Maybe<Array<(
-      { __typename?: 'Book' }
-      & BookDetailsFragment
-    )>> }
-  ) }
-);
-
-export type SeriesOverviewListQueryVariables = Exact<{
+export type RankedSeriesListQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
-  bookLimit?: Maybe<Scalars['Int']>;
+  field: Scalars['String'];
+  direction: SortDirectionEnum;
 }>;
 
 
-export type SeriesOverviewListQuery = (
+export type RankedSeriesListQuery = (
   { __typename?: 'Query' }
   & { seriesList: (
     { __typename?: 'SeriesConnection' }
     & { nodes?: Maybe<Array<Maybe<(
       { __typename?: 'Series' }
-      & Pick<Series, 'id' | 'name'>
-      & { books?: Maybe<Array<(
-        { __typename?: 'Book' }
-        & Pick<Book, 'id' | 'displayName'>
-      )>> }
+      & Pick<Series, 'id' | 'name' | 'publisherName' | 'bookCount'>
     )>>> }
   ) }
 );
 
-export type SeriesListQueryVariables = Exact<{ [key: string]: never; }>;
 
-
-export type SeriesListQuery = (
-  { __typename?: 'Query' }
-  & { seriesList: (
-    { __typename?: 'SeriesConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Series' }
-      & Pick<Series, 'id' | 'name'>
-      & { books?: Maybe<Array<(
-        { __typename?: 'Book' }
-        & BookDetailsFragment
-      )>> }
-    )>>> }
-  ) }
-);
-
-export const BookDetailsFragmentDoc = gql`
-    fragment BookDetails on Book {
-  id
-  alternateTitle
-  displayName
-  format
-  issue
-  pageCount
-  price
-  publicationDate
-  publisherName
-  seriesName
-  summary
-  credits {
-    id
-    role
-    creator {
-      id
-      firstName
-      lastName
-    }
-  }
-  publisher {
-    id
-  }
-  series {
-    id
-  }
-  createdAt
-  updatedAt
-}
-    `;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -694,121 +552,9 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
-export const CreateBookDocument = gql`
-    mutation CreateBook($attributes: BookAttributes!) {
-  createBook(attributes: $attributes) {
-    book {
-      ...BookDetails
-    }
-    errors {
-      message
-    }
-  }
-}
-    ${BookDetailsFragmentDoc}`;
-export type CreateBookMutationFn = Apollo.MutationFunction<CreateBookMutation, CreateBookMutationVariables>;
-
-/**
- * __useCreateBookMutation__
- *
- * To run a mutation, you first call `useCreateBookMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateBookMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createBookMutation, { data, loading, error }] = useCreateBookMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateBookMutation(baseOptions?: Apollo.MutationHookOptions<CreateBookMutation, CreateBookMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateBookMutation, CreateBookMutationVariables>(CreateBookDocument, options);
-      }
-export type CreateBookMutationHookResult = ReturnType<typeof useCreateBookMutation>;
-export type CreateBookMutationResult = Apollo.MutationResult<CreateBookMutation>;
-export type CreateBookMutationOptions = Apollo.BaseMutationOptions<CreateBookMutation, CreateBookMutationVariables>;
-export const EditBookDocument = gql`
-    mutation EditBook($id: ID!, $attributes: BookAttributes!) {
-  editBook(id: $id, attributes: $attributes) {
-    book {
-      ...BookDetails
-    }
-    errors {
-      message
-    }
-  }
-}
-    ${BookDetailsFragmentDoc}`;
-export type EditBookMutationFn = Apollo.MutationFunction<EditBookMutation, EditBookMutationVariables>;
-
-/**
- * __useEditBookMutation__
- *
- * To run a mutation, you first call `useEditBookMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useEditBookMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [editBookMutation, { data, loading, error }] = useEditBookMutation({
- *   variables: {
- *      id: // value for 'id'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useEditBookMutation(baseOptions?: Apollo.MutationHookOptions<EditBookMutation, EditBookMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<EditBookMutation, EditBookMutationVariables>(EditBookDocument, options);
-      }
-export type EditBookMutationHookResult = ReturnType<typeof useEditBookMutation>;
-export type EditBookMutationResult = Apollo.MutationResult<EditBookMutation>;
-export type EditBookMutationOptions = Apollo.BaseMutationOptions<EditBookMutation, EditBookMutationVariables>;
-export const BookDocument = gql`
-    query Book($id: ID!) {
-  book(id: $id) {
-    ...BookDetails
-  }
-}
-    ${BookDetailsFragmentDoc}`;
-
-/**
- * __useBookQuery__
- *
- * To run a query within a React component, call `useBookQuery` and pass it any options that fit your needs.
- * When your component renders, `useBookQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useBookQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useBookQuery(baseOptions: Apollo.QueryHookOptions<BookQuery, BookQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<BookQuery, BookQueryVariables>(BookDocument, options);
-      }
-export function useBookLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BookQuery, BookQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<BookQuery, BookQueryVariables>(BookDocument, options);
-        }
-export type BookQueryHookResult = ReturnType<typeof useBookQuery>;
-export type BookLazyQueryHookResult = ReturnType<typeof useBookLazyQuery>;
-export type BookQueryResult = Apollo.QueryResult<BookQuery, BookQueryVariables>;
 export const BooksDocument = gql`
-    query Books {
-  books {
+    query Books($last: Int) {
+  books(last: $last) {
     nodes {
       id
       publisherName
@@ -835,6 +581,7 @@ export const BooksDocument = gql`
  * @example
  * const { data, loading, error } = useBooksQuery({
  *   variables: {
+ *      last: // value for 'last'
  *   },
  * });
  */
@@ -849,276 +596,128 @@ export function useBooksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Book
 export type BooksQueryHookResult = ReturnType<typeof useBooksQuery>;
 export type BooksLazyQueryHookResult = ReturnType<typeof useBooksLazyQuery>;
 export type BooksQueryResult = Apollo.QueryResult<BooksQuery, BooksQueryVariables>;
-export const CreatePublisherDocument = gql`
-    mutation CreatePublisher($name: String!) {
-  createPublisher(name: $name) {
-    publisher {
-      id
-      name
-    }
-    errors {
-      message
-    }
-  }
-}
-    `;
-export type CreatePublisherMutationFn = Apollo.MutationFunction<CreatePublisherMutation, CreatePublisherMutationVariables>;
-
-/**
- * __useCreatePublisherMutation__
- *
- * To run a mutation, you first call `useCreatePublisherMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreatePublisherMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createPublisherMutation, { data, loading, error }] = useCreatePublisherMutation({
- *   variables: {
- *      name: // value for 'name'
- *   },
- * });
- */
-export function useCreatePublisherMutation(baseOptions?: Apollo.MutationHookOptions<CreatePublisherMutation, CreatePublisherMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreatePublisherMutation, CreatePublisherMutationVariables>(CreatePublisherDocument, options);
-      }
-export type CreatePublisherMutationHookResult = ReturnType<typeof useCreatePublisherMutation>;
-export type CreatePublisherMutationResult = Apollo.MutationResult<CreatePublisherMutation>;
-export type CreatePublisherMutationOptions = Apollo.BaseMutationOptions<CreatePublisherMutation, CreatePublisherMutationVariables>;
-export const PublisherDocument = gql`
-    query Publisher($id: ID!) {
-  publisher(id: $id) {
-    id
-    name
-    series {
-      id
-      name
-    }
-  }
-}
-    `;
-
-/**
- * __usePublisherQuery__
- *
- * To run a query within a React component, call `usePublisherQuery` and pass it any options that fit your needs.
- * When your component renders, `usePublisherQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePublisherQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function usePublisherQuery(baseOptions: Apollo.QueryHookOptions<PublisherQuery, PublisherQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PublisherQuery, PublisherQueryVariables>(PublisherDocument, options);
-      }
-export function usePublisherLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublisherQuery, PublisherQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PublisherQuery, PublisherQueryVariables>(PublisherDocument, options);
-        }
-export type PublisherQueryHookResult = ReturnType<typeof usePublisherQuery>;
-export type PublisherLazyQueryHookResult = ReturnType<typeof usePublisherLazyQuery>;
-export type PublisherQueryResult = Apollo.QueryResult<PublisherQuery, PublisherQueryVariables>;
-export const PublisherListDocument = gql`
-    query PublisherList {
-  publishers {
+export const RankedBookListDocument = gql`
+    query RankedBookList($limit: Int, $field: String!, $direction: SortDirectionEnum!) {
+  books(limit: $limit, sortBy: {field: $field, direction: $direction}) {
     nodes {
       id
-      name
+      displayName
+      publicationDate
+      publisherName
     }
   }
 }
     `;
 
 /**
- * __usePublisherListQuery__
+ * __useRankedBookListQuery__
  *
- * To run a query within a React component, call `usePublisherListQuery` and pass it any options that fit your needs.
- * When your component renders, `usePublisherListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useRankedBookListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRankedBookListQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePublisherListQuery({
- *   variables: {
- *   },
- * });
- */
-export function usePublisherListQuery(baseOptions?: Apollo.QueryHookOptions<PublisherListQuery, PublisherListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PublisherListQuery, PublisherListQueryVariables>(PublisherListDocument, options);
-      }
-export function usePublisherListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublisherListQuery, PublisherListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PublisherListQuery, PublisherListQueryVariables>(PublisherListDocument, options);
-        }
-export type PublisherListQueryHookResult = ReturnType<typeof usePublisherListQuery>;
-export type PublisherListLazyQueryHookResult = ReturnType<typeof usePublisherListLazyQuery>;
-export type PublisherListQueryResult = Apollo.QueryResult<PublisherListQuery, PublisherListQueryVariables>;
-export const CreateSeriesDocument = gql`
-    mutation CreateSeries($name: String!, $publisherId: ID!) {
-  createSeries(name: $name, publisherId: $publisherId) {
-    id
-    name
-  }
-}
-    `;
-export type CreateSeriesMutationFn = Apollo.MutationFunction<CreateSeriesMutation, CreateSeriesMutationVariables>;
-
-/**
- * __useCreateSeriesMutation__
- *
- * To run a mutation, you first call `useCreateSeriesMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateSeriesMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createSeriesMutation, { data, loading, error }] = useCreateSeriesMutation({
- *   variables: {
- *      name: // value for 'name'
- *      publisherId: // value for 'publisherId'
- *   },
- * });
- */
-export function useCreateSeriesMutation(baseOptions?: Apollo.MutationHookOptions<CreateSeriesMutation, CreateSeriesMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateSeriesMutation, CreateSeriesMutationVariables>(CreateSeriesDocument, options);
-      }
-export type CreateSeriesMutationHookResult = ReturnType<typeof useCreateSeriesMutation>;
-export type CreateSeriesMutationResult = Apollo.MutationResult<CreateSeriesMutation>;
-export type CreateSeriesMutationOptions = Apollo.BaseMutationOptions<CreateSeriesMutation, CreateSeriesMutationVariables>;
-export const SeriesDocument = gql`
-    query Series($id: ID!) {
-  series(id: $id) {
-    id
-    name
-    books {
-      ...BookDetails
-    }
-  }
-}
-    ${BookDetailsFragmentDoc}`;
-
-/**
- * __useSeriesQuery__
- *
- * To run a query within a React component, call `useSeriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useSeriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSeriesQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useSeriesQuery(baseOptions: Apollo.QueryHookOptions<SeriesQuery, SeriesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SeriesQuery, SeriesQueryVariables>(SeriesDocument, options);
-      }
-export function useSeriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeriesQuery, SeriesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SeriesQuery, SeriesQueryVariables>(SeriesDocument, options);
-        }
-export type SeriesQueryHookResult = ReturnType<typeof useSeriesQuery>;
-export type SeriesLazyQueryHookResult = ReturnType<typeof useSeriesLazyQuery>;
-export type SeriesQueryResult = Apollo.QueryResult<SeriesQuery, SeriesQueryVariables>;
-export const SeriesOverviewListDocument = gql`
-    query SeriesOverviewList($limit: Int, $bookLimit: Int) {
-  seriesList(limit: $limit) {
-    nodes {
-      id
-      name
-      books(limit: $bookLimit) {
-        id
-        displayName
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useSeriesOverviewListQuery__
- *
- * To run a query within a React component, call `useSeriesOverviewListQuery` and pass it any options that fit your needs.
- * When your component renders, `useSeriesOverviewListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSeriesOverviewListQuery({
+ * const { data, loading, error } = useRankedBookListQuery({
  *   variables: {
  *      limit: // value for 'limit'
- *      bookLimit: // value for 'bookLimit'
+ *      field: // value for 'field'
+ *      direction: // value for 'direction'
  *   },
  * });
  */
-export function useSeriesOverviewListQuery(baseOptions?: Apollo.QueryHookOptions<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>) {
+export function useRankedBookListQuery(baseOptions: Apollo.QueryHookOptions<RankedBookListQuery, RankedBookListQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>(SeriesOverviewListDocument, options);
+        return Apollo.useQuery<RankedBookListQuery, RankedBookListQueryVariables>(RankedBookListDocument, options);
       }
-export function useSeriesOverviewListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>) {
+export function useRankedBookListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RankedBookListQuery, RankedBookListQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>(SeriesOverviewListDocument, options);
+          return Apollo.useLazyQuery<RankedBookListQuery, RankedBookListQueryVariables>(RankedBookListDocument, options);
         }
-export type SeriesOverviewListQueryHookResult = ReturnType<typeof useSeriesOverviewListQuery>;
-export type SeriesOverviewListLazyQueryHookResult = ReturnType<typeof useSeriesOverviewListLazyQuery>;
-export type SeriesOverviewListQueryResult = Apollo.QueryResult<SeriesOverviewListQuery, SeriesOverviewListQueryVariables>;
-export const SeriesListDocument = gql`
-    query SeriesList {
-  seriesList {
+export type RankedBookListQueryHookResult = ReturnType<typeof useRankedBookListQuery>;
+export type RankedBookListLazyQueryHookResult = ReturnType<typeof useRankedBookListLazyQuery>;
+export type RankedBookListQueryResult = Apollo.QueryResult<RankedBookListQuery, RankedBookListQueryVariables>;
+export const RankedPublisherListDocument = gql`
+    query RankedPublisherList($limit: Int, $field: String!, $direction: SortDirectionEnum!) {
+  publishers(limit: $limit, sortBy: {field: $field, direction: $direction}) {
     nodes {
       id
       name
-      books {
-        ...BookDetails
-      }
+      seriesCount
     }
   }
 }
-    ${BookDetailsFragmentDoc}`;
+    `;
 
 /**
- * __useSeriesListQuery__
+ * __useRankedPublisherListQuery__
  *
- * To run a query within a React component, call `useSeriesListQuery` and pass it any options that fit your needs.
- * When your component renders, `useSeriesListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useRankedPublisherListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRankedPublisherListQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useSeriesListQuery({
+ * const { data, loading, error } = useRankedPublisherListQuery({
  *   variables: {
+ *      limit: // value for 'limit'
+ *      field: // value for 'field'
+ *      direction: // value for 'direction'
  *   },
  * });
  */
-export function useSeriesListQuery(baseOptions?: Apollo.QueryHookOptions<SeriesListQuery, SeriesListQueryVariables>) {
+export function useRankedPublisherListQuery(baseOptions: Apollo.QueryHookOptions<RankedPublisherListQuery, RankedPublisherListQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SeriesListQuery, SeriesListQueryVariables>(SeriesListDocument, options);
+        return Apollo.useQuery<RankedPublisherListQuery, RankedPublisherListQueryVariables>(RankedPublisherListDocument, options);
       }
-export function useSeriesListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeriesListQuery, SeriesListQueryVariables>) {
+export function useRankedPublisherListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RankedPublisherListQuery, RankedPublisherListQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SeriesListQuery, SeriesListQueryVariables>(SeriesListDocument, options);
+          return Apollo.useLazyQuery<RankedPublisherListQuery, RankedPublisherListQueryVariables>(RankedPublisherListDocument, options);
         }
-export type SeriesListQueryHookResult = ReturnType<typeof useSeriesListQuery>;
-export type SeriesListLazyQueryHookResult = ReturnType<typeof useSeriesListLazyQuery>;
-export type SeriesListQueryResult = Apollo.QueryResult<SeriesListQuery, SeriesListQueryVariables>;
+export type RankedPublisherListQueryHookResult = ReturnType<typeof useRankedPublisherListQuery>;
+export type RankedPublisherListLazyQueryHookResult = ReturnType<typeof useRankedPublisherListLazyQuery>;
+export type RankedPublisherListQueryResult = Apollo.QueryResult<RankedPublisherListQuery, RankedPublisherListQueryVariables>;
+export const RankedSeriesListDocument = gql`
+    query RankedSeriesList($limit: Int, $field: String!, $direction: SortDirectionEnum!) {
+  seriesList(limit: $limit, sortBy: {field: $field, direction: $direction}) {
+    nodes {
+      id
+      name
+      publisherName
+      bookCount
+    }
+  }
+}
+    `;
+
+/**
+ * __useRankedSeriesListQuery__
+ *
+ * To run a query within a React component, call `useRankedSeriesListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRankedSeriesListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRankedSeriesListQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      field: // value for 'field'
+ *      direction: // value for 'direction'
+ *   },
+ * });
+ */
+export function useRankedSeriesListQuery(baseOptions: Apollo.QueryHookOptions<RankedSeriesListQuery, RankedSeriesListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RankedSeriesListQuery, RankedSeriesListQueryVariables>(RankedSeriesListDocument, options);
+      }
+export function useRankedSeriesListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RankedSeriesListQuery, RankedSeriesListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RankedSeriesListQuery, RankedSeriesListQueryVariables>(RankedSeriesListDocument, options);
+        }
+export type RankedSeriesListQueryHookResult = ReturnType<typeof useRankedSeriesListQuery>;
+export type RankedSeriesListLazyQueryHookResult = ReturnType<typeof useRankedSeriesListLazyQuery>;
+export type RankedSeriesListQueryResult = Apollo.QueryResult<RankedSeriesListQuery, RankedSeriesListQueryVariables>;

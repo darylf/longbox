@@ -1,5 +1,0 @@
-query Book($id: ID!) {
-  book(id: $id) {
-    ...BookDetails
-  }
-}

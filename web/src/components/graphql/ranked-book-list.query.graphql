@@ -1,0 +1,14 @@
+query RankedBookList(
+  $limit: Int
+  $field: String!
+  $direction: SortDirectionEnum!
+) {
+  books(limit: $limit, sortBy: { field: $field, direction: $direction }) {
+    nodes {
+      id
+      displayName
+      publicationDate
+      publisherName
+    }
+  }
+}
