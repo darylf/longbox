@@ -34,6 +34,13 @@ module Resolvers
         expect(data[1]['displayName']).to start_with('Bravo For Adventure')
         expect(data[2]['displayName']).to start_with('Alpha Flight')
       end
+
+      it 'raises an error when field doesn\'t exist on the object' do
+        expect do
+          post '/graphql', params: { query: sort_query(sort_by: { field: "bad_field", direction: "DESC" }) }
+        end.to raise_error ArgumentError, "Field 'bad_field' is not supported on type 'Book'"
+      end
+
       def sort_query(sort_by:)
         <<~GQL
           query RankedBookList
