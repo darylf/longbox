@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, { ReactElement } from "react";
 
-export default function BrowseCollection() {
+export default function BrowseCollection(): ReactElement {
   return (
     <>
       <h1>Browse Collection</h1>

@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, { ReactElement } from "react";
 
-export default function Trending() {
+export default function Trending(): ReactElement {
   return (
     <>
       <h1>Trending</h1>

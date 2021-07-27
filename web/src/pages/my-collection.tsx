@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, { ReactElement } from "react";
 
-export default function MyCollection() {
+export default function MyCollection(): ReactElement {
   return (
     <>
       <h1>My Collection</h1>

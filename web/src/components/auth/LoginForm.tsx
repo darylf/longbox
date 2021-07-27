@@ -1,7 +1,12 @@
-import * as React from 'react';
-import { ChangeEvent, Dispatch, FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import useAuthenticationToken from './useAuthenticationToken';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  ReactElement,
+  useState,
+} from "react";
+import { Link } from "react-router-dom";
+import useAuthenticationToken from "./useAuthenticationToken";
 
 type StatesIndex = {
   [key: string]: Dispatch<any>;
@@ -10,17 +15,17 @@ type StatesIndex = {
 interface GreetingProps {
   name: string;
 }
-function Greeting({ name }: GreetingProps): JSX.Element {
+function Greeting({ name }: GreetingProps): ReactElement {
   return <div>welcome, {name}</div>;
 }
 
-function LoginForm(): JSX.Element {
+function LoginForm(): ReactElement {
   const { token, setToken } = useAuthenticationToken();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const states: StatesIndex = {
     email: setEmail,
-    password: setPassword
+    password: setPassword,
   };
 
   function handleSubmit(e: FormEvent) {
@@ -54,7 +59,7 @@ function LoginForm(): JSX.Element {
             <input
               type="email"
               name="email"
-              onChange={(e) => onChange('email', e)}
+              onChange={(e) => onChange("email", e)}
               required
             />
           </div>
@@ -63,7 +68,7 @@ function LoginForm(): JSX.Element {
             <input
               type="password"
               name="password"
-              onChange={(e) => onChange('password', e)}
+              onChange={(e) => onChange("password", e)}
               required
             />
           </div>

@@ -1,4 +1,3 @@
-import React, { ReactNode } from "react";
 import {
   IconButton,
   Avatar,
@@ -21,6 +20,8 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import React, { ReactElement, ReactNode, ReactText } from "react";
+import { IconType } from "react-icons";
 import {
   FiHome,
   FiTrendingUp,
@@ -31,8 +32,6 @@ import {
   FiBell,
   FiChevronDown,
 } from "react-icons/fi";
-import { IconType } from "react-icons";
-import { ReactText } from "react";
 import { Link } from "react-router-dom";
 
 interface LinkItemProps {
@@ -52,7 +51,7 @@ export default function SidebarWithHeader({
   children,
 }: {
   children: ReactNode;
-}) {
+}): ReactElement {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue("white", "gray.800")}>

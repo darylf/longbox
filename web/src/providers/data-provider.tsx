@@ -6,11 +6,11 @@ import {
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import * as React from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { AUTH_TOKEN } from "../components/auth/useAuthenticationToken";
 
 interface Props {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 const httpLink = new HttpLink({
@@ -35,7 +35,7 @@ const client = new ApolloClient({
   link: concat(authMiddleware, httpLink),
 });
 
-function DataProvider({ children }: Props): JSX.Element {
+function DataProvider({ children }: Props): ReactElement {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }
 

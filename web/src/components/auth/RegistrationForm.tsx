@@ -1,13 +1,18 @@
-import * as React from 'react';
-import { ChangeEvent, Dispatch, FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useRegisterMutation } from '../../hooks/graphql';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  ReactElement,
+  useState,
+} from "react";
+import { Link } from "react-router-dom";
+import { useRegisterMutation } from "../../hooks/graphql";
 
 type StatesIndex = {
   [key: string]: Dispatch<any>;
 };
 
-function RegistrationForm(): JSX.Element {
+function RegistrationForm(): ReactElement {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [name, setName] = useState<string>();
@@ -15,13 +20,17 @@ function RegistrationForm(): JSX.Element {
   const states: StatesIndex = {
     email: setEmail,
     password: setPassword,
-    name: setName
+    name: setName,
   };
 
   function submitForm(e: FormEvent) {
     e.preventDefault();
     register({
-      variables: { email: `${email}`, password: `${password}`, name: `${name}` }
+      variables: {
+        email: `${email}`,
+        password: `${password}`,
+        name: `${name}`,
+      },
     });
   }
 
@@ -43,7 +52,7 @@ function RegistrationForm(): JSX.Element {
           <input
             type="email"
             name="email"
-            onChange={(e) => onChange('email', e)}
+            onChange={(e) => onChange("email", e)}
             required
           />
         </div>
@@ -52,7 +61,7 @@ function RegistrationForm(): JSX.Element {
           <input
             type="password"
             name="password"
-            onChange={(e) => onChange('password', e)}
+            onChange={(e) => onChange("password", e)}
             required
           />
         </div>
@@ -61,7 +70,7 @@ function RegistrationForm(): JSX.Element {
           <input
             type="text"
             name="name"
-            onChange={(e) => onChange('name', e)}
+            onChange={(e) => onChange("name", e)}
             required
           />
         </div>

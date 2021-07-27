@@ -1,22 +1,25 @@
-import * as React from "react";
 import { Box, Heading, ListItem, OrderedList } from "@chakra-ui/react";
+import React, { ReactElement } from "react";
 
-interface PanelProps {
+interface PanelProps<T> {
   headerText: string;
-  items: Array<string>;
+  items: Array<T>;
+  render: (item: T) => ReactElement;
 }
 
-const Panel = ({ headerText, items }: PanelProps): JSX.Element => (
-  <Box border="1px solid" borderColor="gray.300" borderRadius="md" p="7">
-    <Heading as="h1" size="md">
-      {headerText}
-    </Heading>
-    <OrderedList>
-      {items.map((item) => (
-        <ListItem>{item}</ListItem>
-      ))}
-    </OrderedList>
-  </Box>
-);
+function Panel<T>({ headerText, items, render }: PanelProps<T>): ReactElement {
+  return (
+    <Box border="1px solid" borderColor="gray.300" borderRadius="md" p="7">
+      <Heading as="h1" size="md">
+        {headerText}
+      </Heading>
+      <OrderedList>
+        {items.map((item, key) => (
+          <ListItem key={key}>{render(item)}</ListItem>
+        ))}
+      </OrderedList>
+    </Box>
+  );
+}
 
 export default Panel;

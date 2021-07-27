@@ -1,12 +1,12 @@
-import * as React from "react";
 import { Table, Tbody, Th, Thead, Tr, Td } from "@chakra-ui/react";
+import React, { ReactElement } from "react";
 import { Book } from "../hooks/graphql";
 
 interface BookTableProps {
   books: Array<Book>;
 }
 
-const BookTable = ({ books }: BookTableProps) => (
+const BookTable = ({ books }: BookTableProps): ReactElement => (
   <Table>
     <Thead>
       <Tr>
@@ -19,7 +19,7 @@ const BookTable = ({ books }: BookTableProps) => (
     </Thead>
     <Tbody>
       {books.map((book) => (
-        <Tr>
+        <Tr key={book.id}>
           <Td>{book.publisherName}</Td>
           <Td>{book.seriesName}</Td>
           <Td>{book.issue}</Td>
