@@ -14,6 +14,7 @@ const App = (): ReactElement => {
             <Route path="/explore" component={Pages.Explore} />
             <Route path="/my-collection" component={Pages.MyCollection} />
             <Route path="/trending" component={Pages.Trending} />
+            <Route path="/login" component={Pages.Login} />
             <Route exact path="/" component={Pages.Home} />
           </Switch>
         </Layout>

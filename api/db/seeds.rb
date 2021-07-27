@@ -28,6 +28,11 @@ if CLEAN_ALL_RECORDS
   User.destroy_all
 end
 
+User.find_or_create_by(email: 'daryl@example.com') do |user|
+  user.name = 'Daryl'
+  user.password = 'password'
+end
+
 Dir[Rails.root.join('db', 'seeds', '*.rb')].sort.each do |file|
   require file
 end

@@ -60,14 +60,14 @@ export default function HomePage(): ReactElement {
 
   const latestBooks = convertToArray<Book>(latestBooksResult.data?.books.nodes);
 
-  const bookQueryResult = useBooksQuery();
+  const { data, loading, error } = useBooksQuery();
   let bookTable = <></>;
-  if (bookQueryResult.loading) {
+  if (loading) {
     bookTable = <>Loading...</>;
-  } else if (bookQueryResult.error) {
+  } else if (error) {
     bookTable = <>An error has occured</>;
   } else {
-    const books = convertToArray<Book>(bookQueryResult.data?.books.nodes);
+    const books = convertToArray<Book>(data?.books.nodes);
     bookTable = <BookTable books={books} />;
   }
 
