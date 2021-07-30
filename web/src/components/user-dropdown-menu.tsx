@@ -15,7 +15,11 @@ import {
 import React, { ReactElement } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useLoginState, useLogout } from "../hooks/use-authentication";
+import {
+  useLoginState,
+  useLogout,
+  UserAttributes,
+} from "../hooks/use-authentication";
 
 export function LoginControl(): ReactElement {
   return (
@@ -27,10 +31,14 @@ export function LoginControl(): ReactElement {
   );
 }
 
-export function UserDropDownMenu(): ReactElement {
+interface UserDropDownMenuProps {
+  user: UserAttributes | null;
+}
+export function UserDropDownMenu({
+  user,
+}: UserDropDownMenuProps): ReactElement {
   const logout = useLogout();
-  const loginState = useLoginState();
-  const avatarUrl = loginState.user?.avatar;
+  const avatarUrl = user?.avatar;
   return (
     <Flex alignItems="center">
       <Menu>
@@ -43,7 +51,7 @@ export function UserDropDownMenu(): ReactElement {
               spacing="1px"
               ml="2"
             >
-              <Text fontSize="sm">{loginState.user?.name}</Text>
+              <Text fontSize="sm">{user?.name}</Text>
               <Text fontSize="xs" color="gray.600">
                 Admin
               </Text>
@@ -73,5 +81,5 @@ export function UserActions(): ReactElement {
   const loginState = useLoginState();
   if (!loginState.authenticated) return <LoginControl />;
 
-  return <UserDropDownMenu />;
+  return <UserDropDownMenu user={loginState.user} />;
 }

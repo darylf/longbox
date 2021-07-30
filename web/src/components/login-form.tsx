@@ -9,6 +9,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Spinner,
 } from "@chakra-ui/react";
 import React, {
   ReactElement,
@@ -17,7 +18,7 @@ import React, {
   FormEvent,
   useState,
 } from "react";
-import { useLogin } from "../hooks/use-authentication";
+import { useLogin, useLoginState } from "../hooks/use-authentication";
 
 export function ErrorMessage({ message }: { message: string }): ReactElement {
   return (
@@ -32,6 +33,7 @@ export function ErrorMessage({ message }: { message: string }): ReactElement {
 
 export function LoginForm(): ReactElement {
   const login = useLogin();
+  const { loading } = useLoginState();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
@@ -82,8 +84,14 @@ export function LoginForm(): ReactElement {
                 ref={passwordRef}
               />
             </FormControl>
-            <Button type="submit" variant="outline" width="full" mt={4}>
-              Sign In
+            <Button
+              type="submit"
+              variant="outline"
+              width="full"
+              mt={4}
+              disabled={loading}
+            >
+              {loading ? <Spinner size="sm" /> : "Sign In"}
             </Button>
           </form>
         </Box>
