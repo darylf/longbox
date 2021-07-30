@@ -53,7 +53,7 @@ export function UserDropDownMenu({
             >
               <Text fontSize="sm">{user?.name}</Text>
               <Text fontSize="xs" color="gray.600">
-                Admin
+                User Type
               </Text>
             </VStack>
             <Box display={{ base: "none", md: "flex" }}>
