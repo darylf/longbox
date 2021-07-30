@@ -30,16 +30,7 @@ module.exports = {
     }
   },
   rules: {
-    semi: 'error',
-    'import/order': [
-      'error',
-      {
-        groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
-        alphabetize: {
-          order: 'asc'
-        }
-      }
-    ]
+    semi: 'error'
   },
-  ignorePatterns: ['**/hooks/graphql.tsx']
+  ignorePatterns: ['**/hooks/use-graphql.tsx']
 };

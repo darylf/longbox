@@ -2,12 +2,11 @@ import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
-  concat,
   HttpLink,
   InMemoryCache,
+  concat,
 } from "@apollo/client";
 import React, { ReactElement, ReactNode } from "react";
-import { AUTH_TOKEN } from "../components/auth/useAuthenticationToken";
 
 interface Props {
   children?: ReactNode;
@@ -17,7 +16,7 @@ const httpLink = new HttpLink({
   uri: "http://localhost/backend/graphql",
 });
 
-const token = sessionStorage.getItem(AUTH_TOKEN);
+const token = sessionStorage.getItem("token");
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   if (token) {

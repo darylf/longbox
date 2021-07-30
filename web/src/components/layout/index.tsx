@@ -1,43 +1,45 @@
 import {
-  IconButton,
   Box,
+  BoxProps,
   CloseButton,
-  Flex,
-  HStack,
-  Icon,
-  useColorModeValue,
   Drawer,
   DrawerContent,
-  Text,
-  useDisclosure,
-  BoxProps,
+  Flex,
   FlexProps,
+  HStack,
+  Icon,
+  IconButton,
+  Text,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { ReactElement, ReactNode, ReactText } from "react";
 import { IconType } from "react-icons";
 import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
   FiBell,
+  FiCompass,
+  FiHome,
+  FiMenu,
+  FiSettings,
+  FiStar,
+  FiTrendingUp,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { LoginControl } from "../user-dropdown-menu";
+import { useLoginState } from "../../hooks/use-authentication";
+import { UserActions } from "../user-dropdown-menu";
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
   url: string;
+  adminOnliy?: boolean;
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, url: "/" },
   { name: "Trending", icon: FiTrendingUp, url: "/trending" },
   { name: "Explore", icon: FiCompass, url: "/series" },
   { name: "Favourites", icon: FiStar, url: "/my-collection" },
-  { name: "Settings", icon: FiSettings, url: "/admin" },
+  { name: "Settings", icon: FiSettings, url: "/admin", adminOnliy: true },
 ];
 
 export default function SidebarWithHeader({
@@ -79,6 +81,7 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const loginState = useLoginState();
   return (
     <Box
       transition="3s ease"
@@ -96,11 +99,14 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} url={link.url}>
-          {link.name}
-        </NavItem>
-      ))}
+      {LinkItems.map((link) => {
+        if (link.adminOnliy && !loginState.authenticated) return null;
+        return (
+          <NavItem key={link.name} icon={link.icon} url={link.url}>
+            {link.name}
+          </NavItem>
+        );
+      })}
     </Box>
   );
 };
@@ -182,7 +188,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           aria-label="open menu"
           icon={<FiBell />}
         />
-        <LoginControl />
+        <UserActions />
       </HStack>
     </Flex>
   );

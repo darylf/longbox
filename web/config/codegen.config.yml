@@ -2,7 +2,7 @@ overwrite: true
 schema: 'http://api:3000/graphql'
 documents: 'src/**/*.graphql'
 generates:
-  src/hooks/graphql.tsx:
+  src/hooks/use-graphql.tsx:
     plugins:
       - typescript
       - typescript-operations

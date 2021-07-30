@@ -11,7 +11,7 @@ import {
   useRankedBookListQuery,
   useRankedPublisherListQuery,
   useRankedSeriesListQuery,
-} from "../hooks/graphql";
+} from "../hooks/use-graphql";
 
 const TOP_SUMMARY_COUNT = 5;
 

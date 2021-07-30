@@ -3,18 +3,19 @@ import {
   Box,
   Flex,
   HStack,
-  VStack,
-  useColorModeValue,
-  Text,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
+  Text,
+  VStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useLoginState, useLogout } from "../hooks/use-authentication";
 
 export function LoginControl(): ReactElement {
   return (
@@ -27,24 +28,22 @@ export function LoginControl(): ReactElement {
 }
 
 export function UserDropDownMenu(): ReactElement {
+  const logout = useLogout();
+  const loginState = useLoginState();
+  const avatarUrl = loginState.user?.avatar;
   return (
     <Flex alignItems={"center"}>
       <Menu>
         <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: "none" }}>
           <HStack>
-            <Avatar
-              size={"sm"}
-              src={
-                "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-              }
-            />
+            <Avatar size={"sm"} src={avatarUrl} />
             <VStack
               display={{ base: "none", md: "flex" }}
               alignItems="flex-start"
               spacing="1px"
               ml="2"
             >
-              <Text fontSize="sm">Justina Clark</Text>
+              <Text fontSize="sm">{loginState.user?.name}</Text>
               <Text fontSize="xs" color="gray.600">
                 Admin
               </Text>
@@ -61,9 +60,19 @@ export function UserDropDownMenu(): ReactElement {
           <MenuItem>Profile</MenuItem>
           <MenuItem>Settings</MenuItem>
           <MenuDivider />
-          <MenuItem>Sign out</MenuItem>
+          <MenuItem>
+            <Text onClick={logout}>Sign Out</Text>
+          </MenuItem>
         </MenuList>
       </Menu>
     </Flex>
   );
+}
+
+export function UserActions(): ReactElement {
+  const loginState = useLoginState();
+  console.log("UserActions - ", loginState);
+  if (!loginState.authenticated) return <LoginControl />;
+
+  return <UserDropDownMenu />;
 }

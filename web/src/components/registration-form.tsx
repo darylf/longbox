@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
-import { useRegisterMutation } from "../../hooks/graphql";
+import { useRegisterMutation } from "../hooks/use-graphql";
 
 type StatesIndex = {
   [key: string]: Dispatch<any>;

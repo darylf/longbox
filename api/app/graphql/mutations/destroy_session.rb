@@ -7,7 +7,7 @@ module Mutations
     graphql_name 'Logout'
 
     def resolve(**_args)
-      session = JWTSessions::Session.new(payload: payload)
+      session = JWTSessions::Session.new
       session.flush_by_access_payload
 
       context[:current_user] = nil
@@ -15,8 +15,6 @@ module Mutations
 
       {
       }
-    rescue AuthenticationError
-      GraphQL::ExecutionError.new('Invalid credentials', options: { status: :unprocessable_entity, code: 401 })
     end
   end
 end

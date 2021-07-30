@@ -1,8 +1,8 @@
+import * as Pages from "./pages";
 import React, { ReactElement } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Layout from "./components/layout/";
-import * as Pages from "./pages";
 import AppProvider from "./providers";
+import Layout from "./components/layout/";
 
 const App = (): ReactElement => {
   return (
