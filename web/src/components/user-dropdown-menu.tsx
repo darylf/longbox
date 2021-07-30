@@ -19,7 +19,7 @@ import { useLoginState, useLogout } from "../hooks/use-authentication";
 
 export function LoginControl(): ReactElement {
   return (
-    <Flex alignItems={"center"}>
+    <Flex alignItems="center">
       <HStack>
         <Link to="/login">Login</Link>
       </HStack>
@@ -32,11 +32,11 @@ export function UserDropDownMenu(): ReactElement {
   const loginState = useLoginState();
   const avatarUrl = loginState.user?.avatar;
   return (
-    <Flex alignItems={"center"}>
+    <Flex alignItems="center">
       <Menu>
         <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: "none" }}>
           <HStack>
-            <Avatar size={"sm"} src={avatarUrl} />
+            <Avatar size="sm" src={avatarUrl} />
             <VStack
               display={{ base: "none", md: "flex" }}
               alignItems="flex-start"
@@ -71,7 +71,6 @@ export function UserDropDownMenu(): ReactElement {
 
 export function UserActions(): ReactElement {
   const loginState = useLoginState();
-  console.log("UserActions - ", loginState);
   if (!loginState.authenticated) return <LoginControl />;
 
   return <UserDropDownMenu />;

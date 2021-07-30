@@ -1,10 +1,3 @@
-import React, {
-  ReactElement,
-  useRef,
-  useCallback,
-  FormEvent,
-  useState,
-} from "react";
 import {
   Alert,
   AlertDescription,
@@ -17,6 +10,13 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
+import React, {
+  ReactElement,
+  useRef,
+  useCallback,
+  FormEvent,
+  useState,
+} from "react";
 import { useLogin } from "../hooks/use-authentication";
 
 export function ErrorMessage({ message }: { message: string }): ReactElement {
@@ -65,16 +65,22 @@ export function LoginForm(): ReactElement {
         <Box my={4} textAlign="left">
           <form onSubmit={onLogin}>
             <FormControl isRequired>
-              <FormLabel>Email</FormLabel>
+              <FormLabel htmlFor="email">Email</FormLabel>
               <Input
+                id="email"
                 type="email"
                 placeholder="user@example.com"
                 ref={emailRef}
               />
             </FormControl>
             <FormControl mt={6} isRequired>
-              <FormLabel>Password</FormLabel>
-              <Input type="password" placeholder="*******" ref={passwordRef} />
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <Input
+                id="password"
+                type="password"
+                placeholder="*******"
+                ref={passwordRef}
+              />
             </FormControl>
             <Button type="submit" variant="outline" width="full" mt={4}>
               Sign In

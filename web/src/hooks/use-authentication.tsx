@@ -26,7 +26,7 @@ type UseAuthenticationManagerResult = ReturnType<
   typeof useAuthenticationManager
 >;
 
-const initialLoginState: Readonly<LoginState> = {
+const defaultLoginState: Readonly<LoginState> = {
   authenticated: false,
   errors: new Array<string>(),
   token: null,
@@ -35,15 +35,15 @@ const initialLoginState: Readonly<LoginState> = {
 
 export function getInitialLoginState(): LoginState {
   const token = sessionStorage.getItem(TOKEN);
-  const user_session = sessionStorage.getItem(USER);
+  const userSession = sessionStorage.getItem(USER);
 
-  const user = user_session === null ? null : JSON.parse(user_session);
+  const user = userSession === null ? null : JSON.parse(userSession);
   const authenticated = token !== null;
 
   return {
-    ...initialLoginState,
-    authenticated: authenticated,
-    user: user,
+    ...defaultLoginState,
+    authenticated,
+    user,
   };
 }
 
@@ -114,7 +114,6 @@ function useAuthenticationManager(initialLoginState: LoginState): {
       loginMutation({ variables: { email: "", password: "" } });
     },
     onError: (error) => {
-      console.log(error);
       // handleError(error.message);
     },
   });
@@ -127,7 +126,7 @@ function useAuthenticationManager(initialLoginState: LoginState): {
     ) => {
       loginMutation({ variables: { email, password } });
     },
-    []
+    [loginMutation]
   );
 
   const logout = useCallback(() => {
@@ -140,6 +139,7 @@ function useAuthenticationManager(initialLoginState: LoginState): {
 
 export const AuthenticationProvider: React.FunctionComponent<{
   initialLoginState: LoginState;
+  children?: React.ReactNode;
 }> = ({
   initialLoginState,
   children,
@@ -153,6 +153,10 @@ export const AuthenticationProvider: React.FunctionComponent<{
     {children}
   </AuthenticationContext.Provider>
 );
+
+AuthenticationProvider.defaultProps = {
+  children: <></>,
+};
 
 export const useLoginState = (): LoginState => {
   const { loginState } = useContext(AuthenticationContext);

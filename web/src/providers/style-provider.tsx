@@ -13,4 +13,6 @@ function StyleProvider({ children }: Props): ReactElement {
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
 }
 
+StyleProvider.defaultProps = { children: <></> };
+
 export default StyleProvider;

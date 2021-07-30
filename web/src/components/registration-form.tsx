@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {
   ChangeEvent,
   Dispatch,
@@ -34,11 +35,18 @@ function RegistrationForm(): ReactElement {
     });
   }
 
-  function onChange(name: string, e: ChangeEvent<HTMLInputElement>) {
-    states[name](e.target.value);
+  function onChange(key: string, e: ChangeEvent<HTMLInputElement>) {
+    states[key](e.target.value);
   }
 
-  const displayError = error ? <div>Error: {error?.message}</div> : <></>;
+  const displayError = error ? (
+    <div>
+      Error:
+      {error?.message}
+    </div>
+  ) : (
+    <></>
+  );
   const displaySuccess = data ? <div>Registration successful</div> : <></>;
 
   return (
@@ -50,6 +58,7 @@ function RegistrationForm(): ReactElement {
         <div>
           <label htmlFor="email">Email:</label>
           <input
+            id="email"
             type="email"
             name="email"
             onChange={(e) => onChange("email", e)}
@@ -59,6 +68,7 @@ function RegistrationForm(): ReactElement {
         <div>
           <label htmlFor="password">Password:</label>
           <input
+            id="password"
             type="password"
             name="password"
             onChange={(e) => onChange("password", e)}
@@ -66,8 +76,9 @@ function RegistrationForm(): ReactElement {
           />
         </div>
         <div>
-          <label htmlFor="email">Name:</label>
+          <label htmlFor="name">Name:</label>
           <input
+            id="name"
             type="text"
             name="name"
             onChange={(e) => onChange("name", e)}

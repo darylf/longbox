@@ -15,7 +15,9 @@ function Panel<T>({ headerText, items, render }: PanelProps<T>): ReactElement {
       </Heading>
       <OrderedList>
         {items.map((item, key) => (
+          /* eslint-disable react/no-array-index-key */
           <ListItem key={key}>{render(item)}</ListItem>
+          /* eslint-enable react/no-array-index-key */
         ))}
       </OrderedList>
     </Box>
