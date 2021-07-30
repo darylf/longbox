@@ -4,7 +4,7 @@ module Mutations
 
     graphql_name 'Login'
 
-    field :user, Types::UserType, null: true
+    field :user, Types::UserType, null: false
     field :csrf, String, null: false
     field :jwt, String, null: false
     field :expires_at, String, null: false

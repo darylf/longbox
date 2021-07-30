@@ -3,43 +3,36 @@ module.exports = {
     browser: true,
     es2021: true
   },
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
   extends: [
-    'plugin:jest-dom/recommended',
+    'airbnb-typescript',
+    'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'prettier'
+    'plugin:jest/recommended',
+    'plugin:import/recommended',
+    'plugin:prettier/recommended'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true
     },
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: [
-    '@typescript-eslint',
-    'import',
-    'jest-dom',
-    'react',
-    'testing-library'
-  ],
-  settings: {
-    react: {
-      version: 'detect'
-    }
-  },
   rules: {
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     semi: 'error',
+    'react/jsx-pascal-case': 2,
     'import/order': [
       'error',
-      {
-        groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
-        alphabetize: {
-          order: 'asc'
-        }
-      }
+      { alphabetize: { order: 'asc', caseInsensitive: true } }
     ]
   },
-  ignorePatterns: ['**/hooks/graphql.tsx']
+  ignorePatterns: ['**/hooks/use-graphql.tsx']
 };

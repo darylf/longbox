@@ -1,6 +1,8 @@
+create_count = get_number_to_create(SERIES_TO_CREATE)
+
 progressbar = ProgressBar.create(
   title: 'Creating Series',
-  total: SERIES_TO_CREATE
+  total: create_count
 )
 
 def generate_series_name
@@ -12,7 +14,7 @@ def generate_series_name
 end
 
 
-SERIES_TO_CREATE.times do
+create_count.times do
   series = Series.create(
     name: generate_series_name,
     publisher_id: Publisher.ids.sample

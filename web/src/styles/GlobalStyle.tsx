@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { ThemeType } from './theme';
+import { createGlobalStyle } from "styled-components";
+import { ThemeType } from "./theme";
 
 const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   html {font-size: 100%} /*16px*/

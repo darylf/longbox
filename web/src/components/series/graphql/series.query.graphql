@@ -1,9 +1,0 @@
-query Series($id: ID!) {
-  series(id: $id) {
-    id
-    name
-    books {
-      ...BookDetails
-    }
-  }
-}

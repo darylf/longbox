@@ -1,0 +1,14 @@
+query Books($last: Int) {
+  books(last: $last) {
+    nodes {
+      id
+      publisherName
+      seriesName
+      issue
+      format
+      publicationDate
+      price
+      pageCount
+    }
+  }
+}

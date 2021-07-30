@@ -1,9 +1,14 @@
 module Resolvers
   class PublishersResolver < Resolvers::BaseResolver
-    type [Types::PublisherType], null: false
+    include Sortable
+    include Truncatable
 
-    def resolve
-      Publisher.all
+    type [Types::PublisherType], null: false
+    argument :sort_by, Types::SortAttributes, required: false
+    argument :limit, Integer, required: false
+
+    def resolve(**args)
+      trunc_list(sort_list(Publisher.all, args[:sort_by]), args[:limit])
     end
   end
 end
