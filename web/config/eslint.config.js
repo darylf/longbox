@@ -33,6 +33,5 @@ module.exports = {
       'error',
       { alphabetize: { order: 'asc', caseInsensitive: true } }
     ]
-  },
-  ignorePatterns: ['**/hooks/use-graphql.tsx']
+  }
 };
