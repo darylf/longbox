@@ -7,5 +7,6 @@ module Types
     field :name, String, null: false
     field :email, String, null: false
     field :avatar, String, null: false, method: :gravatar_url
+    field :roles, [String], null: false
   end
 end

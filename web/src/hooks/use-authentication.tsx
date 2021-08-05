@@ -9,7 +9,12 @@ import { useLoginMutation, useLogoutMutation } from "./use-graphql";
 const TOKEN = "token";
 const USER = "attributes";
 
-export type UserAttributes = { id: string; name: string; avatar: string };
+export type UserAttributes = {
+  id: string;
+  name: string;
+  avatar: string;
+  roles: string[];
+};
 
 type ActionType =
   | { type: "LOGIN_ERROR"; error: string }

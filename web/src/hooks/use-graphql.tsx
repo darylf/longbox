@@ -235,6 +235,7 @@ export type Query = {
   publishers: PublisherConnection;
   series: Series;
   seriesList: SeriesConnection;
+  users: UserConnection;
 };
 
 export type QueryBookArgs = {
@@ -268,6 +269,15 @@ export type QuerySeriesArgs = {
 };
 
 export type QuerySeriesListArgs = {
+  sortBy?: Maybe<SortAttributes>;
+  limit?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
+  before?: Maybe<Scalars["String"]>;
+  first?: Maybe<Scalars["Int"]>;
+  last?: Maybe<Scalars["Int"]>;
+};
+
+export type QueryUsersArgs = {
   sortBy?: Maybe<SortAttributes>;
   limit?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
@@ -348,7 +358,28 @@ export type User = {
   email: Scalars["String"];
   id: Scalars["ID"];
   name: Scalars["String"];
+  roles: Array<Scalars["String"]>;
   updatedAt: Scalars["DateTime"];
+};
+
+/** The connection type for User. */
+export type UserConnection = {
+  __typename?: "UserConnection";
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<UserEdge>>>;
+  /** A list of nodes. */
+  nodes?: Maybe<Array<Maybe<User>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type UserEdge = {
+  __typename?: "UserEdge";
+  /** A cursor for use in pagination. */
+  cursor: Scalars["String"];
+  /** The item at the end of the edge. */
+  node?: Maybe<User>;
 };
 
 /** A user-readable error */
@@ -399,7 +430,13 @@ export type LoginMutation = { __typename?: "Mutation" } & {
     > & {
         user: { __typename?: "User" } & Pick<
           User,
-          "id" | "name" | "email" | "avatar" | "createdAt" | "updatedAt"
+          | "id"
+          | "name"
+          | "email"
+          | "avatar"
+          | "roles"
+          | "createdAt"
+          | "updatedAt"
         >;
       }
   >;
@@ -559,6 +596,7 @@ export const LoginDocument = gql`
         name
         email
         avatar
+        roles
         createdAt
         updatedAt
       }

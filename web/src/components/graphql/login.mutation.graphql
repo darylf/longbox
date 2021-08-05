@@ -9,6 +9,7 @@ mutation Login($email: String!, $password: String!) {
       name
       email
       avatar
+      roles
       createdAt
       updatedAt
     }

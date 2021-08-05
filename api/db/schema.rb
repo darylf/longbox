@@ -10,30 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_133537) do
+ActiveRecord::Schema.define(version: 2021_08_05_144948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "book_formats", force: :cascade do |t|
-    t.string "name"
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "user_role_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "user_role_id"], name: "index_assignments_on_user_id_and_user_role_id", unique: true
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+    t.index ["user_role_id"], name: "index_assignments_on_user_role_id"
+  end
+
+  create_table "book_formats", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_book_formats_on_name", unique: true
   end
 
   create_table "books", force: :cascade do |t|
     t.string "issue"
     t.bigint "series_id"
     t.integer "book_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "book_format_id"
     t.string "alternate_title"
     t.text "summary"
     t.string "page_count"
     t.string "price"
     t.string "publication_date"
     t.string "age_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "book_format_id"
     t.index ["book_format_id"], name: "index_books_on_book_format_id"
     t.index ["series_id"], name: "index_books_on_series_id"
   end
@@ -49,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_credit_roles_on_name", unique: true
   end
 
   create_table "credits", force: :cascade do |t|
@@ -57,24 +69,33 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.bigint "credit_role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id", "creator_id", "credit_role_id"], name: "index_credits_on_book_id_and_creator_id_and_credit_role_id", unique: true
     t.index ["book_id"], name: "index_credits_on_book_id"
     t.index ["creator_id"], name: "index_credits_on_creator_id"
     t.index ["credit_role_id"], name: "index_credits_on_credit_role_id"
   end
 
   create_table "publishers", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_publishers_on_name", unique: true
   end
 
   create_table "series", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.bigint "publisher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_series_on_name", unique: true
     t.index ["publisher_id"], name: "index_series_on_publisher_id"
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_user_roles_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,6 +107,8 @@ ActiveRecord::Schema.define(version: 2021_04_29_133537) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "assignments", "user_roles"
+  add_foreign_key "assignments", "users"
   add_foreign_key "books", "book_formats"
   add_foreign_key "books", "series"
   add_foreign_key "credits", "books"

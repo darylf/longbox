@@ -6,5 +6,6 @@ module Types
     field :publishers, Types::PublisherType.connection_type, resolver: Resolvers::PublishersResolver
     field :series, resolver: Resolvers::SeriesResolver
     field :series_list, Types::SeriesType.connection_type, resolver: Resolvers::SeriesListResolver
+    field :users, Types::UserType.connection_type, resolver: Resolvers::UsersResolver
   end
 end

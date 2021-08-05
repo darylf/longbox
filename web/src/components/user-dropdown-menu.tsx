@@ -31,6 +31,16 @@ export function LoginControl(): ReactElement {
   );
 }
 
+const DEFAULT_ROLE: Readonly<string> = "User";
+
+// Remove "User" if the list of roles has more than one
+function getUserType(user: { roles: string[] } | null): string {
+  if (user === null || user.roles === undefined) return DEFAULT_ROLE;
+  const displayableRoles = user.roles.filter((r) => r !== DEFAULT_ROLE);
+  if (displayableRoles.length === 0) return DEFAULT_ROLE;
+  return displayableRoles.join(",");
+}
+
 interface UserDropDownMenuProps {
   user: UserAttributes | null;
 }
@@ -53,7 +63,7 @@ export function UserDropDownMenu({
             >
               <Text fontSize="sm">{user?.name}</Text>
               <Text fontSize="xs" color="gray.600">
-                User Type
+                {getUserType(user)}
               </Text>
             </VStack>
             <Box display={{ base: "none", md: "flex" }}>
