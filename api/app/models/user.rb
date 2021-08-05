@@ -1,5 +1,12 @@
 class User < ApplicationRecord
   has_secure_password
+  before_create :set_default_role
+
+  has_many :assignments,
+           dependent: :destroy
+
+  has_many :user_roles,
+           through: :assignments
 
   validates :name,
             presence: true,
@@ -15,5 +22,20 @@ class User < ApplicationRecord
     size = 64 if size < 1 || size > 2048
     md5 = Digest::MD5.hexdigest(email.downcase.strip)
     "//www.gravatar.com/avatar/#{md5}?s=#{size}&d=robohash"
+  end
+
+  def roles
+    user_roles.map(&:name)
+  end
+
+  def role?(role)
+    user_roles.any? { |r| r.name_sym == role }
+  end
+
+  private
+
+  def set_default_role
+    role = UserRole.find_by(name: 'User')
+    user_roles << role if role.present?
   end
 end

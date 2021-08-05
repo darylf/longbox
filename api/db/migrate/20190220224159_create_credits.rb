@@ -13,5 +13,8 @@ class CreateCredits < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :credit_roles, :name, unique: true
+    add_index :credits, [:book_id, :creator_id, :credit_role_id], unique: true
   end
 end
