@@ -6,6 +6,6 @@ class UserRole < ApplicationRecord
            through: :assignments
 
   def name_sym
-    name.underscore.gsub(' ', '_').to_sym
+    name.underscore.tr(' ', '_').to_sym
   end
 end

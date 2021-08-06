@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    it "should have role" do
+    it "has role" do
       expect(user.role?(:test_user)).to be false
 
       user.roles << UserRole.new(name: "Test User")

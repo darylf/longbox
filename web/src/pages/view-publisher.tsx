@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Publisher, usePublisherQuery } from "../hooks/use-graphql";
 import ShowPublisher from "../components/show-publisher";
+import { Publisher, usePublisherQuery } from "../hooks/use-graphql";
 
 function ViewPublisher(): React.ReactElement {
   const { id } = useParams<{ id: string }>();

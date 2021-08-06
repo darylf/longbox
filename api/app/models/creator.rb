@@ -1,5 +1,5 @@
 class Creator < ApplicationRecord
-  has_many :credits
+  has_many :credits, dependent: :destroy
   has_many :books, through: :credits
   has_many :series, through: :books
 

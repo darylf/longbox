@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Book, useBookQuery } from "../hooks/use-graphql";
 import ShowBook from "../components/show-book";
+import { Book, useBookQuery } from "../hooks/use-graphql";
 
 function ViewBook(): React.ReactElement {
   const { id } = useParams<{ id: string }>();

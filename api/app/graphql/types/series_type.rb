@@ -9,7 +9,6 @@ module Types
     field :created_at, Types::DateTimeType, null: false
     field :updated_at, Types::DateTimeType, null: false
 
-
     field :books, [Types::BookType], 'A list of books released in this series', null: true do
       argument :limit, Integer, required: false
     end
