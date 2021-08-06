@@ -1,0 +1,11 @@
+query Series($id: ID!) {
+  series(id: $id) {
+    name
+    createdAt
+    updatedAt
+    books {
+      id
+      displayName
+    }
+  }
+}

@@ -10,10 +10,14 @@ const App = (): ReactElement => (
       <Layout>
         <Switch>
           <Route path="/admin" component={Pages.Admin} />
+          <Route path="/comics/:id" component={Pages.ViewBook} />
+          <Route path="/creators/:id" component={Pages.ViewCreator} />
           <Route path="/explore" component={Pages.Explore} />
-          <Route path="/my-collection" component={Pages.MyCollection} />
-          <Route path="/trending" component={Pages.Trending} />
           <Route path="/login" component={Pages.Login} />
+          <Route path="/my-collection" component={Pages.MyCollection} />
+          <Route path="/publishers/:id" component={Pages.ViewPublisher} />
+          <Route path="/series/:id" component={Pages.ViewSeries} />
+          <Route path="/trending" component={Pages.Trending} />
           <Route exact path="/" component={Pages.Home} />
         </Switch>
       </Layout>

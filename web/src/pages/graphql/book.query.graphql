@@ -1,0 +1,32 @@
+query Book($id: ID!) {
+  book(id: $id) {
+    id
+    ageRating
+    alternateTitle
+    createdAt
+    credits {
+      creator {
+        id
+        firstName
+        lastName
+      }
+      role
+    }
+    displayName
+    format
+    issue
+    pageCount
+    price
+    publicationDate
+    publisher {
+      id
+      name
+    }
+    series {
+      id
+      name
+    }
+    summary
+    updatedAt
+  }
+}

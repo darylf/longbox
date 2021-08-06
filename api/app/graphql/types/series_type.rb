@@ -6,6 +6,9 @@ module Types
     field :publisher, Types::PublisherType, null: true
     field :publisher_name, String, null: true
     field :book_count, Int, null: false
+    field :created_at, Types::DateTimeType, null: false
+    field :updated_at, Types::DateTimeType, null: false
+
 
     field :books, [Types::BookType], 'A list of books released in this series', null: true do
       argument :limit, Integer, required: false

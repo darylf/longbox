@@ -3,8 +3,8 @@ return unless Rails.env.development?
 CLEAN_ALL_RECORDS = true
 USERS_TO_CREATE = 5
 CREATORS_TO_CREATE = 20..40
-SERIES_TO_CREATE = 12..20
-BOOKS_ON_EACH_SERIES = 5..12
+SERIES_TO_CREATE = 40..50
+BOOKS_ON_EACH_SERIES = 7..12
 
 def get_number_to_create(val)
   val.is_a?(Range) ? rand(val) : val

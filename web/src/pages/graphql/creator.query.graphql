@@ -1,0 +1,16 @@
+query Creator($id: ID!) {
+  creator(id: $id) {
+    id
+    firstName
+    lastName
+    createdAt
+    updatedAt
+    credits {
+      role
+      book {
+        id
+        displayName
+      }
+    }
+  }
+}

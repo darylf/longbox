@@ -1,5 +1,6 @@
-import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Link, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { Book } from "../hooks/use-graphql";
 
 interface BookTableProps {
@@ -15,6 +16,7 @@ const BookTable = ({ books }: BookTableProps): ReactElement => (
         <Th>Issue</Th>
         <Th>Cost</Th>
         <Th>Pages</Th>
+        <Th>&nbsp;</Th>
       </Tr>
     </Thead>
     <Tbody>
@@ -25,6 +27,11 @@ const BookTable = ({ books }: BookTableProps): ReactElement => (
           <Td>{book.issue}</Td>
           <Td>{book.price}</Td>
           <Td>{book.pageCount}</Td>
+          <Td>
+            <Link as={RouterLink} to={`/comics/${book.id}`}>
+              View
+            </Link>
+          </Td>
         </Tr>
       ))}
     </Tbody>

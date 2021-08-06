@@ -1,7 +1,8 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Link, SimpleGrid } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
+import { Link as LinkRouter } from "react-router-dom";
 import BookTable from "../components/book-table";
-import Panel from "../components/layout/panel";
+import Panel from "../components/panel";
 import {
   Book,
   Publisher,
@@ -60,7 +61,7 @@ export default function HomePage(): ReactElement {
 
   const latestBooks = convertToArray<Book>(latestBooksResult.data?.books.nodes);
 
-  const { data, loading, error } = useBooksQuery();
+  const { data, loading, error } = useBooksQuery({ variables: { limit: 50 } });
   let bookTable = <></>;
   if (loading) {
     bookTable = <>Loading...</>;
@@ -79,19 +80,33 @@ export default function HomePage(): ReactElement {
           items={topPublishers}
           render={(item) => (
             <>
-              {item.name} ({item.seriesCount})
+              <Link as={LinkRouter} to={`/publishers/${item.id}`}>
+                {item.name}
+              </Link>{" "}
+              ({item.seriesCount})
             </>
           )}
         />
         <Panel
           headerText="Top Series"
           items={topSeries}
-          render={(item) => <>{item.name}</>}
+          render={(item) => (
+            <>
+              <Link as={LinkRouter} to={`/series/${item.id}`}>
+                {item.name}
+              </Link>{" "}
+              ({item.bookCount})
+            </>
+          )}
         />
         <Panel
           headerText="Latest Books"
           items={latestBooks}
-          render={(item) => <>{item.displayName}</>}
+          render={(item) => (
+            <Link as={LinkRouter} to={`/comics/${item.id}`}>
+              {item.displayName}
+            </Link>
+          )}
         />
       </SimpleGrid>
       {bookTable}

@@ -4,3 +4,7 @@ export { default as Home } from "./home";
 export { default as Login } from "./login";
 export { default as MyCollection } from "./my-collection";
 export { default as Trending } from "./trending";
+export { default as ViewBook } from "./view-book";
+export { default as ViewCreator } from "./view-creator";
+export { default as ViewPublisher } from "./view-publisher";
+export { default as ViewSeries } from "./view-series";

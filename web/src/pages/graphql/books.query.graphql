@@ -1,5 +1,5 @@
-query Books($last: Int) {
-  books(last: $last) {
+query Books($limit: Int) {
+  books(limit: $limit) {
     nodes {
       id
       publisherName

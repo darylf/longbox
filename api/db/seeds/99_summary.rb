@@ -5,7 +5,7 @@ results = {}.tap do |result|
     next if model.name == 'ActiveRecord::InternalMetadata'
     next if model.name == 'ApplicationRecord'
 
-    result[model.name] = model.count
+    result[model.name.pluralize] = model.count
   end
 end
 
@@ -13,6 +13,6 @@ puts
 puts
 puts 'Summary'
 puts '-----------------'
-results.each do |k, v|
+results.sort.each do |k, v|
   puts "#{k}: #{v}"
 end
