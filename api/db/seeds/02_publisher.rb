@@ -1,6 +1,12 @@
+publishers = ['Marvel', 'DC', 'Image', 'IDW', 'Dark Horse',
+              'Dynamite Entertainment', 'BOOM! Studios',
+              'Oni Press', 'Viz', 'Yen Press', 'Valiant',
+              'Avatar', 'Zenescope', 'Fantagraphics', 'Archie',
+              'Action Lab', 'Aspen Comics', 'Kodansha Comics']
+
 progressbar = ProgressBar.create(
   title: 'Creating Publishers',
-  total: 3
+  total: publishers.size
 )
 
 def generate_publisher_name
@@ -11,7 +17,7 @@ def generate_publisher_name
   end
 end
 
-['Marvel Comics', 'DC Comics', 'Image Comics'].each do |t|
+publishers.each do |t|
   Publisher.create name: t
   progressbar.increment
 end

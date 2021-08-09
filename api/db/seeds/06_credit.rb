@@ -3,8 +3,6 @@ progressbar = ProgressBar.create(
   total: Book.count * CreditRole.count
 )
 
-def get_role_dictionary
-
 Series.all.each do |series|
   role_dictionary = {}
   CreditRole.ids.each do |role_id|
