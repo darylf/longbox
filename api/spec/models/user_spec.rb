@@ -32,13 +32,5 @@ RSpec.describe User, type: :model do
         end
       end
     end
-
-    it "has role" do
-      expect(user.role?(:test_user)).to be false
-
-      user.roles << UserRole.new(name: "Test User")
-
-      expect(user.role?(:test_user)).to be true
-    end
   end
 end
