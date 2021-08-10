@@ -3,10 +3,20 @@ progressbar = ProgressBar.create(
   total: Book.count * CreditRole.count
 )
 
+WRITER_ID = CreditRole.find_by(name: 'Writer')
+ARTIST_ID = CreditRole.find_by(name: 'Penciller')
+CREATOR_ID = CreditRole.find_by(name: 'Creator')
+ROLE_IDS = CreditRole.ids
+CREATOR_IDS = Creator.ids
+
 Series.all.each do |series|
   role_dictionary = {}
-  CreditRole.ids.each do |role_id|
-    role_dictionary[role_id] = Creator.ids.sample
+  role_dictionary[CREATOR_ID] = CREATOR_IDS.sample
+  role_dictionary[WRITER_ID] = CREATOR_IDS.sample
+  role_dictionary[ARTIST_ID] = CREATOR_IDS.sample
+
+  ROLE_IDS.sample(rand(2..ROLE_IDS.size)).each do |role_id|
+    role_dictionary[role_id] = CREATOR_IDS.sample
   end
 
   series.books.ids.each do |book_id|

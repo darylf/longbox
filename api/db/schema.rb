@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_144948) do
     t.bigint "publisher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_series_on_name", unique: true
+    t.index ["publisher_id", "name"], name: "index_series_on_publisher_id_and_name", unique: true
     t.index ["publisher_id"], name: "index_series_on_publisher_id"
   end
 

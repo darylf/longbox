@@ -6,6 +6,6 @@ class CreateSeries < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :series, :name, unique: true
+    add_index :series, [:publisher_id, :name], unique: true
   end
 end
