@@ -3,7 +3,7 @@ module Mutations
     field :publisher, Types::PublisherType, null: true
     field :errors, [Types::UserError], null: false, description: 'In case of failure, there will be errors in this list'
 
-    argument :attributes, Inputs::PublisherAttributesType, required: true
+    argument :attributes, Inputs::PublisherInput, required: true
 
     def resolve(attributes:)
       raise GraphQL::ExecutionError, "Unauthorized user" if context[:current_user] == nil

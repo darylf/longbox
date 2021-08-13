@@ -5,7 +5,7 @@ module Mutations
     field :book, Types::BookType, null: true
     field :errors, [Types::UserError], null: false
 
-    argument :attributes, Inputs::BookAttributesType, required: true
+    argument :attributes, Inputs::BookInput, required: true
 
     def resolve(attributes:)
       book = book_from_attributes(attributes.to_hash)

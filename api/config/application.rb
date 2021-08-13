@@ -33,6 +33,7 @@ module LongboxApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.hosts.clear
 
     config.authentication_token = ENV.fetch("AUTH_SECRET_TOKEN", Rails.application.credentials.secret_key_base)
   end

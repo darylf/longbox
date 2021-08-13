@@ -4,7 +4,7 @@ module Mutations
     field :errors, [Types::UserError], null: false
 
     argument :id, ID, required: true
-    argument :attributes, Inputs::SeriesAttributesType, required: true
+    argument :attributes, Inputs::SeriesInput, required: true
 
     def resolve(id:, attributes:)
       series = Series.find(id)

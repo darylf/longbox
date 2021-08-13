@@ -4,7 +4,7 @@ module Mutations
     field :errors, [Types::UserError], null: false
 
     argument :id, ID, required: true
-    argument :attributes, Inputs::BookAttributesType, required: true
+    argument :attributes, Inputs::BookInput, required: true
 
     def resolve(**args)
       book = Book.find(args[:id])
