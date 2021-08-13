@@ -2,14 +2,13 @@ import {
   Box,
   Flex,
   Heading,
-  Link,
-  Text,
-  Stack,
   List,
   ListItem,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import Link from "../components/link";
 import { Series } from "../hooks/use-graphql";
 
 interface Props {
@@ -30,9 +29,7 @@ function ShowSeries({ series }: Props): React.ReactElement {
             <List>
               {series.books.map((b) => (
                 <ListItem key={b.id}>
-                  <Link as={RouterLink} to={`/comics/${b.id}`}>
-                    {b.displayName}
-                  </Link>
+                  <Link to={`/comics/${b.id}`}>{b.displayName}</Link>
                 </ListItem>
               ))}
             </List>

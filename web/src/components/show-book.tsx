@@ -1,21 +1,20 @@
 import {
   Box,
   Flex,
-  Image,
   Heading,
-  Text,
-  Link,
+  Image,
   List,
   ListItem,
   Stack,
   Tab,
-  Tabs,
   TabList,
-  TabPanels,
   TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import Link from "../components/link";
 import { Book } from "../hooks/use-graphql";
 
 interface Props {
@@ -48,16 +47,13 @@ function ShowBook({ book }: Props): React.ReactElement {
                 <Box>
                   <Text>
                     Publisher:
-                    <Link
-                      as={RouterLink}
-                      to={`/publishers/${book.publisher?.id}`}
-                    >
+                    <Link to={`/publishers/${book.publisher?.id}`}>
                       {book.publisher?.name}
                     </Link>
                   </Text>
                   <Text>
                     Series:
-                    <Link as={RouterLink} to={`/series/${book.series?.id}`}>
+                    <Link to={`/series/${book.series?.id}`}>
                       {book.series?.name}
                     </Link>
                   </Text>
@@ -76,10 +72,7 @@ function ShowBook({ book }: Props): React.ReactElement {
                     <List spacing={3}>
                       {book.credits?.map((c) => (
                         <ListItem key={c.id}>
-                          <Link
-                            as={RouterLink}
-                            to={`/creators/${c.creator.id}`}
-                          >
+                          <Link to={`/creators/${c.creator.id}`}>
                             {c.creator.firstName} {c.creator.lastName}
                           </Link>{" "}
                           ({c.role})

@@ -12,10 +12,10 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import React, {
-  ReactElement,
-  useRef,
-  useCallback,
   FormEvent,
+  ReactElement,
+  useCallback,
+  useRef,
   useState,
 } from "react";
 import { useLogin, useLoginState } from "../hooks/use-authentication";
@@ -44,6 +44,7 @@ export function LoginForm(): ReactElement {
   const onLogin = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      console.log("Logigng in?");
       if (emailRef.current && passwordRef.current) {
         login(emailRef.current.value, passwordRef.current.value, handleError);
       }

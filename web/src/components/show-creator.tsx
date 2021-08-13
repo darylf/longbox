@@ -1,14 +1,6 @@
-import {
-  Box,
-  Heading,
-  Link,
-  Text,
-  Stack,
-  List,
-  ListItem,
-} from "@chakra-ui/react";
+import { Box, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import Link from "../components/link";
 import { Creator } from "../hooks/use-graphql";
 
 interface Props {
@@ -30,10 +22,8 @@ function ShowCreator({ creator }: Props): React.ReactElement {
         <List>
           {creator.credits.map((c) => (
             <ListItem key={c.id}>
-              <Link as={RouterLink} to={`/comics/${c.book.id}`}>
-                {c.book.displayName}
-              </Link>{" "}
-              ({c.role})
+              <Link to={`/comics/${c.book.id}`}>{c.book.displayName}</Link> (
+              {c.role})
             </ListItem>
           ))}
         </List>

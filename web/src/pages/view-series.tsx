@@ -1,21 +1,55 @@
-import React from "react";
+import { Box } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import SeriesForm from "../components/series-form";
 import ShowSeries from "../components/show-series";
-import { Series, useSeriesQuery } from "../hooks/use-graphql";
+import { useLoginState } from "../hooks/use-authentication";
+import {
+  Series,
+  useSeriesQuery,
+  useUpdateSeriesMutation,
+} from "../hooks/use-graphql";
 
 function ViewSeries(): React.ReactElement {
   const { id } = useParams<{ id: string }>();
-  const { data, loading, error } = useSeriesQuery({ variables: { id } });
+  const [series, setSeries] = useState<Series | null>(null);
+  const { authenticated } = useLoginState();
+  const { loading, error } = useSeriesQuery({
+    variables: { id },
+    onCompleted: (data) => setSeries(data.series as Series),
+  });
+  const [updateSeries, { data: dataMutation }] = useUpdateSeriesMutation({
+    variables: { id, name: series?.name ?? "" },
+    onCompleted: (data) => {
+      if (data.updateSeries?.series)
+        setSeries({ ...series, ...data.updateSeries?.series } as Series);
+    },
+  });
 
-  const showSeries = <></>;
+  const handleSubmit = (series: Partial<Series>) => {
+    updateSeries({ variables: { id, name: series.name ?? "" } });
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>An error has occured...</p>;
-  if (data && data.series) return <ShowSeries series={data.series as Series} />;
 
   return (
     <>
-      View Series
-      {showSeries}
+      {series && (
+        <>
+          <ShowSeries series={series} />
+          {authenticated && (
+            <Box mt={2} textAlign="right">
+              <SeriesForm
+                series={series}
+                handleSubmit={handleSubmit}
+                isLoading={loading}
+                userErrors={dataMutation?.updateSeries?.errors}
+              />
+            </Box>
+          )}
+        </>
+      )}
     </>
   );
 }

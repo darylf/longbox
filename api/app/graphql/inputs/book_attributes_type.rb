@@ -1,4 +1,4 @@
-module Types
+module Inputs
   class BookAttributesType < Types::BaseInputObject
     argument :age_rating, String, required: false
     argument :alternate_title, String, required: false

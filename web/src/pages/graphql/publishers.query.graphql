@@ -1,9 +1,12 @@
 query Publishers {
-  publisher {
-    name
-    bookCount
-    seriesCount
-    createdAt
-    updatedAt
+  publishers {
+    nodes {
+      id
+      name
+      series {
+        name
+      }
+      seriesCount
+    }
   }
 }

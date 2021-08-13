@@ -4,6 +4,7 @@ documents: 'src/**/*.graphql'
 generates:
   src/hooks/use-graphql.tsx:
     plugins:
+      - named-operations-object
       - typescript
       - typescript-operations
       - typescript-react-apollo

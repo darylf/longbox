@@ -1,14 +1,14 @@
 module Mutations
-  class CreatePublisher < Mutations::BaseMutation
+  class UpdatePublisher < Mutations::BaseMutation
     field :publisher, Types::PublisherType, null: true
-    field :errors, [Types::UserError], null: false, description: 'In case of failure, there will be errors in this list'
+    field :errors, [Types::UserError], null: false
 
+    argument :id, ID, required: true
     argument :attributes, Inputs::PublisherAttributesType, required: true
 
-    def resolve(attributes:)
-      publisher = Publisher.create(name: attributes[:name])
-
-      if publisher.save
+    def resolve(id:, attributes:)
+      publisher = Publisher.find(id)
+      if publisher.update(attributes.to_h)
         {
           publisher: publisher,
           errors: []

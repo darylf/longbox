@@ -129,9 +129,10 @@ function useAuthenticationManager(initialLoginState: LoginState): {
         });
         dispatch({ type: "LOGIN_LOADING", loading: false });
       }
-      loginMutation({ variables: { email: "", password: "" } });
+      // loginMutation({ variables: { email: "", password: "" } });
     },
     onError: (error) => {
+      console.error(error);
       dispatch({ type: "LOGIN_LOADING", loading: false });
     },
   });

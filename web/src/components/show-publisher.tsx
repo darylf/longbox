@@ -1,21 +1,14 @@
-import {
-  Box,
-  Heading,
-  Link,
-  Text,
-  Stack,
-  List,
-  ListItem,
-} from "@chakra-ui/react";
+import { Box, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { Link as RouterLink, useParams } from "react-router-dom";
-import { Publisher, usePublisherQuery } from "../hooks/use-graphql";
+import Link from "../components/link";
+import { Publisher } from "../hooks/use-graphql";
 
 interface Props {
   publisher: Publisher;
 }
 
 function ShowPublisher({ publisher }: Props): React.ReactElement {
+  console.log(publisher);
   return (
     <>
       <Box p={6}>
@@ -29,9 +22,7 @@ function ShowPublisher({ publisher }: Props): React.ReactElement {
         <List>
           {publisher.series.map((s) => (
             <ListItem key={s.id}>
-              <Link as={RouterLink} to={`/series/${s.id}`}>
-                {s.name}
-              </Link>
+              <Link to={`/series/${s.id}`}>{s.name}</Link>
             </ListItem>
           ))}
         </List>

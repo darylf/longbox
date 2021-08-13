@@ -1,0 +1,13 @@
+mutation UpdateSeries($id: ID!, $name: String!) {
+  updateSeries(id: $id, attributes: { name: $name }) {
+    series {
+      id
+      name
+      updatedAt
+    }
+    errors {
+      path
+      message
+    }
+  }
+}

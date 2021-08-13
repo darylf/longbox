@@ -1,0 +1,13 @@
+mutation UpdatePublisher($id: ID!, $name: String!) {
+  updatePublisher(id: $id, attributes: { name: $name }) {
+    publisher {
+      id
+      name
+      updatedAt
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
