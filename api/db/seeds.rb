@@ -32,7 +32,7 @@ if CLEAN_ALL_RECORDS
   User.destroy_all
 end
 
-User.find_or_create_by(email: 'daryl@example.com') do |user|
+ADMIN_USER = User.find_or_create_by(email: 'daryl@example.com') do |user|
   user.name = 'Daryl'
   user.password = 'password'
   user.user_roles << UserRole.find_or_create_by(name: 'Admin')

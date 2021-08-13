@@ -11,12 +11,13 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 # Authentication
 gem 'bcrypt', '~> 3.1.7'
-gem 'jwt_sessions'
+gem 'jwt'
 gem 'rack-cors'
 
-gem 'graphql-batch'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql', '~> 1.12.14'
+gem 'graphql-batch'
+gem "interactor"
 gem 'puma', '~> 5.4.0'
 
 group :development do

@@ -10,16 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_144948) do
+ActiveRecord::Schema.define(version: 2021_08_13_154417) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "user_role_id", null: false
+    t.bigint "created_by_id", null: false
+    t.bigint "updated_by_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_assignments_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_assignments_on_updated_by_id"
     t.index ["user_id", "user_role_id"], name: "index_assignments_on_user_id_and_user_role_id", unique: true
     t.index ["user_id"], name: "index_assignments_on_user_id"
     t.index ["user_role_id"], name: "index_assignments_on_user_role_id"
@@ -45,8 +50,12 @@ ActiveRecord::Schema.define(version: 2021_08_05_144948) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "book_format_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.index ["book_format_id"], name: "index_books_on_book_format_id"
+    t.index ["created_by_id"], name: "index_books_on_created_by_id"
     t.index ["series_id"], name: "index_books_on_series_id"
+    t.index ["updated_by_id"], name: "index_books_on_updated_by_id"
   end
 
   create_table "creators", force: :cascade do |t|
@@ -54,6 +63,10 @@ ActiveRecord::Schema.define(version: 2021_08_05_144948) do
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.index ["created_by_id"], name: "index_creators_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_creators_on_updated_by_id"
   end
 
   create_table "credit_roles", force: :cascade do |t|
@@ -69,17 +82,37 @@ ActiveRecord::Schema.define(version: 2021_08_05_144948) do
     t.bigint "credit_role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.index ["book_id", "creator_id", "credit_role_id"], name: "index_credits_on_book_id_and_creator_id_and_credit_role_id", unique: true
     t.index ["book_id"], name: "index_credits_on_book_id"
+    t.index ["created_by_id"], name: "index_credits_on_created_by_id"
     t.index ["creator_id"], name: "index_credits_on_creator_id"
     t.index ["credit_role_id"], name: "index_credits_on_credit_role_id"
+    t.index ["updated_by_id"], name: "index_credits_on_updated_by_id"
   end
 
   create_table "publishers", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.index ["created_by_id"], name: "index_publishers_on_created_by_id"
     t.index ["name"], name: "index_publishers_on_name", unique: true
+    t.index ["updated_by_id"], name: "index_publishers_on_updated_by_id"
+  end
+
+  create_table "refresh_tokens", force: :cascade do |t|
+    t.string "token", null: false
+    t.bigint "user_id", null: false
+    t.datetime "expires_at", null: false
+    t.string "jti"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["jti"], name: "index_refresh_tokens_on_jti"
+    t.index ["token"], name: "index_refresh_tokens_on_token"
+    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
   create_table "series", force: :cascade do |t|
@@ -87,8 +120,12 @@ ActiveRecord::Schema.define(version: 2021_08_05_144948) do
     t.bigint "publisher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.index ["created_by_id"], name: "index_series_on_created_by_id"
     t.index ["publisher_id", "name"], name: "index_series_on_publisher_id_and_name", unique: true
     t.index ["publisher_id"], name: "index_series_on_publisher_id"
+    t.index ["updated_by_id"], name: "index_series_on_updated_by_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -99,7 +136,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_144948) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", null: false
+    t.citext "email", null: false
     t.string "password_digest", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -109,10 +146,23 @@ ActiveRecord::Schema.define(version: 2021_08_05_144948) do
 
   add_foreign_key "assignments", "user_roles"
   add_foreign_key "assignments", "users"
+  add_foreign_key "assignments", "users", column: "created_by_id"
+  add_foreign_key "assignments", "users", column: "updated_by_id"
   add_foreign_key "books", "book_formats"
   add_foreign_key "books", "series"
+  add_foreign_key "books", "users", column: "created_by_id"
+  add_foreign_key "books", "users", column: "updated_by_id"
+  add_foreign_key "creators", "users", column: "created_by_id"
+  add_foreign_key "creators", "users", column: "updated_by_id"
   add_foreign_key "credits", "books"
   add_foreign_key "credits", "creators"
   add_foreign_key "credits", "credit_roles"
+  add_foreign_key "credits", "users", column: "created_by_id"
+  add_foreign_key "credits", "users", column: "updated_by_id"
+  add_foreign_key "publishers", "users", column: "created_by_id"
+  add_foreign_key "publishers", "users", column: "updated_by_id"
+  add_foreign_key "refresh_tokens", "users"
   add_foreign_key "series", "publishers"
+  add_foreign_key "series", "users", column: "created_by_id"
+  add_foreign_key "series", "users", column: "updated_by_id"
 end

@@ -6,7 +6,14 @@ module Mutations
     argument :attributes, Inputs::PublisherAttributesType, required: true
 
     def resolve(attributes:)
+      raise GraphQL::ExecutionError, "Unauthorized user" if context[:current_user] == nil
+
+      puts ">>>>>>>>>>>>>>>>>> DARYL <<<<<<<<<<<<<<<<<<<<<<"
+      puts context[:current_user].to_json
+      puts ">>>>>>>>>>>>>>>>>> DARYL <<<<<<<<<<<<<<<<<<<<<<"
       publisher = Publisher.create(name: attributes[:name])
+      publisher.created_by = context[:current_user]
+      publisher.updated_by = context[:current_user]
 
       if publisher.save
         {

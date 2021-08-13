@@ -1,40 +1,19 @@
 module Mutations
   class CreateSession < Mutations::BaseMutation
-    class AuthenticationError < StandardError; end
-
     graphql_name 'Login'
 
-    field :user, Types::UserType, null: false
-    field :csrf, String, null: false
-    field :jwt, String, null: false
-    field :expires_at, String, null: false
-    field :refresh, String, null: false
-    field :refresh_expires_at, String, null: false
+    argument :input, Inputs::LogInInput, required: true
 
-    argument :email, String, required: true
-    argument :password, String, required: true
+    type Types::AuthenticationResultType
 
-    def resolve(**args)
-      user = User.find_by(email: args[:email])
-      raise AuthenticationError unless user&.authenticate(args[:password])
+    def resolve(input:)
+      signin_user = LogInUser.call(input.to_h)
 
-      payload = { user_id: user.id }
-      session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
-      tokens = session.login
-
-      context[:current_user] = user
-      context[:session_tokens] = tokens
-
-      {
-        user: user,
-        csrf: tokens[:csrf],
-        jwt: tokens[:access],
-        expires_at: tokens[:access_expires_at],
-        refresh: tokens[:refresh],
-        refresh_expires_at: tokens[:refresh_expires_at]
-      }
-    rescue AuthenticationError
-      GraphQL::ExecutionError.new('Invalid credentials', options: { status: :unprocessable_entity, code: 401 })
+      if signin_user.success?
+        signin_user
+      else
+        execution_error(error_data: signin_user.error_data)
+      end
     end
   end
 end

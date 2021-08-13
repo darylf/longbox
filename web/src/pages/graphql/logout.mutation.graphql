@@ -1,5 +1,5 @@
-mutation Logout {
-  logout {
-    exit
+mutation LogOut($everywhere: Boolean) {
+  logout(input: { everywhere: $everywhere }) {
+    message
   }
 }

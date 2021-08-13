@@ -1,7 +1,13 @@
 mutation Register($name: String!, $email: String!, $password: String!) {
-  register(name: $name, email: $email, password: $password) {
-    user {
+  register(input: { name: $name, email: $email, password: $password }) {
+    me {
       id
+      avatar
+      email
+      name
+      roles
     }
+    accessToken
+    refreshToken
   }
 }

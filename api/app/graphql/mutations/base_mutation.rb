@@ -1,9 +1,20 @@
 module Mutations
   class BaseMutation < GraphQL::Schema::Mutation
+    include ExecutionErrorResponder
+
     private
 
-    def execution_error(message: nil, status: :unprocessable_entity, code: 422)
-      GraphQL::ExecutionError.new(message, options: { status: status, code: code })
+    def current_user
+      context[:current_user]
     end
+
+    def token
+      context[:token]
+    end
+
+    def token_payload
+      context[:token_payload]
+    end
+
   end
 end

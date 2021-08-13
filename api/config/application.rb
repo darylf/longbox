@@ -11,6 +11,7 @@ require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 # require "action_view/railtie"
+# require "action_cable/engine"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -32,10 +33,7 @@ module LongboxApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    config.hosts.clear
 
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
-    config.middleware.use ActionDispatch::Flash # required for cookies, for some reason [?]
+    config.authentication_token = ENV.fetch("AUTH_SECRET_TOKEN", Rails.application.credentials.secret_key_base)
   end
 end
