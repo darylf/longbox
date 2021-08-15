@@ -8,7 +8,7 @@ export default function BrowseCollection(): ReactElement {
       <Heading>Explore</Heading>
       <List>
         <ListItem>
-          <Link to={"/publishers"}>Browse Publishers</Link>
+          <Link to="/publishers">Browse Publishers</Link>
         </ListItem>
       </List>
     </Stack>

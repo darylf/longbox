@@ -25,6 +25,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
+  ignorePatterns: ['use-graphql.tsx'],
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     semi: 'error',
