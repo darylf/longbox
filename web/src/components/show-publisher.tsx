@@ -8,7 +8,6 @@ interface Props {
 }
 
 function ShowPublisher({ publisher }: Props): React.ReactElement {
-  console.log(publisher);
   return (
     <>
       <Box p={6}>
