@@ -26,8 +26,8 @@ function ViewSeries(): React.ReactElement {
     },
   });
 
-  const handleSubmit = (series: Partial<Series>) => {
-    updateSeries({ variables: { id, name: series.name ?? "" } });
+  const handleSubmit = (seriesParam: Partial<Series>) => {
+    updateSeries({ variables: { id, name: seriesParam.name ?? "" } });
   };
 
   if (loading) return <p>Loading...</p>;

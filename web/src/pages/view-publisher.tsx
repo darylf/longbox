@@ -31,11 +31,11 @@ function ViewPublisher(): React.ReactElement {
           setIsModalOpen(false);
         }
       },
-      onError: (error) => console.error(error),
+      onError: (err) => console.error(err),
     });
 
-  const handleSubmit = (publisher: Partial<Publisher>) => {
-    updatePublisher({ variables: { id, name: publisher.name ?? "" } });
+  const handleSubmit = (publisherParam: Partial<Publisher>) => {
+    updatePublisher({ variables: { id, name: publisherParam.name ?? "" } });
   };
 
   if (loading) return <p>Loading...</p>;

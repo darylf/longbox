@@ -76,3 +76,8 @@ export default function PublisherForm({
     </>
   );
 }
+
+PublisherForm.defaultProps = {
+  series: {},
+  userErrors: undefined,
+};

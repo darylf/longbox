@@ -1,7 +1,7 @@
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import Link from "../components/link";
 import { Book } from "../hooks/use-graphql";
+import Link from "./link";
 
 interface BookTableProps {
   books: Array<Book>;

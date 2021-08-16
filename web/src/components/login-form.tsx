@@ -44,7 +44,6 @@ export function LoginForm(): ReactElement {
   const onLogin = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log("Logigng in?");
       if (emailRef.current && passwordRef.current) {
         login(emailRef.current.value, passwordRef.current.value, handleError);
       }

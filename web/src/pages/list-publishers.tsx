@@ -15,15 +15,15 @@ function NewPublisherForm(): React.ReactElement {
     variables: {
       name: `${publisher?.name}`,
     },
-    onCompleted: (data) => {
-      console.log("Success! Created ", data.createPublisher?.publisher?.id);
+    onCompleted: () => {
+      // console.log("Success! Created ", data.createPublisher?.publisher?.id);
       setIsModalOpen(false);
     },
     onError: (error) => console.error("An error has occured", error),
   });
 
-  const handleSubmit = (publisher: Partial<Publisher>) => {
-    createPublisher({ variables: { name: publisher.name ?? "" } });
+  const handleSubmit = (publisherParam: Partial<Publisher>) => {
+    createPublisher({ variables: { name: publisherParam.name ?? "" } });
   };
 
   return (

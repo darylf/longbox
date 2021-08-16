@@ -8,8 +8,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import Link from "../components/link";
 import { Series } from "../hooks/use-graphql";
+import Link from "./link";
 
 interface Props {
   series: Series;

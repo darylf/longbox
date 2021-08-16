@@ -2,9 +2,9 @@ import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
+  concat,
   HttpLink,
   InMemoryCache,
-  concat,
 } from "@apollo/client";
 import React, { ReactElement, ReactNode } from "react";
 

@@ -9,8 +9,8 @@ import {
   MenuItem,
   MenuList,
   Text,
-  VStack,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { FiChevronDown } from "react-icons/fi";
