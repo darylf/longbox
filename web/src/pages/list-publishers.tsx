@@ -15,8 +15,8 @@ function NewPublisherForm(): React.ReactElement {
     variables: {
       name: `${publisher?.name}`,
     },
-    onCompleted: () => {
-      // console.log("Success! Created ", data.createPublisher?.publisher?.id);
+    onCompleted: (data) => {
+      console.log("Success! Created ", data.createPublisher?.id);
       setIsModalOpen(false);
     },
     onError: (error) => console.error("An error has occured", error),
@@ -34,7 +34,7 @@ function NewPublisherForm(): React.ReactElement {
       isModalOpen={isModalOpen}
       publisher={publisher as Publisher}
       setIsModalOpen={setIsModalOpen}
-      userErrors={data?.createPublisher?.errors}
+      userErrors={[]}
     />
   );
 }

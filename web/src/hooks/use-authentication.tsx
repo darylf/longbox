@@ -120,11 +120,11 @@ function useAuthenticationManager(initialLoginState: LoginState): {
     onCompleted: (data) => {
       if (data.login && data.login.me) {
         const { me, accessToken, refreshToken } = data.login;
-        sessionStorage.setItem(TOKEN, accessToken);
+        sessionStorage.setItem(TOKEN, refreshToken);
         sessionStorage.setItem(USER, JSON.stringify(me));
         dispatch({
           type: "LOGIN_SUCCESS",
-          token: accessToken,
+          token: refreshToken,
           user: me,
         });
         dispatch({ type: "LOGIN_LOADING", loading: false });

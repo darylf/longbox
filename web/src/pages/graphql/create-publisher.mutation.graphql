@@ -1,12 +1,8 @@
 mutation CreatePublisher($name: String!) {
-  createPublisher(attributes: { name: $name }) {
-    publisher {
-      id
-      name
-    }
-    errors {
-      path
-      message
-    }
+  createPublisher(input: { name: $name }) {
+    id
+    name
+    createdAt
+    updatedAt
   }
 }
