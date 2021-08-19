@@ -41,8 +41,14 @@ module.exports = {
   },
   devServer: {
     port: process.env.PORT,
-    sockPort: 3001,
-    contentBase: path.join(__dirname, 'public'),
+    client: {
+      webSocketURL: {
+        port: 3001
+      }
+    },
+    static: {
+      directory: path.join(__dirname, 'public')
+    },
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
