@@ -1,6 +1,7 @@
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import {
   Button,
+  FormControl,
+  FormLabel,
   Input,
   Modal,
   ModalBody,
