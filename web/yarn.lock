@@ -1756,12 +1756,12 @@
     "@graphql-tools/utils" "^8.0.1"
     tslib "~2.3.0"
 
-"@graphql-codegen/fragment-matcher@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-3.0.0.tgz#0a688b38f5081ba0023c450732a2eee614f18438"
-  integrity sha512-tSxS0v3AQ5kl08KXVfFCCoYjcPsKeG7DeH3FNoCztr/Cdxf6gwApmlr0rZQLcWPLsyV89cqGw3d2kf+oy8J99Q==
+"@graphql-codegen/fragment-matcher@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-3.1.0.tgz#837cecc9b195e63a627c9570273b403bada90507"
+  integrity sha512-CNn5zVMGxXhVWlrBHKtWMN/IVV1oJQnaBwhhjplLqBdUNAk+fATcoznFjnIRthcJiLNUQlM4dm2bc0sa/ZMUXA==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.0.0"
+    "@graphql-codegen/plugin-helpers" "^2.1.0"
     tslib "~2.3.0"
 
 "@graphql-codegen/import-types-preset@^2.0.0":
