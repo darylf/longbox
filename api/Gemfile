@@ -20,7 +20,7 @@ gem 'graphql', '~> 1.12.14'
 gem 'puma', '~> 5.4.0'
 
 group :development do
-  gem 'faker', '~> 2.18.0'
+  gem 'faker', '~> 2.19.0'
   gem 'graphiql-rails'
   gem 'listen', '>= 3.3'
   gem "rubocop", require: false
