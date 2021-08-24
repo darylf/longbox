@@ -4,7 +4,6 @@ class SavePublisher
   delegate :user, :token, :everywhere, to: :context
 
   def call
-    puts ">>>>>>>>>>>>>>>> #{user}"
     publisher = Publisher.new(name: context.name)
     publisher.created_by << user
     publisher.updated_by << user
@@ -18,5 +17,4 @@ class SavePublisher
   def error_data
     { message: "Record Invalid", detail: context.publisher.errors.to_a }
   end
-
 end

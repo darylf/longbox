@@ -1,4 +1,3 @@
-
 module ExecutionErrorResponder
   extend ActiveSupport::Concern
 

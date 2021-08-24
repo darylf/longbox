@@ -2,14 +2,10 @@ module HasAuthentication
   private
 
   def current_user
-    puts "TOKEN?? #{token.to_json}"
-    puts "PAYLOAD?? #{payload.to_json}"
     return unless token && payload
-    puts "ACTIVE REFRESH TOKEN??"
+
     return unless active_refresh_token?
 
-    puts "FIND USER??"
-    puts "#{payload.to_json}"
     User.find_by(id: payload["sub"])
   end
 
@@ -28,7 +24,6 @@ module HasAuthentication
   end
 
   def active_refresh_token?
-    puts ">>>>>>>>>>>JTI??? #{jti.to_json}"
     RefreshToken.active.exists?(jti: jti)
   end
 end

@@ -1,4 +1,3 @@
-
 module TransactionalInteractor
   extend ActiveSupport::Concern
 

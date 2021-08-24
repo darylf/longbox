@@ -3,8 +3,8 @@ module UserStampable
   included do
     attr_accessible :created_by
     attr_accessible :updated_by
-    belongs_to :created_by, class_name: "User", foreign_key: :created_by_id
-    belongs_to :updated_by, class_name: "User", foreign_key: :updated_by_id
+    belongs_to :created_by, class_name: "User"
+    belongs_to :updated_by, class_name: "User"
     before_create :user_stamp_create
     before_create :user_stamp_update
   end
@@ -18,4 +18,3 @@ module UserStampable
     self.updated_by = current_user
   end
 end
-
