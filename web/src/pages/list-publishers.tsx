@@ -11,12 +11,11 @@ import {
 function NewPublisherForm(): React.ReactElement {
   const [publisher, setPublisher] = useState<Publisher | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [createPublisher, { data, loading }] = useCreatePublisherMutation({
+  const [createPublisher, { loading }] = useCreatePublisherMutation({
     variables: {
       name: `${publisher?.name}`,
     },
     onCompleted: (data) => {
-      console.log("Success! Created ", data.createPublisher?.id);
       setIsModalOpen(false);
     },
     onError: (error) => console.error("An error has occured", error),

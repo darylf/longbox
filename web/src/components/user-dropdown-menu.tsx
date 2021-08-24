@@ -14,12 +14,12 @@ import {
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { FiChevronDown } from "react-icons/fi";
-import Link from "../components/link";
 import {
   useLoginState,
   useLogout,
   UserAttributes,
 } from "../hooks/use-authentication";
+import Link from "./link";
 
 export function LoginControl(): ReactElement {
   return (
