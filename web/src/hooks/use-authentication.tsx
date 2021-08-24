@@ -4,7 +4,7 @@ import React, {
   useContext,
   useReducer,
 } from "react";
-import { useLoginMutation, useLogoutMutation } from "./use-graphql";
+import { useLoginMutation, useLogOutMutation } from "./use-graphql";
 
 const TOKEN = "token";
 const USER = "attributes";
@@ -118,18 +118,17 @@ function useAuthenticationManager(initialLoginState: LoginState): {
 
   const [loginMutation] = useLoginMutation({
     onCompleted: (data) => {
-      const attributes = data.login;
-      if (attributes?.jwt && attributes.user) {
-        sessionStorage.setItem(TOKEN, attributes.jwt);
-        sessionStorage.setItem(USER, JSON.stringify(attributes.user));
+      if (data.login && data.login.me) {
+        const { me, accessToken, refreshToken } = data.login;
+        sessionStorage.setItem(TOKEN, refreshToken);
+        sessionStorage.setItem(USER, JSON.stringify(me));
         dispatch({
           type: "LOGIN_SUCCESS",
-          token: attributes.jwt,
-          user: attributes.user,
+          token: refreshToken,
+          user: me,
         });
         dispatch({ type: "LOGIN_LOADING", loading: false });
       }
-      // loginMutation({ variables: { email: "", password: "" } });
     },
     onError: (error) => {
       console.error(error);
@@ -137,7 +136,7 @@ function useAuthenticationManager(initialLoginState: LoginState): {
     },
   });
 
-  const [logoutMutation] = useLogoutMutation({
+  const [logoutMutation] = useLogOutMutation({
     onCompleted: () => {
       sessionStorage.clear();
       dispatch({

@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :assignments,
            dependent: :destroy
 
+  has_many :refresh_tokens,
+           dependent: :destroy
+
   has_many :user_roles,
            through: :assignments
 
@@ -16,7 +19,7 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false },
             length: { minimum: 4, maximum: 254 },
-            format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+            format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def gravatar_url(size = 64)
     size = 64 if size < 1 || size > 2048

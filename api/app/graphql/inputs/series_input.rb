@@ -1,5 +1,5 @@
 module Inputs
-  class PublisherAttributesType < Types::BaseInputObject
+  class SeriesInput < Types::BaseInputObject
     argument :name, String, required: false
   end
 end

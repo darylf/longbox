@@ -1,30 +1,18 @@
 module Mutations
   class CreatePublisher < Mutations::BaseMutation
-    field :publisher, Types::PublisherType, null: true
-    field :errors, [Types::UserError], null: false, description: 'In case of failure, there will be errors in this list'
+    include AuthenticatableGraphqlUser
 
-    argument :attributes, Inputs::PublisherAttributesType, required: true
+    argument :input, Inputs::PublisherInput, required: true
 
-    def resolve(attributes:)
-      publisher = Publisher.create(name: attributes[:name])
+    type Types::PublisherType
 
-      if publisher.save
-        {
-          publisher: publisher,
-          errors: []
-        }
+    def resolve(input:)
+      publisher = SavePublisher.call(input.to_h)
+
+      if publisher.success?
+        publisher
       else
-        user_errors = publisher.errors.map do |error|
-          path = ["attributes", error.attribute.to_s.camelize(:lower)]
-          {
-            path: path,
-            message: error.full_message
-          }
-        end
-        {
-          publisher: nil,
-          errors: user_errors
-        }
+        execution_error(error_data: publisher.error_data)
       end
     end
   end

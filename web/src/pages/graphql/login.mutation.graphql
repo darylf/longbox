@@ -1,17 +1,13 @@
 mutation Login($email: String!, $password: String!) {
-  login(email: $email, password: $password) {
-    csrf
-    jwt
-    refresh
-    refreshExpiresAt
-    user {
+  login(input: { email: $email, password: $password }) {
+    me {
       id
+      avatar
       name
       email
-      avatar
       roles
-      createdAt
-      updatedAt
     }
+    accessToken
+    refreshToken
   }
 }

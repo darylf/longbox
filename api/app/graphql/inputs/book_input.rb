@@ -1,5 +1,5 @@
 module Inputs
-  class BookAttributesType < Types::BaseInputObject
+  class BookInput < Types::BaseInputObject
     argument :age_rating, String, required: false
     argument :alternate_title, String, required: false
     argument :credit_ids, [ID], required: false

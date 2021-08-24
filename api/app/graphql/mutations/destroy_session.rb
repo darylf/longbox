@@ -1,19 +1,17 @@
 module Mutations
-  class DestroySession < Mutations::BaseMutation
-    class AuthenticationError < StandardError; end
-
-    field :exit, String, null: true
-
+  class DestroySession < BaseMutation
+    include AuthenticatableGraphqlUser
     graphql_name 'Logout'
 
-    def resolve(**_args)
-      session = JWTSessions::Session.new
-      session.flush_by_access_payload
+    argument :input, Inputs::LogOutInput, required: true
 
-      context[:current_user] = nil
-      context[:jwt] = nil
+    type Types::MessageType
+
+    def resolve(input:)
+      LogOutUser.call(token: token, user: current_user, everywhere: input.everywhere)
 
       {
+        message: "User signed out successfully"
       }
     end
   end

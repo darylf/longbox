@@ -4,7 +4,7 @@ module Mutations
     field :errors, [Types::UserError], null: false
 
     argument :id, ID, required: true
-    argument :attributes, Inputs::PublisherAttributesType, required: true
+    argument :attributes, Inputs::PublisherInput, required: true
 
     def resolve(id:, attributes:)
       publisher = Publisher.find(id)

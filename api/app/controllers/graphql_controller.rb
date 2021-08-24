@@ -1,37 +1,41 @@
 class GraphqlController < ApplicationController
   def execute
-    variables = prepare_variables(params[:variables])
-    query = params[:query]
-    operation_name = params[:operationName]
-    context = {
-      context_user: current_user
-    }
-    result = LongboxApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    render json: result
+    render json: execute_query
   rescue StandardError => e
     raise e unless Rails.env.development?
 
-    handle_error_in_development(e)
+    handle_error_in_development e
   end
 
   private
 
-  def prepare_variables(variables_param)
-    case variables_param
+  def execute_query
+    LongboxApiSchema.execute(
+      params[:query],
+      variables: ensure_hash(params[:variables]),
+      context: execution_context,
+      operation_name: params[:operationName]
+    )
+  end
+
+  def execution_context
+    {
+      current_user: current_user,
+      token: token,
+      token_payload: payload
+    }
+  end
+
+  def ensure_hash(ambiguous_param)
+    case ambiguous_param
     when String
-      if variables_param.present?
-        JSON.parse(variables_param) || {}
-      else
-        {}
-      end
-    when Hash
-      variables_param
-    when ActionController::Parameters
-      variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
+      ambiguous_param.present? ? ensure_hash(JSON.parse(ambiguous_param)) : {}
+    when Hash, ActionController::Parameters
+      ambiguous_param
     when nil
       {}
     else
-      raise ArgumentError, "Unexpected parameter: #{variables_param}"
+      raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
     end
   end
 
@@ -39,6 +43,8 @@ class GraphqlController < ApplicationController
     logger.error exception.message
     logger.error exception.backtrace.join("\n")
 
-    render json: { errors: [{ message: exception.message, backtrace: exception.backtrace }], data: {} }, status: :internal_server_error
+    error = { error: { message: exception.message, backtrace: exception.backtrace }, data: {} }
+
+    render json: error, status: :internal_server_error
   end
 end

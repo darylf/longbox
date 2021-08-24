@@ -28,7 +28,9 @@ const BookTable = ({ books }: BookTableProps): ReactElement => (
           <Td>{book.price}</Td>
           <Td>{book.pageCount}</Td>
           <Td>
-            <Link to={`/comics/${book.id}`}>View</Link>
+            <Link to={`/comics/${book.id}`} color="blue.400">
+              View
+            </Link>
           </Td>
         </Tr>
       ))}

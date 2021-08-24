@@ -1,28 +1,17 @@
 module Mutations
-  class UpdateSession < Mutations::BaseMutation
-    class AuthenticationError < StandardError; end
+  class UpdateSession < BaseMutation
+    include AuthenticatableGraphqlUser
 
-    field :csrf, String, null: false
+    type Types::AuthenticationResultType
 
-    graphql_name 'Refresh'
+    def resolve
+      update_token = UpdateTokenPair.call(user: current_user, token: token, token_payload: token_payload)
 
-    def resolve(**_args)
-      authorize_refresh_by_access_request!
-
-      session = JWTSessions::Session.new(payload: claimless_payload, refresh_by_access_allowed: true)
-
-      tokens = session.refresh_by_access_payload do
-        raise JWTSessions::Errors::Unauthorized, 'Malicious activity detected'
+      if update_token.success?
+        update_token
+      else
+        execution_error(error_data: update_token.error_data)
       end
-
-      response.set_cookie(JWTSessions.access_cookie,
-                          value: tokens[:access],
-                          httponly: true,
-                          secure: Rails.env.production?)
-
-      { csrf: tokens[:csrf] }
-    rescue AuthenticationError
-      GraphQL::ExecutionError.new('Invalid credentials', options: { status: :unprocessable_entity, code: 401 })
     end
   end
 end
