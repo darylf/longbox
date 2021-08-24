@@ -24,7 +24,7 @@
     "react-dom": "^17.0.0",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -38,7 +38,7 @@
     "@graphql-codegen/named-operations-object": "^2.1.0",
     "@graphql-codegen/typescript": "^2.0.0",
     "@graphql-codegen/typescript-operations": "^2.1.1",
-    "@graphql-codegen/typescript-react-apollo": "^3.1.0",
+    "@graphql-codegen/typescript-react-apollo": "^3.1.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@types/html-webpack-plugin": "^3.2.6",
