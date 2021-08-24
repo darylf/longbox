@@ -15,7 +15,7 @@ gem 'jwt'
 gem 'rack-cors'
 
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'graphql', '~> 1.12.14'
+gem 'graphql', '~> 1.12.15'
 gem 'graphql-batch'
 gem "interactor"
 gem 'puma', '~> 5.4.0'
