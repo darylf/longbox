@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { FiChevronDown } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import Link from "../components/link";
 import {
   useLoginState,
   useLogout,

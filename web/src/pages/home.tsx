@@ -1,7 +1,7 @@
-import { Link, SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import { Link as LinkRouter } from "react-router-dom";
 import BookTable from "../components/book-table";
+import Link from "../components/link";
 import Panel from "../components/panel";
 import {
   Book,
@@ -80,10 +80,8 @@ export default function HomePage(): ReactElement {
           items={topPublishers}
           render={(item) => (
             <>
-              <Link as={LinkRouter} to={`/publishers/${item.id}`}>
-                {item.name}
-              </Link>{" "}
-              ({item.seriesCount})
+              <Link to={`/publishers/${item.id}`}>{item.name}</Link> (
+              {item.seriesCount})
             </>
           )}
         />
@@ -92,10 +90,8 @@ export default function HomePage(): ReactElement {
           items={topSeries}
           render={(item) => (
             <>
-              <Link as={LinkRouter} to={`/series/${item.id}`}>
-                {item.name}
-              </Link>{" "}
-              ({item.bookCount})
+              <Link to={`/series/${item.id}`}>{item.name}</Link> (
+              {item.bookCount})
             </>
           )}
         />
@@ -103,9 +99,7 @@ export default function HomePage(): ReactElement {
           headerText="Latest Books"
           items={latestBooks}
           render={(item) => (
-            <Link as={LinkRouter} to={`/comics/${item.id}`}>
-              {item.displayName}
-            </Link>
+            <Link to={`/comics/${item.id}`}>{item.displayName}</Link>
           )}
         />
       </SimpleGrid>
