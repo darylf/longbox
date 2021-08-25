@@ -15,7 +15,6 @@ services:
     build:
       context: ./api
       args:
-        RUBY_VERSION: "3.0.0"
         RAILS_ENV: development
         NODE_ENV: development
     ports:

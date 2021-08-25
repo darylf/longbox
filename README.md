@@ -74,7 +74,7 @@ setting everything up locally.
       examples only):
 
       ```bash
-      RUBY_VERSION="3.0.0"
+      RUBY_VERSION="3.0.2"
       DATABASE_URL=postgres://postgres:@db
       DATABASE_NAME=longbox
       DATABASE_USERNAME=postgres
