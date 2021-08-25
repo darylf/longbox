@@ -45,24 +45,28 @@ function ShowBook({ book }: Props): React.ReactElement {
             <TabPanels>
               <TabPanel>
                 <Box>
-                  <Text>
-                    Publisher:
-                    <Link to={`/publishers/${book.publisher?.id}`}>
-                      {book.publisher?.name}
-                    </Link>
-                  </Text>
-                  <Text>
-                    Series:
-                    <Link to={`/series/${book.series?.id}`}>
-                      {book.series?.name}
-                    </Link>
-                  </Text>
-                  <Text>Age Rating: {book.ageRating}</Text>
-                  <Text>Title: {book.alternateTitle}</Text>
-                  <Text>Pages: {book.pageCount}</Text>
-                  <Text>Cover price: {book.price}</Text>
-                  <Text>Publication date: {book.publicationDate}</Text>
-                  <Text>Summary: {book.summary}</Text>
+                  <Stack>
+                    <Text>
+                      Publisher:
+                      <Link to={`/publishers/${book.publisher?.id}`}>
+                        {book.publisher?.name}
+                      </Link>
+                    </Text>
+                    <Text>
+                      Series:
+                      <Link to={`/series/${book.series?.id}`}>
+                        {book.series?.name}
+                      </Link>
+                    </Text>
+                    <Text>Age Rating: {book.ageRating}</Text>
+                    <Text>Title: {book.alternateTitle}</Text>
+                    <Text>Pages: {book.pageCount}</Text>
+                    <Text>Cover price: {book.price}</Text>
+                    <Text>Publication date: {book.publicationDate}</Text>
+                    <Text>Summary: {book.summary}</Text>
+                    <Text>Originally created:{book.createdAt} by Username</Text>
+                    <Text>Last updated at: {book.updatedAt} by Username</Text>
+                  </Stack>
                 </Box>
               </TabPanel>
               <TabPanel>
@@ -86,8 +90,6 @@ function ShowBook({ book }: Props): React.ReactElement {
           </Tabs>
         </Box>
       </Flex>
-      <Text>Originally created:{book.createdAt}</Text>
-      <Text>Last updated at {book.updatedAt}</Text>
     </>
   );
 }

@@ -11,9 +11,9 @@ const USER = "attributes";
 
 export type UserAttributes = {
   id: string;
-  name: string;
   avatar: string;
   roles: string[];
+  username: string;
 };
 
 type ActionType =

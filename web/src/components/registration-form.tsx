@@ -4,10 +4,10 @@ import React, {
   Dispatch,
   FormEvent,
   ReactElement,
-  useState
-} from 'react';
-import { Link } from 'react-router-dom';
-import { useRegisterMutation } from '../hooks/use-graphql';
+  useState,
+} from "react";
+import { Link } from "react-router-dom";
+import { useRegisterMutation } from "../hooks/use-graphql";
 
 type StatesIndex = {
   [key: string]: Dispatch<any>;
@@ -16,12 +16,12 @@ type StatesIndex = {
 function RegistrationForm(): ReactElement {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const [name, setName] = useState<string>();
+  const [username, setUsername] = useState<string>();
   const [register, { data, error }] = useRegisterMutation();
   const states: StatesIndex = {
     email: setEmail,
     password: setPassword,
-    name: setName
+    username: setUsername,
   };
 
   function submitForm(e: FormEvent) {
@@ -30,8 +30,8 @@ function RegistrationForm(): ReactElement {
       variables: {
         email: `${email}`,
         password: `${password}`,
-        name: `${name}`
-      }
+        username: `${username}`,
+      },
     });
   }
 
@@ -61,7 +61,7 @@ function RegistrationForm(): ReactElement {
             id="email"
             type="email"
             name="email"
-            onChange={(e) => onChange('email', e)}
+            onChange={(e) => onChange("email", e)}
             required
           />
         </div>
@@ -71,17 +71,17 @@ function RegistrationForm(): ReactElement {
             id="password"
             type="password"
             name="password"
-            onChange={(e) => onChange('password', e)}
+            onChange={(e) => onChange("password", e)}
             required
           />
         </div>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="username">Username:</label>
           <input
-            id="name"
+            id="username"
             type="text"
-            name="name"
-            onChange={(e) => onChange('name', e)}
+            name="username"
+            onChange={(e) => onChange("username", e)}
             required
           />
         </div>

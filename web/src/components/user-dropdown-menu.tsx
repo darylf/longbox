@@ -61,7 +61,7 @@ export function UserDropDownMenu({
               spacing="1px"
               ml="2"
             >
-              <Text fontSize="sm">{user?.name}</Text>
+              <Text fontSize="sm">{user?.username}</Text>
               <Text fontSize="xs" color="gray.600">
                 {getUserType(user)}
               </Text>

@@ -5,12 +5,13 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.citext :email, null: false
       t.string :password_digest, null: false
-      t.string :name
+      t.citext :username, null: false
 
       t.timestamps
     end
 
     add_index :users, :email, unique: true
+    add_index :users, :username, unique: true
 
     add_reference :books, :created_by, foreign_key: { to_table: :users }
     add_reference :books, :updated_by, foreign_key: { to_table: :users }
