@@ -3,9 +3,9 @@ mutation Login($email: String!, $password: String!) {
     me {
       id
       avatar
-      name
       email
       roles
+      username
     }
     accessToken
     refreshToken

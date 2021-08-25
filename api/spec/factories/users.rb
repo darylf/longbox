@@ -3,7 +3,9 @@ FactoryBot.define do
     sequence :email do |n|
       "person#{n}@example.com"
     end
-    name { "John" }
+    sequence :username do |n|
+      "peter_parker_#{n}"
+    end
     password_digest { "Password1" }
   end
 end

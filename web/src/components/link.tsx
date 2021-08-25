@@ -3,21 +3,22 @@ import {
   LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
 
-interface LinkProps extends ChakraLinkProps {
-  children?: React.ReactNode;
-  to: string;
-}
+type LinkProps = RouterLinkProps & ChakraLinkProps;
 
-const Link = ({ children, to }: LinkProps): ReactElement => (
-  <ChakraLink as={RouterLink} to={to}>
+const Link = ({ children, to, color }: LinkProps): ReactElement => (
+  <ChakraLink as={RouterLink} to={to} color={color}>
     {children}
   </ChakraLink>
 );
 
 Link.defaultProps = {
   children: <></>,
+  color: "blue.500",
 };
 
 export default Link;

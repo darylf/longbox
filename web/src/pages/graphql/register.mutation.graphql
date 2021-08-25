@@ -1,11 +1,11 @@
-mutation Register($name: String!, $email: String!, $password: String!) {
-  register(input: { name: $name, email: $email, password: $password }) {
+mutation Register($username: String!, $email: String!, $password: String!) {
+  register(input: { username: $username, email: $email, password: $password }) {
     me {
       id
       avatar
       email
-      name
       roles
+      username
     }
     accessToken
     refreshToken

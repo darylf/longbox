@@ -336,7 +336,7 @@ export type QueryUsersArgs = {
 export type RegistrationInput = {
   email: Scalars['String'];
   password: Scalars['String'];
-  name: Scalars['String'];
+  username: Scalars['String'];
 };
 
 /** A collection of related books */
@@ -426,9 +426,9 @@ export type User = {
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   id: Scalars['ID'];
-  name: Scalars['String'];
   roles: Array<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
+  username: Scalars['String'];
 };
 
 /** The connection type for User. */
@@ -494,7 +494,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: Maybe<{ __typename?: 'AuthenticationResult', accessToken: string, refreshToken: string, me?: Maybe<{ __typename?: 'User', id: string, avatar: string, name: string, email: string, roles: Array<string> }> }> };
+export type LoginMutation = { __typename?: 'Mutation', login?: Maybe<{ __typename?: 'AuthenticationResult', accessToken: string, refreshToken: string, me?: Maybe<{ __typename?: 'User', id: string, avatar: string, email: string, roles: Array<string>, username: string }> }> };
 
 export type LogOutMutationVariables = Exact<{
   everywhere?: Maybe<Scalars['Boolean']>;
@@ -543,13 +543,13 @@ export type RankedSeriesListQueryVariables = Exact<{
 export type RankedSeriesListQuery = { __typename?: 'Query', seriesList: { __typename?: 'SeriesConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Series', id: string, name: string, publisherName?: Maybe<string>, bookCount: number }>>> } };
 
 export type RegisterMutationVariables = Exact<{
-  name: Scalars['String'];
+  username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register?: Maybe<{ __typename?: 'AuthenticationResult', accessToken: string, refreshToken: string, me?: Maybe<{ __typename?: 'User', id: string, avatar: string, email: string, name: string, roles: Array<string> }> }> };
+export type RegisterMutation = { __typename?: 'Mutation', register?: Maybe<{ __typename?: 'AuthenticationResult', accessToken: string, refreshToken: string, me?: Maybe<{ __typename?: 'User', id: string, avatar: string, email: string, roles: Array<string>, username: string }> }> };
 
 export type SeriesQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -770,9 +770,9 @@ export const LoginDocument = gql`
     me {
       id
       avatar
-      name
       email
       roles
+      username
     }
     accessToken
     refreshToken
@@ -1048,14 +1048,14 @@ export type RankedSeriesListQueryHookResult = ReturnType<typeof useRankedSeriesL
 export type RankedSeriesListLazyQueryHookResult = ReturnType<typeof useRankedSeriesListLazyQuery>;
 export type RankedSeriesListQueryResult = Apollo.QueryResult<RankedSeriesListQuery, RankedSeriesListQueryVariables>;
 export const RegisterDocument = gql`
-    mutation Register($name: String!, $email: String!, $password: String!) {
-  register(input: {name: $name, email: $email, password: $password}) {
+    mutation Register($username: String!, $email: String!, $password: String!) {
+  register(input: {username: $username, email: $email, password: $password}) {
     me {
       id
       avatar
       email
-      name
       roles
+      username
     }
     accessToken
     refreshToken
@@ -1077,7 +1077,7 @@ export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, Regis
  * @example
  * const [registerMutation, { data, loading, error }] = useRegisterMutation({
  *   variables: {
- *      name: // value for 'name'
+ *      username: // value for 'username'
  *      email: // value for 'email'
  *      password: // value for 'password'
  *   },

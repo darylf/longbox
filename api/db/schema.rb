@@ -19,12 +19,8 @@ ActiveRecord::Schema.define(version: 2021_08_13_154417) do
   create_table "assignments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "user_role_id", null: false
-    t.bigint "created_by_id", null: false
-    t.bigint "updated_by_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["created_by_id"], name: "index_assignments_on_created_by_id"
-    t.index ["updated_by_id"], name: "index_assignments_on_updated_by_id"
     t.index ["user_id", "user_role_id"], name: "index_assignments_on_user_id_and_user_role_id", unique: true
     t.index ["user_id"], name: "index_assignments_on_user_id"
     t.index ["user_role_id"], name: "index_assignments_on_user_role_id"
@@ -138,16 +134,15 @@ ActiveRecord::Schema.define(version: 2021_08_13_154417) do
   create_table "users", force: :cascade do |t|
     t.citext "email", null: false
     t.string "password_digest", null: false
-    t.string "name"
+    t.citext "username", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "assignments", "user_roles"
   add_foreign_key "assignments", "users"
-  add_foreign_key "assignments", "users", column: "created_by_id"
-  add_foreign_key "assignments", "users", column: "updated_by_id"
   add_foreign_key "books", "book_formats"
   add_foreign_key "books", "series"
   add_foreign_key "books", "users", column: "created_by_id"

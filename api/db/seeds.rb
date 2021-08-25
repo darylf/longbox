@@ -32,11 +32,14 @@ if CLEAN_ALL_RECORDS
   User.destroy_all
 end
 
-ADMIN_USER = User.find_or_create_by(email: 'daryl@example.com') do |user|
-  user.name = 'Daryl'
+ADMIN_USER = User.find_or_create_by(email: 'daryl@example.com', username: 'Daryl') do |user|
   user.password = 'password'
-  user.user_roles << UserRole.find_or_create_by(name: 'Admin')
 end
+
+Assignment.create(
+  user_role: UserRole.find_or_create_by(name: 'Admin'),
+  user: ADMIN_USER)
+
 
 Dir[Rails.root.join('db', 'seeds', '*.rb')].sort.each do |file|
   require file

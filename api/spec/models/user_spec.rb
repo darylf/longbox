@@ -8,10 +8,10 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
-    describe ".name" do
-      it { should validate_presence_of(:name) }
-      it { should validate_length_of(:name).is_at_least(3) }
-      it { should validate_length_of(:name).is_at_most(50) }
+    describe ".username" do
+      it { should validate_presence_of(:username) }
+      it { should validate_length_of(:username).is_at_least(3) }
+      it { should validate_length_of(:username).is_at_most(50) }
     end
 
     describe ".email" do
