@@ -45,7 +45,6 @@ function ViewPublisher(): React.ReactElement {
     <>
       {publisher && (
         <>
-          {/* <Helmet title={`${publisher.name}`} /> */}
           <Stack>
             <Box mt={2}>
               <ShowPublisher publisher={publisher} />

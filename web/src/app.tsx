@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Layout from "./components/layout";
 import * as Pages from "./pages";
@@ -12,10 +11,6 @@ export const PageTitle = (title: string) =>
 
 const App = (): ReactElement => (
   <>
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>Longbox</title>
-    </Helmet>
     <Router>
       <AppProvider>
         <Layout>
