@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import PublisherForm from "../components/publisher-form";
@@ -45,20 +45,25 @@ function ViewPublisher(): React.ReactElement {
     <>
       {publisher && (
         <>
-          <ShowPublisher publisher={publisher} />
-          {authenticated && (
-            <Box mt={2} textAlign="right">
-              <PublisherForm
-                buttonText="Edit Publisher"
-                handleSubmit={handleSubmit}
-                isLoading={loading}
-                isModalOpen={isModalOpen}
-                publisher={publisher}
-                setIsModalOpen={setIsModalOpen}
-                userErrors={dataMutation?.updatePublisher?.errors}
-              />
+          {/* <Helmet title={`${publisher.name}`} /> */}
+          <Stack>
+            <Box mt={2}>
+              <ShowPublisher publisher={publisher} />
             </Box>
-          )}
+            {authenticated && (
+              <Box mt={2} textAlign="right">
+                <PublisherForm
+                  buttonText="Edit Publisher"
+                  handleSubmit={handleSubmit}
+                  isLoading={loading}
+                  isModalOpen={isModalOpen}
+                  publisher={publisher}
+                  setIsModalOpen={setIsModalOpen}
+                  userErrors={dataMutation?.updatePublisher?.errors}
+                />
+              </Box>
+            )}
+          </Stack>
         </>
       )}
     </>

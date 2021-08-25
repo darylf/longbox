@@ -1,4 +1,4 @@
-import { Box, Heading, List, ListItem } from "@chakra-ui/react";
+import { Box, Heading, ListItem, Stack, UnorderedList } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Link from "../components/link";
 import PublisherForm from "../components/publisher-form";
@@ -50,24 +50,24 @@ function Publishers(): React.ReactElement {
       .sort((a, b) => a!.name.localeCompare(b!.name)) ?? [];
 
   return (
-    <List>
+    <UnorderedList>
       {publisherList.map((p) => (
         <ListItem key={p?.id}>
           <Link to={`/publishers/${p?.id}`}>{p?.name}</Link>
         </ListItem>
       ))}
-    </List>
+    </UnorderedList>
   );
 }
 
 function ListPublishers(): React.ReactElement {
   return (
     <Box p="6">
-      <Heading>Publishers</Heading>
-      <div>
+      <Stack>
+        <Heading>Publishers</Heading>
         <NewPublisherForm />
         <Publishers />
-      </div>
+      </Stack>
     </Box>
   );
 }

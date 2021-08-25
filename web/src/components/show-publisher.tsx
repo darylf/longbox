@@ -9,7 +9,7 @@ interface Props {
 
 function ShowPublisher({ publisher }: Props): React.ReactElement {
   return (
-    <>
+    <Stack>
       <Box p={6}>
         <Box p={10}>
           <Stack spacing={0} align="center" mb={5}>
@@ -28,7 +28,7 @@ function ShowPublisher({ publisher }: Props): React.ReactElement {
       </Box>
       <Text>Originally created:{publisher.createdAt}</Text>
       <Text>Last updated at{publisher.updatedAt}</Text>
-    </>
+    </Stack>
   );
 }
 
