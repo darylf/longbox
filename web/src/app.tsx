@@ -19,6 +19,8 @@ const App = (): ReactElement => (
           <Route path="/publishers" component={Pages.ListPublishers} />
           <Route path="/series/:id" component={Pages.ViewSeries} />
           <Route path="/trending" component={Pages.Trending} />
+          <Route path="/users/:id" component={Pages.ViewUser} />
+          <Route path="/users" component={Pages.ListUsers} />
           <Route exact path="/" component={Pages.Home} />
         </Switch>
       </Layout>

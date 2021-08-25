@@ -1,0 +1,11 @@
+query Users {
+  users {
+    nodes {
+      id
+      avatar
+      email
+      roles
+      username
+    }
+  }
+}

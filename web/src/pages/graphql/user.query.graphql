@@ -1,0 +1,11 @@
+query User($id: ID!) {
+  user(id: $id) {
+    id
+    email
+    username
+    avatar
+    roles
+    createdAt
+    updatedAt
+  }
+}
