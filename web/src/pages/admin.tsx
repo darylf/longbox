@@ -1,21 +1,41 @@
+import {
+  Heading,
+  ListItem,
+  Stack,
+  Text,
+  UnorderedList,
+} from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import { Link } from "react-router-dom";
+import Link from "../components/link";
+import NewPublisherForm from "../components/new-publisher-form";
+import { useLoginState } from "../hooks/use-authentication";
 
-const AdminPage = (): ReactElement => (
-  <div>
-    <h1>Admin</h1>
-    <ul>
-      <li>
-        <Link to="/publishers/new">Create Publisher</Link>
-      </li>
-      <li>
-        <Link to="/series/new">Create Series</Link>
-      </li>
-      <li>
-        <Link to="/books/new">Create Book</Link>
-      </li>
-    </ul>
-  </div>
-);
+const AdminPage = (): ReactElement => {
+  const { authenticated } = useLoginState();
+  if (!authenticated) {
+    return (
+      <Stack p={6}>
+        <Heading>Access denied</Heading>
+        <Text>Please log in using the link in the header.</Text>
+      </Stack>
+    );
+  }
+  return (
+    <Stack p={6}>
+      <Heading>Administration</Heading>
+      <UnorderedList>
+        <ListItem>
+          <NewPublisherForm />
+        </ListItem>
+        <ListItem>
+          <Link to="/series/new">Create Series</Link>
+        </ListItem>
+        <ListItem>
+          <Link to="/books/new">Create Book</Link>
+        </ListItem>
+      </UnorderedList>
+    </Stack>
+  );
+};
 
 export default AdminPage;

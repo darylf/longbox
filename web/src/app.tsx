@@ -6,7 +6,7 @@ import AppProvider from "./providers";
 
 const SiteName = "Longbox";
 
-export const PageTitle = (title: string) =>
+export const PageTitle = (title: string): string =>
   title ? `${title} | ${SiteName}` : SiteName;
 
 const App = (): ReactElement => (

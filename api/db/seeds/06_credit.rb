@@ -4,7 +4,7 @@ progressbar = ProgressBar.create(
 )
 
 WRITER_ID = CreditRole.find_by(name: 'Writer')
-ARTIST_ID = CreditRole.find_by(name: 'Penciller')
+ARTIST_ID = CreditRole.find_by(name: 'Artist')
 CREATOR_ID = CreditRole.find_by(name: 'Creator')
 ROLE_IDS = CreditRole.ids
 CREATOR_IDS = Creator.ids

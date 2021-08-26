@@ -17,7 +17,8 @@ export const namedOperations = {
     RankedSeriesList: 'RankedSeriesList',
     Series: 'Series',
     User: 'User',
-    Users: 'Users'
+    Users: 'Users',
+    SeriesList: 'SeriesList'
   },
   Mutation: {
     CreatePublisher: 'CreatePublisher',
@@ -394,9 +395,9 @@ export type SeriesInput = {
 /** Attributes for defining the sorting of the query results */
 export type SortAttributes = {
   /** name of the field */
-  field: Scalars['String'];
+  field?: Maybe<Scalars['String']>;
   /** direction of the sort */
-  direction: SortDirectionEnum;
+  direction?: Maybe<SortDirectionEnum>;
 };
 
 export enum SortDirectionEnum {
@@ -518,7 +519,11 @@ export type PublisherQueryVariables = Exact<{
 
 export type PublisherQuery = { __typename?: 'Query', publisher: { __typename?: 'Publisher', id: string, name: string, createdAt: any, updatedAt: any, series: Array<{ __typename?: 'Series', id: string, name: string }> } };
 
-export type PublishersQueryVariables = Exact<{ [key: string]: never; }>;
+export type PublishersQueryVariables = Exact<{
+  field?: Maybe<Scalars['String']>;
+  direction?: Maybe<SortDirectionEnum>;
+  limit?: Maybe<Scalars['Int']>;
+}>;
 
 
 export type PublishersQuery = { __typename?: 'Query', publishers: { __typename?: 'PublisherConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Publisher', id: string, name: string, seriesCount: number, series: Array<{ __typename?: 'Series', name: string }> }>>> } };
@@ -593,6 +598,15 @@ export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type UsersQuery = { __typename?: 'Query', users: { __typename?: 'UserConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'User', id: string, avatar: string, email: string, roles: Array<string>, username: string }>>> } };
+
+export type SeriesListQueryVariables = Exact<{
+  field?: Maybe<Scalars['String']>;
+  direction?: Maybe<SortDirectionEnum>;
+  limit?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type SeriesListQuery = { __typename?: 'Query', seriesList: { __typename?: 'SeriesConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Series', bookCount: number, id: string, name: string, publisherName?: Maybe<string> }>>> } };
 
 
 export const BookDocument = gql`
@@ -902,8 +916,8 @@ export type PublisherQueryHookResult = ReturnType<typeof usePublisherQuery>;
 export type PublisherLazyQueryHookResult = ReturnType<typeof usePublisherLazyQuery>;
 export type PublisherQueryResult = Apollo.QueryResult<PublisherQuery, PublisherQueryVariables>;
 export const PublishersDocument = gql`
-    query Publishers {
-  publishers {
+    query Publishers($field: String = "name", $direction: SortDirectionEnum = ASC, $limit: Int) {
+  publishers(sortBy: {field: $field, direction: $direction}, limit: $limit) {
     nodes {
       id
       name
@@ -928,6 +942,9 @@ export const PublishersDocument = gql`
  * @example
  * const { data, loading, error } = usePublishersQuery({
  *   variables: {
+ *      field: // value for 'field'
+ *      direction: // value for 'direction'
+ *      limit: // value for 'limit'
  *   },
  * });
  */
@@ -1316,3 +1333,45 @@ export function useUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<User
 export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
 export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
+export const SeriesListDocument = gql`
+    query SeriesList($field: String = "name", $direction: SortDirectionEnum = ASC, $limit: Int) {
+  seriesList(sortBy: {field: $field, direction: $direction}, limit: $limit) {
+    nodes {
+      bookCount
+      id
+      name
+      publisherName
+    }
+  }
+}
+    `;
+
+/**
+ * __useSeriesListQuery__
+ *
+ * To run a query within a React component, call `useSeriesListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSeriesListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSeriesListQuery({
+ *   variables: {
+ *      field: // value for 'field'
+ *      direction: // value for 'direction'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useSeriesListQuery(baseOptions?: Apollo.QueryHookOptions<SeriesListQuery, SeriesListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SeriesListQuery, SeriesListQueryVariables>(SeriesListDocument, options);
+      }
+export function useSeriesListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeriesListQuery, SeriesListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SeriesListQuery, SeriesListQueryVariables>(SeriesListDocument, options);
+        }
+export type SeriesListQueryHookResult = ReturnType<typeof useSeriesListQuery>;
+export type SeriesListLazyQueryHookResult = ReturnType<typeof useSeriesListLazyQuery>;
+export type SeriesListQueryResult = Apollo.QueryResult<SeriesListQuery, SeriesListQueryVariables>;

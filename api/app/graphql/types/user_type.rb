@@ -8,5 +8,9 @@ module Types
     field :email, String, null: false
     field :avatar, String, null: false, method: :gravatar_url
     field :roles, [String], null: false
+
+    def roles
+      object.roles.map(&:name)
+    end
   end
 end

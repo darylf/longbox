@@ -13,6 +13,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'rack-cors'
+gem "rolify"
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql', '~> 1.12.15'
