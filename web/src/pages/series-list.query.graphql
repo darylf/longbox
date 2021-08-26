@@ -1,0 +1,14 @@
+query SeriesList(
+  $field: String = "name"
+  $direction: SortDirectionEnum = ASC
+  $limit: Int
+) {
+  seriesList(sortBy: { field: $field, direction: $direction }, limit: $limit) {
+    nodes {
+      bookCount
+      id
+      name
+      publisherName
+    }
+  }
+}

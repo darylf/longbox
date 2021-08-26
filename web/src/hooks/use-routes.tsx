@@ -50,6 +50,9 @@ function getPath(key: PageKey): string {
   return getPageDetails(key).path;
 }
 
-export default function usePageRoutes() {
+export default function usePageRoutes(): {
+  PageKey: typeof PageKey;
+  getPath: typeof getPath;
+} {
   return { PageKey, getPath };
 }

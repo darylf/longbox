@@ -1,5 +1,9 @@
-query Publishers {
-  publishers {
+query Publishers(
+  $field: String = "name"
+  $direction: SortDirectionEnum = ASC
+  $limit: Int
+) {
+  publishers(sortBy: { field: $field, direction: $direction }, limit: $limit) {
     nodes {
       id
       name

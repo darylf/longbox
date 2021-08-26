@@ -158,6 +158,7 @@ GEM
       ffi (~> 1.0)
     regexp_parser (2.1.1)
     rexml (3.2.5)
+    rolify (6.0.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -247,6 +248,7 @@ DEPENDENCIES
   puma (~> 5.4.0)
   rack-cors
   rails (~> 6.1.4)
+  rolify
   rspec-graphql_matchers (~> 1.3.0)
   rspec-rails (~> 5.0.2)
   rubocop
@@ -263,4 +265,4 @@ RUBY VERSION
    ruby 3.0.0p0
 
 BUNDLED WITH
-   2.2.3
+   2.2.22

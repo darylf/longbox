@@ -19,20 +19,19 @@ function ViewPublisher(): React.ReactElement {
     variables: { id },
     onCompleted: (data) => setPublisher(data.publisher as Publisher),
   });
-  const [updatePublisher, { data: dataMutation, loading: loadingMutation }] =
-    useUpdatePublisherMutation({
-      variables: { id, name: publisher?.name ?? "" },
-      onCompleted: (data) => {
-        if (data.updatePublisher?.publisher) {
-          setPublisher({
-            ...publisher,
-            ...data.updatePublisher?.publisher,
-          } as Publisher);
-          setIsModalOpen(false);
-        }
-      },
-      onError: (err) => console.error(err),
-    });
+  const [updatePublisher, { data: dataMutation }] = useUpdatePublisherMutation({
+    variables: { id, name: publisher?.name ?? "" },
+    onCompleted: (data) => {
+      if (data.updatePublisher?.publisher) {
+        setPublisher({
+          ...publisher,
+          ...data.updatePublisher?.publisher,
+        } as Publisher);
+        setIsModalOpen(false);
+      }
+    },
+    onError: (err) => console.error(err),
+  });
 
   const handleSubmit = (publisherParam: Partial<Publisher>) => {
     updatePublisher({ variables: { id, name: publisherParam.name ?? "" } });

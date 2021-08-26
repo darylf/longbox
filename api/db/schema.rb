@@ -10,21 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_13_154417) do
+ActiveRecord::Schema.define(version: 2021_08_25_180710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
-
-  create_table "assignments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "user_role_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "user_role_id"], name: "index_assignments_on_user_id_and_user_role_id", unique: true
-    t.index ["user_id"], name: "index_assignments_on_user_id"
-    t.index ["user_role_id"], name: "index_assignments_on_user_role_id"
-  end
 
   create_table "book_formats", force: :cascade do |t|
     t.string "name", null: false
@@ -111,6 +101,16 @@ ActiveRecord::Schema.define(version: 2021_08_13_154417) do
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
   create_table "series", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "publisher_id"
@@ -124,13 +124,6 @@ ActiveRecord::Schema.define(version: 2021_08_13_154417) do
     t.index ["updated_by_id"], name: "index_series_on_updated_by_id"
   end
 
-  create_table "user_roles", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_user_roles_on_name", unique: true
-  end
-
   create_table "users", force: :cascade do |t|
     t.citext "email", null: false
     t.string "password_digest", null: false
@@ -141,8 +134,14 @@ ActiveRecord::Schema.define(version: 2021_08_13_154417) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "assignments", "user_roles"
-  add_foreign_key "assignments", "users"
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
   add_foreign_key "books", "book_formats"
   add_foreign_key "books", "series"
   add_foreign_key "books", "users", column: "created_by_id"

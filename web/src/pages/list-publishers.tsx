@@ -1,42 +1,8 @@
 import { Box, Heading, ListItem, Stack, UnorderedList } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import Link from "../components/link";
-import PublisherForm from "../components/publisher-form";
-import {
-  Publisher,
-  useCreatePublisherMutation,
-  usePublishersQuery,
-} from "../hooks/use-graphql";
-
-function NewPublisherForm(): React.ReactElement {
-  const [publisher, setPublisher] = useState<Publisher | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [createPublisher, { loading }] = useCreatePublisherMutation({
-    variables: {
-      name: `${publisher?.name}`,
-    },
-    onCompleted: (data) => {
-      setIsModalOpen(false);
-    },
-    onError: (error) => console.error("An error has occured", error),
-  });
-
-  const handleSubmit = (publisherParam: Partial<Publisher>) => {
-    createPublisher({ variables: { name: publisherParam.name ?? "" } });
-  };
-
-  return (
-    <PublisherForm
-      buttonText="Create a Publisher"
-      handleSubmit={handleSubmit}
-      isLoading={loading}
-      isModalOpen={isModalOpen}
-      publisher={publisher as Publisher}
-      setIsModalOpen={setIsModalOpen}
-      userErrors={[]}
-    />
-  );
-}
+import NewPublisherForm from "../components/new-publisher-form";
+import { usePublishersQuery } from "../hooks/use-graphql";
 
 function Publishers(): React.ReactElement {
   const { data, loading, error } = usePublishersQuery();
