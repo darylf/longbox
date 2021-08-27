@@ -2,7 +2,7 @@ return unless Rails.env.development?
 
 CLEAN_ALL_RECORDS = true
 USERS_TO_CREATE = 5
-CREATORS_TO_CREATE = 50..100
+CREATORS_TO_CREATE = 150..200
 SERIES_TO_CREATE = 70..99
 BOOKS_ON_EACH_SERIES = 7..12
 
@@ -10,7 +10,7 @@ def get_number_to_create(val)
   val.is_a?(Range) ? rand(val) : val
 end
 
-['Creator', 'Writer', 'Artist', 'Penciller', 'Colorist', 'Inker', 'Cover Artist', 'Letterer', 'Editor', 'Assistant Editor'].each do |c|
+['Writer', 'Artist', 'Creator', 'Penciller', 'Colorist', 'Inker', 'Cover Artist', 'Letterer', 'Editor', 'Assistant Editor'].each do |c|
   CreditRole.find_or_create_by(name: c)
 end
 

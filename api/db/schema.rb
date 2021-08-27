@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2021_08_25_180710) do
     t.bigint "book_id"
     t.bigint "creator_id"
     t.bigint "credit_role_id"
+    t.boolean "featured", default: false, null: false
+    t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "created_by_id"

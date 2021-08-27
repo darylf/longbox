@@ -7,5 +7,7 @@ module Types
     field :book, Types::BookType, null: false
     field :creator, Types::CreatorType, null: false
     field :role, String, null: false
+    field :featured, Boolean, null: false
+    field :position, Integer, null: true, description: "The position this creator should be listed in a featured list"
   end
 end

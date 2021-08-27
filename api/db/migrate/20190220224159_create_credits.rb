@@ -10,6 +10,8 @@ class CreateCredits < ActiveRecord::Migration[5.2]
       t.references :book, foreign_key: true
       t.references :creator, foreign_key: true
       t.references :credit_role, foreign_key: true
+      t.boolean :featured, null: false, default: false
+      t.integer :position
 
       t.timestamps
     end

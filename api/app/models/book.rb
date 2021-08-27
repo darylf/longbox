@@ -6,8 +6,12 @@ class Book < ApplicationRecord
 
   has_one :publisher, through: :series
 
-  has_many :creators, through: :credits
   has_many :credits, dependent: :destroy
+  has_many :creators, through: :credits do
+    def featured
+       where('featured = ?', true)
+    end
+  end
 
   delegate :name, to: :series, prefix: true, allow_nil: true
   delegate :name, to: :publisher, prefix: true, allow_nil: true
