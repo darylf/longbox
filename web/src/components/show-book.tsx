@@ -64,8 +64,14 @@ function ShowBook({ book }: Props): React.ReactElement {
                     <Text>Cover price: {book.price}</Text>
                     <Text>Publication date: {book.publicationDate}</Text>
                     <Text>Summary: {book.summary}</Text>
-                    <Text>Originally created:{book.createdAt} by Username</Text>
-                    <Text>Last updated at: {book.updatedAt} by Username</Text>
+                    <Text>
+                      Originally created:{book.createdAt} by{" "}
+                      {book.createdBy.username}
+                    </Text>
+                    <Text>
+                      Last updated at: {book.updatedAt} by{" "}
+                      {book.updatedBy.username}
+                    </Text>
                   </Stack>
                 </Box>
               </TabPanel>

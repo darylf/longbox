@@ -5,8 +5,8 @@ class SavePublisher
 
   def call
     publisher = Publisher.new(name: context.name)
-    publisher.created_by << user
-    publisher.updated_by << user
+    publisher.created_by = user
+    publisher.updated_by = user
 
     context.publisher = publisher
     context.fail!(error_data: error_data) unless context.publisher.save

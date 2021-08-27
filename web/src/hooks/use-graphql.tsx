@@ -52,6 +52,7 @@ export type Book = {
   ageRating?: Maybe<Scalars['String']>;
   alternateTitle?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
+  createdBy: User;
   credits?: Maybe<Array<Credit>>;
   displayName: Scalars['String'];
   format?: Maybe<Scalars['String']>;
@@ -66,6 +67,7 @@ export type Book = {
   seriesName?: Maybe<Scalars['String']>;
   summary?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
+  updatedBy: User;
 };
 
 /** The connection type for Book. */
@@ -474,7 +476,7 @@ export type BookQueryVariables = Exact<{
 }>;
 
 
-export type BookQuery = { __typename?: 'Query', book: { __typename?: 'Book', id: string, ageRating?: Maybe<string>, alternateTitle?: Maybe<string>, createdAt: any, displayName: string, format?: Maybe<string>, issue?: Maybe<string>, pageCount?: Maybe<string>, price?: Maybe<string>, publicationDate?: Maybe<string>, summary?: Maybe<string>, updatedAt: any, credits?: Maybe<Array<{ __typename?: 'Credit', role: string, creator: { __typename?: 'Creator', id: string, firstName?: Maybe<string>, lastName?: Maybe<string> } }>>, publisher?: Maybe<{ __typename?: 'Publisher', id: string, name: string }>, series?: Maybe<{ __typename?: 'Series', id: string, name: string }> } };
+export type BookQuery = { __typename?: 'Query', book: { __typename?: 'Book', id: string, ageRating?: Maybe<string>, alternateTitle?: Maybe<string>, createdAt: any, displayName: string, format?: Maybe<string>, issue?: Maybe<string>, pageCount?: Maybe<string>, price?: Maybe<string>, publicationDate?: Maybe<string>, summary?: Maybe<string>, updatedAt: any, createdBy: { __typename?: 'User', id: string, username: string }, credits?: Maybe<Array<{ __typename?: 'Credit', role: string, creator: { __typename?: 'Creator', id: string, firstName?: Maybe<string>, lastName?: Maybe<string> } }>>, publisher?: Maybe<{ __typename?: 'Publisher', id: string, name: string }>, series?: Maybe<{ __typename?: 'Series', id: string, name: string }>, updatedBy: { __typename?: 'User', id: string, username: string } } };
 
 export type BooksQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
@@ -616,6 +618,10 @@ export const BookDocument = gql`
     ageRating
     alternateTitle
     createdAt
+    createdBy {
+      id
+      username
+    }
     credits {
       creator {
         id
@@ -640,6 +646,10 @@ export const BookDocument = gql`
     }
     summary
     updatedAt
+    updatedBy {
+      id
+      username
+    }
   }
 }
     `;

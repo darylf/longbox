@@ -4,5 +4,7 @@ FactoryBot.define do
     alternate_title { "Test Title" }
     series
     book_format
+    created_by factory: :user
+    updated_by factory: :user
   end
 end

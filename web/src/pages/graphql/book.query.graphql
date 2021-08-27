@@ -4,6 +4,10 @@ query Book($id: ID!) {
     ageRating
     alternateTitle
     createdAt
+    createdBy {
+      id
+      username
+    }
     credits {
       creator {
         id
@@ -28,5 +32,9 @@ query Book($id: ID!) {
     }
     summary
     updatedAt
+    updatedBy {
+      id
+      username
+    }
   }
 }

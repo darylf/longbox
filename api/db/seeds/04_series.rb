@@ -21,7 +21,9 @@ end
 create_count.times do
   series = Series.find_or_create_by(
     name: generate_series_name,
-    publisher_id: PUBLISHER_IDS.sample
+    publisher_id: PUBLISHER_IDS.sample,
+    created_by: ADMIN_USER,
+    updated_by: ADMIN_USER
   )
   progressbar.increment
 end

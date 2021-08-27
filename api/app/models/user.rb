@@ -4,8 +4,7 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
-  has_many :refresh_tokens,
-           dependent: :destroy
+  has_many :refresh_tokens, dependent: :destroy
 
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },
@@ -19,7 +18,7 @@ class User < ApplicationRecord
 
   validates :username,
             format: { with: /\A[A-Za-z][A-Za-z0-9_-]+/ },
-            length: { minimum: 2, maximum: 15 },
+            length: { minimum: 2, maximum: 36 },
             presence: true,
             uniqueness: { case_sensitive: false }
 

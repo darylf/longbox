@@ -22,7 +22,9 @@ Series.all.each_with_index do |series,n|
       page_count: 23,
       price: 2.99,
       publication_date: pub_date,
-      age_rating: 'general'
+      age_rating: 'general',
+      created_by: ADMIN_USER,
+      updated_by: ADMIN_USER
     )
     progressbar.increment
   end

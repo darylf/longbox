@@ -17,6 +17,8 @@ module Types
     field :series, Types::SeriesType, null: true
     field :series_name, String, null: true
     field :summary, String, null: true
+    field :created_by, Types::UserType, null: false
+    field :updated_by, Types::UserType, null: false
 
     field :created_at, Types::DateTimeType, null: false
     field :updated_at, Types::DateTimeType, null: false

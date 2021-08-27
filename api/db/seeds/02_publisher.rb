@@ -18,6 +18,6 @@ def generate_publisher_name
 end
 
 publishers.each do |t|
-  Publisher.create name: t, created_by: ADMIN_USER, updated_by: ADMIN_USER
+  Publisher.create(name: t, created_by: ADMIN_USER, updated_by: ADMIN_USER)
   progressbar.increment
 end

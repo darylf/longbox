@@ -24,7 +24,9 @@ Series.all.each do |series|
       Credit.create(
         book_id: book_id,
         credit_role_id: rd[0],
-        creator_id: rd[1]
+        creator_id: rd[1],
+        created_by: ADMIN_USER,
+        updated_by: ADMIN_USER
       )
       progressbar.increment
     end

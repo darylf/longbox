@@ -1,7 +1,8 @@
 class Publisher < ApplicationRecord
-  has_many :series, dependent: :restrict_with_error
   belongs_to :created_by, class_name: "User"
   belongs_to :updated_by, class_name: "User"
+
+  has_many :series, dependent: :restrict_with_error
 
   validates :name, presence: true, length: { maximum: 120 }, uniqueness: true
 

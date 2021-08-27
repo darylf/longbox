@@ -12,12 +12,7 @@ function ViewBook(): React.ReactElement {
   if (error) return <p>An error has occured...</p>;
   if (data && data.book) showBook = <ShowBook book={data.book as Book} />;
 
-  return (
-    <>
-      View Book
-      {showBook}
-    </>
-  );
+  return <>{showBook}</>;
 }
 
 export default ViewBook;
