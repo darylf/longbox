@@ -13,6 +13,10 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false }
 
+  validates :password,
+            length: { minimum: 6, maximum: 254 },
+            presence: true
+
   validates :username,
             format: { with: /\A[A-Za-z][A-Za-z0-9_-]+/ },
             length: { minimum: 2, maximum: 15 },

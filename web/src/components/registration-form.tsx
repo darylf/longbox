@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { FormHelperText } from "@chakra-ui/react";
 import React, {
   ChangeEvent,
   Dispatch,
@@ -64,6 +65,7 @@ function RegistrationForm(): ReactElement {
             onChange={(e) => onChange("email", e)}
             required
           />
+          <FormHelperText>We'll never share your email.</FormHelperText>
         </div>
         <div>
           <label htmlFor="password">Password:</label>
@@ -74,6 +76,17 @@ function RegistrationForm(): ReactElement {
             onChange={(e) => onChange("password", e)}
             required
           />
+          <FormHelperText>
+            <p>Your password must:</p>
+            <ul>
+              <li>Be at least six characters long</li>
+              <li>Contain one or more numbers</li>
+              <li>
+                Include at least one of the following special characters:
+                !"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{"{"}|{"}"}~, or a space
+              </li>
+            </ul>
+          </FormHelperText>
         </div>
         <div>
           <label htmlFor="username">Username:</label>
@@ -84,6 +97,10 @@ function RegistrationForm(): ReactElement {
             onChange={(e) => onChange("username", e)}
             required
           />
+          <FormHelperText>
+            Your username should be between 2 and 15 characters, begin with a
+            letter and contain only letters, numbers, '_' or '-'
+          </FormHelperText>
         </div>
         <div>
           <button type="submit">Register</button>

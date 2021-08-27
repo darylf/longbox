@@ -6,6 +6,7 @@ FactoryBot.define do
     sequence :username do |n|
       "peter_parker_#{n}"
     end
+    password { "Password1" }
     password_digest { "Password1" }
   end
 end
