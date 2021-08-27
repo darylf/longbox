@@ -10,8 +10,14 @@ RSpec.describe User, type: :model do
 
     describe ".username" do
       it { should validate_presence_of(:username) }
-      it { should validate_length_of(:username).is_at_least(3) }
-      it { should validate_length_of(:username).is_at_most(50) }
+      it { should validate_length_of(:username).is_at_least(2) }
+      it { should validate_length_of(:username).is_at_most(15) }
+      it "should begin with a letter" do
+        ["1username", ".username", "_username", "-username"].each do |invalid_username|
+          user.username = invalid_username
+          expect(user).to be_invalid
+        end
+      end
     end
 
     describe ".email" do

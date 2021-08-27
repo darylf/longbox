@@ -14,8 +14,8 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   validates :username,
-            format: { with: /[A-Za-z0-9._-]/ },
-            length: { minimum: 3, maximum: 50 },
+            format: { with: /\A[A-Za-z][A-Za-z0-9_-]+/ },
+            length: { minimum: 2, maximum: 15 },
             presence: true,
             uniqueness: { case_sensitive: false }
 
