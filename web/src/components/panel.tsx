@@ -1,5 +1,5 @@
 import { Box, Heading, ListItem, OrderedList, Stack } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
+import React, { Key, ReactElement } from "react";
 
 interface PanelProps<T> {
   headerText: string;
@@ -7,7 +7,15 @@ interface PanelProps<T> {
   render: (item: T) => ReactElement;
 }
 
-function Panel<T>({ headerText, items, render }: PanelProps<T>): ReactElement {
+interface ObjId {
+  id: Key;
+}
+
+function Panel<T extends ObjId>({
+  headerText,
+  items,
+  render,
+}: PanelProps<T>): ReactElement {
   return (
     <Box border="1px solid" borderColor="gray.300" borderRadius="md" p="7">
       <Stack>
@@ -15,10 +23,8 @@ function Panel<T>({ headerText, items, render }: PanelProps<T>): ReactElement {
           {headerText}
         </Heading>
         <OrderedList>
-          {items.map((item, key) => (
-            /* eslint-disable react/no-array-index-key */
-            <ListItem key={key}>{render(item)}</ListItem>
-            /* eslint-enable react/no-array-index-key */
+          {items.map((item) => (
+            <ListItem key={item.id}>{render(item)}</ListItem>
           ))}
         </OrderedList>
       </Stack>
