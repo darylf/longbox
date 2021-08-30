@@ -1,20 +1,20 @@
 module Mutations
   class CreateSeries < Mutations::BaseMutation
-    graphql_name 'CreateSeries'
+    include AuthenticatableGraphqlUser
 
-    argument :name, String, required: true
-    argument :publisher_id, ID, required: true
+    argument :input, Inputs::SeriesInput, required: true
 
     type Types::SeriesType
 
-    def resolve(**args)
-      Series.create!(
-        publisher_id: args[:publisher_id],
-        name: args[:name]
-      )
-    rescue ActiveRecord::RecordInvalid => e
-      e.record.errors.map do |error|
-        GraphQL::ExecutionError.new(error.full_message)
+    def resolve(input:)
+      execution_error(error_data: 'Unauthorized') unless current_user
+
+      series = SaveSeries.call(input: input.to_h, user: current_user)
+
+      if series.success?
+        series
+      else
+        execution_error(error_data: series.error_data)
       end
     end
   end

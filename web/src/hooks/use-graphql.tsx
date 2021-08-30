@@ -22,11 +22,11 @@ export const namedOperations = {
   },
   Mutation: {
     CreatePublisher: 'CreatePublisher',
+    CreateSeries: 'CreateSeries',
     Login: 'Login',
     LogOut: 'LogOut',
     Register: 'Register',
-    UpdatePublisher: 'UpdatePublisher',
-    UpdateSeries: 'UpdateSeries'
+    UpdatePublisher: 'UpdatePublisher'
   }
 }
 /** All built-in and custom scalars, mapped to their actual values */
@@ -127,7 +127,10 @@ export type Credit = {
   book: Book;
   createdAt: Scalars['DateTime'];
   creator: Creator;
+  featured: Scalars['Boolean'];
   id: Scalars['ID'];
+  /** The position this creator should be listed in a featured list */
+  position?: Maybe<Scalars['Int']>;
   role: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -174,8 +177,7 @@ export type MutationCreatePublisherArgs = {
 
 
 export type MutationCreateSeriesArgs = {
-  name: Scalars['String'];
-  publisherId: Scalars['ID'];
+  input: SeriesInput;
 };
 
 
@@ -262,7 +264,7 @@ export type PublisherEdge = {
 };
 
 export type PublisherInput = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type Query = {
@@ -391,7 +393,8 @@ export type SeriesEdge = {
 };
 
 export type SeriesInput = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  publisherId: Scalars['ID'];
 };
 
 /** Attributes for defining the sorting of the query results */
@@ -492,6 +495,14 @@ export type CreatePublisherMutationVariables = Exact<{
 
 export type CreatePublisherMutation = { __typename?: 'Mutation', createPublisher?: Maybe<{ __typename?: 'Publisher', id: string, name: string, createdAt: any, updatedAt: any }> };
 
+export type CreateSeriesMutationVariables = Exact<{
+  name: Scalars['String'];
+  publisherId: Scalars['ID'];
+}>;
+
+
+export type CreateSeriesMutation = { __typename?: 'Mutation', createSeries?: Maybe<{ __typename?: 'Series', id: string, name: string, createdAt: any, updatedAt: any }> };
+
 export type CreatorQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -580,14 +591,6 @@ export type UpdatePublisherMutationVariables = Exact<{
 
 
 export type UpdatePublisherMutation = { __typename?: 'Mutation', updatePublisher?: Maybe<{ __typename?: 'UpdatePublisherPayload', publisher?: Maybe<{ __typename?: 'Publisher', id: string, name: string, updatedAt: any }>, errors: Array<{ __typename?: 'UserError', path?: Maybe<Array<string>>, message: string }> }> };
-
-export type UpdateSeriesMutationVariables = Exact<{
-  id: Scalars['ID'];
-  name: Scalars['String'];
-}>;
-
-
-export type UpdateSeriesMutation = { __typename?: 'Mutation', updateSeries?: Maybe<{ __typename?: 'UpdateSeriesPayload', series?: Maybe<{ __typename?: 'Series', id: string, name: string, updatedAt: any }>, errors: Array<{ __typename?: 'UserError', path?: Maybe<Array<string>>, message: string }> }> };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -761,6 +764,43 @@ export function useCreatePublisherMutation(baseOptions?: Apollo.MutationHookOpti
 export type CreatePublisherMutationHookResult = ReturnType<typeof useCreatePublisherMutation>;
 export type CreatePublisherMutationResult = Apollo.MutationResult<CreatePublisherMutation>;
 export type CreatePublisherMutationOptions = Apollo.BaseMutationOptions<CreatePublisherMutation, CreatePublisherMutationVariables>;
+export const CreateSeriesDocument = gql`
+    mutation CreateSeries($name: String!, $publisherId: ID!) {
+  createSeries(input: {name: $name, publisherId: $publisherId}) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type CreateSeriesMutationFn = Apollo.MutationFunction<CreateSeriesMutation, CreateSeriesMutationVariables>;
+
+/**
+ * __useCreateSeriesMutation__
+ *
+ * To run a mutation, you first call `useCreateSeriesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSeriesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSeriesMutation, { data, loading, error }] = useCreateSeriesMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      publisherId: // value for 'publisherId'
+ *   },
+ * });
+ */
+export function useCreateSeriesMutation(baseOptions?: Apollo.MutationHookOptions<CreateSeriesMutation, CreateSeriesMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateSeriesMutation, CreateSeriesMutationVariables>(CreateSeriesDocument, options);
+      }
+export type CreateSeriesMutationHookResult = ReturnType<typeof useCreateSeriesMutation>;
+export type CreateSeriesMutationResult = Apollo.MutationResult<CreateSeriesMutation>;
+export type CreateSeriesMutationOptions = Apollo.BaseMutationOptions<CreateSeriesMutation, CreateSeriesMutationVariables>;
 export const CreatorDocument = gql`
     query Creator($id: ID!) {
   creator(id: $id) {
@@ -1220,48 +1260,6 @@ export function useUpdatePublisherMutation(baseOptions?: Apollo.MutationHookOpti
 export type UpdatePublisherMutationHookResult = ReturnType<typeof useUpdatePublisherMutation>;
 export type UpdatePublisherMutationResult = Apollo.MutationResult<UpdatePublisherMutation>;
 export type UpdatePublisherMutationOptions = Apollo.BaseMutationOptions<UpdatePublisherMutation, UpdatePublisherMutationVariables>;
-export const UpdateSeriesDocument = gql`
-    mutation UpdateSeries($id: ID!, $name: String!) {
-  updateSeries(id: $id, attributes: {name: $name}) {
-    series {
-      id
-      name
-      updatedAt
-    }
-    errors {
-      path
-      message
-    }
-  }
-}
-    `;
-export type UpdateSeriesMutationFn = Apollo.MutationFunction<UpdateSeriesMutation, UpdateSeriesMutationVariables>;
-
-/**
- * __useUpdateSeriesMutation__
- *
- * To run a mutation, you first call `useUpdateSeriesMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateSeriesMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateSeriesMutation, { data, loading, error }] = useUpdateSeriesMutation({
- *   variables: {
- *      id: // value for 'id'
- *      name: // value for 'name'
- *   },
- * });
- */
-export function useUpdateSeriesMutation(baseOptions?: Apollo.MutationHookOptions<UpdateSeriesMutation, UpdateSeriesMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateSeriesMutation, UpdateSeriesMutationVariables>(UpdateSeriesDocument, options);
-      }
-export type UpdateSeriesMutationHookResult = ReturnType<typeof useUpdateSeriesMutation>;
-export type UpdateSeriesMutationResult = Apollo.MutationResult<UpdateSeriesMutation>;
-export type UpdateSeriesMutationOptions = Apollo.BaseMutationOptions<UpdateSeriesMutation, UpdateSeriesMutationVariables>;
 export const UserDocument = gql`
     query User($id: ID!) {
   user(id: $id) {

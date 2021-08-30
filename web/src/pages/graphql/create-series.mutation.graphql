@@ -1,0 +1,8 @@
+mutation CreateSeries($name: String!, $publisherId: ID!) {
+  createSeries(input: { name: $name, publisherId: $publisherId }) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}

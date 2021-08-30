@@ -8,6 +8,7 @@ import {
 import React, { ReactElement } from "react";
 import Link from "../components/link";
 import NewPublisherForm from "../components/new-publisher-form";
+import NewSeriesForm from "../components/new-series-form";
 import { useLoginState } from "../hooks/use-authentication";
 
 const AdminPage = (): ReactElement => {
@@ -28,7 +29,7 @@ const AdminPage = (): ReactElement => {
           <NewPublisherForm />
         </ListItem>
         <ListItem>
-          <Link to="/series/new">Create Series</Link>
+          <NewSeriesForm />
         </ListItem>
         <ListItem>
           <Link to="/books/new">Create Book</Link>

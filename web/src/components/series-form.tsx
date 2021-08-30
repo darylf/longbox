@@ -9,43 +9,65 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
   Stack,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Series, UserError } from "../hooks/use-graphql";
+import { Publisher, Series, UserError } from "../hooks/use-graphql";
 
-interface FormProps {
-  series?: Partial<Series>;
+interface SeriesFormProps {
+  buttonText: string;
   handleSubmit: (series: Partial<Series>) => void;
   isLoading: boolean;
+  isModalOpen: boolean;
+  publishers: Array<Publisher>;
+  series?: Partial<Series>;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   userErrors?: Array<UserError> | undefined;
 }
 
-function displayError(userError: UserError) {
+function ErrorMessage(userError: UserError) {
   return <div key={userError.message}>{userError.message}</div>;
 }
 
-export default function PublisherForm({
-  series,
+function SeriesForm({
+  buttonText,
   handleSubmit,
-  userErrors,
   isLoading,
-}: FormProps): React.ReactElement {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  isModalOpen,
+  publishers,
+  setIsModalOpen,
+  series,
+  userErrors,
+}: SeriesFormProps): React.ReactElement {
+  const { onOpen, onClose } = useDisclosure();
   const [name, setName] = useState(series?.name ?? "");
+  const [publisherId, setPublisherId] = useState(series?.publisher?.id ?? "");
   return (
     <>
       <form>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isModalOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Edit Series</ModalHeader>
+            <ModalHeader>{buttonText}</ModalHeader>
             <ModalBody pb={6}>
               <Stack>
                 {userErrors && (
-                  <div>{userErrors.map((e) => displayError(e))}</div>
+                  <div>{userErrors.map((e) => ErrorMessage(e))}</div>
                 )}
+                <FormControl isRequired>
+                  <FormLabel htmlFor="publisher">Publisher:</FormLabel>
+                  <Select
+                    id="publisher"
+                    placeholder="Select option"
+                    onChange={(e) => setPublisherId(e.target.value)}
+                  >
+                    {publishers.map((p) => (
+                      <option value={p.id}>{p.name}</option>
+                    ))}
+                  </Select>
+                </FormControl>
                 <FormControl isRequired>
                   <FormLabel htmlFor="name">Name:</FormLabel>
                   <Input
@@ -60,7 +82,7 @@ export default function PublisherForm({
             <ModalFooter>
               <Button
                 onClick={() => {
-                  handleSubmit({ name } as Partial<Series>);
+                  handleSubmit({ name, publisherId } as Partial<Series>);
                 }}
                 disabled={isLoading}
                 colorScheme="blue"
@@ -68,17 +90,34 @@ export default function PublisherForm({
               >
                 Save
               </Button>
-              <Button onClick={onClose}>Cancel</Button>
+              <Button
+                onClick={() => {
+                  setIsModalOpen(false);
+                  onClose();
+                }}
+              >
+                Cancel
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
       </form>
-      <Button onClick={onOpen}>Edit Series</Button>
+      <Button
+        onClick={() => {
+          setIsModalOpen(true);
+          onOpen();
+        }}
+      >
+        {buttonText}
+      </Button>
     </>
   );
 }
 
-PublisherForm.defaultProps = {
+SeriesForm.defaultProps = {
+  publishers: [],
   series: {},
   userErrors: undefined,
 };
+
+export default SeriesForm;
