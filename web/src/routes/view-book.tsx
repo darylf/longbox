@@ -4,7 +4,7 @@ import ShowBook from "../components/show-book";
 import { Book, useBookQuery } from "../hooks/use-graphql";
 
 function ViewBook(): React.ReactElement {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const { data, loading, error } = useBookQuery({ variables: { id } });
 
   let showBook = <></>;

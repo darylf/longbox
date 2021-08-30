@@ -11,7 +11,7 @@ import {
 } from "../hooks/use-graphql";
 
 function ViewPublisher(): React.ReactElement {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const [publisher, setPublisher] = useState<Publisher | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { authenticated } = useLoginState();

@@ -5,7 +5,7 @@ import { useLoginState } from "../hooks/use-authentication";
 import { Series, useSeriesQuery } from "../hooks/use-graphql";
 
 function ViewSeries(): React.ReactElement {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const [series, setSeries] = useState<Series | null>(null);
   const { authenticated } = useLoginState();
   const { loading, error } = useSeriesQuery({

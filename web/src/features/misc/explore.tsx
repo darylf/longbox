@@ -7,14 +7,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import Link from "../components/link";
+import Link from "../../components/link";
 import {
   Publisher,
   Series,
   SortDirectionEnum,
   usePublishersQuery,
   useSeriesListQuery,
-} from "../hooks/use-graphql";
+} from "../../hooks/use-graphql";
 
 interface Props {
   publisher: Publisher;

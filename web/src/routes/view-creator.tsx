@@ -4,7 +4,7 @@ import ShowCreator from "../components/show-creator";
 import { Creator, useCreatorQuery } from "../hooks/use-graphql";
 
 function ViewCreator(): React.ReactElement {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const { data, loading, error } = useCreatorQuery({ variables: { id } });
   let creatorComponent = <></>;
   if (loading) return <p>Loading...</p>;

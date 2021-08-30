@@ -1,4 +1,6 @@
 {
+  "target": "es5",
+  "lib": ["dom", "dom.iterable", "esnext"],
   "compilerOptions": {
     "allowJs": true,
     "isolatedModules": true,
@@ -14,5 +16,6 @@
     "resolveJsonModule": true
   },
   "include": ["src", "config"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "extends": "./tsconfig-paths.json"
 }

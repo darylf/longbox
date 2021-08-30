@@ -18,7 +18,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useLogin, useLoginState } from "../hooks/use-authentication";
+import { useLogin, useLoginState } from "../../../hooks/use-authentication";
 
 export function ErrorMessage({ message }: { message: string }): ReactElement {
   return (

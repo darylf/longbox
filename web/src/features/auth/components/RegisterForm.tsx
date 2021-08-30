@@ -8,13 +8,13 @@ import React, {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
-import { useRegisterMutation } from "../hooks/use-graphql";
+import { useRegisterMutation } from "../../../hooks/use-graphql";
 
 type StatesIndex = {
   [key: string]: Dispatch<any>;
 };
 
-function RegistrationForm(): ReactElement {
+function RegisterForm(): ReactElement {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [username, setUsername] = useState<string>();
@@ -113,4 +113,4 @@ function RegistrationForm(): ReactElement {
   );
 }
 
-export default RegistrationForm;
+export { RegisterForm };

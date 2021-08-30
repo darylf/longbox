@@ -1,8 +1,8 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import BookTable from "../components/book-table";
-import Link from "../components/link";
-import Panel from "../components/panel";
+import BookTable from "../../components/book-table";
+import Link from "../../components/link";
+import Panel from "../../components/panel";
 import {
   Book,
   Publisher,
@@ -12,7 +12,7 @@ import {
   useRankedBookListQuery,
   useRankedPublisherListQuery,
   useRankedSeriesListQuery,
-} from "../hooks/use-graphql";
+} from "../../hooks/use-graphql";
 
 const TOP_SUMMARY_COUNT = 5;
 

@@ -1,4 +1,5 @@
-import React, { ReactElement, ReactNode } from "react";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import {
   AuthenticationProvider,
   getInitialLoginState,
@@ -6,19 +7,18 @@ import {
 import DataProvider from "./data-provider";
 import StyleProvider from "./style-provider";
 
-export { default as DataProvider } from "./data-provider";
-export { default as StyleProvider } from "./style-provider";
+type AppProviderProps = {
+  children: React.ReactNode;
+};
 
-interface Props {
-  children?: ReactNode;
-}
-
-const AppProvider = ({ children }: Props): ReactElement => {
+export const AppProvider = ({ children }: AppProviderProps) => {
   const initialLoginState = getInitialLoginState();
   return (
     <DataProvider>
       <AuthenticationProvider initialLoginState={initialLoginState}>
-        <StyleProvider>{children}</StyleProvider>
+        <StyleProvider>
+          <Router>{children}</Router>
+        </StyleProvider>
       </AuthenticationProvider>
     </DataProvider>
   );

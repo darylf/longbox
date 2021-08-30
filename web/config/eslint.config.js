@@ -32,7 +32,18 @@ module.exports = {
     'react/jsx-pascal-case': 2,
     'import/order': [
       'error',
-      { alphabetize: { order: 'asc', caseInsensitive: true } }
+      { alphabetize: { order: 'asc', caseInsensitive: true } },
+      { 'newlines-between': 'always' },
+      {
+        pathGroups: [
+          {
+            pattern: '@/**',
+            group: 'external',
+            position: 'after'
+          }
+        ],
+        pathGroupsExcludedImportTypes: ['builtin']
+      }
     ]
   }
 };

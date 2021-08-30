@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useUserQuery } from "../hooks/use-graphql";
 
 function ViewUser(): React.ReactElement {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const { data, loading, error } = useUserQuery({
     variables: { id },
   });
