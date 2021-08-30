@@ -13,9 +13,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Publisher, UserError } from "../hooks/use-graphql";
+import { Publisher, UserError } from "../../../hooks/use-graphql";
 
-interface FormProps {
+interface PublisherFormProps {
   buttonText: string;
   handleSubmit: (publisher: Partial<Publisher>) => void;
   isLoading: boolean;
@@ -29,7 +29,7 @@ function displayError(userError: UserError) {
   return <div key={userError.message}>{userError.message}</div>;
 }
 
-export default function PublisherForm({
+export const PublisherForm = ({
   buttonText,
   handleSubmit,
   isLoading,
@@ -37,7 +37,7 @@ export default function PublisherForm({
   setIsModalOpen,
   publisher,
   userErrors,
-}: FormProps): React.ReactElement {
+}: PublisherFormProps): React.ReactElement => {
   const { onOpen, onClose } = useDisclosure();
   const [name, setName] = useState(publisher?.name ?? "");
   return (
@@ -96,7 +96,7 @@ export default function PublisherForm({
       </Button>
     </>
   );
-}
+};
 
 PublisherForm.defaultProps = {
   publisher: {},

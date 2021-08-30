@@ -1,13 +1,15 @@
 import { Box, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { Publisher } from "../hooks/use-graphql";
-import Link from "./link";
+import Link from "../../../components/link";
+import { Publisher } from "../../../hooks/use-graphql";
 
-interface Props {
+interface ViewPublisherProps {
   publisher: Publisher;
 }
 
-function ShowPublisher({ publisher }: Props): React.ReactElement {
+export const ViewPublisher = ({
+  publisher,
+}: ViewPublisherProps): React.ReactElement => {
   return (
     <Stack>
       <Box p={6}>
@@ -30,6 +32,4 @@ function ShowPublisher({ publisher }: Props): React.ReactElement {
       <Text>Last updated at{publisher.updatedAt}</Text>
     </Stack>
   );
-}
-
-export default ShowPublisher;
+};

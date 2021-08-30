@@ -5,8 +5,8 @@ import { Login } from "../features/auth/routes/Login";
 import BrowseCollection from "../features/misc/explore";
 import HomePage from "../features/misc/home";
 import { useLoginState } from "../hooks/use-authentication";
+import { lazyImport } from "../utils/lazyImport";
 import AdminPage from "./admin";
-import ListPublishers from "./list-publishers";
 import ListUsers from "./list-users";
 import MyCollection from "./my-collection";
 import { protectedRoutes } from "./protected";
@@ -14,9 +14,13 @@ import { publicRoutes } from "./public";
 import Trending from "./trending";
 import ViewBook from "./view-book";
 import ViewCreator from "./view-creator";
-import ViewPublisher from "./view-publisher";
 import ViewSeries from "./view-series";
 import ViewUser from "./view-user";
+
+const { PublishersRoutes } = lazyImport(
+  () => import("../features/publishers"),
+  "PublishersRoutes"
+);
 
 export const AppRoutes = () => {
   const { authenticated } = useLoginState();
@@ -29,8 +33,7 @@ export const AppRoutes = () => {
     { path: "/explore", element: <BrowseCollection /> },
     { path: "/login", element: <Login /> },
     { path: "/my-collection", element: <MyCollection /> },
-    { path: "/publishers/:id", element: <ViewPublisher /> },
-    { path: "/publishers", element: <ListPublishers /> },
+    { path: "/publishers/*", element: <PublishersRoutes /> },
     { path: "/series/:id", element: <ViewSeries /> },
     { path: "/trending", element: <Trending /> },
     { path: "/users/:id", element: <ViewUser /> },

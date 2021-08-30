@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import Link from "../components/link";
-import NewPublisherForm from "../components/new-publisher-form";
+// import NewPublisherForm from "../components/new-publisher-form";
 import NewSeriesForm from "../components/new-series-form";
 import { useLoginState } from "../hooks/use-authentication";
 
@@ -25,9 +25,9 @@ const AdminPage = (): ReactElement => {
     <Stack p={6}>
       <Heading>Administration</Heading>
       <UnorderedList>
-        <ListItem>
+        {/* <ListItem>
           <NewPublisherForm />
-        </ListItem>
+        </ListItem> */}
         <ListItem>
           <NewSeriesForm />
         </ListItem>

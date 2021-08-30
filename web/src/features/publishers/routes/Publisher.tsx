@@ -1,23 +1,23 @@
 import { Box, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import PublisherForm from "../components/publisher-form";
-import ShowPublisher from "../components/show-publisher";
-import { useLoginState } from "../hooks/use-authentication";
+import { useLoginState } from "../../../hooks/use-authentication";
 import {
-  Publisher,
+  Publisher as PublisherObj,
   usePublisherQuery,
   useUpdatePublisherMutation,
-} from "../hooks/use-graphql";
+} from "../../../hooks/use-graphql";
+import { PublisherForm } from "../components/PublisherForm";
+import { ViewPublisher } from "../components/ViewPublisher";
 
-function ViewPublisher(): React.ReactElement {
+export const Publisher = (): React.ReactElement => {
   const { id } = useParams();
-  const [publisher, setPublisher] = useState<Publisher | null>(null);
+  const [publisher, setPublisher] = useState<PublisherObj | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { authenticated } = useLoginState();
   const { loading, error } = usePublisherQuery({
     variables: { id },
-    onCompleted: (data) => setPublisher(data.publisher as Publisher),
+    onCompleted: (data) => setPublisher(data.publisher as PublisherObj),
   });
   const [updatePublisher, { data: dataMutation }] = useUpdatePublisherMutation({
     variables: { id, name: publisher?.name ?? "" },
@@ -26,14 +26,14 @@ function ViewPublisher(): React.ReactElement {
         setPublisher({
           ...publisher,
           ...data.updatePublisher?.publisher,
-        } as Publisher);
+        } as PublisherObj);
         setIsModalOpen(false);
       }
     },
     onError: (err) => console.error(err),
   });
 
-  const handleSubmit = (publisherParam: Partial<Publisher>) => {
+  const handleSubmit = (publisherParam: Partial<PublisherObj>) => {
     updatePublisher({ variables: { id, name: publisherParam.name ?? "" } });
   };
 
@@ -46,7 +46,7 @@ function ViewPublisher(): React.ReactElement {
         <>
           <Stack>
             <Box mt={2}>
-              <ShowPublisher publisher={publisher} />
+              <ViewPublisher publisher={publisher} />
             </Box>
             {authenticated && (
               <Box mt={2} textAlign="right">
@@ -66,6 +66,4 @@ function ViewPublisher(): React.ReactElement {
       )}
     </>
   );
-}
-
-export default ViewPublisher;
+};
