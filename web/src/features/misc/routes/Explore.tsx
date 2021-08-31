@@ -82,7 +82,7 @@ function FeaturedPublishers() {
   const { data, loading, error } = usePublishersQuery({
     variables: {
       direction: SortDirectionEnum.Desc,
-      field: "series_countusePublishersQuery",
+      field: "series_count",
       limit: 5,
     },
   });
