@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
-import { useRegisterMutation } from "../../../hooks/use-graphql";
+import { useRegisterMutation } from "../api/register.mutation.generated";
 
 type StatesIndex = {
   [key: string]: Dispatch<any>;
@@ -106,7 +106,7 @@ function RegisterForm(): ReactElement {
           <button type="submit">Register</button>
         </div>
         <div>
-          <Link to="/login">login</Link>
+          <Link to="/auth/login">login</Link>
         </div>
       </form>
     </div>

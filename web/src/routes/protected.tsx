@@ -17,7 +17,7 @@ const App = () => {
   );
 };
 
-export const protectedRoutes = [
+const protectedRoutes = [
   {
     path: "/app",
     element: <App />,
@@ -30,3 +30,5 @@ export const protectedRoutes = [
     ],
   },
 ];
+
+export default protectedRoutes;

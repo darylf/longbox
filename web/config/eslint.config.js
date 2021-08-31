@@ -25,25 +25,15 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  ignorePatterns: ['use-graphql.tsx'],
+  ignorePatterns: ['*.generated.tsx', 'types.ts'],
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     semi: 'error',
     'react/jsx-pascal-case': 2,
     'import/order': [
       'error',
-      { alphabetize: { order: 'asc', caseInsensitive: true } },
-      { 'newlines-between': 'always' },
-      {
-        pathGroups: [
-          {
-            pattern: '@/**',
-            group: 'external',
-            position: 'after'
-          }
-        ],
-        pathGroupsExcludedImportTypes: ['builtin']
-      }
-    ]
+      { alphabetize: { order: 'asc', caseInsensitive: true } }
+    ],
+    'import/prefer-default-export': 'off'
   }
 };

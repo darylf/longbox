@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import {
-  Publisher,
-  useCreatePublisherMutation,
-} from "../../../hooks/use-graphql";
+import { Publisher } from "../../../types";
+import { useCreatePublisherMutation } from "../api/create-publisher.mutation.generated";
 import { PublisherForm } from "../components/PublisherForm";
 
 export const NewPublisher = (): React.ReactElement => {

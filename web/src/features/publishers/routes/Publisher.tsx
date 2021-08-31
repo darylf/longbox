@@ -2,11 +2,9 @@ import { Box, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLoginState } from "../../../hooks/use-authentication";
-import {
-  Publisher as PublisherObj,
-  usePublisherQuery,
-  useUpdatePublisherMutation,
-} from "../../../hooks/use-graphql";
+import { Publisher as PublisherObj } from "../../../types";
+import { usePublisherQuery } from "../api/publisher.query.generated";
+import { useUpdatePublisherMutation } from "../api/update-publisher.mutation.generated";
 import { PublisherForm } from "../components/PublisherForm";
 import { ViewPublisher } from "../components/ViewPublisher";
 

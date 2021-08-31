@@ -1,43 +1,57 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
 import SidebarWithHeader from "../components/layout";
-import { Login } from "../features/auth/routes/Login";
-import BrowseCollection from "../features/misc/explore";
-import HomePage from "../features/misc/home";
+import {
+  Admin,
+  Dashboard,
+  Explore,
+  MyCollection,
+  Trending,
+} from "../features/misc";
 import { useLoginState } from "../hooks/use-authentication";
-import { lazyImport } from "../utils/lazyImport";
-import AdminPage from "./admin";
-import ListUsers from "./list-users";
-import MyCollection from "./my-collection";
-import { protectedRoutes } from "./protected";
-import { publicRoutes } from "./public";
-import Trending from "./trending";
-import ViewBook from "./view-book";
-import ViewCreator from "./view-creator";
-import ViewSeries from "./view-series";
-import ViewUser from "./view-user";
+import lazyImport from "../utils/lazyImport";
+import protectedRoutes from "./protected";
+import publicRoutes from "./public";
+
+const { BooksRoutes } = lazyImport(
+  () => import("../features/books"),
+  "BooksRoutes"
+);
+
+const { CreatorsRoutes } = lazyImport(
+  () => import("../features/creators"),
+  "CreatorsRoutes"
+);
 
 const { PublishersRoutes } = lazyImport(
   () => import("../features/publishers"),
   "PublishersRoutes"
 );
 
-export const AppRoutes = () => {
+const { SeriesRoutes } = lazyImport(
+  () => import("../features/series"),
+  "SeriesRoutes"
+);
+
+const { UsersRoutes } = lazyImport(
+  () => import("../features/users"),
+  "UsersRoutes"
+);
+
+const AppRoutes = () => {
   const { authenticated } = useLoginState();
 
   const commonRoutes = [
-    { path: "/", element: <HomePage /> },
-    { path: "/admin", element: <AdminPage /> },
-    { path: "/comics/:id", element: <ViewBook /> },
-    { path: "/creators/:id", element: <ViewCreator /> },
-    { path: "/explore", element: <BrowseCollection /> },
-    { path: "/login", element: <Login /> },
+    { path: "/", element: <Dashboard /> },
+    { path: "/admin", element: <Admin /> },
+    { path: "/comics/*", element: <BooksRoutes /> },
+    { path: "/creators/*", element: <CreatorsRoutes /> },
+    { path: "/explore", element: <Explore /> },
     { path: "/my-collection", element: <MyCollection /> },
     { path: "/publishers/*", element: <PublishersRoutes /> },
-    { path: "/series/:id", element: <ViewSeries /> },
+    { path: "/series/*", element: <SeriesRoutes /> },
     { path: "/trending", element: <Trending /> },
-    { path: "/users/:id", element: <ViewUser /> },
-    { path: "/users", element: <ListUsers /> },
+    { path: "/users/*", element: <UsersRoutes /> },
   ];
 
   const routes = authenticated ? protectedRoutes : publicRoutes;
@@ -46,3 +60,5 @@ export const AppRoutes = () => {
 
   return <SidebarWithHeader>{element}</SidebarWithHeader>;
 };
+
+export default AppRoutes;

@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Publisher, UserError } from "../../../hooks/use-graphql";
+import { Publisher, UserError } from "../../../types";
 
 interface PublisherFormProps {
   buttonText: string;

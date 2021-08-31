@@ -30,7 +30,7 @@ type AppProviderProps = {
   children: React.ReactNode;
 };
 
-export const AppProvider = ({ children }: AppProviderProps) => {
+const AppProvider = ({ children }: AppProviderProps) => {
   const initialLoginState = getInitialLoginState();
   return (
     <React.Suspense
@@ -52,7 +52,5 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     </React.Suspense>
   );
 };
-
-AppProvider.defaultProps = { children: <></> };
 
 export default AppProvider;

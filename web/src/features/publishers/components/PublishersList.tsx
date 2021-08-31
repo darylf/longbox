@@ -1,7 +1,7 @@
 import { ListItem, UnorderedList } from "@chakra-ui/react";
 import React from "react";
 import Link from "../../../components/link";
-import { usePublishersQuery } from "../../../hooks/use-graphql";
+import { usePublishersQuery } from "../api/publishers.query.generated";
 
 export const PublisherList = (): React.ReactElement => {
   const { data, loading, error } = usePublishersQuery();

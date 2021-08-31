@@ -1,7 +1,7 @@
 import { Box, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import Link from "../../../components/link";
-import { Publisher } from "../../../hooks/use-graphql";
+import { Publisher } from "../../../types";
 
 interface ViewPublisherProps {
   publisher: Publisher;

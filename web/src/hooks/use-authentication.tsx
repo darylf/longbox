@@ -4,7 +4,8 @@ import React, {
   useContext,
   useReducer,
 } from "react";
-import { useLoginMutation, useLogOutMutation } from "./use-graphql";
+import { useLoginMutation } from "../features/auth/api/login.mutation.generated";
+import { useLogOutMutation } from "../features/auth/api/logout.mutation.generated";
 
 const TOKEN = "token";
 const USER = "attributes";
