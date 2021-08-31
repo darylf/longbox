@@ -1,33 +1,49 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type LoginMutationVariables = Types.Exact<{
-  email: Types.Scalars['String'];
-  password: Types.Scalars['String'];
+  email: Types.Scalars["String"];
+  password: Types.Scalars["String"];
 }>;
 
-
-export type LoginMutation = { __typename?: 'Mutation', login?: Types.Maybe<{ __typename?: 'AuthenticationResult', accessToken: string, refreshToken: string, me?: Types.Maybe<{ __typename?: 'User', id: string, avatar: string, email: string, roles: Array<string>, username: string }> }> };
-
+export type LoginMutation = {
+  __typename?: "Mutation";
+  login?: Types.Maybe<{
+    __typename?: "AuthenticationResult";
+    accessToken: string;
+    refreshToken: string;
+    me?: Types.Maybe<{
+      __typename?: "User";
+      id: string;
+      avatar: string;
+      email: string;
+      roles: Array<string>;
+      username: string;
+    }>;
+  }>;
+};
 
 export const LoginDocument = gql`
-    mutation Login($email: String!, $password: String!) {
-  login(input: {email: $email, password: $password}) {
-    me {
-      id
-      avatar
-      email
-      roles
-      username
+  mutation Login($email: String!, $password: String!) {
+    login(input: { email: $email, password: $password }) {
+      me {
+        id
+        avatar
+        email
+        roles
+        username
+      }
+      accessToken
+      refreshToken
     }
-    accessToken
-    refreshToken
   }
-}
-    `;
-export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+`;
+export type LoginMutationFn = Apollo.MutationFunction<
+  LoginMutation,
+  LoginMutationVariables
+>;
 
 /**
  * __useLoginMutation__
@@ -47,10 +63,21 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  *   },
  * });
  */
-export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
-      }
+export function useLoginMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    LoginMutation,
+    LoginMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(
+    LoginDocument,
+    options
+  );
+}
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<
+  LoginMutation,
+  LoginMutationVariables
+>;

@@ -1,30 +1,38 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type PublisherQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars["ID"];
 }>;
 
-
-export type PublisherQuery = { __typename?: 'Query', publisher: { __typename?: 'Publisher', id: string, name: string, createdAt: any, updatedAt: any, series: Array<{ __typename?: 'Series', id: string, name: string }> } };
-
+export type PublisherQuery = {
+  __typename?: "Query";
+  publisher: {
+    __typename?: "Publisher";
+    id: string;
+    name: string;
+    createdAt: any;
+    updatedAt: any;
+    series: Array<{ __typename?: "Series"; id: string; name: string }>;
+  };
+};
 
 export const PublisherDocument = gql`
-    query Publisher($id: ID!) {
-  publisher(id: $id) {
-    id
-    name
-    createdAt
-    updatedAt
-    series {
+  query Publisher($id: ID!) {
+    publisher(id: $id) {
       id
       name
+      createdAt
+      updatedAt
+      series {
+        id
+        name
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __usePublisherQuery__
@@ -42,14 +50,32 @@ export const PublisherDocument = gql`
  *   },
  * });
  */
-export function usePublisherQuery(baseOptions: Apollo.QueryHookOptions<PublisherQuery, PublisherQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PublisherQuery, PublisherQueryVariables>(PublisherDocument, options);
-      }
-export function usePublisherLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublisherQuery, PublisherQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PublisherQuery, PublisherQueryVariables>(PublisherDocument, options);
-        }
+export function usePublisherQuery(
+  baseOptions: Apollo.QueryHookOptions<PublisherQuery, PublisherQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<PublisherQuery, PublisherQueryVariables>(
+    PublisherDocument,
+    options
+  );
+}
+export function usePublisherLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PublisherQuery,
+    PublisherQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PublisherQuery, PublisherQueryVariables>(
+    PublisherDocument,
+    options
+  );
+}
 export type PublisherQueryHookResult = ReturnType<typeof usePublisherQuery>;
-export type PublisherLazyQueryHookResult = ReturnType<typeof usePublisherLazyQuery>;
-export type PublisherQueryResult = Apollo.QueryResult<PublisherQuery, PublisherQueryVariables>;
+export type PublisherLazyQueryHookResult = ReturnType<
+  typeof usePublisherLazyQuery
+>;
+export type PublisherQueryResult = Apollo.QueryResult<
+  PublisherQuery,
+  PublisherQueryVariables
+>;

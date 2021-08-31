@@ -1,29 +1,49 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type RankedPublisherListQueryVariables = Types.Exact<{
-  limit?: Types.Maybe<Types.Scalars['Int']>;
-  field: Types.Scalars['String'];
+  limit?: Types.Maybe<Types.Scalars["Int"]>;
+  field: Types.Scalars["String"];
   direction: Types.SortDirectionEnum;
 }>;
 
-
-export type RankedPublisherListQuery = { __typename?: 'Query', publishers: { __typename?: 'PublisherConnection', nodes?: Types.Maybe<Array<Types.Maybe<{ __typename?: 'Publisher', id: string, name: string, seriesCount: number }>>> } };
-
+export type RankedPublisherListQuery = {
+  __typename?: "Query";
+  publishers: {
+    __typename?: "PublisherConnection";
+    nodes?: Types.Maybe<
+      Array<
+        Types.Maybe<{
+          __typename?: "Publisher";
+          id: string;
+          name: string;
+          seriesCount: number;
+        }>
+      >
+    >;
+  };
+};
 
 export const RankedPublisherListDocument = gql`
-    query RankedPublisherList($limit: Int, $field: String!, $direction: SortDirectionEnum!) {
-  publishers(limit: $limit, sortBy: {field: $field, direction: $direction}) {
-    nodes {
-      id
-      name
-      seriesCount
+  query RankedPublisherList(
+    $limit: Int
+    $field: String!
+    $direction: SortDirectionEnum!
+  ) {
+    publishers(
+      limit: $limit
+      sortBy: { field: $field, direction: $direction }
+    ) {
+      nodes {
+        id
+        name
+        seriesCount
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useRankedPublisherListQuery__
@@ -43,14 +63,37 @@ export const RankedPublisherListDocument = gql`
  *   },
  * });
  */
-export function useRankedPublisherListQuery(baseOptions: Apollo.QueryHookOptions<RankedPublisherListQuery, RankedPublisherListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<RankedPublisherListQuery, RankedPublisherListQueryVariables>(RankedPublisherListDocument, options);
-      }
-export function useRankedPublisherListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RankedPublisherListQuery, RankedPublisherListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<RankedPublisherListQuery, RankedPublisherListQueryVariables>(RankedPublisherListDocument, options);
-        }
-export type RankedPublisherListQueryHookResult = ReturnType<typeof useRankedPublisherListQuery>;
-export type RankedPublisherListLazyQueryHookResult = ReturnType<typeof useRankedPublisherListLazyQuery>;
-export type RankedPublisherListQueryResult = Apollo.QueryResult<RankedPublisherListQuery, RankedPublisherListQueryVariables>;
+export function useRankedPublisherListQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    RankedPublisherListQuery,
+    RankedPublisherListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    RankedPublisherListQuery,
+    RankedPublisherListQueryVariables
+  >(RankedPublisherListDocument, options);
+}
+export function useRankedPublisherListLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    RankedPublisherListQuery,
+    RankedPublisherListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    RankedPublisherListQuery,
+    RankedPublisherListQueryVariables
+  >(RankedPublisherListDocument, options);
+}
+export type RankedPublisherListQueryHookResult = ReturnType<
+  typeof useRankedPublisherListQuery
+>;
+export type RankedPublisherListLazyQueryHookResult = ReturnType<
+  typeof useRankedPublisherListLazyQuery
+>;
+export type RankedPublisherListQueryResult = Apollo.QueryResult<
+  RankedPublisherListQuery,
+  RankedPublisherListQueryVariables
+>;

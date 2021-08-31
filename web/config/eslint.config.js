@@ -25,7 +25,6 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  ignorePatterns: ['*.generated.tsx', 'types.ts'],
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     semi: 'error',

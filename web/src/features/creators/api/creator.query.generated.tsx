@@ -1,35 +1,49 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type CreatorQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars["ID"];
 }>;
 
-
-export type CreatorQuery = { __typename?: 'Query', creator: { __typename?: 'Creator', id: string, firstName?: Types.Maybe<string>, lastName?: Types.Maybe<string>, createdAt: any, updatedAt: any, credits: Array<{ __typename?: 'Credit', id: string, role: string, book: { __typename?: 'Book', id: string, displayName: string } }> } };
-
+export type CreatorQuery = {
+  __typename?: "Query";
+  creator: {
+    __typename?: "Creator";
+    id: string;
+    firstName?: Types.Maybe<string>;
+    lastName?: Types.Maybe<string>;
+    createdAt: any;
+    updatedAt: any;
+    credits: Array<{
+      __typename?: "Credit";
+      id: string;
+      role: string;
+      book: { __typename?: "Book"; id: string; displayName: string };
+    }>;
+  };
+};
 
 export const CreatorDocument = gql`
-    query Creator($id: ID!) {
-  creator(id: $id) {
-    id
-    firstName
-    lastName
-    createdAt
-    updatedAt
-    credits {
+  query Creator($id: ID!) {
+    creator(id: $id) {
       id
-      role
-      book {
+      firstName
+      lastName
+      createdAt
+      updatedAt
+      credits {
         id
-        displayName
+        role
+        book {
+          id
+          displayName
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useCreatorQuery__
@@ -47,14 +61,27 @@ export const CreatorDocument = gql`
  *   },
  * });
  */
-export function useCreatorQuery(baseOptions: Apollo.QueryHookOptions<CreatorQuery, CreatorQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CreatorQuery, CreatorQueryVariables>(CreatorDocument, options);
-      }
-export function useCreatorLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CreatorQuery, CreatorQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CreatorQuery, CreatorQueryVariables>(CreatorDocument, options);
-        }
+export function useCreatorQuery(
+  baseOptions: Apollo.QueryHookOptions<CreatorQuery, CreatorQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CreatorQuery, CreatorQueryVariables>(
+    CreatorDocument,
+    options
+  );
+}
+export function useCreatorLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<CreatorQuery, CreatorQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CreatorQuery, CreatorQueryVariables>(
+    CreatorDocument,
+    options
+  );
+}
 export type CreatorQueryHookResult = ReturnType<typeof useCreatorQuery>;
 export type CreatorLazyQueryHookResult = ReturnType<typeof useCreatorLazyQuery>;
-export type CreatorQueryResult = Apollo.QueryResult<CreatorQuery, CreatorQueryVariables>;
+export type CreatorQueryResult = Apollo.QueryResult<
+  CreatorQuery,
+  CreatorQueryVariables
+>;

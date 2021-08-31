@@ -1,33 +1,50 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type UpdatePublisherMutationVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
-  name: Types.Scalars['String'];
+  id: Types.Scalars["ID"];
+  name: Types.Scalars["String"];
 }>;
 
-
-export type UpdatePublisherMutation = { __typename?: 'Mutation', updatePublisher?: Types.Maybe<{ __typename?: 'UpdatePublisherPayload', publisher?: Types.Maybe<{ __typename?: 'Publisher', id: string, name: string, updatedAt: any }>, errors: Array<{ __typename?: 'UserError', path?: Types.Maybe<Array<string>>, message: string }> }> };
-
+export type UpdatePublisherMutation = {
+  __typename?: "Mutation";
+  updatePublisher?: Types.Maybe<{
+    __typename?: "UpdatePublisherPayload";
+    publisher?: Types.Maybe<{
+      __typename?: "Publisher";
+      id: string;
+      name: string;
+      updatedAt: any;
+    }>;
+    errors: Array<{
+      __typename?: "UserError";
+      path?: Types.Maybe<Array<string>>;
+      message: string;
+    }>;
+  }>;
+};
 
 export const UpdatePublisherDocument = gql`
-    mutation UpdatePublisher($id: ID!, $name: String!) {
-  updatePublisher(id: $id, attributes: {name: $name}) {
-    publisher {
-      id
-      name
-      updatedAt
-    }
-    errors {
-      path
-      message
+  mutation UpdatePublisher($id: ID!, $name: String!) {
+    updatePublisher(id: $id, attributes: { name: $name }) {
+      publisher {
+        id
+        name
+        updatedAt
+      }
+      errors {
+        path
+        message
+      }
     }
   }
-}
-    `;
-export type UpdatePublisherMutationFn = Apollo.MutationFunction<UpdatePublisherMutation, UpdatePublisherMutationVariables>;
+`;
+export type UpdatePublisherMutationFn = Apollo.MutationFunction<
+  UpdatePublisherMutation,
+  UpdatePublisherMutationVariables
+>;
 
 /**
  * __useUpdatePublisherMutation__
@@ -47,10 +64,24 @@ export type UpdatePublisherMutationFn = Apollo.MutationFunction<UpdatePublisherM
  *   },
  * });
  */
-export function useUpdatePublisherMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePublisherMutation, UpdatePublisherMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdatePublisherMutation, UpdatePublisherMutationVariables>(UpdatePublisherDocument, options);
-      }
-export type UpdatePublisherMutationHookResult = ReturnType<typeof useUpdatePublisherMutation>;
-export type UpdatePublisherMutationResult = Apollo.MutationResult<UpdatePublisherMutation>;
-export type UpdatePublisherMutationOptions = Apollo.BaseMutationOptions<UpdatePublisherMutation, UpdatePublisherMutationVariables>;
+export function useUpdatePublisherMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdatePublisherMutation,
+    UpdatePublisherMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdatePublisherMutation,
+    UpdatePublisherMutationVariables
+  >(UpdatePublisherDocument, options);
+}
+export type UpdatePublisherMutationHookResult = ReturnType<
+  typeof useUpdatePublisherMutation
+>;
+export type UpdatePublisherMutationResult =
+  Apollo.MutationResult<UpdatePublisherMutation>;
+export type UpdatePublisherMutationOptions = Apollo.BaseMutationOptions<
+  UpdatePublisherMutation,
+  UpdatePublisherMutationVariables
+>;

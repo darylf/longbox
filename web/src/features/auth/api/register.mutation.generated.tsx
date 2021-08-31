@@ -1,34 +1,52 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type RegisterMutationVariables = Types.Exact<{
-  username: Types.Scalars['String'];
-  email: Types.Scalars['String'];
-  password: Types.Scalars['String'];
+  username: Types.Scalars["String"];
+  email: Types.Scalars["String"];
+  password: Types.Scalars["String"];
 }>;
 
-
-export type RegisterMutation = { __typename?: 'Mutation', register?: Types.Maybe<{ __typename?: 'AuthenticationResult', accessToken: string, refreshToken: string, me?: Types.Maybe<{ __typename?: 'User', id: string, avatar: string, email: string, roles: Array<string>, username: string }> }> };
-
+export type RegisterMutation = {
+  __typename?: "Mutation";
+  register?: Types.Maybe<{
+    __typename?: "AuthenticationResult";
+    accessToken: string;
+    refreshToken: string;
+    me?: Types.Maybe<{
+      __typename?: "User";
+      id: string;
+      avatar: string;
+      email: string;
+      roles: Array<string>;
+      username: string;
+    }>;
+  }>;
+};
 
 export const RegisterDocument = gql`
-    mutation Register($username: String!, $email: String!, $password: String!) {
-  register(input: {username: $username, email: $email, password: $password}) {
-    me {
-      id
-      avatar
-      email
-      roles
-      username
+  mutation Register($username: String!, $email: String!, $password: String!) {
+    register(
+      input: { username: $username, email: $email, password: $password }
+    ) {
+      me {
+        id
+        avatar
+        email
+        roles
+        username
+      }
+      accessToken
+      refreshToken
     }
-    accessToken
-    refreshToken
   }
-}
-    `;
-export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+`;
+export type RegisterMutationFn = Apollo.MutationFunction<
+  RegisterMutation,
+  RegisterMutationVariables
+>;
 
 /**
  * __useRegisterMutation__
@@ -49,10 +67,21 @@ export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, Regis
  *   },
  * });
  */
-export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
-      }
+export function useRegisterMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RegisterMutation,
+    RegisterMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(
+    RegisterDocument,
+    options
+  );
+}
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
-export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<
+  RegisterMutation,
+  RegisterMutationVariables
+>;

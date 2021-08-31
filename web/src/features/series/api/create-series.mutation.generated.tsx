@@ -1,28 +1,38 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type CreateSeriesMutationVariables = Types.Exact<{
-  name: Types.Scalars['String'];
-  publisherId: Types.Scalars['ID'];
+  name: Types.Scalars["String"];
+  publisherId: Types.Scalars["ID"];
 }>;
 
-
-export type CreateSeriesMutation = { __typename?: 'Mutation', createSeries?: Types.Maybe<{ __typename?: 'Series', id: string, name: string, createdAt: any, updatedAt: any }> };
-
+export type CreateSeriesMutation = {
+  __typename?: "Mutation";
+  createSeries?: Types.Maybe<{
+    __typename?: "Series";
+    id: string;
+    name: string;
+    createdAt: any;
+    updatedAt: any;
+  }>;
+};
 
 export const CreateSeriesDocument = gql`
-    mutation CreateSeries($name: String!, $publisherId: ID!) {
-  createSeries(input: {name: $name, publisherId: $publisherId}) {
-    id
-    name
-    createdAt
-    updatedAt
+  mutation CreateSeries($name: String!, $publisherId: ID!) {
+    createSeries(input: { name: $name, publisherId: $publisherId }) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
   }
-}
-    `;
-export type CreateSeriesMutationFn = Apollo.MutationFunction<CreateSeriesMutation, CreateSeriesMutationVariables>;
+`;
+export type CreateSeriesMutationFn = Apollo.MutationFunction<
+  CreateSeriesMutation,
+  CreateSeriesMutationVariables
+>;
 
 /**
  * __useCreateSeriesMutation__
@@ -42,10 +52,24 @@ export type CreateSeriesMutationFn = Apollo.MutationFunction<CreateSeriesMutatio
  *   },
  * });
  */
-export function useCreateSeriesMutation(baseOptions?: Apollo.MutationHookOptions<CreateSeriesMutation, CreateSeriesMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateSeriesMutation, CreateSeriesMutationVariables>(CreateSeriesDocument, options);
-      }
-export type CreateSeriesMutationHookResult = ReturnType<typeof useCreateSeriesMutation>;
-export type CreateSeriesMutationResult = Apollo.MutationResult<CreateSeriesMutation>;
-export type CreateSeriesMutationOptions = Apollo.BaseMutationOptions<CreateSeriesMutation, CreateSeriesMutationVariables>;
+export function useCreateSeriesMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateSeriesMutation,
+    CreateSeriesMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateSeriesMutation,
+    CreateSeriesMutationVariables
+  >(CreateSeriesDocument, options);
+}
+export type CreateSeriesMutationHookResult = ReturnType<
+  typeof useCreateSeriesMutation
+>;
+export type CreateSeriesMutationResult =
+  Apollo.MutationResult<CreateSeriesMutation>;
+export type CreateSeriesMutationOptions = Apollo.BaseMutationOptions<
+  CreateSeriesMutation,
+  CreateSeriesMutationVariables
+>;

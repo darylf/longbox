@@ -1,30 +1,48 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type RankedBookListQueryVariables = Types.Exact<{
-  limit?: Types.Maybe<Types.Scalars['Int']>;
-  field: Types.Scalars['String'];
+  limit?: Types.Maybe<Types.Scalars["Int"]>;
+  field: Types.Scalars["String"];
   direction: Types.SortDirectionEnum;
 }>;
 
-
-export type RankedBookListQuery = { __typename?: 'Query', books: { __typename?: 'BookConnection', nodes?: Types.Maybe<Array<Types.Maybe<{ __typename?: 'Book', id: string, displayName: string, publicationDate?: Types.Maybe<string>, publisherName?: Types.Maybe<string> }>>> } };
-
+export type RankedBookListQuery = {
+  __typename?: "Query";
+  books: {
+    __typename?: "BookConnection";
+    nodes?: Types.Maybe<
+      Array<
+        Types.Maybe<{
+          __typename?: "Book";
+          id: string;
+          displayName: string;
+          publicationDate?: Types.Maybe<string>;
+          publisherName?: Types.Maybe<string>;
+        }>
+      >
+    >;
+  };
+};
 
 export const RankedBookListDocument = gql`
-    query RankedBookList($limit: Int, $field: String!, $direction: SortDirectionEnum!) {
-  books(limit: $limit, sortBy: {field: $field, direction: $direction}) {
-    nodes {
-      id
-      displayName
-      publicationDate
-      publisherName
+  query RankedBookList(
+    $limit: Int
+    $field: String!
+    $direction: SortDirectionEnum!
+  ) {
+    books(limit: $limit, sortBy: { field: $field, direction: $direction }) {
+      nodes {
+        id
+        displayName
+        publicationDate
+        publisherName
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useRankedBookListQuery__
@@ -44,14 +62,37 @@ export const RankedBookListDocument = gql`
  *   },
  * });
  */
-export function useRankedBookListQuery(baseOptions: Apollo.QueryHookOptions<RankedBookListQuery, RankedBookListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<RankedBookListQuery, RankedBookListQueryVariables>(RankedBookListDocument, options);
-      }
-export function useRankedBookListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RankedBookListQuery, RankedBookListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<RankedBookListQuery, RankedBookListQueryVariables>(RankedBookListDocument, options);
-        }
-export type RankedBookListQueryHookResult = ReturnType<typeof useRankedBookListQuery>;
-export type RankedBookListLazyQueryHookResult = ReturnType<typeof useRankedBookListLazyQuery>;
-export type RankedBookListQueryResult = Apollo.QueryResult<RankedBookListQuery, RankedBookListQueryVariables>;
+export function useRankedBookListQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    RankedBookListQuery,
+    RankedBookListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<RankedBookListQuery, RankedBookListQueryVariables>(
+    RankedBookListDocument,
+    options
+  );
+}
+export function useRankedBookListLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    RankedBookListQuery,
+    RankedBookListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<RankedBookListQuery, RankedBookListQueryVariables>(
+    RankedBookListDocument,
+    options
+  );
+}
+export type RankedBookListQueryHookResult = ReturnType<
+  typeof useRankedBookListQuery
+>;
+export type RankedBookListLazyQueryHookResult = ReturnType<
+  typeof useRankedBookListLazyQuery
+>;
+export type RankedBookListQueryResult = Apollo.QueryResult<
+  RankedBookListQuery,
+  RankedBookListQueryVariables
+>;

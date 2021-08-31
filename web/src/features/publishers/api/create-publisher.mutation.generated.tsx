@@ -1,27 +1,37 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type CreatePublisherMutationVariables = Types.Exact<{
-  name: Types.Scalars['String'];
+  name: Types.Scalars["String"];
 }>;
 
-
-export type CreatePublisherMutation = { __typename?: 'Mutation', createPublisher?: Types.Maybe<{ __typename?: 'Publisher', id: string, name: string, createdAt: any, updatedAt: any }> };
-
+export type CreatePublisherMutation = {
+  __typename?: "Mutation";
+  createPublisher?: Types.Maybe<{
+    __typename?: "Publisher";
+    id: string;
+    name: string;
+    createdAt: any;
+    updatedAt: any;
+  }>;
+};
 
 export const CreatePublisherDocument = gql`
-    mutation CreatePublisher($name: String!) {
-  createPublisher(input: {name: $name}) {
-    id
-    name
-    createdAt
-    updatedAt
+  mutation CreatePublisher($name: String!) {
+    createPublisher(input: { name: $name }) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
   }
-}
-    `;
-export type CreatePublisherMutationFn = Apollo.MutationFunction<CreatePublisherMutation, CreatePublisherMutationVariables>;
+`;
+export type CreatePublisherMutationFn = Apollo.MutationFunction<
+  CreatePublisherMutation,
+  CreatePublisherMutationVariables
+>;
 
 /**
  * __useCreatePublisherMutation__
@@ -40,10 +50,24 @@ export type CreatePublisherMutationFn = Apollo.MutationFunction<CreatePublisherM
  *   },
  * });
  */
-export function useCreatePublisherMutation(baseOptions?: Apollo.MutationHookOptions<CreatePublisherMutation, CreatePublisherMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreatePublisherMutation, CreatePublisherMutationVariables>(CreatePublisherDocument, options);
-      }
-export type CreatePublisherMutationHookResult = ReturnType<typeof useCreatePublisherMutation>;
-export type CreatePublisherMutationResult = Apollo.MutationResult<CreatePublisherMutation>;
-export type CreatePublisherMutationOptions = Apollo.BaseMutationOptions<CreatePublisherMutation, CreatePublisherMutationVariables>;
+export function useCreatePublisherMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreatePublisherMutation,
+    CreatePublisherMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreatePublisherMutation,
+    CreatePublisherMutationVariables
+  >(CreatePublisherDocument, options);
+}
+export type CreatePublisherMutationHookResult = ReturnType<
+  typeof useCreatePublisherMutation
+>;
+export type CreatePublisherMutationResult =
+  Apollo.MutationResult<CreatePublisherMutation>;
+export type CreatePublisherMutationOptions = Apollo.BaseMutationOptions<
+  CreatePublisherMutation,
+  CreatePublisherMutationVariables
+>;

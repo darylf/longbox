@@ -1,32 +1,53 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type PublishersQueryVariables = Types.Exact<{
-  field?: Types.Maybe<Types.Scalars['String']>;
+  field?: Types.Maybe<Types.Scalars["String"]>;
   direction?: Types.Maybe<Types.SortDirectionEnum>;
-  limit?: Types.Maybe<Types.Scalars['Int']>;
+  limit?: Types.Maybe<Types.Scalars["Int"]>;
 }>;
 
-
-export type PublishersQuery = { __typename?: 'Query', publishers: { __typename?: 'PublisherConnection', nodes?: Types.Maybe<Array<Types.Maybe<{ __typename?: 'Publisher', id: string, name: string, seriesCount: number, series: Array<{ __typename?: 'Series', name: string }> }>>> } };
-
+export type PublishersQuery = {
+  __typename?: "Query";
+  publishers: {
+    __typename?: "PublisherConnection";
+    nodes?: Types.Maybe<
+      Array<
+        Types.Maybe<{
+          __typename?: "Publisher";
+          id: string;
+          name: string;
+          seriesCount: number;
+          series: Array<{ __typename?: "Series"; name: string }>;
+        }>
+      >
+    >;
+  };
+};
 
 export const PublishersDocument = gql`
-    query Publishers($field: String = "name", $direction: SortDirectionEnum = ASC, $limit: Int) {
-  publishers(sortBy: {field: $field, direction: $direction}, limit: $limit) {
-    nodes {
-      id
-      name
-      series {
+  query Publishers(
+    $field: String = "name"
+    $direction: SortDirectionEnum = ASC
+    $limit: Int
+  ) {
+    publishers(
+      sortBy: { field: $field, direction: $direction }
+      limit: $limit
+    ) {
+      nodes {
+        id
         name
+        series {
+          name
+        }
+        seriesCount
       }
-      seriesCount
     }
   }
-}
-    `;
+`;
 
 /**
  * __usePublishersQuery__
@@ -46,14 +67,35 @@ export const PublishersDocument = gql`
  *   },
  * });
  */
-export function usePublishersQuery(baseOptions?: Apollo.QueryHookOptions<PublishersQuery, PublishersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PublishersQuery, PublishersQueryVariables>(PublishersDocument, options);
-      }
-export function usePublishersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublishersQuery, PublishersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PublishersQuery, PublishersQueryVariables>(PublishersDocument, options);
-        }
+export function usePublishersQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    PublishersQuery,
+    PublishersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<PublishersQuery, PublishersQueryVariables>(
+    PublishersDocument,
+    options
+  );
+}
+export function usePublishersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PublishersQuery,
+    PublishersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PublishersQuery, PublishersQueryVariables>(
+    PublishersDocument,
+    options
+  );
+}
 export type PublishersQueryHookResult = ReturnType<typeof usePublishersQuery>;
-export type PublishersLazyQueryHookResult = ReturnType<typeof usePublishersLazyQuery>;
-export type PublishersQueryResult = Apollo.QueryResult<PublishersQuery, PublishersQueryVariables>;
+export type PublishersLazyQueryHookResult = ReturnType<
+  typeof usePublishersLazyQuery
+>;
+export type PublishersQueryResult = Apollo.QueryResult<
+  PublishersQuery,
+  PublishersQueryVariables
+>;

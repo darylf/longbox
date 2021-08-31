@@ -1,24 +1,28 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type LogOutMutationVariables = Types.Exact<{
-  everywhere?: Types.Maybe<Types.Scalars['Boolean']>;
+  everywhere?: Types.Maybe<Types.Scalars["Boolean"]>;
 }>;
 
-
-export type LogOutMutation = { __typename?: 'Mutation', logout?: Types.Maybe<{ __typename?: 'Message', message: string }> };
-
+export type LogOutMutation = {
+  __typename?: "Mutation";
+  logout?: Types.Maybe<{ __typename?: "Message"; message: string }>;
+};
 
 export const LogOutDocument = gql`
-    mutation LogOut($everywhere: Boolean) {
-  logout(input: {everywhere: $everywhere}) {
-    message
+  mutation LogOut($everywhere: Boolean) {
+    logout(input: { everywhere: $everywhere }) {
+      message
+    }
   }
-}
-    `;
-export type LogOutMutationFn = Apollo.MutationFunction<LogOutMutation, LogOutMutationVariables>;
+`;
+export type LogOutMutationFn = Apollo.MutationFunction<
+  LogOutMutation,
+  LogOutMutationVariables
+>;
 
 /**
  * __useLogOutMutation__
@@ -37,10 +41,21 @@ export type LogOutMutationFn = Apollo.MutationFunction<LogOutMutation, LogOutMut
  *   },
  * });
  */
-export function useLogOutMutation(baseOptions?: Apollo.MutationHookOptions<LogOutMutation, LogOutMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LogOutMutation, LogOutMutationVariables>(LogOutDocument, options);
-      }
+export function useLogOutMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    LogOutMutation,
+    LogOutMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<LogOutMutation, LogOutMutationVariables>(
+    LogOutDocument,
+    options
+  );
+}
 export type LogOutMutationHookResult = ReturnType<typeof useLogOutMutation>;
 export type LogOutMutationResult = Apollo.MutationResult<LogOutMutation>;
-export type LogOutMutationOptions = Apollo.BaseMutationOptions<LogOutMutation, LogOutMutationVariables>;
+export type LogOutMutationOptions = Apollo.BaseMutationOptions<
+  LogOutMutation,
+  LogOutMutationVariables
+>;

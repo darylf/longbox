@@ -1,29 +1,38 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type SeriesQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars["ID"];
 }>;
 
-
-export type SeriesQuery = { __typename?: 'Query', series: { __typename?: 'Series', name: string, createdAt: any, updatedAt: any, books?: Types.Maybe<Array<{ __typename?: 'Book', id: string, displayName: string }>> } };
-
+export type SeriesQuery = {
+  __typename?: "Query";
+  series: {
+    __typename?: "Series";
+    name: string;
+    createdAt: any;
+    updatedAt: any;
+    books?: Types.Maybe<
+      Array<{ __typename?: "Book"; id: string; displayName: string }>
+    >;
+  };
+};
 
 export const SeriesDocument = gql`
-    query Series($id: ID!) {
-  series(id: $id) {
-    name
-    createdAt
-    updatedAt
-    books {
-      id
-      displayName
+  query Series($id: ID!) {
+    series(id: $id) {
+      name
+      createdAt
+      updatedAt
+      books {
+        id
+        displayName
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useSeriesQuery__
@@ -41,14 +50,27 @@ export const SeriesDocument = gql`
  *   },
  * });
  */
-export function useSeriesQuery(baseOptions: Apollo.QueryHookOptions<SeriesQuery, SeriesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SeriesQuery, SeriesQueryVariables>(SeriesDocument, options);
-      }
-export function useSeriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeriesQuery, SeriesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SeriesQuery, SeriesQueryVariables>(SeriesDocument, options);
-        }
+export function useSeriesQuery(
+  baseOptions: Apollo.QueryHookOptions<SeriesQuery, SeriesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<SeriesQuery, SeriesQueryVariables>(
+    SeriesDocument,
+    options
+  );
+}
+export function useSeriesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<SeriesQuery, SeriesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<SeriesQuery, SeriesQueryVariables>(
+    SeriesDocument,
+    options
+  );
+}
 export type SeriesQueryHookResult = ReturnType<typeof useSeriesQuery>;
 export type SeriesLazyQueryHookResult = ReturnType<typeof useSeriesLazyQuery>;
-export type SeriesQueryResult = Apollo.QueryResult<SeriesQuery, SeriesQueryVariables>;
+export type SeriesQueryResult = Apollo.QueryResult<
+  SeriesQuery,
+  SeriesQueryVariables
+>;

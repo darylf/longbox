@@ -1,30 +1,51 @@
-import * as Types from '../../../types';
+import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
+import * as Types from "../../../types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+const defaultOptions = {};
 export type RankedSeriesListQueryVariables = Types.Exact<{
-  limit?: Types.Maybe<Types.Scalars['Int']>;
-  field: Types.Scalars['String'];
+  limit?: Types.Maybe<Types.Scalars["Int"]>;
+  field: Types.Scalars["String"];
   direction: Types.SortDirectionEnum;
 }>;
 
-
-export type RankedSeriesListQuery = { __typename?: 'Query', seriesList: { __typename?: 'SeriesConnection', nodes?: Types.Maybe<Array<Types.Maybe<{ __typename?: 'Series', id: string, name: string, publisherName?: Types.Maybe<string>, bookCount: number }>>> } };
-
+export type RankedSeriesListQuery = {
+  __typename?: "Query";
+  seriesList: {
+    __typename?: "SeriesConnection";
+    nodes?: Types.Maybe<
+      Array<
+        Types.Maybe<{
+          __typename?: "Series";
+          id: string;
+          name: string;
+          publisherName?: Types.Maybe<string>;
+          bookCount: number;
+        }>
+      >
+    >;
+  };
+};
 
 export const RankedSeriesListDocument = gql`
-    query RankedSeriesList($limit: Int, $field: String!, $direction: SortDirectionEnum!) {
-  seriesList(limit: $limit, sortBy: {field: $field, direction: $direction}) {
-    nodes {
-      id
-      name
-      publisherName
-      bookCount
+  query RankedSeriesList(
+    $limit: Int
+    $field: String!
+    $direction: SortDirectionEnum!
+  ) {
+    seriesList(
+      limit: $limit
+      sortBy: { field: $field, direction: $direction }
+    ) {
+      nodes {
+        id
+        name
+        publisherName
+        bookCount
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useRankedSeriesListQuery__
@@ -44,14 +65,37 @@ export const RankedSeriesListDocument = gql`
  *   },
  * });
  */
-export function useRankedSeriesListQuery(baseOptions: Apollo.QueryHookOptions<RankedSeriesListQuery, RankedSeriesListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<RankedSeriesListQuery, RankedSeriesListQueryVariables>(RankedSeriesListDocument, options);
-      }
-export function useRankedSeriesListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RankedSeriesListQuery, RankedSeriesListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<RankedSeriesListQuery, RankedSeriesListQueryVariables>(RankedSeriesListDocument, options);
-        }
-export type RankedSeriesListQueryHookResult = ReturnType<typeof useRankedSeriesListQuery>;
-export type RankedSeriesListLazyQueryHookResult = ReturnType<typeof useRankedSeriesListLazyQuery>;
-export type RankedSeriesListQueryResult = Apollo.QueryResult<RankedSeriesListQuery, RankedSeriesListQueryVariables>;
+export function useRankedSeriesListQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    RankedSeriesListQuery,
+    RankedSeriesListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<RankedSeriesListQuery, RankedSeriesListQueryVariables>(
+    RankedSeriesListDocument,
+    options
+  );
+}
+export function useRankedSeriesListLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    RankedSeriesListQuery,
+    RankedSeriesListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    RankedSeriesListQuery,
+    RankedSeriesListQueryVariables
+  >(RankedSeriesListDocument, options);
+}
+export type RankedSeriesListQueryHookResult = ReturnType<
+  typeof useRankedSeriesListQuery
+>;
+export type RankedSeriesListLazyQueryHookResult = ReturnType<
+  typeof useRankedSeriesListLazyQuery
+>;
+export type RankedSeriesListQueryResult = Apollo.QueryResult<
+  RankedSeriesListQuery,
+  RankedSeriesListQueryVariables
+>;
