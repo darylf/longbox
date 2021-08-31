@@ -22,4 +22,8 @@ class Book < ApplicationRecord
   def display_name
     "#{series.name} ##{issue}"
   end
+
+  def cover_image_url
+    "https://via.placeholder.com/633x1024,png?text=#{ERB::Util.url_encode(display_name)}"
+  end
 end

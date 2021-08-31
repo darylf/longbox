@@ -14,5 +14,5 @@ generates:
       - typescript-operations
       - typescript-react-apollo
 hooks:
-  afterOneFileWrite:
-    - yarn lint:fix
+  afterAllFileWrite:
+    - yarn run eslint --fix --config config/eslint.config.js '*/**/*generated.tsx' src/types/index.ts

@@ -3,6 +3,7 @@ query Book($id: ID!) {
     id
     ageRating
     alternateTitle
+    coverImageUrl
     createdAt
     createdBy {
       id

@@ -14,6 +14,7 @@ export type BookQuery = {
     id: string;
     ageRating?: Types.Maybe<string>;
     alternateTitle?: Types.Maybe<string>;
+    coverImageUrl?: Types.Maybe<string>;
     createdAt: any;
     displayName: string;
     format?: Types.Maybe<string>;
@@ -52,6 +53,7 @@ export const BookDocument = gql`
       id
       ageRating
       alternateTitle
+      coverImageUrl
       createdAt
       createdBy {
         id

@@ -28,6 +28,7 @@ export type Book = {
   __typename?: "Book";
   ageRating?: Maybe<Scalars["String"]>;
   alternateTitle?: Maybe<Scalars["String"]>;
+  coverImageUrl?: Maybe<Scalars["String"]>;
   createdAt: Scalars["DateTime"];
   createdBy: User;
   credits?: Maybe<Array<Credit>>;

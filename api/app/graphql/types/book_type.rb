@@ -5,6 +5,7 @@ module Types
 
     field :age_rating, String, null: true
     field :alternate_title, String, null: true
+    field :cover_image_url, String, null: true
     field :credits, [Types::CreditType], null: true
     field :display_name, String, null: false
     field :format, String, null: true

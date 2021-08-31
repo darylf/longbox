@@ -21,12 +21,12 @@ interface Props {
   book: Book;
 }
 function ShowBook({ book }: Props): React.ReactElement {
-  const coverImg = `https://via.placeholder.com/633x1024,png?text=${book.displayName}`;
+  const coverImg = `https://via.placeholder.com/633x1024,png?text=Cover+Missing`;
   return (
     <>
       <Flex p={6}>
         <Box boxSize="sm">
-          <Image src={coverImg} />
+          <Image src={book.coverImageUrl ?? coverImg} />
         </Box>
 
         <Box p={10}>
