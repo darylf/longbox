@@ -25,7 +25,6 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  ignorePatterns: ['use-graphql.tsx'],
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     semi: 'error',
@@ -33,6 +32,7 @@ module.exports = {
     'import/order': [
       'error',
       { alphabetize: { order: 'asc', caseInsensitive: true } }
-    ]
+    ],
+    'import/prefer-default-export': 'off'
   }
 };

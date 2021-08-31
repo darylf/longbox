@@ -2,11 +2,17 @@ overwrite: true
 schema: 'http://api:3000/graphql'
 documents: 'src/**/*.graphql'
 generates:
-  src/hooks/use-graphql.tsx:
+  src/types/index.ts:
+    - typescript
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: types.ts
+      extension: .generated.tsx
+      folder: ../
     plugins:
-      - named-operations-object
-      - typescript
       - typescript-operations
       - typescript-react-apollo
-    config:
-      preResolveTypes: true
+hooks:
+  afterOneFileWrite:
+    - yarn lint:fix
