@@ -1,6 +1,6 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
-import SidebarWithHeader from "../components/layout";
+import SidebarWithHeader from "../components/SidebarWithHeader";
 import {
   Admin,
   Dashboard,
@@ -8,7 +8,7 @@ import {
   MyCollection,
   Trending,
 } from "../features/misc";
-import { useLoginState } from "../hooks/use-authentication";
+import { useLoginState } from "../hooks/useAuthentication";
 import lazyImport from "../utils/lazyImport";
 import protectedRoutes from "./protected";
 import publicRoutes from "./public";

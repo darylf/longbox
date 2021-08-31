@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import Link from "../../../components/link";
+import Link from "../../../components/Link";
 import { Publisher, Series, SortDirectionEnum } from "../../../types";
 import { usePublishersQuery } from "../../publishers/api/publishers.query.generated";
 import { useSeriesListQuery } from "../../series/api/series-list.query.generated";

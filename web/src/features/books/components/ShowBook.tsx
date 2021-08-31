@@ -14,7 +14,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import Link from "../../../components/link";
+import Link from "../../../components/Link";
 import { Book } from "../../../types";
 
 interface Props {

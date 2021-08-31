@@ -6,8 +6,8 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import Link from "../../../components/link";
-import { useLoginState } from "../../../hooks/use-authentication";
+import Link from "../../../components/Link";
+import { useLoginState } from "../../../hooks/useAuthentication";
 // import NewPublisherForm from "../components/new-publisher-form";
 // import NewSeriesForm from "../components/new-series-form";
 

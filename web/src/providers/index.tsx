@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import {
   AuthenticationProvider,
   getInitialLoginState,
-} from "../hooks/use-authentication";
+} from "../hooks/useAuthentication";
 import DataProvider from "./dataProvider";
 import StyleProvider from "./styleProvider";
 

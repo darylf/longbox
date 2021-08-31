@@ -1,14 +1,21 @@
-import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Table as ChakraTable,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import Link from "../../../components/link";
+import Link from "../../../components/Link";
 import { Book } from "../../../types";
 
-interface BookTableProps {
+interface TableProps {
   books: Array<Book>;
 }
 
-const BookTable = ({ books }: BookTableProps): ReactElement => (
-  <Table>
+const Table = ({ books }: TableProps): ReactElement => (
+  <ChakraTable>
     <Thead>
       <Tr>
         <Th>Publisher</Th>
@@ -35,7 +42,7 @@ const BookTable = ({ books }: BookTableProps): ReactElement => (
         </Tr>
       ))}
     </Tbody>
-  </Table>
+  </ChakraTable>
 );
 
-export default BookTable;
+export default Table;

@@ -1,6 +1,6 @@
 import { ListItem, UnorderedList } from "@chakra-ui/react";
 import React from "react";
-import Link from "../../../components/link";
+import Link from "../../../components/Link";
 import { usePublishersQuery } from "../api/publishers.query.generated";
 
 export const PublisherList = (): React.ReactElement => {

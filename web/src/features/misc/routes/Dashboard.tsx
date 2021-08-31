@@ -1,11 +1,11 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import Link from "../../../components/link";
-import Panel from "../../../components/panel";
+import Link from "../../../components/Link";
+import Panel from "../../../components/Panel";
 import { Book, Publisher, Series, SortDirectionEnum } from "../../../types";
 import { useBooksQuery } from "../../books/api/books.query.generated";
 import { useRankedBookListQuery } from "../../books/api/ranked-book-list.query.generated";
-import BookTable from "../../books/components/book-table";
+import BookTable from "../../books/components/Table";
 import { useRankedPublisherListQuery } from "../../publishers/api/ranked-publisher-list.query.generated";
 import { useRankedSeriesListQuery } from "../../series/api/ranked-series-list.query.generated";
 

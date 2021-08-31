@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Series } from "../../../types";
 import { useCreateSeriesMutation } from "../api/create-series.mutation.generated";
-import SeriesForm from "./series-form";
+import SeriesForm from "./SeriesForm";
 
 function NewSeriesForm(): React.ReactElement {
   const [series, setSeries] = useState<Series>({} as Series);

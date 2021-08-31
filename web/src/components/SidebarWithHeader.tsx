@@ -25,8 +25,8 @@ import {
   FiTrendingUp,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { UserActions } from "../features/auth/components/user-dropdown-menu";
-import { useLoginState } from "../hooks/use-authentication";
+import { UserActions } from "../features/auth/components/UserDropDownMenu";
+import { useLoginState } from "../hooks/useAuthentication";
 
 interface LinkItemProps {
   name: string;

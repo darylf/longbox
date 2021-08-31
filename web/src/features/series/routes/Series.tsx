@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useLoginState } from "../../../hooks/use-authentication";
+import { useLoginState } from "../../../hooks/useAuthentication";
 import { Series as SeriesObj } from "../../../types";
 import { useSeriesQuery } from "../api/series.query.generated";
-import ShowSeries from "../components/show-series";
+import ShowSeries from "../components/ShowSeries";
 
 export default function Series(): React.ReactElement {
   const { id } = useParams();

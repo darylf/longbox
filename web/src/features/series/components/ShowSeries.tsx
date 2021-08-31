@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import Link from "../../../components/link";
+import Link from "../../../components/Link";
 import { Series } from "../../../types";
 
 interface Props {

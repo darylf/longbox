@@ -1,6 +1,6 @@
 import { Box, Heading, List, ListItem } from "@chakra-ui/react";
 import React from "react";
-import Link from "../../../components/link";
+import Link from "../../../components/Link";
 import { useUsersQuery } from "../api/users.query.generated";
 
 function UserList(): React.ReactElement {

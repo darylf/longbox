@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Book as BookObj } from "../../../types";
 import { useBookQuery } from "../api/book.query.generated";
-import ShowBook from "../components/show-book";
+import ShowBook from "../components/ShowBook";
 
 export default function Book(): React.ReactElement {
   const { id } = useParams();

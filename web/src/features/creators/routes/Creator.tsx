@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Creator as CreatorObj } from "../../../types";
 import { useCreatorQuery } from "../api/creator.query.generated";
-import ShowCreator from "../components/show-creator";
+import ShowCreator from "../components/ShowCreator";
 
 function Creator(): React.ReactElement {
   const { id } = useParams();

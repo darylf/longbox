@@ -1,7 +1,7 @@
 import { Box, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useLoginState } from "../../../hooks/use-authentication";
+import { useLoginState } from "../../../hooks/useAuthentication";
 import { Publisher as PublisherObj } from "../../../types";
 import { usePublisherQuery } from "../api/publisher.query.generated";
 import { useUpdatePublisherMutation } from "../api/update-publisher.mutation.generated";
