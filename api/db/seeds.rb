@@ -20,12 +20,12 @@ end
 
 if CLEAN_ALL_RECORDS
   puts 'Cleaning data...'
-  Credit.destroy_all
-  Book.destroy_all
-  Series.destroy_all
-  Publisher.destroy_all
-  Creator.destroy_all
-  User.destroy_all
+  Credit.delete_all
+  Book.delete_all
+  Series.delete_all
+  Publisher.delete_all
+  Creator.delete_all
+  User.delete_all
 end
 
 ADMIN_USER = User.find_or_create_by(email: 'daryl@example.com', username: 'Daryl') do |user|

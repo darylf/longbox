@@ -9,12 +9,12 @@ module Mutations
     def resolve(input:)
       execution_error(error_data: 'Unauthorized') unless current_user
 
-      series = SaveSeries.call(input: input.to_h, user: current_user)
+      result = SaveSeries.call(input: input.to_h, user: current_user)
 
-      if series.success?
-        series
+      if result.success?
+        result.series
       else
-        execution_error(error_data: series.error_data)
+        execution_error(error_data: result.error_data)
       end
     end
   end

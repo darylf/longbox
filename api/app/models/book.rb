@@ -9,7 +9,7 @@ class Book < ApplicationRecord
   has_many :credits, dependent: :destroy
   has_many :creators, through: :credits do
     def featured
-       where('featured = ?', true)
+      where(featured: true)
     end
   end
 

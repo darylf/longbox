@@ -8,13 +8,12 @@ module Mutations
 
     def resolve(input:)
       execution_error(error_data: 'Unauthorized') unless current_user
+      result = SavePublisher.call(input: input.to_h, user: current_user)
 
-      publisher = SavePublisher.call(input: input.to_h, user: current_user)
-
-      if publisher.success?
-        publisher
+      if result.success?
+        result.publisher
       else
-        execution_error(error_data: publisher.error_data)
+        execution_error(error_data: result.publisher.error_data)
       end
     end
   end

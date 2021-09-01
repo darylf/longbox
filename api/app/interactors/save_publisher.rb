@@ -1,10 +1,10 @@
 class SavePublisher
   include Interactor
 
-  delegate :user, :token, :everywhere, to: :context
+  delegate :input, :user, to: :context
 
   def call
-    publisher = Publisher.new(name: context.name)
+    publisher = Publisher.new(name: input[:name])
     publisher.created_by = user
     publisher.updated_by = user
 
