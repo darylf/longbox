@@ -1,106 +1,104 @@
+import { isApolloError } from "@apollo/client";
 import {
+  Alert,
+  Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
+  Heading,
   Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Stack,
-  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FiEdit } from "react-icons/fi";
-import { Publisher, UserError } from "../../../types";
+import { useForm, UseFormRegisterReturn } from "react-hook-form";
+import {
+  CreatePublisherMutationVariables,
+  namedOperations,
+} from "../../../types";
+import { useCreatePublisherMutation } from "../api/create-publisher.mutation.generated";
 
 interface PublisherFormProps {
-  buttonText: string;
-  handleSubmit: (publisher: Partial<Publisher>) => void;
-  isLoading: boolean;
-  isModalOpen: boolean;
-  publisher?: Partial<Publisher>;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userErrors?: Array<UserError> | undefined;
+  htmlId?: string;
 }
 
-function displayError(userError: UserError) {
-  return <div key={userError.message}>{userError.message}</div>;
-}
+const PublisherForm = ({ htmlId }: PublisherFormProps): React.ReactElement => {
+  const [alert, setAlert] = useState<string>();
+  const toast = useToast();
+  const {
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    register,
+    setValue,
+  } = useForm<CreatePublisherMutationVariables>();
+  const [createPublisher] = useCreatePublisherMutation({
+    refetchQueries: [namedOperations.Query.Publishers],
+  });
+  const onSubmit = handleSubmit(async (variables) => {
+    try {
+      const { data } = await createPublisher({ variables });
+      if (data?.createPublisher) {
+        setValue("name", "");
+        toast({
+          title: "Publisher created.",
+          description: `${data.createPublisher.name} has been created successfully!`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (error: any) {
+      if (isApolloError(error)) {
+        setAlert(error.graphQLErrors[0].message);
+      }
+    }
+  });
 
-export const PublisherForm = ({
-  buttonText,
-  handleSubmit,
-  isLoading,
-  isModalOpen,
-  setIsModalOpen,
-  publisher,
-  userErrors,
-}: PublisherFormProps): React.ReactElement => {
-  const { onOpen, onClose } = useDisclosure();
-  const [name, setName] = useState(publisher?.name ?? "");
+  const nameField: UseFormRegisterReturn = register("name", {
+    required: "This is required",
+  });
+
   return (
     <>
-      <form>
-        <Modal isOpen={isModalOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>{buttonText}</ModalHeader>
-            <ModalBody pb={6}>
-              <Stack>
-                {userErrors && (
-                  <div>{userErrors.map((e) => displayError(e))}</div>
-                )}
-                <FormControl isRequired>
-                  <FormLabel htmlFor="name">Name:</FormLabel>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormControl>
-              </Stack>
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                onClick={() => {
-                  handleSubmit({ name } as Partial<Publisher>);
-                }}
-                disabled={isLoading}
-                colorScheme="blue"
-                mr={3}
-              >
-                Save
-              </Button>
-              <Button
-                onClick={() => {
-                  setIsModalOpen(false);
-                  onClose();
-                }}
-              >
-                Cancel
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+      <form id={htmlId} onSubmit={onSubmit}>
+        <Stack>
+          <Heading>Add Publisher</Heading>
+          {alert && (
+            <Box sx={{ mb: 2 }}>
+              <Alert severity="error">{alert}</Alert>
+            </Box>
+          )}
+
+          <FormControl isInvalid={errors.name !== undefined}>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <Input
+              id="name"
+              onBlur={nameField.onBlur}
+              onChange={nameField.onChange}
+              name={nameField.name}
+              ref={nameField.ref}
+            />
+            <FormErrorMessage>
+              {errors.name && errors.name.message}
+            </FormErrorMessage>
+          </FormControl>
+          <Button
+            mt={4}
+            colorScheme="teal"
+            isLoading={isSubmitting}
+            type="submit"
+          >
+            Submit
+          </Button>
+        </Stack>
       </form>
-      <Button
-        leftIcon={<FiEdit />}
-        onClick={() => {
-          setIsModalOpen(true);
-          onOpen();
-        }}
-      >
-        {buttonText}
-      </Button>
     </>
   );
 };
 
 PublisherForm.defaultProps = {
-  publisher: {},
-  userErrors: undefined,
+  htmlId: "publisher-form",
 };
+
+export default PublisherForm;

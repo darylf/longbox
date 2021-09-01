@@ -1,43 +1,24 @@
 import { HStack, Stack } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
+import FormDrawer from "../../../components/FormDrawer";
 import { useLoginState } from "../../../hooks/useAuthentication";
-import { Publisher as PublisherObj } from "../../../types";
-import SeriesFormDrawer from "../../series/components/SeriesFormDrawer";
+import { Publisher as IPublisher } from "../../../types";
+import SeriesForm from "../../series/components/SeriesForm";
 import { usePublisherQuery } from "../api/publisher.query.generated";
-import { useUpdatePublisherMutation } from "../api/update-publisher.mutation.generated";
-import { PublisherForm } from "../components/PublisherForm";
 import { ViewPublisher } from "../components/ViewPublisher";
 
 export const Publisher = (): React.ReactElement => {
   const { id } = useParams();
-  const [publisher, setPublisher] = useState<PublisherObj | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { authenticated } = useLoginState();
-  const { loading, error } = usePublisherQuery({
+  const { data, loading, error } = usePublisherQuery({
     variables: { id },
-    onCompleted: (data) => setPublisher(data.publisher as PublisherObj),
   });
-  const [updatePublisher, { data: dataMutation }] = useUpdatePublisherMutation({
-    variables: { id, name: publisher?.name ?? "" },
-    onCompleted: (data) => {
-      if (data.updatePublisher?.publisher) {
-        setPublisher({
-          ...publisher,
-          ...data.updatePublisher?.publisher,
-        } as PublisherObj);
-        setIsModalOpen(false);
-      }
-    },
-    onError: (err) => console.error(err),
-  });
-
-  const handleSubmit = (publisherParam: Partial<PublisherObj>) => {
-    updatePublisher({ variables: { id, name: publisherParam.name ?? "" } });
-  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>An error has occured...</p>;
+
+  const publisher = data?.publisher as IPublisher;
 
   return (
     <>
@@ -47,16 +28,9 @@ export const Publisher = (): React.ReactElement => {
             <ViewPublisher publisher={publisher} />
             {authenticated && (
               <HStack>
-                <SeriesFormDrawer publisher={publisher} />
-                <PublisherForm
-                  buttonText="Edit Publisher"
-                  handleSubmit={handleSubmit}
-                  isLoading={loading}
-                  isModalOpen={isModalOpen}
-                  publisher={publisher}
-                  setIsModalOpen={setIsModalOpen}
-                  userErrors={dataMutation?.updatePublisher?.errors}
-                />
+                <FormDrawer id={id} openButtonText="Add a Series">
+                  <SeriesForm id={id} selectedPublisher={publisher} />
+                </FormDrawer>
               </HStack>
             )}
           </Stack>

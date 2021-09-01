@@ -16,22 +16,28 @@ import { FiPlus } from "react-icons/fi";
 interface FormDrawerProps {
   id: string;
   children: ReactElement;
-  title: string;
+  openButtonText?: string;
+  title?: string;
 }
 
-function FormDrawer({ id, children, title }: FormDrawerProps): ReactElement {
+function FormDrawer({
+  id,
+  children,
+  openButtonText,
+  title,
+}: FormDrawerProps): ReactElement {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
       <Button leftIcon={<FiPlus />} colorScheme="teal" onClick={onOpen}>
-        {title}
+        {openButtonText}
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">Add Series</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">{title}</DrawerHeader>
 
           <DrawerBody>
             <Stack spacing="24px">{children} </Stack>
@@ -50,5 +56,10 @@ function FormDrawer({ id, children, title }: FormDrawerProps): ReactElement {
     </>
   );
 }
+
+FormDrawer.defaultProps = {
+  openButtonText: "Show Form",
+  title: "",
+};
 
 export default FormDrawer;
