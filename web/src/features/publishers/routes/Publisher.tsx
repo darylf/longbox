@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLoginState } from "../../../hooks/useAuthentication";
 import { Publisher as PublisherObj } from "../../../types";
-import FormDrawer from "../../series/components/FormDrawer";
+import SeriesFormDrawer from "../../series/components/SeriesFormDrawer";
 import { usePublisherQuery } from "../api/publisher.query.generated";
 import { useUpdatePublisherMutation } from "../api/update-publisher.mutation.generated";
 import { PublisherForm } from "../components/PublisherForm";
@@ -47,7 +47,7 @@ export const Publisher = (): React.ReactElement => {
             <ViewPublisher publisher={publisher} />
             {authenticated && (
               <HStack>
-                <FormDrawer publisher={publisher} />
+                <SeriesFormDrawer publisher={publisher} />
                 <PublisherForm
                   buttonText="Edit Publisher"
                   handleSubmit={handleSubmit}

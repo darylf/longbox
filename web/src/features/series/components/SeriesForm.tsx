@@ -1,122 +1,117 @@
+import { isApolloError } from "@apollo/client";
 import {
+  Alert,
+  Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
+  Heading,
   Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
   Stack,
-  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Publisher, Series, UserError } from "../../../types";
+import React, { ReactElement, useState } from "react";
+import { useForm, UseFormRegisterReturn } from "react-hook-form";
+import { Publisher } from "../../../types";
+import { PublisherDocument } from "../../publishers/api/publisher.query.generated";
+import {
+  CreateSeriesMutationVariables,
+  useCreateSeriesMutation,
+} from "../api/create-series.mutation.generated";
 
 interface SeriesFormProps {
-  buttonText: string;
-  handleSubmit: (series: Partial<Series>) => void;
-  isLoading: boolean;
-  isModalOpen: boolean;
-  publishers: Array<Publisher>;
-  series?: Partial<Series>;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userErrors?: Array<UserError> | undefined;
+  id?: string;
+  selectedPublisher: Publisher;
 }
 
-function ErrorMessage({ message }: UserError) {
-  return <div key={message}>{message}</div>;
-}
+function SeriesForm({ id, selectedPublisher }: SeriesFormProps): ReactElement {
+  const [alert, setAlert] = useState<string>();
+  const toast = useToast();
+  const {
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    register,
+    setValue,
+  } = useForm<CreateSeriesMutationVariables>();
+  const [createSeries] = useCreateSeriesMutation({
+    refetchQueries: [
+      { query: PublisherDocument, variables: { id: selectedPublisher.id } },
+    ],
+  });
 
-function SeriesForm({
-  buttonText,
-  handleSubmit,
-  isLoading,
-  isModalOpen,
-  publishers,
-  setIsModalOpen,
-  series,
-  userErrors,
-}: SeriesFormProps): React.ReactElement {
-  const { onOpen, onClose } = useDisclosure();
-  const [name, setName] = useState(series?.name ?? "");
-  const [publisherId, setPublisherId] = useState(series?.publisher?.id ?? "");
+  const onSubmit = handleSubmit(async (variables) => {
+    try {
+      const { data } = await createSeries({ variables });
+      if (data?.createSeries) {
+        setValue("publisherId", selectedPublisher.id);
+        setValue("name", "");
+        toast({
+          title: "Series created.",
+          description: `${data.createSeries.name} has been created successfully!`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (error: any) {
+      if (isApolloError(error)) {
+        setAlert(error.graphQLErrors[0].message);
+      }
+    }
+  });
+
+  setValue("publisherId", selectedPublisher.id);
+
+  const nameField: UseFormRegisterReturn = register("name", {
+    required: "This is required",
+  });
+
   return (
     <>
-      <form>
-        <Modal isOpen={isModalOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>{buttonText}</ModalHeader>
-            <ModalBody pb={6}>
-              <Stack>
-                {userErrors && (
-                  <div>{userErrors.map((e) => ErrorMessage(e))}</div>
-                )}
-                <FormControl isRequired>
-                  <FormLabel htmlFor="publisher">Publisher:</FormLabel>
-                  <Select
-                    id="publisher"
-                    placeholder="Select option"
-                    onChange={(e) => setPublisherId(e.target.value)}
-                  >
-                    {publishers.map((p) => (
-                      <option value={p.id}>{p.name}</option>
-                    ))}
-                  </Select>
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel htmlFor="name">Name:</FormLabel>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormControl>
-              </Stack>
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                onClick={() => {
-                  handleSubmit({ name, publisherId } as Partial<Series>);
-                }}
-                disabled={isLoading}
-                colorScheme="blue"
-                mr={3}
-              >
-                Save
-              </Button>
-              <Button
-                onClick={() => {
-                  setIsModalOpen(false);
-                  onClose();
-                }}
-              >
-                Cancel
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+      <form id={id} onSubmit={onSubmit}>
+        <Stack>
+          <Heading>Add Series</Heading>
+          {alert && (
+            <Box sx={{ mb: 2 }}>
+              <Alert severity="error">{alert}</Alert>
+            </Box>
+          )}
+
+          <FormControl isDisabled>
+            <FormLabel htmlFor="publisherId">Publisher</FormLabel>
+            <Input id="publisherId" value={selectedPublisher.name} />
+          </FormControl>
+
+          <FormControl isInvalid={errors.name !== undefined}>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <Input
+              id="name"
+              onBlur={nameField.onBlur}
+              onChange={nameField.onChange}
+              name={nameField.name}
+              ref={nameField.ref}
+            />
+            <FormErrorMessage>
+              {errors.name && errors.name.message}
+            </FormErrorMessage>
+          </FormControl>
+          <Button
+            mt={4}
+            colorScheme="teal"
+            isLoading={isSubmitting}
+            type="submit"
+          >
+            Submit
+          </Button>
+        </Stack>
       </form>
-      <Button
-        onClick={() => {
-          setIsModalOpen(true);
-          onOpen();
-        }}
-      >
-        {buttonText}
-      </Button>
     </>
   );
 }
 
 SeriesForm.defaultProps = {
-  series: {},
-  userErrors: undefined,
+  id: "series-form",
 };
 
 export default SeriesForm;
