@@ -4,6 +4,8 @@ documents: 'src/**/*.graphql'
 generates:
   src/types/index.ts:
     - typescript
+    - typescript-operations
+    - named-operations-object
   src/:
     preset: near-operation-file
     presetConfig:
@@ -16,3 +18,5 @@ generates:
 hooks:
   afterAllFileWrite:
     - yarn run eslint --fix --config config/eslint.config.js '*/**/*generated.tsx' src/types/index.ts
+config:
+  withResultType: true

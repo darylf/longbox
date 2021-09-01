@@ -13,6 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { FiEdit } from "react-icons/fi";
 import { Publisher, UserError } from "../../../types";
 
 interface PublisherFormProps {
@@ -87,6 +88,7 @@ export const PublisherForm = ({
         </Modal>
       </form>
       <Button
+        leftIcon={<FiEdit />}
         onClick={() => {
           setIsModalOpen(true);
           onOpen();

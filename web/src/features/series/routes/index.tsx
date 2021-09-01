@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Series from "./Series";
 
-export const SeriesRoutes = () => {
+export const SeriesRoutes = (): ReactElement => {
   return (
     <Routes>
       <Route path=":id" element={<Series />} />

@@ -1,5 +1,5 @@
 import { Button, Spinner } from "@chakra-ui/react";
-import React from "react";
+import React, { ReactElement } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter as Router } from "react-router-dom";
 import {
@@ -30,7 +30,7 @@ type AppProviderProps = {
   children: React.ReactNode;
 };
 
-const AppProvider = ({ children }: AppProviderProps) => {
+const AppProvider = ({ children }: AppProviderProps): ReactElement => {
   const initialLoginState = getInitialLoginState();
   return (
     <React.Suspense

@@ -7,6 +7,7 @@ import React, {
 import { useLoginMutation } from "../features/auth/api/login.mutation.generated";
 import { useLogOutMutation } from "../features/auth/api/logout.mutation.generated";
 
+const ACCESS_TOKEN = "access";
 const TOKEN = "token";
 const USER = "attributes";
 
@@ -122,6 +123,7 @@ function useAuthenticationManager(initialLoginState: LoginState): {
       if (data.login && data.login.me) {
         const { me, accessToken, refreshToken } = data.login;
         sessionStorage.setItem(TOKEN, refreshToken);
+        sessionStorage.setItem(ACCESS_TOKEN, accessToken);
         sessionStorage.setItem(USER, JSON.stringify(me));
         dispatch({
           type: "LOGIN_SUCCESS",
@@ -147,11 +149,7 @@ function useAuthenticationManager(initialLoginState: LoginState): {
   });
 
   const login = useCallback(
-    (
-      email: string,
-      password: string,
-      handleError: (message: string) => void
-    ) => {
+    (email: string, password: string) => {
       dispatch({ type: "LOGIN_LOADING", loading: true });
       loginMutation({ variables: { email, password } });
     },
@@ -159,7 +157,7 @@ function useAuthenticationManager(initialLoginState: LoginState): {
   );
 
   const logout = useCallback(() => {
-    // logoutMutation();
+    logoutMutation();
     sessionStorage.clear();
     dispatch({ type: "LOGOUT" });
   }, []);

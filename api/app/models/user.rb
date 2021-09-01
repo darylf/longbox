@@ -17,7 +17,7 @@ class User < ApplicationRecord
             presence: true
 
   validates :username,
-            format: { with: /\A[A-Za-z][A-Za-z0-9_-]+/ },
+            format: { with: /\A[A-Za-z][A-Za-z0-9_-]+\z/ },
             length: { minimum: 2, maximum: 36 },
             presence: true,
             uniqueness: { case_sensitive: false }

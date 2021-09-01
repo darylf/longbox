@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useRoutes } from "react-router-dom";
 import SidebarWithHeader from "../components/SidebarWithHeader";
 import {
@@ -38,7 +38,7 @@ const { UsersRoutes } = lazyImport(
   "UsersRoutes"
 );
 
-const AppRoutes = () => {
+const AppRoutes = (): ReactElement => {
   const { authenticated } = useLoginState();
 
   const commonRoutes = [

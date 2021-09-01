@@ -1,9 +1,6 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { ReactElement } from "react";
 import { RegisterForm } from "../components/RegisterForm";
 
-export const Register = () => {
-  const navigate = useNavigate();
-
+export const Register = (): ReactElement => {
   return <RegisterForm />;
 };

@@ -1,9 +1,9 @@
 import { Heading, Image } from "@chakra-ui/react";
-import React from "react";
+import React, { ReactElement } from "react";
 import { useParams } from "react-router-dom";
 import { useUserQuery } from "../api/user.query.generated";
 
-export default function User(): React.ReactElement {
+export default function User(): ReactElement {
   const { id } = useParams();
   const { data, loading, error } = useUserQuery({
     variables: { id },

@@ -1,8 +1,9 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { HStack, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLoginState } from "../../../hooks/useAuthentication";
 import { Publisher as PublisherObj } from "../../../types";
+import FormDrawer from "../../series/components/FormDrawer";
 import { usePublisherQuery } from "../api/publisher.query.generated";
 import { useUpdatePublisherMutation } from "../api/update-publisher.mutation.generated";
 import { PublisherForm } from "../components/PublisherForm";
@@ -43,11 +44,10 @@ export const Publisher = (): React.ReactElement => {
       {publisher && (
         <>
           <Stack>
-            <Box mt={2}>
-              <ViewPublisher publisher={publisher} />
-            </Box>
+            <ViewPublisher publisher={publisher} />
             {authenticated && (
-              <Box mt={2} textAlign="right">
+              <HStack>
+                <FormDrawer publisher={publisher} />
                 <PublisherForm
                   buttonText="Edit Publisher"
                   handleSubmit={handleSubmit}
@@ -57,7 +57,7 @@ export const Publisher = (): React.ReactElement => {
                   setIsModalOpen={setIsModalOpen}
                   userErrors={dataMutation?.updatePublisher?.errors}
                 />
-              </Box>
+              </HStack>
             )}
           </Stack>
         </>

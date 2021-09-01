@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import User from "./User";
 import Users from "./Users";
 
-export const UsersRoutes = () => {
+export const UsersRoutes = (): ReactElement => {
   return (
     <Routes>
       <Route path="" element={<Users />} />

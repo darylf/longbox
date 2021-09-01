@@ -12,7 +12,7 @@ export const PublisherList = (): React.ReactElement => {
   const publisherList =
     data?.publishers.nodes
       ?.filter((p) => p != null)
-      .sort((a, b) => a!.name.localeCompare(b!.name)) ?? [];
+      .sort((a, b) => `${a?.name}`.localeCompare(`${b?.name}`)) ?? [];
 
   return (
     <UnorderedList>

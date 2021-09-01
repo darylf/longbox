@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack --mode production --config config/webpack.config.js",
     "codegen": "graphql-codegen --config config/codegen.config.yml",
-    "lint": "eslint --config config/eslint.config.js '*/**/*.{js,ts,tsx}'",
-    "lint:fix": "eslint --config config/eslint.config.js '*/**/*.{js,ts,tsx}' --fix",
+    "lint": "eslint --config config/eslint.config.js '*/**/*.{js,ts,tsx}' --ignore-pattern '*generated.tsx' --ignore-pattern '**/types/index.ts'",
+    "lint:fix": "eslint --fix --config config/eslint.config.js '*/**/*.{js,ts,tsx}' --ignore-pattern '*generated.tsx' --ignore-pattern '**/types/index.ts'",
     "prettier:save": "prettier --config config/prettier.config.js '*/**/*.{js,ts,tsx}' --write",
     "start:dev": "webpack serve --host 0.0.0.0 --mode development  --config config/webpack.config.js",
     "test": "jest --config config/jest.config.js",

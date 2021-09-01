@@ -12,7 +12,7 @@ function UserList(): React.ReactElement {
   const publisherList =
     data?.users.nodes
       ?.filter((p) => p != null)
-      .sort((a, b) => a!.username.localeCompare(b!.username)) ?? [];
+      .sort((a, b) => `${a?.username}`.localeCompare(`${b?.username}`)) ?? [];
 
   return (
     <List>

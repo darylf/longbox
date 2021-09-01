@@ -1,4 +1,10 @@
-import { Box, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
+import {
+  Heading,
+  ListItem,
+  Stack,
+  Text,
+  UnorderedList,
+} from "@chakra-ui/react";
 import React from "react";
 import Link from "../../../components/Link";
 import { Publisher } from "../../../types";
@@ -12,22 +18,19 @@ export const ViewPublisher = ({
 }: ViewPublisherProps): React.ReactElement => {
   return (
     <Stack>
-      <Box p={6}>
-        <Box p={10}>
-          <Stack spacing={0} align="center" mb={5}>
-            <Heading size="2xl" fontWeight={500}>
-              {publisher.name}
-            </Heading>
-          </Stack>
-        </Box>
-        <List>
-          {publisher.series.map((s) => (
+      {" "}
+      <Heading size="2xl" fontWeight={500}>
+        {publisher.name}
+      </Heading>
+      <UnorderedList pl={10}>
+        {publisher.series
+          // .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .map((s) => (
             <ListItem key={s.id}>
               <Link to={`/series/${s.id}`}>{s.name}</Link>
             </ListItem>
           ))}
-        </List>
-      </Box>
+      </UnorderedList>
       <Text>Originally created:{publisher.createdAt}</Text>
       <Text>Last updated at{publisher.updatedAt}</Text>
     </Stack>

@@ -4,7 +4,7 @@ import { useCreatePublisherMutation } from "../api/create-publisher.mutation.gen
 import { PublisherForm } from "../components/PublisherForm";
 
 export const NewPublisher = (): React.ReactElement => {
-  const [publisher, setPublisher] = useState<Publisher | null>(null);
+  const [publisher] = useState<Publisher | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createPublisher, { loading }] = useCreatePublisherMutation({
     variables: {
