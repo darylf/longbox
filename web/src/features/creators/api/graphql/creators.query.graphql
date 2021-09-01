@@ -1,0 +1,13 @@
+query Creators {
+  creators {
+    nodes {
+      id
+      firstName
+      lastName
+      createdAt
+      credits {
+        role
+      }
+    }
+  }
+}

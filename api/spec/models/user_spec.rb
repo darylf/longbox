@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
       it { should validate_length_of(:username).is_at_most(36) }
       it { should validate_uniqueness_of(:username).case_insensitive }
       it do
-        expect(user).not_to allow_values("1username", ".username", "_username", "-username","user\nname").for(:username)
+        expect(user).not_to allow_values("1username", ".username", "_username", "-username", "user\nname").for(:username)
       end
     end
   end

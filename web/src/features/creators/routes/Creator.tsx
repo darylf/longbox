@@ -7,18 +7,11 @@ import ShowCreator from "../components/ShowCreator";
 function Creator(): React.ReactElement {
   const { id } = useParams();
   const { data, loading, error } = useCreatorQuery({ variables: { id } });
-  let creatorComponent = <></>;
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>An error has occured...</p>;
-  if (data)
-    creatorComponent = <ShowCreator creator={data.creator as CreatorObj} />;
 
-  return (
-    <>
-      View Publisher
-      {creatorComponent}
-    </>
-  );
+  return <ShowCreator creator={data?.creator as CreatorObj} />;
 }
 
 export default Creator;

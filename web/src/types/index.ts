@@ -99,6 +99,31 @@ export type Creator = {
   updatedAt: Scalars["DateTime"];
 };
 
+/** The connection type for Creator. */
+export type CreatorConnection = {
+  __typename?: "CreatorConnection";
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<CreatorEdge>>>;
+  /** A list of nodes. */
+  nodes?: Maybe<Array<Maybe<Creator>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type CreatorEdge = {
+  __typename?: "CreatorEdge";
+  /** A cursor for use in pagination. */
+  cursor: Scalars["String"];
+  /** The item at the end of the edge. */
+  node?: Maybe<Creator>;
+};
+
+export type CreatorInput = {
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+};
+
 /** An association of book and creator */
 export type Credit = {
   __typename?: "Credit";
@@ -130,6 +155,7 @@ export type Message = {
 export type Mutation = {
   __typename?: "Mutation";
   createBook?: Maybe<CreateBookPayload>;
+  createCreator?: Maybe<Creator>;
   createPublisher?: Maybe<Publisher>;
   createSeries?: Maybe<Series>;
   createUser?: Maybe<AuthenticationResult>;
@@ -144,6 +170,10 @@ export type Mutation = {
 
 export type MutationCreateBookArgs = {
   attributes: BookInput;
+};
+
+export type MutationCreateCreatorArgs = {
+  input: CreatorInput;
 };
 
 export type MutationCreatePublisherArgs = {
@@ -239,7 +269,7 @@ export type Query = {
   book: Book;
   books: BookConnection;
   creator: Creator;
-  creators: Array<Creator>;
+  creators: CreatorConnection;
   publisher: Publisher;
   publishers: PublisherConnection;
   series: Series;
@@ -263,6 +293,15 @@ export type QueryBooksArgs = {
 
 export type QueryCreatorArgs = {
   id?: Maybe<Scalars["ID"]>;
+};
+
+export type QueryCreatorsArgs = {
+  sortBy?: Maybe<SortAttributes>;
+  limit?: Maybe<Scalars["Int"]>;
+  after?: Maybe<Scalars["String"]>;
+  before?: Maybe<Scalars["String"]>;
+  first?: Maybe<Scalars["Int"]>;
+  last?: Maybe<Scalars["Int"]>;
 };
 
 export type QueryPublisherArgs = {
@@ -575,6 +614,21 @@ export type RankedBookListQuery = {
   };
 };
 
+export type CreateCreatorMutationVariables = Exact<{
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+}>;
+
+export type CreateCreatorMutation = {
+  __typename?: "Mutation";
+  createCreator?: Maybe<{
+    __typename?: "Creator";
+    id: string;
+    firstName?: Maybe<string>;
+    lastName?: Maybe<string>;
+  }>;
+};
+
 export type CreatorQueryVariables = Exact<{
   id: Scalars["ID"];
 }>;
@@ -594,6 +648,27 @@ export type CreatorQuery = {
       role: string;
       book: { __typename?: "Book"; id: string; displayName: string };
     }>;
+  };
+};
+
+export type CreatorsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CreatorsQuery = {
+  __typename?: "Query";
+  creators: {
+    __typename?: "CreatorConnection";
+    nodes?: Maybe<
+      Array<
+        Maybe<{
+          __typename?: "Creator";
+          id: string;
+          firstName?: Maybe<string>;
+          lastName?: Maybe<string>;
+          createdAt: any;
+          credits: Array<{ __typename?: "Credit"; role: string }>;
+        }>
+      >
+    >;
   };
 };
 
@@ -824,6 +899,7 @@ export const namedOperations = {
     Books: "Books",
     RankedBookList: "RankedBookList",
     Creator: "Creator",
+    Creators: "Creators",
     Publisher: "Publisher",
     Publishers: "Publishers",
     RankedPublisherList: "RankedPublisherList",
@@ -837,6 +913,7 @@ export const namedOperations = {
     Login: "Login",
     LogOut: "LogOut",
     Register: "Register",
+    CreateCreator: "CreateCreator",
     CreatePublisher: "CreatePublisher",
     UpdatePublisher: "UpdatePublisher",
     CreateSeries: "CreateSeries",
