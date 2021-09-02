@@ -8,7 +8,7 @@ module Inputs
     argument :page_count, String, required: false
     argument :price, String, required: false
     argument :publication_date, String, required: false
-    argument :series_id, ID, required: false
+    argument :series_id, ID, required: true
     argument :summary, String, required: false
   end
 end

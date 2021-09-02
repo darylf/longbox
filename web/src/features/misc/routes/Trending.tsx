@@ -1,10 +1,16 @@
+import { Heading, Stack, Text } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
+import { Head } from "../../../components/Head";
+import SidebarWithHeader from "../../../components/SidebarWithHeader";
 
 export default function Trending(): ReactElement {
   return (
-    <>
-      <h1>Trending</h1>
-      <p>This page is still under construction</p>
-    </>
+    <SidebarWithHeader>
+      <Head title="Trending Title" />
+      <Stack>
+        <Heading>Trending Titles</Heading>
+        <Text>Coming soon.</Text>
+      </Stack>
+    </SidebarWithHeader>
   );
 }

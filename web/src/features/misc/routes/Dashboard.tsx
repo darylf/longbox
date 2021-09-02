@@ -1,7 +1,9 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
+import { Head } from "../../../components/Head";
 import Link from "../../../components/Link";
 import Panel from "../../../components/Panel";
+import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { Book, Publisher, Series, SortDirectionEnum } from "../../../types";
 import { useBooksQuery } from "../../books/api/books.query.generated";
 import { useRankedBookListQuery } from "../../books/api/ranked-book-list.query.generated";
@@ -68,7 +70,8 @@ export default function HomePage(): ReactElement {
   }
 
   return (
-    <>
+    <SidebarWithHeader>
+      <Head title="Home" />
       <SimpleGrid columns={3} spacing={10}>
         <Panel
           headerText="Top Publishers"
@@ -99,6 +102,6 @@ export default function HomePage(): ReactElement {
         />
       </SimpleGrid>
       {bookTable}
-    </>
+    </SidebarWithHeader>
   );
 }

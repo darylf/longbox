@@ -1,8 +1,13 @@
 import React, { ReactElement } from "react";
-import { useLoginState } from "../../../hooks/useAuthentication";
+import { Head } from "../../../components/Head";
+import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { LoginForm } from "../components/LoginForm";
 
 export const Login = (): ReactElement => {
-  const { authenticated } = useLoginState();
-  return authenticated ? <div>Logged in</div> : <LoginForm />;
+  return (
+    <SidebarWithHeader>
+      <Head title="Login" />
+      <LoginForm />
+    </SidebarWithHeader>
+  );
 };

@@ -7,6 +7,7 @@ import {
   getInitialLoginState,
 } from "../hooks/useAuthentication";
 import DataProvider from "./dataProvider";
+import HeadProvider from "./headProvider";
 import StyleProvider from "./styleProvider";
 
 const ErrorFallback = () => {
@@ -27,7 +28,7 @@ const ErrorFallback = () => {
 };
 
 type AppProviderProps = {
-  children: React.ReactNode;
+  children: ReactElement;
 };
 
 const AppProvider = ({ children }: AppProviderProps): ReactElement => {
@@ -41,13 +42,15 @@ const AppProvider = ({ children }: AppProviderProps): ReactElement => {
       }
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <DataProvider>
-          <AuthenticationProvider initialLoginState={initialLoginState}>
-            <StyleProvider>
-              <Router>{children}</Router>
-            </StyleProvider>
-          </AuthenticationProvider>
-        </DataProvider>
+        <HeadProvider>
+          <DataProvider>
+            <AuthenticationProvider initialLoginState={initialLoginState}>
+              <StyleProvider>
+                <Router>{children}</Router>
+              </StyleProvider>
+            </AuthenticationProvider>
+          </DataProvider>
+        </HeadProvider>
       </ErrorBoundary>
     </React.Suspense>
   );

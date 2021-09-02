@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Head } from "../../../components/Head";
+import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { Creator as CreatorObj } from "../../../types";
 import { useCreatorQuery } from "../api/creator.query.generated";
 import ShowCreator from "../components/ShowCreator";
@@ -11,7 +13,14 @@ function Creator(): React.ReactElement {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>An error has occured...</p>;
 
-  return <ShowCreator creator={data?.creator as CreatorObj} />;
+  const creator = data?.creator as CreatorObj;
+
+  return (
+    <SidebarWithHeader>
+      <Head title={`${creator.firstName} ${creator.lastName}`} />
+      <ShowCreator creator={creator} />
+    </SidebarWithHeader>
+  );
 }
 
 export default Creator;

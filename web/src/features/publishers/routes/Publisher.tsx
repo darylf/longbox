@@ -2,6 +2,8 @@ import { HStack, Stack } from "@chakra-ui/react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FormDrawer from "../../../components/FormDrawer";
+import { Head } from "../../../components/Head";
+import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { useLoginState } from "../../../hooks/useAuthentication";
 import { Publisher as IPublisher } from "../../../types";
 import SeriesForm from "../../series/components/SeriesForm";
@@ -21,21 +23,18 @@ export const Publisher = (): React.ReactElement => {
   const publisher = data?.publisher as IPublisher;
 
   return (
-    <>
-      {publisher && (
-        <>
-          <Stack>
-            <ViewPublisher publisher={publisher} />
-            {authenticated && (
-              <HStack>
-                <FormDrawer id={id} openButtonText="Add a Series">
-                  <SeriesForm id={id} selectedPublisher={publisher} />
-                </FormDrawer>
-              </HStack>
-            )}
-          </Stack>
-        </>
-      )}
-    </>
+    <SidebarWithHeader>
+      <Head title={publisher.name} />
+      <Stack>
+        <ViewPublisher publisher={publisher} />
+        {authenticated && (
+          <HStack>
+            <FormDrawer id={id} openButtonText="Add a Series">
+              <SeriesForm id={id} selectedPublisher={publisher} />
+            </FormDrawer>
+          </HStack>
+        )}
+      </Stack>
+    </SidebarWithHeader>
   );
 };

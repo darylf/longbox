@@ -33,7 +33,7 @@ function FormDrawer({
       <Button leftIcon={<FiPlus />} colorScheme="teal" onClick={onOpen}>
         {openButtonText}
       </Button>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />

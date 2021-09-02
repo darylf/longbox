@@ -1,0 +1,28 @@
+mutation CreateBook(
+  $ageRating: String
+  $alternateTitle: String
+  $format: String!
+  $issue: String!
+  $pageCount: String
+  $price: String
+  $publicationDate: String
+  $seriesId: ID!
+  $summary: String
+) {
+  createBook(
+    input: {
+      ageRating: $ageRating
+      alternateTitle: $alternateTitle
+      format: $format
+      issue: $issue
+      pageCount: $pageCount
+      price: $price
+      publicationDate: $publicationDate
+      seriesId: $seriesId
+      summary: $summary
+    }
+  ) {
+    id
+    displayName
+  }
+}
