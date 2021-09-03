@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { useRoutes } from "react-router-dom";
+import SidebarWithHeader from "../components/SidebarWithHeader";
 import {
   Admin,
   Dashboard,
@@ -57,7 +58,7 @@ const AppRoutes = (): ReactElement => {
 
   const element = useRoutes([...routes, ...commonRoutes]);
 
-  return <>{element}</>;
+  return <SidebarWithHeader>{element}</SidebarWithHeader>;
 };
 
 export default AppRoutes;

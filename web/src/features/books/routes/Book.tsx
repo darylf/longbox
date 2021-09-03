@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Head } from "../../../components/Head";
-import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { Book as BookObj } from "../../../types";
 import { useBookQuery } from "../api/book.query.generated";
 import ShowBook from "../components/ShowBook";
@@ -16,9 +15,9 @@ export default function Book(): React.ReactElement {
   const book = data?.book as BookObj;
 
   return (
-    <SidebarWithHeader>
+    <>
       <Head title={book.displayName} />
       <ShowBook book={book} />
-    </SidebarWithHeader>
+    </>
   );
 }

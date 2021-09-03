@@ -2,7 +2,6 @@ import { Box, Heading, List, ListItem } from "@chakra-ui/react";
 import React from "react";
 import { Head } from "../../../components/Head";
 import Link from "../../../components/Link";
-import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { useUsersQuery } from "../api/users.query.generated";
 
 function UserList(): React.ReactElement {
@@ -29,7 +28,7 @@ function UserList(): React.ReactElement {
 
 export default function Users(): React.ReactElement {
   return (
-    <SidebarWithHeader>
+    <>
       <Head title="Browse Users" />
       <Box p="6">
         <Heading>Browse Users</Heading>
@@ -37,6 +36,6 @@ export default function Users(): React.ReactElement {
           <UserList />
         </div>
       </Box>
-    </SidebarWithHeader>
+    </>
   );
 }

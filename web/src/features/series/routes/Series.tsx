@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import FormDrawer from "../../../components/FormDrawer";
 import { Head } from "../../../components/Head";
-import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { Series as SeriesObj } from "../../../types";
 import BookForm from "../../books/components/BookForm";
 import { useSeriesQuery } from "../api/series.query.generated";
@@ -22,12 +21,16 @@ export default function Series(): React.ReactElement {
   if (error) return <p>An error has occured...</p>;
 
   return (
-    <SidebarWithHeader>
+    <>
       <Head title={`${series?.name}`} />
-      <FormDrawer id={formHtmlId} openButtonText="Create Book">
-        <BookForm htmlId={formHtmlId} series={series} />
-      </FormDrawer>
       {series && <ShowSeries series={series} />}
-    </SidebarWithHeader>
+      <FormDrawer id={formHtmlId} openButtonText="Create Book">
+        <BookForm
+          htmlId={formHtmlId}
+          series={series}
+          showSubmitButton={false}
+        />
+      </FormDrawer>
+    </>
   );
 }

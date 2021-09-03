@@ -24,9 +24,14 @@ import {
 interface BookFormProps {
   htmlId?: string;
   series?: Series | null | undefined;
+  showSubmitButton?: false;
 }
 
-const BookForm = ({ htmlId, series }: BookFormProps): ReactElement => {
+const BookForm = ({
+  htmlId,
+  series,
+  showSubmitButton,
+}: BookFormProps): ReactElement => {
   const [alert, setAlert] = useState<string>();
   const toast = useToast();
   const {
@@ -34,7 +39,6 @@ const BookForm = ({ htmlId, series }: BookFormProps): ReactElement => {
     handleSubmit,
     register,
     reset,
-    setValue,
   } = useForm<CreateBookMutationVariables>({
     defaultValues: { seriesId: `${series?.id}` },
   });
@@ -69,7 +73,6 @@ const BookForm = ({ htmlId, series }: BookFormProps): ReactElement => {
   const priceField: UseFormRegisterReturn = register("price");
   const publicationDateField: UseFormRegisterReturn =
     register("publicationDate");
-  const seriesIdField: UseFormRegisterReturn = register("seriesId");
   const summaryField: UseFormRegisterReturn = register("summary");
 
   return (
@@ -187,14 +190,16 @@ const BookForm = ({ htmlId, series }: BookFormProps): ReactElement => {
             <FormErrorMessage>{errors?.summary?.message}</FormErrorMessage>
           </FormControl>
 
-          <Button
-            mt={4}
-            colorScheme="teal"
-            isLoading={isSubmitting}
-            type="submit"
-          >
-            Submit
-          </Button>
+          {showSubmitButton && (
+            <Button
+              mt={4}
+              colorScheme="teal"
+              isLoading={isSubmitting}
+              type="submit"
+            >
+              Submit
+            </Button>
+          )}
         </Stack>
       </form>
     </>
@@ -204,6 +209,7 @@ const BookForm = ({ htmlId, series }: BookFormProps): ReactElement => {
 BookForm.defaultProps = {
   htmlId: "publisher-form",
   series: undefined,
+  showSubmitButton: false,
 };
 
 export default BookForm;

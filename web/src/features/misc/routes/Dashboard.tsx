@@ -3,7 +3,6 @@ import React, { ReactElement } from "react";
 import { Head } from "../../../components/Head";
 import Link from "../../../components/Link";
 import Panel from "../../../components/Panel";
-import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { Column, Table } from "../../../components/Table";
 import { Book, Publisher, Series, SortDirectionEnum } from "../../../types";
 import { convertToArray } from "../../../utils/convertToArray";
@@ -69,7 +68,7 @@ export default function HomePage(): ReactElement {
   }
 
   return (
-    <SidebarWithHeader>
+    <>
       <Head title="Home" />
       <SimpleGrid columns={3} spacing={10}>
         <Panel
@@ -101,6 +100,6 @@ export default function HomePage(): ReactElement {
         />
       </SimpleGrid>
       {bookTable}
-    </SidebarWithHeader>
+    </>
   );
 }

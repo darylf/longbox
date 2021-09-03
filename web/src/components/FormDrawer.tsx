@@ -45,7 +45,7 @@ function FormDrawer({
 
           <DrawerFooter borderTopWidth="1px">
             <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+              Close
             </Button>
             <Button colorScheme="blue" type="submit" form={id}>
               Save

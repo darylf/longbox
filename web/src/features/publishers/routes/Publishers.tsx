@@ -2,7 +2,6 @@ import { Box, Heading, Stack } from "@chakra-ui/react";
 import React from "react";
 import FormDrawer from "../../../components/FormDrawer";
 import { Head } from "../../../components/Head";
-import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import PublisherForm from "../components/PublisherForm";
 import { PublisherList } from "../components/PublishersList";
 
@@ -10,7 +9,7 @@ const formHtmlId = "publisher-form";
 
 export const Publishers = (): React.ReactElement => {
   return (
-    <SidebarWithHeader>
+    <>
       <Head title="All Publishers" />
       <Box p="6">
         <Stack>
@@ -21,7 +20,7 @@ export const Publishers = (): React.ReactElement => {
           <PublisherList />
         </Stack>
       </Box>
-    </SidebarWithHeader>
+    </>
   );
 };
 

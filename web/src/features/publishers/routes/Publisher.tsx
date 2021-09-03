@@ -3,7 +3,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import FormDrawer from "../../../components/FormDrawer";
 import { Head } from "../../../components/Head";
-import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { useLoginState } from "../../../hooks/useAuthentication";
 import { Publisher as IPublisher } from "../../../types";
 import SeriesForm from "../../series/components/SeriesForm";
@@ -23,7 +22,7 @@ export const Publisher = (): React.ReactElement => {
   const publisher = data?.publisher as IPublisher;
 
   return (
-    <SidebarWithHeader>
+    <>
       <Head title={publisher.name} />
       <Stack>
         <ViewPublisher publisher={publisher} />
@@ -35,6 +34,6 @@ export const Publisher = (): React.ReactElement => {
           </HStack>
         )}
       </Stack>
-    </SidebarWithHeader>
+    </>
   );
 };
