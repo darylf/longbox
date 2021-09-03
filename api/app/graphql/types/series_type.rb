@@ -13,10 +13,17 @@ module Types
 
     field :books, [Types::BookType], 'A list of books released in this series', null: true do
       argument :limit, Integer, required: false
+      argument :sort_by, Types::SortAttributes, required: false
     end
 
-    def books(limit: nil)
-      limit.nil? ? object.books : object.books.limit(limit)
+    def books(sort_by: nil, limit: nil)
+      books = object.books
+      unless sort_by.nil?
+        books = books.order(sort_by[:field])
+        books = books.reverse if sort_by[:direction] == "DESC"
+      end
+
+      limit.nil? ? books : books.limit(limit)
     end
   end
 end
