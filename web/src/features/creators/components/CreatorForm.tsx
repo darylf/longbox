@@ -20,9 +20,13 @@ import {
 
 interface PublisherFormProps {
   htmlId?: string;
+  showSubmitButton?: boolean;
 }
 
-const CreatorForm = ({ htmlId }: PublisherFormProps): React.ReactElement => {
+const CreatorForm = ({
+  htmlId,
+  showSubmitButton,
+}: PublisherFormProps): React.ReactElement => {
   const [alert, setAlert] = useState<string>();
   const toast = useToast();
   const {
@@ -118,6 +122,7 @@ const CreatorForm = ({ htmlId }: PublisherFormProps): React.ReactElement => {
 
 CreatorForm.defaultProps = {
   htmlId: "creator-form",
+  showSubmitButton: false,
 };
 
 export default CreatorForm;

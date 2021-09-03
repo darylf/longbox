@@ -25,11 +25,7 @@ export default function Series(): React.ReactElement {
       <Head title={`${series?.name}`} />
       {series && <ShowSeries series={series} />}
       <FormDrawer id={formHtmlId} openButtonText="Create Book">
-        <BookForm
-          htmlId={formHtmlId}
-          series={series}
-          showSubmitButton={false}
-        />
+        <BookForm htmlId={formHtmlId} series={series} />
       </FormDrawer>
     </>
   );

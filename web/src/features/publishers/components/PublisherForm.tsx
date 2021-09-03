@@ -21,9 +21,13 @@ import { useCreatePublisherMutation } from "../api/create-publisher.mutation.gen
 
 interface PublisherFormProps {
   htmlId?: string;
+  showSubmitButton?: boolean;
 }
 
-const PublisherForm = ({ htmlId }: PublisherFormProps): React.ReactElement => {
+const PublisherForm = ({
+  htmlId,
+  showSubmitButton,
+}: PublisherFormProps): React.ReactElement => {
   const [alert, setAlert] = useState<string>();
   const toast = useToast();
   const {
@@ -69,7 +73,6 @@ const PublisherForm = ({ htmlId }: PublisherFormProps): React.ReactElement => {
               <Alert severity="error">{alert}</Alert>
             </Box>
           )}
-
           <FormControl isInvalid={errors.name !== undefined}>
             <FormLabel htmlFor="name">Name</FormLabel>
             <Input
@@ -83,14 +86,16 @@ const PublisherForm = ({ htmlId }: PublisherFormProps): React.ReactElement => {
               {errors.name && errors.name.message}
             </FormErrorMessage>
           </FormControl>
-          <Button
-            mt={4}
-            colorScheme="teal"
-            isLoading={isSubmitting}
-            type="submit"
-          >
-            Submit
-          </Button>
+          {showSubmitButton && (
+            <Button
+              mt={4}
+              colorScheme="teal"
+              isLoading={isSubmitting}
+              type="submit"
+            >
+              Submit
+            </Button>
+          )}
         </Stack>
       </form>
     </>
@@ -99,6 +104,7 @@ const PublisherForm = ({ htmlId }: PublisherFormProps): React.ReactElement => {
 
 PublisherForm.defaultProps = {
   htmlId: "publisher-form",
+  showSubmitButton: false,
 };
 
 export default PublisherForm;

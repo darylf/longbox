@@ -24,7 +24,7 @@ import {
 interface BookFormProps {
   htmlId?: string;
   series?: Series | null | undefined;
-  showSubmitButton?: false;
+  showSubmitButton?: boolean;
 }
 
 const BookForm = ({

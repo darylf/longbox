@@ -23,9 +23,14 @@ import {
 interface SeriesFormProps {
   id?: string;
   selectedPublisher: Publisher;
+  showSubmitButton: boolean;
 }
 
-function SeriesForm({ id, selectedPublisher }: SeriesFormProps): ReactElement {
+function SeriesForm({
+  id,
+  selectedPublisher,
+  showSubmitButton,
+}: SeriesFormProps): ReactElement {
   const [alert, setAlert] = useState<string>();
   const toast = useToast();
   const {
@@ -96,14 +101,16 @@ function SeriesForm({ id, selectedPublisher }: SeriesFormProps): ReactElement {
               {errors.name && errors.name.message}
             </FormErrorMessage>
           </FormControl>
-          <Button
-            mt={4}
-            colorScheme="teal"
-            isLoading={isSubmitting}
-            type="submit"
-          >
-            Submit
-          </Button>
+          {showSubmitButton && (
+            <Button
+              mt={4}
+              colorScheme="teal"
+              isLoading={isSubmitting}
+              type="submit"
+            >
+              Submit
+            </Button>
+          )}
         </Stack>
       </form>
     </>
@@ -112,6 +119,7 @@ function SeriesForm({ id, selectedPublisher }: SeriesFormProps): ReactElement {
 
 SeriesForm.defaultProps = {
   id: "series-form",
+  showSubmitButton: false,
 };
 
 export default SeriesForm;
