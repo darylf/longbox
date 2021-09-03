@@ -1,21 +1,21 @@
-create_count = []
-Series.count.times do |n|
-  create_count.push(n,get_number_to_create(1..12))
+series_hash = {}
+Series.all.each do |s|
+  series_hash[s.id] = 1 # get_number_to_create(BOOKS_ON_EACH_SERIES)
 end
 
-progressbar = ProgressBar.create(
+progressbar = create_progress_bar(
   title: 'Creating Books',
-  total: create_count.sum
+  total: series_hash.values.sum
 )
 
 comic = BookFormat.find_or_create_by(name: 'Comic')
 
-Series.all.each_with_index do |series,n|
+series_hash.keys.each do |series_id|
   pub_date = Faker::Date.in_date_period(year: rand(1980..2019), month: rand(1..12))
-  create_count[n.to_i].times do |n|
+  series_hash[series_id].times do |n|
     pub_date = pub_date + 1.month + rand(1..14).days
     book = Book.create(
-      series_id: series.id,
+      series_id: series_id,
       issue: n+1,
       book_format: comic,
       summary: Faker::Lorem.paragraph,

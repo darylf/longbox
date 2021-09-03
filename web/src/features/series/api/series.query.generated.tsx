@@ -11,11 +11,22 @@ export type SeriesQuery = {
   __typename?: "Query";
   series: {
     __typename?: "Series";
+    id: string;
     name: string;
     createdAt: any;
+    publisherName?: Types.Maybe<string>;
     updatedAt: any;
     books?: Types.Maybe<
-      Array<{ __typename?: "Book"; id: string; displayName: string }>
+      Array<{
+        __typename?: "Book";
+        id: string;
+        displayName: string;
+        format?: Types.Maybe<string>;
+        issue?: Types.Maybe<string>;
+        price?: Types.Maybe<string>;
+        pageCount?: Types.Maybe<string>;
+        publicationDate?: Types.Maybe<string>;
+      }>
     >;
   };
 };
@@ -23,13 +34,20 @@ export type SeriesQuery = {
 export const SeriesDocument = gql`
   query Series($id: ID!) {
     series(id: $id) {
+      id
       name
-      createdAt
-      updatedAt
       books {
         id
         displayName
+        format
+        issue
+        price
+        pageCount
+        publicationDate
       }
+      createdAt
+      publisherName
+      updatedAt
     }
   }
 `;

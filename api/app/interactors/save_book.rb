@@ -7,11 +7,11 @@ class SaveBook
     book = Book.create(
       age_rating: input[:age_rating],
       alternate_title: input[:alternate_title],
-      book_format: input[:format],
+      book_format_id: input[:format],
       issue: input[:issue],
       page_count: input[:page_count],
       price: input[:price],
-      publication_date: pub_date,
+      publication_date: input[:publication_date],
       series_id: input[:series_id],
       summary: input[:summary],
       created_by: user,

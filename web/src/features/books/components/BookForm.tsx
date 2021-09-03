@@ -13,7 +13,7 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import { namedOperations, Series } from "../../../types";
 import {
@@ -21,15 +21,12 @@ import {
   useCreateBookMutation,
 } from "../api/create-book.mutation.generated";
 
-interface PublisherFormProps {
+interface BookFormProps {
   htmlId?: string;
   series?: Series | null | undefined;
 }
 
-const BookForm = ({
-  htmlId,
-  series,
-}: PublisherFormProps): React.ReactElement => {
+const BookForm = ({ htmlId, series }: BookFormProps): ReactElement => {
   const [alert, setAlert] = useState<string>();
   const toast = useToast();
   const {
@@ -74,8 +71,6 @@ const BookForm = ({
     register("publicationDate");
   const seriesIdField: UseFormRegisterReturn = register("seriesId");
   const summaryField: UseFormRegisterReturn = register("summary");
-
-  setValue;
 
   return (
     <>
@@ -208,6 +203,7 @@ const BookForm = ({
 
 BookForm.defaultProps = {
   htmlId: "publisher-form",
+  series: undefined,
 };
 
 export default BookForm;

@@ -1,6 +1,6 @@
 create_count = get_number_to_create(SERIES_TO_CREATE)
 
-progressbar = ProgressBar.create(
+progressbar = create_progress_bar(
   title: 'Creating Series',
   total: create_count
 )

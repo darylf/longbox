@@ -1,11 +1,18 @@
 query Series($id: ID!) {
   series(id: $id) {
+    id
     name
-    createdAt
-    updatedAt
     books {
       id
       displayName
+      format
+      issue
+      price
+      pageCount
+      publicationDate
     }
+    createdAt
+    publisherName
+    updatedAt
   }
 }

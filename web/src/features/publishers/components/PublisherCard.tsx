@@ -1,5 +1,4 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
-import { useColorModeValue } from "@chakra-ui/system";
 import React from "react";
 import Link from "../../../components/Link";
 import { Publisher } from "../../../types";
@@ -15,7 +14,7 @@ function PublisherCard({ publisher }: PublisherCardProps) {
   return (
     <Flex p={50} w="full" alignItems="center" justifyContent="center">
       <Box
-        bg={useColorModeValue("white", "gray.800")}
+        bg="white"
         maxW="sm"
         borderWidth="1px"
         rounded="lg"

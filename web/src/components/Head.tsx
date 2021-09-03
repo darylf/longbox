@@ -6,7 +6,7 @@ type HeadProps = {
   description?: string;
 };
 
-export const Head = ({ title = "", description = "" }: HeadProps = {}) => {
+export const Head = ({ title, description }: HeadProps = {}) => {
   return (
     <Helmet
       title={title ? `${title} | Longbox` : undefined}
@@ -15,4 +15,9 @@ export const Head = ({ title = "", description = "" }: HeadProps = {}) => {
       <meta name="description" content={description} />
     </Helmet>
   );
+};
+
+Head.defaultProps = {
+  title: undefined,
+  description: undefined,
 };

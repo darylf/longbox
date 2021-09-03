@@ -1,10 +1,14 @@
+# publishers = ['Marvel', 'DC', 'Image', 'IDW', 'Dark Horse',
+#               'Dynamite Entertainment', 'BOOM! Studios',
+#               'Oni Press', 'Viz', 'Yen Press', 'Valiant',
+#               'Avatar', 'Zenescope', 'Fantagraphics', 'Archie',
+#               'Action Lab', 'Aspen Comics', 'Kodansha Comics']
+
 publishers = ['Marvel', 'DC', 'Image', 'IDW', 'Dark Horse',
               'Dynamite Entertainment', 'BOOM! Studios',
-              'Oni Press', 'Viz', 'Yen Press', 'Valiant',
-              'Avatar', 'Zenescope', 'Fantagraphics', 'Archie',
-              'Action Lab', 'Aspen Comics', 'Kodansha Comics']
+              'Oni Press', 'Valiant']
 
-progressbar = ProgressBar.create(
+progressbar = create_progress_bar(
   title: 'Creating Publishers',
   total: publishers.size
 )

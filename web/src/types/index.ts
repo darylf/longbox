@@ -349,11 +349,13 @@ export type Series = {
   /** A list of books released in this series */
   books?: Maybe<Array<Book>>;
   createdAt: Scalars["DateTime"];
+  createdBy: User;
   id: Scalars["ID"];
   name: Scalars["String"];
   publisher?: Maybe<Publisher>;
   publisherName?: Maybe<Scalars["String"]>;
   updatedAt: Scalars["DateTime"];
+  updatedBy: User;
 };
 
 /** A collection of related books */
@@ -855,11 +857,22 @@ export type SeriesQuery = {
   __typename?: "Query";
   series: {
     __typename?: "Series";
+    id: string;
     name: string;
     createdAt: any;
+    publisherName?: Maybe<string>;
     updatedAt: any;
     books?: Maybe<
-      Array<{ __typename?: "Book"; id: string; displayName: string }>
+      Array<{
+        __typename?: "Book";
+        id: string;
+        displayName: string;
+        format?: Maybe<string>;
+        issue?: Maybe<string>;
+        price?: Maybe<string>;
+        pageCount?: Maybe<string>;
+        publicationDate?: Maybe<string>;
+      }>
     >;
   };
 };

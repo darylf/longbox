@@ -1,6 +1,6 @@
 create_count = get_number_to_create(CREATORS_TO_CREATE)
 
-progressbar = ProgressBar.create(
+progressbar = create_progress_bar(
   title: 'Creating Creators',
   total: create_count
 )

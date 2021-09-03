@@ -4,24 +4,23 @@ import { Head } from "../../../components/Head";
 import Link from "../../../components/Link";
 import Panel from "../../../components/Panel";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";
+import { Column, Table } from "../../../components/Table";
 import { Book, Publisher, Series, SortDirectionEnum } from "../../../types";
+import { convertToArray } from "../../../utils/convertToArray";
 import { useBooksQuery } from "../../books/api/books.query.generated";
 import { useRankedBookListQuery } from "../../books/api/ranked-book-list.query.generated";
-import BookTable from "../../books/components/Table";
 import { useRankedPublisherListQuery } from "../../publishers/api/ranked-publisher-list.query.generated";
 import { useRankedSeriesListQuery } from "../../series/api/ranked-series-list.query.generated";
 
 const TOP_SUMMARY_COUNT = 5;
 
-function convertToArray<ReturnType>(
-  items: Array<unknown> | null | undefined
-): Array<ReturnType> {
-  const result = new Array<ReturnType>();
-  items?.forEach((item) => {
-    result.push(Object.assign({} as ReturnType, item));
-  });
-  return result;
-}
+const bookColumns: Array<Column<Book>> = [
+  { key: "publisherName", label: "Publisher" },
+  { key: "seriesName", label: "Series" },
+  { key: "issue", label: "Issue" },
+  { key: "price", label: "Cost" },
+  { key: "pageCount", label: "Pages" },
+];
 
 export default function HomePage(): ReactElement {
   const topPublisherResult = useRankedPublisherListQuery({
@@ -66,7 +65,7 @@ export default function HomePage(): ReactElement {
     bookTable = <>An error has occured</>;
   } else {
     const books = convertToArray<Book>(data?.books.nodes);
-    bookTable = <BookTable books={books} />;
+    bookTable = <Table items={books} columns={bookColumns} />;
   }
 
   return (
