@@ -26,7 +26,7 @@ export const PublisherDocument = gql`
       name
       createdAt
       updatedAt
-      series {
+      series(sortBy: { field: "name", direction: ASC }) {
         id
         name
       }

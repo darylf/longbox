@@ -233,6 +233,12 @@ export type Publisher = {
   updatedAt: Scalars["DateTime"];
 };
 
+/** A book publishing company */
+export type PublisherSeriesArgs = {
+  limit?: Maybe<Scalars["Int"]>;
+  sortBy?: Maybe<SortAttributes>;
+};
+
 /** The connection type for Publisher. */
 export type PublisherConnection = {
   __typename?: "PublisherConnection";
@@ -361,6 +367,7 @@ export type Series = {
 /** A collection of related books */
 export type SeriesBooksArgs = {
   limit?: Maybe<Scalars["Int"]>;
+  sortBy?: Maybe<SortAttributes>;
 };
 
 /** The connection type for Series. */
