@@ -23,7 +23,7 @@ import {
 interface SeriesFormProps {
   id?: string;
   selectedPublisher: Publisher;
-  showSubmitButton: boolean;
+  showSubmitButton?: boolean;
 }
 
 function SeriesForm({

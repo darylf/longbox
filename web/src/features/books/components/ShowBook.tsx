@@ -22,7 +22,6 @@ interface Props {
   book: Book;
 }
 function ShowBook({ book }: Props): React.ReactElement {
-  console.log(book);
   const coverImg: string =
     `${book.coverImage?.url}` ??
     `https://via.placeholder.com/633x1024,png?text=Cover+Missing`;
