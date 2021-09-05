@@ -20,6 +20,7 @@ export type PublishersQuery = {
           id: string;
           name: string;
           seriesCount: number;
+          logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
           series: Array<{ __typename?: "Series"; name: string }>;
         }>
       >
@@ -39,6 +40,9 @@ export const PublishersDocument = gql`
     ) {
       nodes {
         id
+        logo {
+          url
+        }
         name
         series {
           name

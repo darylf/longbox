@@ -12,6 +12,9 @@ query Series($id: ID!) {
       publicationDate
     }
     createdAt
+    logo {
+      url
+    }
     publisherName
     updatedAt
   }

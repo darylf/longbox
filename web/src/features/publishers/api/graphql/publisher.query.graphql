@@ -1,12 +1,15 @@
 query Publisher($id: ID!) {
   publisher(id: $id) {
     id
-    name
     createdAt
-    updatedAt
+    logo {
+      url
+    }
+    name
     series(sortBy: { field: "name", direction: ASC }) {
       id
       name
     }
+    updatedAt
   }
 }

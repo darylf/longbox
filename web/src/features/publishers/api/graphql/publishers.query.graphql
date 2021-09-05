@@ -6,6 +6,9 @@ query Publishers(
   publishers(sortBy: { field: $field, direction: $direction }, limit: $limit) {
     nodes {
       id
+      logo {
+        url
+      }
       name
       series {
         name

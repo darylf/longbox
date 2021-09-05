@@ -12,9 +12,10 @@ export type PublisherQuery = {
   publisher: {
     __typename?: "Publisher";
     id: string;
-    name: string;
     createdAt: any;
+    name: string;
     updatedAt: any;
+    logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
     series: Array<{ __typename?: "Series"; id: string; name: string }>;
   };
 };
@@ -23,13 +24,16 @@ export const PublisherDocument = gql`
   query Publisher($id: ID!) {
     publisher(id: $id) {
       id
-      name
       createdAt
-      updatedAt
+      logo {
+        url
+      }
+      name
       series(sortBy: { field: "name", direction: ASC }) {
         id
         name
       }
+      updatedAt
     }
   }
 `;

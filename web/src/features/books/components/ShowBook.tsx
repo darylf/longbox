@@ -12,6 +12,7 @@ import {
   TabPanels,
   Tabs,
   Text,
+  UnorderedList,
 } from "@chakra-ui/react";
 import React from "react";
 import Link from "../../../components/Link";
@@ -21,12 +22,15 @@ interface Props {
   book: Book;
 }
 function ShowBook({ book }: Props): React.ReactElement {
-  const coverImg = `https://via.placeholder.com/633x1024,png?text=Cover+Missing`;
+  console.log(book);
+  const coverImg: string =
+    `${book.coverImage?.url}` ??
+    `https://via.placeholder.com/633x1024,png?text=Cover+Missing`;
   return (
     <>
       <Flex p={6}>
         <Box boxSize="sm">
-          <Image src={book.coverImageUrl ?? coverImg} />
+          <Image src={coverImg} alt={`cover of ${book.displayName}`} />
         </Box>
 
         <Box p={10}>
@@ -57,6 +61,18 @@ function ShowBook({ book }: Props): React.ReactElement {
                       <Link to={`/series/${book.series?.id}`}>
                         {book.series?.name}
                       </Link>
+                    </Text>
+                    <Text>
+                      Creators:{" "}
+                      <UnorderedList>
+                        {book.featuredCreators.map((c) => (
+                          <ListItem key={c.id}>
+                            <Link to={`/creators/${c.id}`}>
+                              {`${c.firstName} ${c.lastName}`}
+                            </Link>
+                          </ListItem>
+                        ))}
+                      </UnorderedList>
                     </Text>
                     <Text>Age Rating: {book.ageRating}</Text>
                     <Text>Title: {book.alternateTitle}</Text>

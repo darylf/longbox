@@ -8,4 +8,10 @@ class Creator < ApplicationRecord
 
   validates :first_name, presence: true, length: { maximum: 120 }
   validates :last_name, presence: true, length: { maximum: 120 }
+
+  def roles
+    credits.includes(:credit_role).map do |credit|
+      credit.credit_role.name
+    end.uniq.sort
+  end
 end

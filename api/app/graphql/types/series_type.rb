@@ -5,6 +5,7 @@ module Types
     field :book_count, Int, null: false
     field :created_at, Types::DateTimeType, null: false
     field :created_by, Types::UserType, null: false
+    field :logo, Types::ImageType, null: true
     field :name, String, null: false
     field :publisher, Types::PublisherType, null: true
     field :publisher_name, String, null: true

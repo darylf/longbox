@@ -4,6 +4,10 @@ module Types
     field :id, ID, null: false
     field :book_count, Int, null: false
     field :created_at, Types::DateTimeType, null: false
+    field :logo, Types::ImageType, null: true do
+      argument :size, Types::ImageSizeEnum, required: false
+      argument :type, Types::ImageExtensionEnum, required: false
+    end
     field :name, String, null: false
     field :series_count, Int, null: false
     field :series, [Types::SeriesType], null: false do

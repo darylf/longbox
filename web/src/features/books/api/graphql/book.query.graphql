@@ -3,7 +3,9 @@ query Book($id: ID!) {
     id
     ageRating
     alternateTitle
-    coverImageUrl
+    coverImage {
+      url
+    }
     createdAt
     createdBy {
       id
@@ -18,6 +20,11 @@ query Book($id: ID!) {
       role
     }
     displayName
+    featuredCreators {
+      id
+      firstName
+      lastName
+    }
     format
     issue
     pageCount

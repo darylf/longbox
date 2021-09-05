@@ -7,6 +7,9 @@ query SeriesList(
     nodes {
       bookCount
       id
+      logo {
+        url
+      }
       name
       publisherName
     }

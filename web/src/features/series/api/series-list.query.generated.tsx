@@ -21,6 +21,7 @@ export type SeriesListQuery = {
           id: string;
           name: string;
           publisherName?: Types.Maybe<string>;
+          logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
         }>
       >
     >;
@@ -40,6 +41,9 @@ export const SeriesListDocument = gql`
       nodes {
         bookCount
         id
+        logo {
+          url
+        }
         name
         publisherName
       }

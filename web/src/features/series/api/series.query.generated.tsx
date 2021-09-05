@@ -28,6 +28,7 @@ export type SeriesQuery = {
         publicationDate?: Types.Maybe<string>;
       }>
     >;
+    logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
   };
 };
 
@@ -46,6 +47,9 @@ export const SeriesDocument = gql`
         publicationDate
       }
       createdAt
+      logo {
+        url
+      }
       publisherName
       updatedAt
     }

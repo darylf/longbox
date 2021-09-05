@@ -14,7 +14,6 @@ export type BookQuery = {
     id: string;
     ageRating?: Types.Maybe<string>;
     alternateTitle?: Types.Maybe<string>;
-    coverImageUrl?: Types.Maybe<string>;
     createdAt: any;
     displayName: string;
     format?: Types.Maybe<string>;
@@ -24,6 +23,7 @@ export type BookQuery = {
     publicationDate?: Types.Maybe<string>;
     summary?: Types.Maybe<string>;
     updatedAt: any;
+    coverImage?: Types.Maybe<{ __typename?: "Image"; url: string }>;
     createdBy: { __typename?: "User"; id: string; username: string };
     credits?: Types.Maybe<
       Array<{
@@ -37,6 +37,12 @@ export type BookQuery = {
         };
       }>
     >;
+    featuredCreators: Array<{
+      __typename?: "Creator";
+      id: string;
+      firstName?: Types.Maybe<string>;
+      lastName?: Types.Maybe<string>;
+    }>;
     publisher?: Types.Maybe<{
       __typename?: "Publisher";
       id: string;
@@ -53,7 +59,9 @@ export const BookDocument = gql`
       id
       ageRating
       alternateTitle
-      coverImageUrl
+      coverImage {
+        url
+      }
       createdAt
       createdBy {
         id
@@ -68,6 +76,11 @@ export const BookDocument = gql`
         role
       }
       displayName
+      featuredCreators {
+        id
+        firstName
+        lastName
+      }
       format
       issue
       pageCount

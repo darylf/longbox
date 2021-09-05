@@ -2,12 +2,10 @@ query Creators {
   creators {
     nodes {
       id
+      createdAt
       firstName
       lastName
-      createdAt
-      credits {
-        role
-      }
+      roles
     }
   }
 }

@@ -14,10 +14,10 @@ export type CreatorsQuery = {
         Types.Maybe<{
           __typename?: "Creator";
           id: string;
+          createdAt: any;
           firstName?: Types.Maybe<string>;
           lastName?: Types.Maybe<string>;
-          createdAt: any;
-          credits: Array<{ __typename?: "Credit"; role: string }>;
+          roles: Array<string>;
         }>
       >
     >;
@@ -29,12 +29,10 @@ export const CreatorsDocument = gql`
     creators {
       nodes {
         id
+        createdAt
         firstName
         lastName
-        createdAt
-        credits {
-          role
-        }
+        roles
       }
     }
   }

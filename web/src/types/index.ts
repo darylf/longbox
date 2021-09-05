@@ -28,11 +28,12 @@ export type Book = {
   __typename?: "Book";
   ageRating?: Maybe<Scalars["String"]>;
   alternateTitle?: Maybe<Scalars["String"]>;
-  coverImageUrl?: Maybe<Scalars["String"]>;
+  coverImage?: Maybe<Image>;
   createdAt: Scalars["DateTime"];
   createdBy: User;
   credits?: Maybe<Array<Credit>>;
   displayName: Scalars["String"];
+  featuredCreators: Array<Creator>;
   format?: Maybe<Scalars["String"]>;
   id: Scalars["ID"];
   issue?: Maybe<Scalars["String"]>;
@@ -89,6 +90,7 @@ export type Creator = {
   firstName?: Maybe<Scalars["String"]>;
   id: Scalars["ID"];
   lastName?: Maybe<Scalars["String"]>;
+  roles: Array<Scalars["String"]>;
   updatedAt: Scalars["DateTime"];
 };
 
@@ -130,6 +132,30 @@ export type Credit = {
   role: Scalars["String"];
   updatedAt: Scalars["DateTime"];
 };
+
+/** A comic book or trade paperback */
+export type Image = {
+  __typename?: "Image";
+  extension: ImageExtensionEnum;
+  height?: Maybe<Scalars["Int"]>;
+  url: Scalars["String"];
+  width?: Maybe<Scalars["Int"]>;
+};
+
+export enum ImageExtensionEnum {
+  Jpg = "jpg",
+  Png = "png",
+  Gif = "gif",
+}
+
+export enum ImageSizeEnum {
+  /** Small image size */
+  S = "S",
+  /** Medium */
+  M = "M",
+  /** Large */
+  L = "L",
+}
 
 export type LogInInput = {
   email: Scalars["String"];
@@ -227,10 +253,17 @@ export type Publisher = {
   bookCount: Scalars["Int"];
   createdAt: Scalars["DateTime"];
   id: Scalars["ID"];
+  logo?: Maybe<Image>;
   name: Scalars["String"];
   series: Array<Series>;
   seriesCount: Scalars["Int"];
   updatedAt: Scalars["DateTime"];
+};
+
+/** A book publishing company */
+export type PublisherLogoArgs = {
+  size?: Maybe<ImageSizeEnum>;
+  type?: Maybe<ImageExtensionEnum>;
 };
 
 /** A book publishing company */
@@ -357,6 +390,7 @@ export type Series = {
   createdAt: Scalars["DateTime"];
   createdBy: User;
   id: Scalars["ID"];
+  logo?: Maybe<Image>;
   name: Scalars["String"];
   publisher?: Maybe<Publisher>;
   publisherName?: Maybe<Scalars["String"]>;
@@ -537,7 +571,6 @@ export type BookQuery = {
     id: string;
     ageRating?: Maybe<string>;
     alternateTitle?: Maybe<string>;
-    coverImageUrl?: Maybe<string>;
     createdAt: any;
     displayName: string;
     format?: Maybe<string>;
@@ -547,6 +580,7 @@ export type BookQuery = {
     publicationDate?: Maybe<string>;
     summary?: Maybe<string>;
     updatedAt: any;
+    coverImage?: Maybe<{ __typename?: "Image"; url: string }>;
     createdBy: { __typename?: "User"; id: string; username: string };
     credits?: Maybe<
       Array<{
@@ -560,6 +594,12 @@ export type BookQuery = {
         };
       }>
     >;
+    featuredCreators: Array<{
+      __typename?: "Creator";
+      id: string;
+      firstName?: Maybe<string>;
+      lastName?: Maybe<string>;
+    }>;
     publisher?: Maybe<{ __typename?: "Publisher"; id: string; name: string }>;
     series?: Maybe<{ __typename?: "Series"; id: string; name: string }>;
     updatedBy: { __typename?: "User"; id: string; username: string };
@@ -681,10 +721,10 @@ export type CreatorsQuery = {
         Maybe<{
           __typename?: "Creator";
           id: string;
+          createdAt: any;
           firstName?: Maybe<string>;
           lastName?: Maybe<string>;
-          createdAt: any;
-          credits: Array<{ __typename?: "Credit"; role: string }>;
+          roles: Array<string>;
         }>
       >
     >;
@@ -715,9 +755,10 @@ export type PublisherQuery = {
   publisher: {
     __typename?: "Publisher";
     id: string;
-    name: string;
     createdAt: any;
+    name: string;
     updatedAt: any;
+    logo?: Maybe<{ __typename?: "Image"; url: string }>;
     series: Array<{ __typename?: "Series"; id: string; name: string }>;
   };
 };
@@ -739,6 +780,7 @@ export type PublishersQuery = {
           id: string;
           name: string;
           seriesCount: number;
+          logo?: Maybe<{ __typename?: "Image"; url: string }>;
           series: Array<{ __typename?: "Series"; name: string }>;
         }>
       >
@@ -850,6 +892,7 @@ export type SeriesListQuery = {
           id: string;
           name: string;
           publisherName?: Maybe<string>;
+          logo?: Maybe<{ __typename?: "Image"; url: string }>;
         }>
       >
     >;
@@ -881,6 +924,7 @@ export type SeriesQuery = {
         publicationDate?: Maybe<string>;
       }>
     >;
+    logo?: Maybe<{ __typename?: "Image"; url: string }>;
   };
 };
 

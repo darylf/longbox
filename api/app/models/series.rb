@@ -12,4 +12,12 @@ class Series < ApplicationRecord
   def book_count
     books.count
   end
+
+  def logo
+    {
+      height: 300,
+      url: "https://via.placeholder.com/400x300.png?text=#{ERB::Util.url_encode(name)}",
+      width: 400,
+    }
+  end
 end

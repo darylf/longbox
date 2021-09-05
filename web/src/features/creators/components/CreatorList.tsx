@@ -16,8 +16,9 @@ export const CreatorList = (): React.ReactElement => {
       {creatorList?.map((c) => (
         <ListItem key={c?.id}>
           <Link
-            to={`/creator/${c?.id}`}
-          >{`${c?.firstName} ${c?.lastName}`}</Link>
+            to={`/creators/${c?.id}`}
+          >{`${c?.firstName} ${c?.lastName}`}</Link>{" "}
+          ({`${c?.roles?.join(", ")}`})
         </ListItem>
       ))}
     </UnorderedList>

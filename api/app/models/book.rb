@@ -6,12 +6,13 @@ class Book < ApplicationRecord
 
   has_one :publisher, through: :series
 
-  has_many :credits, dependent: :destroy
-  has_many :creators, through: :credits do
+  has_many :credits, dependent: :destroy do
     def featured
       where(featured: true)
     end
   end
+
+  has_many :creators, through: :credits
 
   delegate :name, to: :series, prefix: true, allow_nil: true
   delegate :name, to: :publisher, prefix: true, allow_nil: true
@@ -19,11 +20,28 @@ class Book < ApplicationRecord
 
   alias_attribute :format, :book_format_name
 
+  def cover_image(type: nil)
+    case type
+    when "gif"
+      extension = "gif"
+    when "jpg"
+      extension = "jpg"
+    else
+      extension = "png"
+    end
+
+    {
+      height: 1024,
+      url: "https://via.placeholder.com/633x1024,#{extension}?text=#{ERB::Util.url_encode(display_name)}",
+      width: 633
+    }
+  end
+
   def display_name
     "#{series.name} ##{issue}"
   end
 
-  def cover_image_url
-    "https://via.placeholder.com/633x1024,png?text=#{ERB::Util.url_encode(display_name)}"
+  def featured_creators
+    credits.featured.order(:position).map do |credit| credit.creator end
   end
 end

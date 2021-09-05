@@ -8,9 +8,6 @@ interface PublisherCardProps {
 }
 
 function PublisherCard({ publisher }: PublisherCardProps) {
-  const placeholderPublisherName = publisher.name
-    .replace(" ", "+")
-    .toLocaleLowerCase();
   return (
     <Flex p={50} w="full" alignItems="center" justifyContent="center">
       <Box
@@ -23,7 +20,7 @@ function PublisherCard({ publisher }: PublisherCardProps) {
       >
         <Link to={`/publishers/${publisher.id}`}>
           <Image
-            src={`https://via.placeholder.com/728x90.png?text=${placeholderPublisherName}`}
+            src={publisher.logo?.url}
             alt={`logo of ${publisher.name}`}
             roundedTop="lg"
           />

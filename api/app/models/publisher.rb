@@ -11,4 +11,21 @@ class Publisher < ApplicationRecord
   def book_count
     series.sum(&:book_count)
   end
+
+  def logo(type: nil)
+    case type
+    when "gif"
+      extension = "gif"
+    when "jpg"
+      extension = "jpg"
+    else
+      extension = "png"
+    end
+
+    {
+      height: 90,
+      url: "https://via.placeholder.com/600x200.#{extension}?text=#{ERB::Util.url_encode(name)}",
+      width: 728,
+    }
+  end
 end
