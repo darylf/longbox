@@ -1,4 +1,5 @@
-mutation CreateBook(
+mutation UpdateBook(
+  $id: ID!
   $ageRating: String
   $alternateTitle: String
   $format: String!
@@ -9,7 +10,8 @@ mutation CreateBook(
   $seriesId: ID!
   $summary: String
 ) {
-  createBook(
+  updateBook(
+    id: $id
     input: {
       ageRating: $ageRating
       alternateTitle: $alternateTitle

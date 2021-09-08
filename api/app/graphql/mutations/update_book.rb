@@ -1,35 +1,21 @@
 module Mutations
   class UpdateBook < Mutations::BaseMutation
-    field :book, Types::BookType, null: true
-    field :errors, [Types::UserError], null: false
+    include AuthenticatableGraphqlUser
 
     argument :id, ID, required: true
-    argument :attributes, Inputs::BookInput, required: true
+    argument :input, Inputs::BookInput, required: true
 
-    def resolve(**args)
-      book = Book.find(args[:id])
-      book.alternate_title = args[:attributes][:alternate_title]
-      book.issue = args[:attributes][:issue]
-      book.series_id = args[:attributes][:series_id]
-      if book.save
-        {
-          book: book,
-          errors: []
-        }
+    type Types::BookType
+
+    def resolve(id:, input:)
+      execution_error(error_data: 'Unauthorized') unless current_user
+
+      result = SaveBook.call(id: id, input: input.to_h, user: current_user)
+
+      if result.success?
+        result.book
       else
-        # Convert Rails model errors into GraphQL-ready error hashes
-        user_errors = book.errors.map do |error|
-          # This is the GraphQL argument which corresponds to the validation error:
-          path = ["attributes", error.attribute.to_s.camelize(:lower)]
-          {
-            path: path,
-            message: error.message
-          }
-        end
-        {
-          book: book,
-          errors: user_errors
-        }
+        execution_error(error_data: result.error_data)
       end
     end
   end

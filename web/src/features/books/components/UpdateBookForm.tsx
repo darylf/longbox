@@ -15,11 +15,13 @@ import {
 } from "@chakra-ui/react";
 import React, { ReactElement, useState } from "react";
 import { useForm, UseFormRegisterReturn } from "react-hook-form";
-import { Book, namedOperations, Series } from "../../../types";
 import {
-  CreateBookMutationVariables,
-  useCreateBookMutation,
-} from "../api/create-book.mutation.generated";
+  Book,
+  namedOperations,
+  Series,
+  UpdateBookMutationVariables,
+} from "../../../types";
+import { useUpdateBookMutation } from "../api/update-book.mutation.generated";
 
 interface BookFormProps {
   book?: Book;
@@ -29,7 +31,7 @@ interface BookFormProps {
   title?: string;
 }
 
-const BookForm = ({
+const UpdateBookForm = ({
   book,
   htmlId,
   series,
@@ -43,8 +45,9 @@ const BookForm = ({
     handleSubmit,
     register,
     reset,
-  } = useForm<CreateBookMutationVariables>({
+  } = useForm<UpdateBookMutationVariables>({
     defaultValues: {
+      id: book?.id,
       ageRating: book?.ageRating,
       alternateTitle: book?.alternateTitle,
       format: `${book?.format}`,
@@ -56,17 +59,17 @@ const BookForm = ({
       summary: book?.summary,
     },
   });
-  const [createBook] = useCreateBookMutation({
+  const [updateBook] = useUpdateBookMutation({
     refetchQueries: [namedOperations.Query.Publishers],
   });
   const onSubmit = handleSubmit(async (variables) => {
     try {
-      const { data } = await createBook({ variables });
-      if (data?.createBook) {
+      const { data } = await updateBook({ variables });
+      if (data?.updateBook) {
         reset();
         toast({
-          title: "Book created.",
-          description: `${data.createBook.displayName} has been created successfully!`,
+          title: "Book Updated.",
+          description: `${data.updateBook?.displayName} has been updated successfully!`,
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -220,11 +223,11 @@ const BookForm = ({
   );
 };
 
-BookForm.defaultProps = {
+UpdateBookForm.defaultProps = {
   htmlId: "publisher-form",
   series: undefined,
   showSubmitButton: false,
   title: "Book Form",
 };
 
-export default BookForm;
+export default UpdateBookForm;

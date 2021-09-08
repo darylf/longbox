@@ -13,6 +13,7 @@ export type Column<T> = {
   key: keyof T;
   label: string;
   render?: (item: T) => ReactElement;
+  uniqueKey?: string;
 };
 
 const renderColumn = <T extends unknown>(
@@ -42,7 +43,7 @@ export const Table = <T extends unknown>({
       <Thead>
         <Tr>
           {columns.map((c) => (
-            <Th key={`${c.key}`}>{c.label}</Th>
+            <Th key={`${c.key}-${c.uniqueKey}`}>{c.label}</Th>
           ))}
         </Tr>
       </Thead>
@@ -52,7 +53,7 @@ export const Table = <T extends unknown>({
           items.map((item, k) => (
             <Tr key={k}>
               {columns.map((c) => (
-                <Td key={`${c.key}`}>{renderColumn(item, c)}</Td>
+                <Td key={`${c.key}-${c.uniqueKey}`}>{renderColumn(item, c)}</Td>
               ))}
             </Tr>
           )) /* eslint-enable react/no-array-index-key */

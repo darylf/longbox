@@ -13,19 +13,19 @@ class Publisher < ApplicationRecord
   end
 
   def logo(type: nil)
-    case type
-    when "gif"
-      extension = "gif"
-    when "jpg"
-      extension = "jpg"
-    else
-      extension = "png"
-    end
+    extension = case type
+                when "gif"
+                  "gif"
+                when "jpg"
+                  "jpg"
+                else
+                  "png"
+                end
 
     {
       height: 90,
       url: "https://via.placeholder.com/600x200.#{extension}?text=#{ERB::Util.url_encode(name)}",
-      width: 728,
+      width: 728
     }
   end
 end

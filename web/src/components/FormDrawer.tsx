@@ -17,22 +17,36 @@ interface FormDrawerProps {
   id: string;
   children: ReactElement;
   openButtonText?: string;
+  showOpenButton?: boolean;
   title?: string;
+  isOpen?: boolean;
+  onOpen?(): void;
+  onClose?(): void;
 }
 
 function FormDrawer({
   id,
   children,
   openButtonText,
+  showOpenButton,
   title,
+  isOpen: isOpenProp,
+  onOpen: onOpenProp,
+  onClose: onCloseProp,
 }: FormDrawerProps): ReactElement {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const disclosure = useDisclosure();
+
+  const isOpen = isOpenProp !== undefined ? isOpenProp : disclosure.isOpen;
+  const onClose = onCloseProp ?? disclosure.onClose;
+  const onOpen = onOpenProp ?? disclosure.onOpen;
 
   return (
     <>
-      <Button leftIcon={<FiPlus />} colorScheme="teal" onClick={onOpen}>
-        {openButtonText}
-      </Button>
+      {showOpenButton && (
+        <Button leftIcon={<FiPlus />} colorScheme="teal" onClick={onOpen}>
+          {openButtonText}
+        </Button>
+      )}
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
         <DrawerOverlay />
         <DrawerContent>
@@ -59,6 +73,7 @@ function FormDrawer({
 
 FormDrawer.defaultProps = {
   openButtonText: "Show Form",
+  showOpenButton: true,
   title: "",
 };
 

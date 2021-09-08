@@ -21,14 +21,14 @@ class Book < ApplicationRecord
   alias_attribute :format, :book_format_name
 
   def cover_image(type: nil)
-    case type
-    when "gif"
-      extension = "gif"
-    when "jpg"
-      extension = "jpg"
-    else
-      extension = "png"
-    end
+    extension = case type
+                when "gif"
+                  "gif"
+                when "jpg"
+                  "jpg"
+                else
+                  "png"
+                end
 
     {
       height: 1024,
@@ -42,6 +42,6 @@ class Book < ApplicationRecord
   end
 
   def featured_creators
-    credits.featured.order(:position).map do |credit| credit.creator end
+    credits.featured.order(:position).map(&:creator)
   end
 end

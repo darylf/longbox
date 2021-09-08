@@ -17,7 +17,7 @@ class Series < ApplicationRecord
     {
       height: 300,
       url: "https://via.placeholder.com/400x300.png?text=#{ERB::Util.url_encode(name)}",
-      width: 400,
+      width: 400
     }
   end
 end
