@@ -7,6 +7,9 @@ export type UpdateBookMutationVariables = Types.Exact<{
   id: Types.Scalars["ID"];
   ageRating?: Types.Maybe<Types.Scalars["String"]>;
   alternateTitle?: Types.Maybe<Types.Scalars["String"]>;
+  credits:
+    | Array<Types.Maybe<Types.CreditInput>>
+    | Types.Maybe<Types.CreditInput>;
   format: Types.Scalars["String"];
   issue: Types.Scalars["String"];
   pageCount?: Types.Maybe<Types.Scalars["String"]>;
@@ -30,6 +33,20 @@ export type UpdateBookMutation = {
     price?: Types.Maybe<string>;
     publicationDate?: Types.Maybe<string>;
     summary?: Types.Maybe<string>;
+    credits?: Types.Maybe<
+      Array<{
+        __typename?: "Credit";
+        id: string;
+        featured: boolean;
+        position?: Types.Maybe<number>;
+        role: string;
+        creator: {
+          __typename?: "Creator";
+          firstName?: Types.Maybe<string>;
+          lastName?: Types.Maybe<string>;
+        };
+      }>
+    >;
     series?: Types.Maybe<{ __typename?: "Series"; id: string }>;
   }>;
 };
@@ -39,6 +56,7 @@ export const UpdateBookDocument = gql`
     $id: ID!
     $ageRating: String
     $alternateTitle: String
+    $credits: [CreditInput]!
     $format: String!
     $issue: String!
     $pageCount: String
@@ -52,6 +70,7 @@ export const UpdateBookDocument = gql`
       input: {
         ageRating: $ageRating
         alternateTitle: $alternateTitle
+        credits: $credits
         format: $format
         issue: $issue
         pageCount: $pageCount
@@ -65,6 +84,16 @@ export const UpdateBookDocument = gql`
       ageRating
       alternateTitle
       displayName
+      credits {
+        id
+        creator {
+          firstName
+          lastName
+        }
+        featured
+        position
+        role
+      }
       format
       issue
       pageCount
@@ -98,6 +127,7 @@ export type UpdateBookMutationFn = Apollo.MutationFunction<
  *      id: // value for 'id'
  *      ageRating: // value for 'ageRating'
  *      alternateTitle: // value for 'alternateTitle'
+ *      credits: // value for 'credits'
  *      format: // value for 'format'
  *      issue: // value for 'issue'
  *      pageCount: // value for 'pageCount'

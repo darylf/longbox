@@ -10,5 +10,6 @@ module Inputs
     argument :publication_date, String, required: false
     argument :series_id, ID, required: true
     argument :summary, String, required: false
+    argument :credits, [Inputs::CreditInput, null: true], required: true
   end
 end

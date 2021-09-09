@@ -6,6 +6,7 @@ const defaultOptions = {};
 export type CreateBookMutationVariables = Types.Exact<{
   ageRating?: Types.Maybe<Types.Scalars["String"]>;
   alternateTitle?: Types.Maybe<Types.Scalars["String"]>;
+  credits: Array<Types.CreditInput> | Types.CreditInput;
   format: Types.Scalars["String"];
   issue: Types.Scalars["String"];
   pageCount?: Types.Maybe<Types.Scalars["String"]>;
@@ -37,6 +38,7 @@ export const CreateBookDocument = gql`
   mutation CreateBook(
     $ageRating: String
     $alternateTitle: String
+    $credits: [CreditInput!]!
     $format: String!
     $issue: String!
     $pageCount: String
@@ -49,6 +51,7 @@ export const CreateBookDocument = gql`
       input: {
         ageRating: $ageRating
         alternateTitle: $alternateTitle
+        credits: $credits
         format: $format
         issue: $issue
         pageCount: $pageCount
@@ -94,6 +97,7 @@ export type CreateBookMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      ageRating: // value for 'ageRating'
  *      alternateTitle: // value for 'alternateTitle'
+ *      credits: // value for 'credits'
  *      format: // value for 'format'
  *      issue: // value for 'issue'
  *      pageCount: // value for 'pageCount'

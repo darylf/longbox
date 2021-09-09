@@ -80,6 +80,7 @@ export type BookInput = {
   publicationDate?: Maybe<Scalars["String"]>;
   seriesId: Scalars["ID"];
   summary?: Maybe<Scalars["String"]>;
+  credits: Array<Maybe<CreditInput>>;
 };
 
 /** A person representing someone involved in the creation process of a book */
@@ -131,6 +132,13 @@ export type Credit = {
   position?: Maybe<Scalars["Int"]>;
   role: Scalars["String"];
   updatedAt: Scalars["DateTime"];
+};
+
+export type CreditInput = {
+  creatorId: Scalars["ID"];
+  featured?: Maybe<Scalars["Boolean"]>;
+  position?: Maybe<Scalars["Int"]>;
+  roleId: Scalars["ID"];
 };
 
 /** A comic book or trade paperback */
@@ -628,6 +636,7 @@ export type BooksQuery = {
 export type CreateBookMutationVariables = Exact<{
   ageRating?: Maybe<Scalars["String"]>;
   alternateTitle?: Maybe<Scalars["String"]>;
+  credits: Array<CreditInput> | CreditInput;
   format: Scalars["String"];
   issue: Scalars["String"];
   pageCount?: Maybe<Scalars["String"]>;
@@ -683,6 +692,7 @@ export type UpdateBookMutationVariables = Exact<{
   id: Scalars["ID"];
   ageRating?: Maybe<Scalars["String"]>;
   alternateTitle?: Maybe<Scalars["String"]>;
+  credits: Array<Maybe<CreditInput>> | Maybe<CreditInput>;
   format: Scalars["String"];
   issue: Scalars["String"];
   pageCount?: Maybe<Scalars["String"]>;
@@ -706,6 +716,20 @@ export type UpdateBookMutation = {
     price?: Maybe<string>;
     publicationDate?: Maybe<string>;
     summary?: Maybe<string>;
+    credits?: Maybe<
+      Array<{
+        __typename?: "Credit";
+        id: string;
+        featured: boolean;
+        position?: Maybe<number>;
+        role: string;
+        creator: {
+          __typename?: "Creator";
+          firstName?: Maybe<string>;
+          lastName?: Maybe<string>;
+        };
+      }>
+    >;
     series?: Maybe<{ __typename?: "Series"; id: string }>;
   }>;
 };
