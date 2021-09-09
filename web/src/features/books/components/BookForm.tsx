@@ -221,6 +221,7 @@ const BookForm = ({
 };
 
 BookForm.defaultProps = {
+  book: undefined,
   htmlId: "publisher-form",
   series: undefined,
   showSubmitButton: false,

@@ -261,6 +261,7 @@ const UpdateBookForm = ({
 };
 
 UpdateBookForm.defaultProps = {
+  book: undefined,
   htmlId: "publisher-form",
   series: undefined,
   showSubmitButton: false,

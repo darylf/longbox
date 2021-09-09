@@ -75,6 +75,9 @@ FormDrawer.defaultProps = {
   openButtonText: "Show Form",
   showOpenButton: true,
   title: "",
+  isOpen: false,
+  onOpen: () => {},
+  onClose: () => {},
 };
 
 export default FormDrawer;
