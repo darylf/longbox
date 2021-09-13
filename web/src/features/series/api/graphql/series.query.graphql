@@ -4,12 +4,17 @@ query Series($id: ID!) {
     name
     books {
       id
-      displayName
       format
       issue
       price
-      pageCount
       publicationDate
+      pageCount
+      credits {
+        id
+        creatorName
+        role
+      }
+      displayName
     }
     createdAt
     logo {

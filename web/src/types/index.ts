@@ -73,6 +73,7 @@ export type BookInput = {
   ageRating?: Maybe<Scalars["String"]>;
   alternateTitle?: Maybe<Scalars["String"]>;
   creditIds?: Maybe<Array<Scalars["ID"]>>;
+  credits: Array<Maybe<CreditInput>>;
   format?: Maybe<Scalars["String"]>;
   issue?: Maybe<Scalars["String"]>;
   pageCount?: Maybe<Scalars["String"]>;
@@ -80,7 +81,6 @@ export type BookInput = {
   publicationDate?: Maybe<Scalars["String"]>;
   seriesId: Scalars["ID"];
   summary?: Maybe<Scalars["String"]>;
-  credits: Array<Maybe<CreditInput>>;
 };
 
 /** A person representing someone involved in the creation process of a book */
@@ -88,6 +88,7 @@ export type Creator = {
   __typename?: "Creator";
   createdAt: Scalars["DateTime"];
   credits: Array<Credit>;
+  displayName?: Maybe<Scalars["String"]>;
   firstName?: Maybe<Scalars["String"]>;
   id: Scalars["ID"];
   lastName?: Maybe<Scalars["String"]>;
@@ -126,6 +127,7 @@ export type Credit = {
   book: Book;
   createdAt: Scalars["DateTime"];
   creator: Creator;
+  creatorName?: Maybe<Scalars["String"]>;
   featured: Scalars["Boolean"];
   id: Scalars["ID"];
   /** The position this creator should be listed in a featured list */
@@ -151,18 +153,18 @@ export type Image = {
 };
 
 export enum ImageExtensionEnum {
+  Gif = "gif",
   Jpg = "jpg",
   Png = "png",
-  Gif = "gif",
 }
 
 export enum ImageSizeEnum {
-  /** Small image size */
-  S = "S",
-  /** Medium */
-  M = "M",
   /** Large */
   L = "L",
+  /** Medium */
+  M = "M",
+  /** Small image size */
+  S = "S",
 }
 
 export type LogInInput = {
@@ -233,13 +235,13 @@ export type MutationUpdateBookArgs = {
 };
 
 export type MutationUpdatePublisherArgs = {
-  id: Scalars["ID"];
   attributes: PublisherInput;
+  id: Scalars["ID"];
 };
 
 export type MutationUpdateSeriesArgs = {
-  id: Scalars["ID"];
   attributes: SeriesInput;
+  id: Scalars["ID"];
 };
 
 /** Information about pagination in a connection. */
@@ -323,12 +325,12 @@ export type QueryBookArgs = {
 };
 
 export type QueryBooksArgs = {
-  sortBy?: Maybe<SortAttributes>;
-  limit?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
   before?: Maybe<Scalars["String"]>;
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars["Int"]>;
+  sortBy?: Maybe<SortAttributes>;
 };
 
 export type QueryCreatorArgs = {
@@ -336,12 +338,12 @@ export type QueryCreatorArgs = {
 };
 
 export type QueryCreatorsArgs = {
-  sortBy?: Maybe<SortAttributes>;
-  limit?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
   before?: Maybe<Scalars["String"]>;
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars["Int"]>;
+  sortBy?: Maybe<SortAttributes>;
 };
 
 export type QueryPublisherArgs = {
@@ -349,12 +351,12 @@ export type QueryPublisherArgs = {
 };
 
 export type QueryPublishersArgs = {
-  sortBy?: Maybe<SortAttributes>;
-  limit?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
   before?: Maybe<Scalars["String"]>;
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars["Int"]>;
+  sortBy?: Maybe<SortAttributes>;
 };
 
 export type QuerySeriesArgs = {
@@ -362,12 +364,12 @@ export type QuerySeriesArgs = {
 };
 
 export type QuerySeriesListArgs = {
-  sortBy?: Maybe<SortAttributes>;
-  limit?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
   before?: Maybe<Scalars["String"]>;
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars["Int"]>;
+  sortBy?: Maybe<SortAttributes>;
 };
 
 export type QueryUserArgs = {
@@ -375,12 +377,12 @@ export type QueryUserArgs = {
 };
 
 export type QueryUsersArgs = {
-  sortBy?: Maybe<SortAttributes>;
-  limit?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
   before?: Maybe<Scalars["String"]>;
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars["Int"]>;
+  sortBy?: Maybe<SortAttributes>;
 };
 
 export type RegistrationInput = {
@@ -439,10 +441,10 @@ export type SeriesInput = {
 
 /** Attributes for defining the sorting of the query results */
 export type SortAttributes = {
-  /** name of the field */
-  field?: Maybe<Scalars["String"]>;
   /** direction of the sort */
   direction?: Maybe<SortDirectionEnum>;
+  /** name of the field */
+  field?: Maybe<Scalars["String"]>;
 };
 
 export enum SortDirectionEnum {
@@ -586,6 +588,10 @@ export type BookQuery = {
     credits?: Maybe<
       Array<{
         __typename?: "Credit";
+        creatorName?: Maybe<string>;
+        featured: boolean;
+        id: string;
+        position?: Maybe<number>;
         role: string;
         creator: {
           __typename?: "Creator";
@@ -977,12 +983,20 @@ export type SeriesQuery = {
       Array<{
         __typename?: "Book";
         id: string;
-        displayName: string;
         format?: Maybe<string>;
         issue?: Maybe<string>;
         price?: Maybe<string>;
-        pageCount?: Maybe<string>;
         publicationDate?: Maybe<string>;
+        pageCount?: Maybe<string>;
+        displayName: string;
+        credits?: Maybe<
+          Array<{
+            __typename?: "Credit";
+            id: string;
+            creatorName?: Maybe<string>;
+            role: string;
+          }>
+        >;
       }>
     >;
     logo?: Maybe<{ __typename?: "Image"; url: string }>;

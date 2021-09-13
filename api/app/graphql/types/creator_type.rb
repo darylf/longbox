@@ -2,6 +2,7 @@ module Types
   class CreatorType < Types::BaseObject
     description 'A person representing someone involved in the creation process of a book'
     field :credits, [Types::CreditType], null: false
+    field :display_name, String, null: true
     field :first_name, String, null: true
     field :id, ID, null: false
     field :last_name, String, null: true

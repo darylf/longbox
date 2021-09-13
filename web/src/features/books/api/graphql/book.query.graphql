@@ -17,6 +17,10 @@ query Book($id: ID!) {
         firstName
         lastName
       }
+      creatorName
+      featured
+      id
+      position
       role
     }
     displayName

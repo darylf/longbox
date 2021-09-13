@@ -20,12 +20,20 @@ export type SeriesQuery = {
       Array<{
         __typename?: "Book";
         id: string;
-        displayName: string;
         format?: Types.Maybe<string>;
         issue?: Types.Maybe<string>;
         price?: Types.Maybe<string>;
-        pageCount?: Types.Maybe<string>;
         publicationDate?: Types.Maybe<string>;
+        pageCount?: Types.Maybe<string>;
+        displayName: string;
+        credits?: Types.Maybe<
+          Array<{
+            __typename?: "Credit";
+            id: string;
+            creatorName?: Types.Maybe<string>;
+            role: string;
+          }>
+        >;
       }>
     >;
     logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
@@ -39,12 +47,17 @@ export const SeriesDocument = gql`
       name
       books {
         id
-        displayName
         format
         issue
         price
-        pageCount
         publicationDate
+        pageCount
+        credits {
+          id
+          creatorName
+          role
+        }
+        displayName
       }
       createdAt
       logo {

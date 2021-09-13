@@ -9,6 +9,10 @@ class Creator < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 120 }
   validates :last_name, presence: true, length: { maximum: 120 }
 
+  def display_name
+    "#{first_name} #{last_name}".strip if first_name || last_name
+  end
+
   def roles
     credits.includes(:credit_role).map do |credit|
       credit.credit_role.name

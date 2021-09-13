@@ -11,7 +11,7 @@ interface Props {
 }
 
 function ShowSeries({ series }: Props): React.ReactElement {
-  const [editingBook, setEditingBook] = useState<Book | undefined>({} as Book);
+  const [selectedBookId, setSelectedBookId] = useState<string | undefined>();
   const formHtmlId = "edit-book";
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,7 +33,7 @@ function ShowSeries({ series }: Props): React.ReactElement {
       render: (b) => (
         <Button
           onClick={() => {
-            setEditingBook(b);
+            setSelectedBookId(b.id);
             setIsOpen(true);
           }}
         >
@@ -56,7 +56,7 @@ function ShowSeries({ series }: Props): React.ReactElement {
               {series.publisherName}
             </Heading>
           </Stack>
-          {series.books && <Table items={series.books} columns={bookColumns} />}
+          <Table items={series.books} columns={bookColumns} />
         </Box>
       </Flex>
       <Text>Originally created:{series.createdAt}</Text>
@@ -69,12 +69,7 @@ function ShowSeries({ series }: Props): React.ReactElement {
           setIsOpen(false);
         }}
       >
-        <UpdateBookForm
-          htmlId={formHtmlId}
-          title="Edit Book"
-          series={series}
-          book={editingBook}
-        />
+        <UpdateBookForm title="Edit Book" bookId={selectedBookId} />
       </FormDrawer>
     </>
   );

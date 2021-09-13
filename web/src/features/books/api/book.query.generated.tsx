@@ -28,6 +28,10 @@ export type BookQuery = {
     credits?: Types.Maybe<
       Array<{
         __typename?: "Credit";
+        creatorName?: Types.Maybe<string>;
+        featured: boolean;
+        id: string;
+        position?: Types.Maybe<number>;
         role: string;
         creator: {
           __typename?: "Creator";
@@ -73,6 +77,10 @@ export const BookDocument = gql`
           firstName
           lastName
         }
+        creatorName
+        featured
+        id
+        position
         role
       }
       displayName

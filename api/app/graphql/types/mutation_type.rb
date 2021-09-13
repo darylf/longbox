@@ -10,6 +10,7 @@ module Types
     field :refresh_session, mutation: Mutations::UpdateSession
     field :register, mutation: Mutations::CreateUser
     field :update_book, mutation: Mutations::UpdateBook
+    field :update_credits, mutation: Mutations::UpdateCredits
     field :update_publisher, mutation: Mutations::UpdatePublisher
     field :update_series, mutation: Mutations::UpdateSeries
   end

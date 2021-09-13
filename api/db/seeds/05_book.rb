@@ -1,6 +1,6 @@
 series_hash = {}
 Series.all.each do |s|
-  series_hash[s.id] = 1 # get_number_to_create(BOOKS_ON_EACH_SERIES)
+  series_hash[s.id] = get_number_to_create(BOOKS_ON_EACH_SERIES)
 end
 
 progressbar = create_progress_bar(

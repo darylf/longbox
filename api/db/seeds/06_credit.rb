@@ -10,7 +10,7 @@ end
 
 progressbar = create_progress_bar(
   title: 'Creating Credits',
-  total: series_hash.values.flatten.size
+  total: Book.all.size * CreditRole.all.size
 )
 
 series_hash.keys.each do |k|

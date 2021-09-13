@@ -6,6 +6,7 @@ module Types
     field :updated_at, Types::DateTimeType, null: false
     field :book, Types::BookType, null: false
     field :creator, Types::CreatorType, null: false
+    field :creator_name, String, null: true
     field :role, String, null: false
     field :featured, Boolean, null: false
     field :position, Integer, null: true, description: "The position this creator should be listed in a featured list"

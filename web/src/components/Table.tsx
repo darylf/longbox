@@ -25,7 +25,7 @@ const renderColumn = <T extends unknown>(
 };
 
 interface TableProps<T> {
-  items: Array<T>;
+  items: Array<T> | null | undefined;
   columns: Array<Column<T>>;
 }
 
@@ -48,7 +48,7 @@ export const Table = <T extends unknown>({
         </Tr>
       </Thead>
       <Tbody>
-        {
+        {items && items.length > 0 ? (
           /* eslint-disable react/no-array-index-key */
           items.map((item, k) => (
             <Tr key={k}>
@@ -57,7 +57,13 @@ export const Table = <T extends unknown>({
               ))}
             </Tr>
           )) /* eslint-enable react/no-array-index-key */
-        }
+        ) : (
+          <Tr>
+            <Td colSpan={columns.length} textAlign="center" fontSize="sm">
+              <em>No items to display</em>
+            </Td>
+          </Tr>
+        )}
       </Tbody>
     </ChakraTable>
   );
