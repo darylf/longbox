@@ -14,14 +14,20 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
+import FormDrawer from "../../../components/FormDrawer";
 import Link from "../../../components/Link";
 import { Book } from "../../../types";
+import ProtectedContent from "../../auth/components/ProtectedContent";
+import UpdateBookForm from "./UpdateBookForm";
 
 interface Props {
   book: Book;
 }
 function ShowBook({ book }: Props): React.ReactElement {
+  const [isOpen, setIsOpen] = useState(false);
+  const formHtmlId = "edit-book";
+
   const coverImg: string =
     `${book.coverImage?.url}` ??
     `https://via.placeholder.com/633x1024,png?text=Cover+Missing`;
@@ -61,18 +67,16 @@ function ShowBook({ book }: Props): React.ReactElement {
                         {book.series?.name}
                       </Link>
                     </Text>
-                    <Text>
-                      Creators:{" "}
-                      <UnorderedList>
-                        {book.featuredCreators.map((c) => (
-                          <ListItem key={c.id}>
-                            <Link to={`/creators/${c.id}`}>
-                              {`${c.firstName} ${c.lastName}`}
-                            </Link>
-                          </ListItem>
-                        ))}
-                      </UnorderedList>
-                    </Text>
+                    <Text>Creators:</Text>
+                    <UnorderedList>
+                      {book.featuredCreators.map((c) => (
+                        <ListItem key={c.id}>
+                          <Link to={`/creators/${c.id}`}>
+                            {`${c.firstName} ${c.lastName}`}
+                          </Link>
+                        </ListItem>
+                      ))}
+                    </UnorderedList>
                     <Text>Age Rating: {book.ageRating}</Text>
                     <Text>Title: {book.alternateTitle}</Text>
                     <Text>Pages: {book.pageCount}</Text>
@@ -111,6 +115,18 @@ function ShowBook({ book }: Props): React.ReactElement {
           </Tabs>
         </Box>
       </Flex>
+      <ProtectedContent>
+        <FormDrawer
+          id={formHtmlId}
+          showOpenButton
+          openButtonText="Edit"
+          isOpen={isOpen}
+          onOpen={() => setIsOpen(true)}
+          onClose={() => setIsOpen(false)}
+        >
+          <UpdateBookForm title="Edit Book" bookId={book.id} />
+        </FormDrawer>
+      </ProtectedContent>
     </>
   );
 }

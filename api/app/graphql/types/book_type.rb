@@ -6,7 +6,9 @@ module Types
     field :age_rating, String, null: true
     field :alternate_title, String, null: true
     field :cover_image, Types::ImageType, null: true
-    field :credits, [Types::CreditType], null: true
+    field :credits, [Types::CreditType], null: true do
+      argument :featured, Boolean, required: false
+    end
     field :display_name, String, null: false
     field :featured_creators, [Types::CreatorType], null: false
     field :format, String, null: true

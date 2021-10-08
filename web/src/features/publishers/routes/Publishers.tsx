@@ -2,6 +2,7 @@ import { Box, Heading, Stack } from "@chakra-ui/react";
 import React from "react";
 import FormDrawer from "../../../components/FormDrawer";
 import { Head } from "../../../components/Head";
+import ProtectedContent from "../../auth/components/ProtectedContent";
 import PublisherForm from "../components/PublisherForm";
 import { PublisherList } from "../components/PublishersList";
 
@@ -14,9 +15,11 @@ export const Publishers = (): React.ReactElement => {
       <Box p="6">
         <Stack>
           <Heading>Publishers</Heading>
-          <FormDrawer id={formHtmlId} openButtonText="Create Publisher">
-            <PublisherForm htmlId={formHtmlId} />
-          </FormDrawer>
+          <ProtectedContent>
+            <FormDrawer id={formHtmlId} openButtonText="Create Publisher">
+              <PublisherForm htmlId={formHtmlId} />
+            </FormDrawer>
+          </ProtectedContent>
           <PublisherList />
         </Stack>
       </Box>

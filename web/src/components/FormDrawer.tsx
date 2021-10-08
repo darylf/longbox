@@ -4,8 +4,6 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   Stack,
   useDisclosure,
@@ -51,20 +49,11 @@ function FormDrawer({
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">{title}</DrawerHeader>
-
           <DrawerBody>
-            <Stack spacing="24px">{children} </Stack>
+            <Stack p={4} spacing="24px">
+              {children}
+            </Stack>
           </DrawerBody>
-
-          <DrawerFooter borderTopWidth="1px">
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button colorScheme="blue" type="submit" form={id}>
-              Save
-            </Button>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

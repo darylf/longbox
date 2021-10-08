@@ -11,6 +11,7 @@ import React, { ReactElement } from "react";
 import { Book } from "../../../types";
 import { useBookQuery } from "../api/book.query.generated";
 import BookCreditsForm from "./BookCreditsForm";
+import BookImageForm from "./BookImageForm";
 import BookOverviewForm from "./BookOverviewForm";
 
 interface FormProps {
@@ -36,6 +37,8 @@ const FormWithBookId = ({
   if (loading) return <>Loading...</>;
   if (error) return <>An error has ocurred...</>;
 
+  const images = book.coverImage ? new Array(book.coverImage) : [];
+
   return (
     <Stack>
       <Heading>{title}</Heading>
@@ -44,13 +47,17 @@ const FormWithBookId = ({
         <TabList>
           <Tab>Overview</Tab>
           <Tab>Creators</Tab>
+          <Tab>Images</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
             <BookOverviewForm book={book} htmlId="update-book" />
           </TabPanel>
           <TabPanel>
-            <BookCreditsForm bookId={book?.id} credits={book?.credits ?? []} />
+            <BookCreditsForm bookId={book.id} credits={book.credits ?? []} />
+          </TabPanel>
+          <TabPanel>
+            <BookImageForm bookId={book.id} images={images} />
           </TabPanel>
         </TabPanels>
       </Tabs>

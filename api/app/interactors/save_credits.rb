@@ -1,46 +1,40 @@
 class SaveBook
   include Interactor
 
-  delegate :input, :user, to: :context
+  delegate :book_id, :input, :user, to: :context
 
   def call
-    credits = []
-    input.each do |credit_input|
-      credit = if credit_input.id.nil?
-                 Credit.create(
-                   book_id: credit_input[:book_id],
-                   credit_role_id: credit_input[:role_id],
-                   creator_id: credit_input[:creator_id],
-                   featured: credit_input[:featured],
-                   position: credit_input[:position],
-                   created_by: user,
-                   updated_by: user
-                 )
-               else
-                 c = Credit.find(credit_input[:id])
-                 c.attributes = {
-                   id: credit_input[:id],
-                   book_id: credit_input[:book_id],
-                   credit_role_id: credit_input[:role_id],
-                   creator_id: credit_input[:creator_id],
-                   featured: credit_input[:featured],
-                   position: credit_input[:position],
-                   updated_by: user
-                 }
-                 c.save
-                 c
-               end
+    book = Book.find(book_id)
 
-      credits << credit
+    input.each do |credit_input|
+      if credit_input.id.nil?
+        book.credits.build(
+          credit_role_id: credit_input[:role_id],
+          creator_id: credit_input[:creator_id],
+          featured: credit_input[:featured],
+          position: credit_input[:position],
+          created_by: user,
+          updated_by: user
+        )
+      else
+        book.credits.find(credit_input.id).update(
+          id: credit_input[:id],
+          credit_role_id: credit_input[:role_id],
+          creator_id: credit_input[:creator_id],
+          featured: credit_input[:featured],
+          position: credit_input[:position],
+          updated_by: user
+        )
+      end
     end
 
-    context.credits = credits
-    context.fail!(error_data: error_data) unless context.credits.any?(&:errors)
+    context.book = book
+    context.fail!(error_data: error_data) unless book.save
   end
 
   private
 
   def error_data
-    { message: "Record Invalid", detail: context.credits.errors.to_a }
+    { message: "Record Invalid", detail: context.book.errors.to_a }
   end
 end

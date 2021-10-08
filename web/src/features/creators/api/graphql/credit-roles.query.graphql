@@ -1,0 +1,8 @@
+query CreditRoles {
+  creditRoles {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}

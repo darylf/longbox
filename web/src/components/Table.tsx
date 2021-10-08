@@ -7,6 +7,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
+import { nvl } from "../utils/nvl";
 
 export type Column<T> = {
   position?: number;
@@ -28,8 +29,6 @@ interface TableProps<T> {
   items: Array<T> | null | undefined;
   columns: Array<Column<T>>;
 }
-
-const nvl = (value: number | null | undefined): number => value ?? 0;
 
 export const Table = <T extends unknown>({
   items,

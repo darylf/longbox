@@ -4,6 +4,7 @@ import FormDrawer from "../../../components/FormDrawer";
 import Link from "../../../components/Link";
 import { Column, Table } from "../../../components/Table";
 import { Book, Series } from "../../../types";
+import ProtectedContent from "../../auth/components/ProtectedContent";
 import UpdateBookForm from "../../books/components/UpdateBookForm";
 
 interface Props {
@@ -31,14 +32,16 @@ function ShowSeries({ series }: Props): React.ReactElement {
       key: "id",
       label: "",
       render: (b) => (
-        <Button
-          onClick={() => {
-            setSelectedBookId(b.id);
-            setIsOpen(true);
-          }}
-        >
-          Edit
-        </Button>
+        <ProtectedContent>
+          <Button
+            onClick={() => {
+              setSelectedBookId(b.id);
+              setIsOpen(true);
+            }}
+          >
+            Edit
+          </Button>
+        </ProtectedContent>
       ),
       uniqueKey: "edit",
     },
@@ -59,18 +62,20 @@ function ShowSeries({ series }: Props): React.ReactElement {
           <Table items={series.books} columns={bookColumns} />
         </Box>
       </Flex>
-      <Text>Originally created:{series.createdAt}</Text>
-      <Text>Last updated at {series.updatedAt}</Text>
-      <FormDrawer
-        id={formHtmlId}
-        showOpenButton={false}
-        isOpen={isOpen}
-        onClose={() => {
-          setIsOpen(false);
-        }}
-      >
-        <UpdateBookForm title="Edit Book" bookId={selectedBookId} />
-      </FormDrawer>
+      <ProtectedContent>
+        <FormDrawer
+          id={formHtmlId}
+          showOpenButton={false}
+          isOpen={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        >
+          <UpdateBookForm title="Edit Book" bookId={selectedBookId} />
+        </FormDrawer>
+      </ProtectedContent>
+      <Text fontSize="sm">Originally created:{series.createdAt}</Text>
+      <Text fontSize="sm">Last updated at {series.updatedAt}</Text>
     </>
   );
 }

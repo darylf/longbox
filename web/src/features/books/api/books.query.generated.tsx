@@ -16,13 +16,32 @@ export type BooksQuery = {
         Types.Maybe<{
           __typename?: "Book";
           id: string;
-          publisherName?: Types.Maybe<string>;
-          seriesName?: Types.Maybe<string>;
-          issue?: Types.Maybe<string>;
+          displayName: string;
           format?: Types.Maybe<string>;
+          issue?: Types.Maybe<string>;
+          pageCount?: Types.Maybe<string>;
           publicationDate?: Types.Maybe<string>;
           price?: Types.Maybe<string>;
-          pageCount?: Types.Maybe<string>;
+          seriesName?: Types.Maybe<string>;
+          coverImage?: Types.Maybe<{ __typename?: "Image"; url: string }>;
+          credits?: Types.Maybe<
+            Array<{
+              __typename?: "Credit";
+              id: string;
+              featured: boolean;
+              position?: Types.Maybe<number>;
+              creator: {
+                __typename?: "Creator";
+                id: string;
+                displayName?: Types.Maybe<string>;
+              };
+            }>
+          >;
+          publisher?: Types.Maybe<{
+            __typename?: "Publisher";
+            id: string;
+            name: string;
+          }>;
         }>
       >
     >;
@@ -34,13 +53,29 @@ export const BooksDocument = gql`
     books(limit: $limit) {
       nodes {
         id
-        publisherName
-        seriesName
-        issue
+        coverImage {
+          url
+        }
+        credits {
+          id
+          creator {
+            id
+            displayName
+          }
+          featured
+          position
+        }
+        displayName
         format
+        issue
+        pageCount
+        publisher {
+          id
+          name
+        }
         publicationDate
         price
-        pageCount
+        seriesName
       }
     }
   }

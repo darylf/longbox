@@ -2,6 +2,7 @@ import { Box, Heading, Stack } from "@chakra-ui/react";
 import React from "react";
 import FormDrawer from "../../../components/FormDrawer";
 import { Head } from "../../../components/Head";
+import ProtectedContent from "../../auth/components/ProtectedContent";
 import CreatorForm from "../components/CreatorForm";
 import { CreatorList } from "../components/CreatorList";
 
@@ -14,9 +15,11 @@ export const Creators = (): React.ReactElement => {
       <Box p="6">
         <Stack>
           <Heading>Creators</Heading>
-          <FormDrawer id={formHtmlId} openButtonText="Create Creator">
-            <CreatorForm htmlId={formHtmlId} />
-          </FormDrawer>
+          <ProtectedContent>
+            <FormDrawer id={formHtmlId} openButtonText="Create Creator">
+              <CreatorForm htmlId={formHtmlId} />
+            </FormDrawer>
+          </ProtectedContent>
           <CreatorList />
         </Stack>
       </Box>

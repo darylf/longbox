@@ -2,13 +2,29 @@ query Books($limit: Int) {
   books(limit: $limit) {
     nodes {
       id
-      publisherName
-      seriesName
-      issue
+      coverImage {
+        url
+      }
+      credits {
+        id
+        creator {
+          id
+          displayName
+        }
+        featured
+        position
+      }
+      displayName
       format
+      issue
+      pageCount
+      publisher {
+        id
+        name
+      }
       publicationDate
       price
-      pageCount
+      seriesName
     }
   }
 }

@@ -7,7 +7,7 @@ import { useUserQuery } from "../api/user.query.generated";
 export default function User(): ReactElement {
   const { id } = useParams();
   const { data, loading, error } = useUserQuery({
-    variables: { id },
+    variables: { id: `${id}` },
   });
 
   if (loading) return <p>Loading...</p>;

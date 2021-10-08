@@ -1,5 +1,5 @@
 module Resolvers
-  class CreatorsResolver < Resolvers::BaseResolver
+  class CreatorRoleResolver < Resolvers::BaseResolver
     include Sortable
     include Truncatable
 

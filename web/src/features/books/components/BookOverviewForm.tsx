@@ -2,6 +2,7 @@ import { isApolloError } from "@apollo/client";
 import {
   Alert,
   Box,
+  Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -52,7 +53,7 @@ const BookOverviewForm = ({
     },
   });
   const [updateBook] = useUpdateBookMutation({
-    refetchQueries: [namedOperations.Query.Publishers],
+    refetchQueries: [namedOperations.Query.SeriesList],
   });
   const onSubmit = handleSubmit(async (variables) => {
     try {
@@ -198,6 +199,7 @@ const BookOverviewForm = ({
             <FormErrorMessage>{errors?.summary?.message}</FormErrorMessage>
           </FormControl>
         </Stack>
+        <Button type="submit">Save</Button>
       </form>
     </>
   );

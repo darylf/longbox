@@ -5,15 +5,17 @@ import FormDrawer from "../../../components/FormDrawer";
 import { Head } from "../../../components/Head";
 import { useLoginState } from "../../../hooks/useAuthentication";
 import { Publisher as IPublisher } from "../../../types";
+import ProtectedContent from "../../auth/components/ProtectedContent";
 import SeriesForm from "../../series/components/SeriesForm";
 import { usePublisherQuery } from "../api/publisher.query.generated";
 import { ViewPublisher } from "../components/ViewPublisher";
 
 export const Publisher = (): React.ReactElement => {
   const { id } = useParams();
+  const publisherId = id ?? "";
   const { authenticated } = useLoginState();
   const { data, loading, error } = usePublisherQuery({
-    variables: { id },
+    variables: { id: publisherId },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -28,9 +30,11 @@ export const Publisher = (): React.ReactElement => {
         <ViewPublisher publisher={publisher} />
         {authenticated && (
           <HStack>
-            <FormDrawer id={id} openButtonText="Add a Series">
-              <SeriesForm id={id} selectedPublisher={publisher} />
-            </FormDrawer>
+            <ProtectedContent>
+              <FormDrawer id={publisherId} openButtonText="Add a Series">
+                <SeriesForm id={publisherId} selectedPublisher={publisher} />
+              </FormDrawer>
+            </ProtectedContent>
           </HStack>
         )}
       </Stack>

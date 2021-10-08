@@ -49,6 +49,11 @@ export type Book = {
   updatedBy: User;
 };
 
+/** A comic book or trade paperback */
+export type BookCreditsArgs = {
+  featured?: Maybe<Scalars["Boolean"]>;
+};
+
 /** The connection type for Book. */
 export type BookConnection = {
   __typename?: "BookConnection";
@@ -137,10 +142,21 @@ export type Credit = {
 };
 
 export type CreditInput = {
+  bookId: Scalars["ID"];
   creatorId: Scalars["ID"];
   featured?: Maybe<Scalars["Boolean"]>;
+  id?: Maybe<Scalars["ID"]>;
   position?: Maybe<Scalars["Int"]>;
   roleId: Scalars["ID"];
+};
+
+/** The function that a creator performs while creating a book */
+export type CreditRole = {
+  __typename?: "CreditRole";
+  createdAt: Scalars["DateTime"];
+  id: Scalars["ID"];
+  name?: Maybe<Scalars["String"]>;
+  updatedAt: Scalars["DateTime"];
 };
 
 /** A comic book or trade paperback */
@@ -148,6 +164,7 @@ export type Image = {
   __typename?: "Image";
   extension: ImageExtensionEnum;
   height?: Maybe<Scalars["Int"]>;
+  id?: Maybe<Scalars["String"]>;
   url: Scalars["String"];
   width?: Maybe<Scalars["Int"]>;
 };
@@ -193,6 +210,7 @@ export type Mutation = {
   refreshSession?: Maybe<AuthenticationResult>;
   register?: Maybe<AuthenticationResult>;
   updateBook?: Maybe<Book>;
+  updateCredits?: Maybe<Array<Credit>>;
   updatePublisher?: Maybe<UpdatePublisherPayload>;
   updateSeries?: Maybe<UpdateSeriesPayload>;
 };
@@ -232,6 +250,11 @@ export type MutationRegisterArgs = {
 export type MutationUpdateBookArgs = {
   id: Scalars["ID"];
   input: BookInput;
+};
+
+export type MutationUpdateCreditsArgs = {
+  bookId: Scalars["ID"];
+  input: Array<CreditInput>;
 };
 
 export type MutationUpdatePublisherArgs = {
@@ -312,6 +335,7 @@ export type Query = {
   books: BookConnection;
   creator: Creator;
   creators: CreatorConnection;
+  creditRoles: Array<CreditRole>;
   publisher: Publisher;
   publishers: PublisherConnection;
   series: Series;
@@ -342,6 +366,12 @@ export type QueryCreatorsArgs = {
   before?: Maybe<Scalars["String"]>;
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
+  sortBy?: Maybe<SortAttributes>;
+};
+
+export type QueryCreditRolesArgs = {
   limit?: Maybe<Scalars["Int"]>;
   sortBy?: Maybe<SortAttributes>;
 };
@@ -626,13 +656,32 @@ export type BooksQuery = {
         Maybe<{
           __typename?: "Book";
           id: string;
-          publisherName?: Maybe<string>;
-          seriesName?: Maybe<string>;
-          issue?: Maybe<string>;
+          displayName: string;
           format?: Maybe<string>;
+          issue?: Maybe<string>;
+          pageCount?: Maybe<string>;
           publicationDate?: Maybe<string>;
           price?: Maybe<string>;
-          pageCount?: Maybe<string>;
+          seriesName?: Maybe<string>;
+          coverImage?: Maybe<{ __typename?: "Image"; url: string }>;
+          credits?: Maybe<
+            Array<{
+              __typename?: "Credit";
+              id: string;
+              featured: boolean;
+              position?: Maybe<number>;
+              creator: {
+                __typename?: "Creator";
+                id: string;
+                displayName?: Maybe<string>;
+              };
+            }>
+          >;
+          publisher?: Maybe<{
+            __typename?: "Publisher";
+            id: string;
+            name: string;
+          }>;
         }>
       >
     >;
@@ -740,6 +789,31 @@ export type UpdateBookMutation = {
   }>;
 };
 
+export type UpdateCreditsMutationVariables = Exact<{
+  bookId: Scalars["ID"];
+  input: Array<CreditInput> | CreditInput;
+}>;
+
+export type UpdateCreditsMutation = {
+  __typename?: "Mutation";
+  updateCredits?: Maybe<
+    Array<{
+      __typename?: "Credit";
+      id: string;
+      createdAt: any;
+      featured: boolean;
+      position?: Maybe<number>;
+      role: string;
+      updatedAt: any;
+      creator: {
+        __typename?: "Creator";
+        id: string;
+        displayName?: Maybe<string>;
+      };
+    }>
+  >;
+};
+
 export type CreateCreatorMutationVariables = Exact<{
   firstName: Scalars["String"];
   lastName: Scalars["String"];
@@ -777,6 +851,28 @@ export type CreatorQuery = {
   };
 };
 
+export type CreatorsSearchQueryVariables = Exact<{
+  search?: Maybe<Scalars["String"]>;
+}>;
+
+export type CreatorsSearchQuery = {
+  __typename?: "Query";
+  creators: {
+    __typename?: "CreatorConnection";
+    nodes?: Maybe<
+      Array<
+        Maybe<{
+          __typename?: "Creator";
+          id: string;
+          displayName?: Maybe<string>;
+          firstName?: Maybe<string>;
+          lastName?: Maybe<string>;
+        }>
+      >
+    >;
+  };
+};
+
 export type CreatorsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type CreatorsQuery = {
@@ -796,6 +892,19 @@ export type CreatorsQuery = {
       >
     >;
   };
+};
+
+export type CreditRolesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CreditRolesQuery = {
+  __typename?: "Query";
+  creditRoles: Array<{
+    __typename?: "CreditRole";
+    id: string;
+    name?: Maybe<string>;
+    createdAt: any;
+    updatedAt: any;
+  }>;
 };
 
 export type CreatePublisherMutationVariables = Exact<{
@@ -1048,7 +1157,9 @@ export const namedOperations = {
     Books: "Books",
     RankedBookList: "RankedBookList",
     Creator: "Creator",
+    CreatorsSearch: "CreatorsSearch",
     Creators: "Creators",
+    CreditRoles: "CreditRoles",
     Publisher: "Publisher",
     Publishers: "Publishers",
     RankedPublisherList: "RankedPublisherList",
@@ -1064,6 +1175,7 @@ export const namedOperations = {
     Register: "Register",
     CreateBook: "CreateBook",
     UpdateBook: "UpdateBook",
+    UpdateCredits: "UpdateCredits",
     CreateCreator: "CreateCreator",
     CreatePublisher: "CreatePublisher",
     UpdatePublisher: "UpdatePublisher",

@@ -1,0 +1,10 @@
+query CreatorsSearch($search: String) {
+  creators(search: $search) {
+    nodes {
+      id
+      displayName
+      firstName
+      lastName
+    }
+  }
+}

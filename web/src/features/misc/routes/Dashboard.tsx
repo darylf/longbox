@@ -1,25 +1,17 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { Head } from "../../../components/Head";
 import Link from "../../../components/Link";
 import Panel from "../../../components/Panel";
-import { Column, Table } from "../../../components/Table";
 import { Book, Publisher, Series, SortDirectionEnum } from "../../../types";
 import { convertToArray } from "../../../utils/convertToArray";
 import { useBooksQuery } from "../../books/api/books.query.generated";
 import { useRankedBookListQuery } from "../../books/api/ranked-book-list.query.generated";
+import BookCard from "../../books/components/BookCard";
 import { useRankedPublisherListQuery } from "../../publishers/api/ranked-publisher-list.query.generated";
 import { useRankedSeriesListQuery } from "../../series/api/ranked-series-list.query.generated";
 
 const TOP_SUMMARY_COUNT = 5;
-
-const bookColumns: Array<Column<Book>> = [
-  { key: "publisherName", label: "Publisher" },
-  { key: "seriesName", label: "Series" },
-  { key: "issue", label: "Issue" },
-  { key: "price", label: "Cost" },
-  { key: "pageCount", label: "Pages" },
-];
 
 export default function HomePage(): ReactElement {
   const topPublisherResult = useRankedPublisherListQuery({
@@ -56,7 +48,7 @@ export default function HomePage(): ReactElement {
 
   const latestBooks = convertToArray<Book>(latestBooksResult.data?.books.nodes);
 
-  const { data, loading, error } = useBooksQuery({ variables: { limit: 50 } });
+  const { data, loading, error } = useBooksQuery({ variables: { limit: 25 } });
   let bookTable = <></>;
   if (loading) {
     bookTable = <>Loading...</>;
@@ -64,7 +56,13 @@ export default function HomePage(): ReactElement {
     bookTable = <>An error has occured</>;
   } else {
     const books = convertToArray<Book>(data?.books.nodes);
-    bookTable = <Table items={books} columns={bookColumns} />;
+    bookTable = (
+      <SimpleGrid p={8} columns={{ sm: 2, md: 3 }} spacing={6}>
+        {books.map((item) => (
+          <BookCard book={item} />
+        ))}
+      </SimpleGrid>
+    );
   }
 
   return (
@@ -99,7 +97,10 @@ export default function HomePage(): ReactElement {
           )}
         />
       </SimpleGrid>
-      {bookTable}
+      <Box my={8}>
+        <Heading>Featured</Heading>
+        {bookTable}
+      </Box>
     </>
   );
 }

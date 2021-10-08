@@ -1,0 +1,14 @@
+mutation UpdateCredits($bookId: ID!, $input: [CreditInput!]!) {
+  updateCredits(bookId: $bookId, input: $input) {
+    id
+    createdAt
+    creator {
+      id
+      displayName
+    }
+    featured
+    position
+    role
+    updatedAt
+  }
+}
