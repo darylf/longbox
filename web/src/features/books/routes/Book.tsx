@@ -7,7 +7,7 @@ import ShowBook from "../components/ShowBook";
 
 export default function Book(): React.ReactElement {
   const { id } = useParams();
-  if (id == undefined) return <>Invalid ID</>;
+  if (id === undefined) return <>Invalid ID</>;
 
   const { data, loading, error } = useBookQuery({ variables: { id } });
 

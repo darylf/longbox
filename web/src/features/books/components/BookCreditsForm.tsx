@@ -60,10 +60,10 @@ function BookCreditsForm({
 
   const onSubmit = handleSubmit(async (fieldVariables) => {
     try {
-      const { data } = await updateCredits({
+      const { data: submitData } = await updateCredits({
         variables: { bookId: bookIdParam, input: fieldVariables.credits },
       });
-      if (data?.updateCredits) {
+      if (submitData?.updateCredits) {
         reset();
         toast({
           title: "Credits Updated.",
@@ -73,13 +73,13 @@ function BookCreditsForm({
           isClosable: true,
         });
       }
-    } catch (error: any) {
-      if (isApolloError(error)) {
-        setAlert(error.graphQLErrors[0].message);
+    } catch (exception: any) {
+      if (isApolloError(exception)) {
+        setAlert(exception.graphQLErrors[0].message);
       }
     }
   });
-
+  /* eslint-disable react/jsx-props-no-spreading */
   return (
     <form onSubmit={onSubmit}>
       <Box>
@@ -173,6 +173,7 @@ function BookCreditsForm({
       </Box>
     </form>
   );
+  /* eslint-enable react/jsx-props-no-spreading */
 }
 
 export default BookCreditsForm;

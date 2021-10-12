@@ -31,7 +31,8 @@ function ControlledAutoSuggest<T>({
         },
       }}
       onSuggestionsFetchRequested={async (value) => {
-        if (!value) return;
+        // if (!value) return;
+        return value;
       }}
       onSuggestionsClearRequested={() => {
         setSuggestions([]);
