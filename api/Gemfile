@@ -19,7 +19,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql', '~> 1.12.16'
 gem 'graphql-batch'
 gem "interactor"
-gem 'puma', '~> 5.5.0'
+gem 'puma', '~> 5.5.2'
 
 group :development do
   gem 'faker', '~> 2.19.0'
