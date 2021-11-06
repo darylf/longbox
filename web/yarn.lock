@@ -1951,12 +1951,12 @@
     "@graphql-codegen/plugin-helpers" "^2.1.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/named-operations-object@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/named-operations-object/-/named-operations-object-2.1.0.tgz#b3cb32399a6f715f0877efc49920b8f104efe490"
-  integrity sha512-ZagN6e3CcgJyoO9BScV0oUew5U4g64qe9EzGIXA3Jj96vr1oROTUmmtRo8Nd+A6YccV0gKrwiaWS7QcR2LqXrA==
+"@graphql-codegen/named-operations-object@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/named-operations-object/-/named-operations-object-2.2.0.tgz#d54ac25fcab27dd42e1f194317020e0567c2911f"
+  integrity sha512-1bBYokbhO9vg1WIZrwcFv71TzsvjJd/pGOCwLz+eIIQMDogPOieHNuiVKx2YpG62nPN/IRMQcq/NVt67oMnazQ==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.1.0"
+    "@graphql-codegen/plugin-helpers" "^2.3.0"
     change-case-all "1.0.14"
     tslib "~2.3.0"
 
