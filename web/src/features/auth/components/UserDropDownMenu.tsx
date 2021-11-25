@@ -25,7 +25,14 @@ export function LoginControl(): ReactElement {
   return (
     <Flex alignItems="center">
       <HStack>
-        <Link to="/auth/login">Login</Link>
+        <Link
+          to="/auth/login"
+          fontSize={"sm"}
+          fontWeight={400}
+          variant={"link"}
+        >
+          Login
+        </Link>
       </HStack>
     </Flex>
   );

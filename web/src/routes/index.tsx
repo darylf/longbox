@@ -1,3 +1,4 @@
+import { Box, Grid } from "@chakra-ui/layout";
 import React, { ReactElement } from "react";
 import { useRoutes } from "react-router-dom";
 import SidebarWithHeader from "../components/SidebarWithHeader";
@@ -58,7 +59,14 @@ const AppRoutes = (): ReactElement => {
 
   const element = useRoutes([...routes, ...commonRoutes]);
 
-  return <SidebarWithHeader>{element}</SidebarWithHeader>;
+  return (
+    <Grid w="1250px" margin="auto">
+      <Box>
+        <SidebarWithHeader />
+      </Box>
+      <Box>{element}</Box>
+    </Grid>
+  );
 };
 
 export default AppRoutes;
