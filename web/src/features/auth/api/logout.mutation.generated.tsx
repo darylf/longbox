@@ -4,12 +4,12 @@ import * as Types from "../../../types";
 
 const defaultOptions = {};
 export type LogOutMutationVariables = Types.Exact<{
-  everywhere?: Types.Maybe<Types.Scalars["Boolean"]>;
+  everywhere?: Types.InputMaybe<Types.Scalars["Boolean"]>;
 }>;
 
 export type LogOutMutation = {
   __typename?: "Mutation";
-  logout?: Types.Maybe<{ __typename?: "Message"; message: string }>;
+  logout?: { __typename?: "Message"; message: string } | null | undefined;
 };
 
 export const LogOutDocument = gql`

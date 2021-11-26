@@ -4,47 +4,53 @@ import * as Types from "../../../types";
 
 const defaultOptions = {};
 export type BooksQueryVariables = Types.Exact<{
-  limit?: Types.Maybe<Types.Scalars["Int"]>;
+  limit?: Types.InputMaybe<Types.Scalars["Int"]>;
 }>;
 
 export type BooksQuery = {
   __typename?: "Query";
   books: {
     __typename?: "BookConnection";
-    nodes?: Types.Maybe<
-      Array<
-        Types.Maybe<{
-          __typename?: "Book";
-          id: string;
-          displayName: string;
-          format?: Types.Maybe<string>;
-          issue?: Types.Maybe<string>;
-          pageCount?: Types.Maybe<string>;
-          publicationDate?: Types.Maybe<string>;
-          price?: Types.Maybe<string>;
-          seriesName?: Types.Maybe<string>;
-          coverImage?: Types.Maybe<{ __typename?: "Image"; url: string }>;
-          credits?: Types.Maybe<
-            Array<{
-              __typename?: "Credit";
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Book";
               id: string;
-              featured: boolean;
-              position?: Types.Maybe<number>;
-              creator: {
-                __typename?: "Creator";
-                id: string;
-                displayName?: Types.Maybe<string>;
-              };
-            }>
-          >;
-          publisher?: Types.Maybe<{
-            __typename?: "Publisher";
-            id: string;
-            name: string;
-          }>;
-        }>
-      >
-    >;
+              displayName: string;
+              format?: string | null | undefined;
+              issue?: string | null | undefined;
+              pageCount?: string | null | undefined;
+              publicationDate?: string | null | undefined;
+              price?: string | null | undefined;
+              seriesName?: string | null | undefined;
+              coverImage?:
+                | { __typename?: "Image"; url: string }
+                | null
+                | undefined;
+              credits?:
+                | Array<{
+                    __typename?: "Credit";
+                    id: string;
+                    featured: boolean;
+                    position?: number | null | undefined;
+                    creator: {
+                      __typename?: "Creator";
+                      id: string;
+                      displayName?: string | null | undefined;
+                    };
+                  }>
+                | null
+                | undefined;
+              publisher?:
+                | { __typename?: "Publisher"; id: string; name: string }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 

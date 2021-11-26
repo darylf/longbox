@@ -14,29 +14,31 @@ export type SeriesQuery = {
     id: string;
     name: string;
     createdAt: any;
-    publisherName?: Types.Maybe<string>;
+    publisherName?: string | null | undefined;
     updatedAt: any;
-    books?: Types.Maybe<
-      Array<{
-        __typename?: "Book";
-        id: string;
-        format?: Types.Maybe<string>;
-        issue?: Types.Maybe<string>;
-        price?: Types.Maybe<string>;
-        publicationDate?: Types.Maybe<string>;
-        pageCount?: Types.Maybe<string>;
-        displayName: string;
-        credits?: Types.Maybe<
-          Array<{
-            __typename?: "Credit";
-            id: string;
-            creatorName?: Types.Maybe<string>;
-            role: string;
-          }>
-        >;
-      }>
-    >;
-    logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
+    books?:
+      | Array<{
+          __typename?: "Book";
+          id: string;
+          format?: string | null | undefined;
+          issue?: string | null | undefined;
+          price?: string | null | undefined;
+          publicationDate?: string | null | undefined;
+          pageCount?: string | null | undefined;
+          displayName: string;
+          credits?:
+            | Array<{
+                __typename?: "Credit";
+                id: string;
+                creatorName?: string | null | undefined;
+                role: string;
+              }>
+            | null
+            | undefined;
+        }>
+      | null
+      | undefined;
+    logo?: { __typename?: "Image"; url: string } | null | undefined;
   };
 };
 

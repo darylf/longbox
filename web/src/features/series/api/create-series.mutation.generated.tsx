@@ -10,13 +10,16 @@ export type CreateSeriesMutationVariables = Types.Exact<{
 
 export type CreateSeriesMutation = {
   __typename?: "Mutation";
-  createSeries?: Types.Maybe<{
-    __typename?: "Series";
-    id: string;
-    name: string;
-    createdAt: any;
-    updatedAt: any;
-  }>;
+  createSeries?:
+    | {
+        __typename?: "Series";
+        id: string;
+        name: string;
+        createdAt: any;
+        updatedAt: any;
+      }
+    | null
+    | undefined;
 };
 
 export const CreateSeriesDocument = gql`

@@ -10,12 +10,15 @@ export type CreateCreatorMutationVariables = Types.Exact<{
 
 export type CreateCreatorMutation = {
   __typename?: "Mutation";
-  createCreator?: Types.Maybe<{
-    __typename?: "Creator";
-    id: string;
-    firstName?: Types.Maybe<string>;
-    lastName?: Types.Maybe<string>;
-  }>;
+  createCreator?:
+    | {
+        __typename?: "Creator";
+        id: string;
+        firstName?: string | null | undefined;
+        lastName?: string | null | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export const CreateCreatorDocument = gql`

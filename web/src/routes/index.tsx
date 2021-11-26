@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/layout";
+import { Box, Grid } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { useRoutes } from "react-router-dom";
 import SidebarWithHeader from "../components/SidebarWithHeader";

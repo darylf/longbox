@@ -4,7 +4,7 @@ import * as Types from "../../../types";
 
 const defaultOptions = {};
 export type RankedPublisherListQueryVariables = Types.Exact<{
-  limit?: Types.Maybe<Types.Scalars["Int"]>;
+  limit?: Types.InputMaybe<Types.Scalars["Int"]>;
   field: Types.Scalars["String"];
   direction: Types.SortDirectionEnum;
 }>;
@@ -13,16 +13,19 @@ export type RankedPublisherListQuery = {
   __typename?: "Query";
   publishers: {
     __typename?: "PublisherConnection";
-    nodes?: Types.Maybe<
-      Array<
-        Types.Maybe<{
-          __typename?: "Publisher";
-          id: string;
-          name: string;
-          seriesCount: number;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Publisher";
+              id: string;
+              name: string;
+              seriesCount: number;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 

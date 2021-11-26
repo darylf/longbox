@@ -10,19 +10,25 @@ export type LoginMutationVariables = Types.Exact<{
 
 export type LoginMutation = {
   __typename?: "Mutation";
-  login?: Types.Maybe<{
-    __typename?: "AuthenticationResult";
-    accessToken: string;
-    refreshToken: string;
-    me?: Types.Maybe<{
-      __typename?: "User";
-      id: string;
-      avatar: string;
-      email: string;
-      roles: Array<string>;
-      username: string;
-    }>;
-  }>;
+  login?:
+    | {
+        __typename?: "AuthenticationResult";
+        accessToken: string;
+        refreshToken: string;
+        me?:
+          | {
+              __typename?: "User";
+              id: string;
+              avatar: string;
+              email: string;
+              roles: Array<string>;
+              username: string;
+            }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export const LoginDocument = gql`

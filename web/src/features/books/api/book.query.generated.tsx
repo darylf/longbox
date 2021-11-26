@@ -12,47 +12,50 @@ export type BookQuery = {
   book: {
     __typename?: "Book";
     id: string;
-    ageRating?: Types.Maybe<string>;
-    alternateTitle?: Types.Maybe<string>;
+    ageRating?: string | null | undefined;
+    alternateTitle?: string | null | undefined;
     createdAt: any;
     displayName: string;
-    format?: Types.Maybe<string>;
-    issue?: Types.Maybe<string>;
-    pageCount?: Types.Maybe<string>;
-    price?: Types.Maybe<string>;
-    publicationDate?: Types.Maybe<string>;
-    summary?: Types.Maybe<string>;
+    format?: string | null | undefined;
+    issue?: string | null | undefined;
+    pageCount?: string | null | undefined;
+    price?: string | null | undefined;
+    publicationDate?: string | null | undefined;
+    summary?: string | null | undefined;
     updatedAt: any;
-    coverImage?: Types.Maybe<{ __typename?: "Image"; url: string }>;
+    coverImage?: { __typename?: "Image"; url: string } | null | undefined;
     createdBy: { __typename?: "User"; id: string; username: string };
-    credits?: Types.Maybe<
-      Array<{
-        __typename?: "Credit";
-        creatorName?: Types.Maybe<string>;
-        featured: boolean;
-        id: string;
-        position?: Types.Maybe<number>;
-        role: string;
-        creator: {
-          __typename?: "Creator";
+    credits?:
+      | Array<{
+          __typename?: "Credit";
+          creatorName?: string | null | undefined;
+          featured: boolean;
           id: string;
-          firstName?: Types.Maybe<string>;
-          lastName?: Types.Maybe<string>;
-        };
-      }>
-    >;
+          position?: number | null | undefined;
+          role: string;
+          creator: {
+            __typename?: "Creator";
+            id: string;
+            firstName?: string | null | undefined;
+            lastName?: string | null | undefined;
+          };
+        }>
+      | null
+      | undefined;
     featuredCreators: Array<{
       __typename?: "Creator";
       id: string;
-      firstName?: Types.Maybe<string>;
-      lastName?: Types.Maybe<string>;
+      firstName?: string | null | undefined;
+      lastName?: string | null | undefined;
     }>;
-    publisher?: Types.Maybe<{
-      __typename?: "Publisher";
-      id: string;
-      name: string;
-    }>;
-    series?: Types.Maybe<{ __typename?: "Series"; id: string; name: string }>;
+    publisher?:
+      | { __typename?: "Publisher"; id: string; name: string }
+      | null
+      | undefined;
+    series?:
+      | { __typename?: "Series"; id: string; name: string }
+      | null
+      | undefined;
     updatedBy: { __typename?: "User"; id: string; username: string };
   };
 };

@@ -8,7 +8,18 @@ export default function MyCollection(): ReactElement {
       <Head title="My Collection" />
       <Stack>
         <Heading>My Collection</Heading>
-        <p>This page is still under construction</p>
+        <p>
+          <strong>Lists</strong>
+        </p>
+        <p>
+          <strong>Collected</strong>
+        </p>
+        <p>
+          <strong>Wish List</strong>
+        </p>
+        <p>
+          <strong>Read</strong>
+        </p>
       </Stack>
     </>
   );

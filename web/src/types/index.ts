@@ -1,11 +1,14 @@
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -51,7 +54,7 @@ export type Book = {
 
 /** A comic book or trade paperback */
 export type BookCreditsArgs = {
-  featured?: Maybe<Scalars["Boolean"]>;
+  featured?: InputMaybe<Scalars["Boolean"]>;
 };
 
 /** The connection type for Book. */
@@ -75,17 +78,17 @@ export type BookEdge = {
 };
 
 export type BookInput = {
-  ageRating?: Maybe<Scalars["String"]>;
-  alternateTitle?: Maybe<Scalars["String"]>;
-  creditIds?: Maybe<Array<Scalars["ID"]>>;
-  credits: Array<Maybe<CreditInput>>;
-  format?: Maybe<Scalars["String"]>;
-  issue?: Maybe<Scalars["String"]>;
-  pageCount?: Maybe<Scalars["String"]>;
-  price?: Maybe<Scalars["String"]>;
-  publicationDate?: Maybe<Scalars["String"]>;
+  ageRating?: InputMaybe<Scalars["String"]>;
+  alternateTitle?: InputMaybe<Scalars["String"]>;
+  creditIds?: InputMaybe<Array<Scalars["ID"]>>;
+  credits: Array<InputMaybe<CreditInput>>;
+  format?: InputMaybe<Scalars["String"]>;
+  issue?: InputMaybe<Scalars["String"]>;
+  pageCount?: InputMaybe<Scalars["String"]>;
+  price?: InputMaybe<Scalars["String"]>;
+  publicationDate?: InputMaybe<Scalars["String"]>;
   seriesId: Scalars["ID"];
-  summary?: Maybe<Scalars["String"]>;
+  summary?: InputMaybe<Scalars["String"]>;
 };
 
 /** A person representing someone involved in the creation process of a book */
@@ -144,9 +147,9 @@ export type Credit = {
 export type CreditInput = {
   bookId: Scalars["ID"];
   creatorId: Scalars["ID"];
-  featured?: Maybe<Scalars["Boolean"]>;
-  id?: Maybe<Scalars["ID"]>;
-  position?: Maybe<Scalars["Int"]>;
+  featured?: InputMaybe<Scalars["Boolean"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+  position?: InputMaybe<Scalars["Int"]>;
   roleId: Scalars["ID"];
 };
 
@@ -190,7 +193,7 @@ export type LogInInput = {
 };
 
 export type LogOutInput = {
-  everywhere?: Maybe<Scalars["Boolean"]>;
+  everywhere?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type Message = {
@@ -295,14 +298,14 @@ export type Publisher = {
 
 /** A book publishing company */
 export type PublisherLogoArgs = {
-  size?: Maybe<ImageSizeEnum>;
-  type?: Maybe<ImageExtensionEnum>;
+  size?: InputMaybe<ImageSizeEnum>;
+  type?: InputMaybe<ImageExtensionEnum>;
 };
 
 /** A book publishing company */
 export type PublisherSeriesArgs = {
-  limit?: Maybe<Scalars["Int"]>;
-  sortBy?: Maybe<SortAttributes>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 /** The connection type for Publisher. */
@@ -345,61 +348,61 @@ export type Query = {
 };
 
 export type QueryBookArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars["ID"]>;
 };
 
 export type QueryBooksArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  limit?: Maybe<Scalars["Int"]>;
-  sortBy?: Maybe<SortAttributes>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 export type QueryCreatorArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars["ID"]>;
 };
 
 export type QueryCreatorsArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  limit?: Maybe<Scalars["Int"]>;
-  search?: Maybe<Scalars["String"]>;
-  sortBy?: Maybe<SortAttributes>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 export type QueryCreditRolesArgs = {
-  limit?: Maybe<Scalars["Int"]>;
-  sortBy?: Maybe<SortAttributes>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 export type QueryPublisherArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars["ID"]>;
 };
 
 export type QueryPublishersArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  limit?: Maybe<Scalars["Int"]>;
-  sortBy?: Maybe<SortAttributes>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 export type QuerySeriesArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars["ID"]>;
 };
 
 export type QuerySeriesListArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  limit?: Maybe<Scalars["Int"]>;
-  sortBy?: Maybe<SortAttributes>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 export type QueryUserArgs = {
@@ -407,12 +410,12 @@ export type QueryUserArgs = {
 };
 
 export type QueryUsersArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  limit?: Maybe<Scalars["Int"]>;
-  sortBy?: Maybe<SortAttributes>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 export type RegistrationInput = {
@@ -440,8 +443,8 @@ export type Series = {
 
 /** A collection of related books */
 export type SeriesBooksArgs = {
-  limit?: Maybe<Scalars["Int"]>;
-  sortBy?: Maybe<SortAttributes>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<SortAttributes>;
 };
 
 /** The connection type for Series. */
@@ -472,9 +475,9 @@ export type SeriesInput = {
 /** Attributes for defining the sorting of the query results */
 export type SortAttributes = {
   /** direction of the sort */
-  direction?: Maybe<SortDirectionEnum>;
+  direction?: InputMaybe<SortDirectionEnum>;
   /** name of the field */
-  field?: Maybe<Scalars["String"]>;
+  field?: InputMaybe<Scalars["String"]>;
 };
 
 export enum SortDirectionEnum {
@@ -546,28 +549,34 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = {
   __typename?: "Mutation";
-  login?: Maybe<{
-    __typename?: "AuthenticationResult";
-    accessToken: string;
-    refreshToken: string;
-    me?: Maybe<{
-      __typename?: "User";
-      id: string;
-      avatar: string;
-      email: string;
-      roles: Array<string>;
-      username: string;
-    }>;
-  }>;
+  login?:
+    | {
+        __typename?: "AuthenticationResult";
+        accessToken: string;
+        refreshToken: string;
+        me?:
+          | {
+              __typename?: "User";
+              id: string;
+              avatar: string;
+              email: string;
+              roles: Array<string>;
+              username: string;
+            }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export type LogOutMutationVariables = Exact<{
-  everywhere?: Maybe<Scalars["Boolean"]>;
+  everywhere?: InputMaybe<Scalars["Boolean"]>;
 }>;
 
 export type LogOutMutation = {
   __typename?: "Mutation";
-  logout?: Maybe<{ __typename?: "Message"; message: string }>;
+  logout?: { __typename?: "Message"; message: string } | null | undefined;
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -578,19 +587,25 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = {
   __typename?: "Mutation";
-  register?: Maybe<{
-    __typename?: "AuthenticationResult";
-    accessToken: string;
-    refreshToken: string;
-    me?: Maybe<{
-      __typename?: "User";
-      id: string;
-      avatar: string;
-      email: string;
-      roles: Array<string>;
-      username: string;
-    }>;
-  }>;
+  register?:
+    | {
+        __typename?: "AuthenticationResult";
+        accessToken: string;
+        refreshToken: string;
+        me?:
+          | {
+              __typename?: "User";
+              id: string;
+              avatar: string;
+              email: string;
+              roles: Array<string>;
+              username: string;
+            }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export type BookQueryVariables = Exact<{
@@ -602,125 +617,141 @@ export type BookQuery = {
   book: {
     __typename?: "Book";
     id: string;
-    ageRating?: Maybe<string>;
-    alternateTitle?: Maybe<string>;
+    ageRating?: string | null | undefined;
+    alternateTitle?: string | null | undefined;
     createdAt: any;
     displayName: string;
-    format?: Maybe<string>;
-    issue?: Maybe<string>;
-    pageCount?: Maybe<string>;
-    price?: Maybe<string>;
-    publicationDate?: Maybe<string>;
-    summary?: Maybe<string>;
+    format?: string | null | undefined;
+    issue?: string | null | undefined;
+    pageCount?: string | null | undefined;
+    price?: string | null | undefined;
+    publicationDate?: string | null | undefined;
+    summary?: string | null | undefined;
     updatedAt: any;
-    coverImage?: Maybe<{ __typename?: "Image"; url: string }>;
+    coverImage?: { __typename?: "Image"; url: string } | null | undefined;
     createdBy: { __typename?: "User"; id: string; username: string };
-    credits?: Maybe<
-      Array<{
-        __typename?: "Credit";
-        creatorName?: Maybe<string>;
-        featured: boolean;
-        id: string;
-        position?: Maybe<number>;
-        role: string;
-        creator: {
-          __typename?: "Creator";
+    credits?:
+      | Array<{
+          __typename?: "Credit";
+          creatorName?: string | null | undefined;
+          featured: boolean;
           id: string;
-          firstName?: Maybe<string>;
-          lastName?: Maybe<string>;
-        };
-      }>
-    >;
+          position?: number | null | undefined;
+          role: string;
+          creator: {
+            __typename?: "Creator";
+            id: string;
+            firstName?: string | null | undefined;
+            lastName?: string | null | undefined;
+          };
+        }>
+      | null
+      | undefined;
     featuredCreators: Array<{
       __typename?: "Creator";
       id: string;
-      firstName?: Maybe<string>;
-      lastName?: Maybe<string>;
+      firstName?: string | null | undefined;
+      lastName?: string | null | undefined;
     }>;
-    publisher?: Maybe<{ __typename?: "Publisher"; id: string; name: string }>;
-    series?: Maybe<{ __typename?: "Series"; id: string; name: string }>;
+    publisher?:
+      | { __typename?: "Publisher"; id: string; name: string }
+      | null
+      | undefined;
+    series?:
+      | { __typename?: "Series"; id: string; name: string }
+      | null
+      | undefined;
     updatedBy: { __typename?: "User"; id: string; username: string };
   };
 };
 
 export type BooksQueryVariables = Exact<{
-  limit?: Maybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
 }>;
 
 export type BooksQuery = {
   __typename?: "Query";
   books: {
     __typename?: "BookConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Book";
-          id: string;
-          displayName: string;
-          format?: Maybe<string>;
-          issue?: Maybe<string>;
-          pageCount?: Maybe<string>;
-          publicationDate?: Maybe<string>;
-          price?: Maybe<string>;
-          seriesName?: Maybe<string>;
-          coverImage?: Maybe<{ __typename?: "Image"; url: string }>;
-          credits?: Maybe<
-            Array<{
-              __typename?: "Credit";
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Book";
               id: string;
-              featured: boolean;
-              position?: Maybe<number>;
-              creator: {
-                __typename?: "Creator";
-                id: string;
-                displayName?: Maybe<string>;
-              };
-            }>
-          >;
-          publisher?: Maybe<{
-            __typename?: "Publisher";
-            id: string;
-            name: string;
-          }>;
-        }>
-      >
-    >;
+              displayName: string;
+              format?: string | null | undefined;
+              issue?: string | null | undefined;
+              pageCount?: string | null | undefined;
+              publicationDate?: string | null | undefined;
+              price?: string | null | undefined;
+              seriesName?: string | null | undefined;
+              coverImage?:
+                | { __typename?: "Image"; url: string }
+                | null
+                | undefined;
+              credits?:
+                | Array<{
+                    __typename?: "Credit";
+                    id: string;
+                    featured: boolean;
+                    position?: number | null | undefined;
+                    creator: {
+                      __typename?: "Creator";
+                      id: string;
+                      displayName?: string | null | undefined;
+                    };
+                  }>
+                | null
+                | undefined;
+              publisher?:
+                | { __typename?: "Publisher"; id: string; name: string }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
 export type CreateBookMutationVariables = Exact<{
-  ageRating?: Maybe<Scalars["String"]>;
-  alternateTitle?: Maybe<Scalars["String"]>;
+  ageRating?: InputMaybe<Scalars["String"]>;
+  alternateTitle?: InputMaybe<Scalars["String"]>;
   credits: Array<CreditInput> | CreditInput;
   format: Scalars["String"];
   issue: Scalars["String"];
-  pageCount?: Maybe<Scalars["String"]>;
-  price?: Maybe<Scalars["String"]>;
-  publicationDate?: Maybe<Scalars["String"]>;
+  pageCount?: InputMaybe<Scalars["String"]>;
+  price?: InputMaybe<Scalars["String"]>;
+  publicationDate?: InputMaybe<Scalars["String"]>;
   seriesId: Scalars["ID"];
-  summary?: Maybe<Scalars["String"]>;
+  summary?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type CreateBookMutation = {
   __typename?: "Mutation";
-  createBook?: Maybe<{
-    __typename?: "Book";
-    id: string;
-    ageRating?: Maybe<string>;
-    alternateTitle?: Maybe<string>;
-    displayName: string;
-    format?: Maybe<string>;
-    issue?: Maybe<string>;
-    pageCount?: Maybe<string>;
-    price?: Maybe<string>;
-    publicationDate?: Maybe<string>;
-    summary?: Maybe<string>;
-    series?: Maybe<{ __typename?: "Series"; id: string }>;
-  }>;
+  createBook?:
+    | {
+        __typename?: "Book";
+        id: string;
+        ageRating?: string | null | undefined;
+        alternateTitle?: string | null | undefined;
+        displayName: string;
+        format?: string | null | undefined;
+        issue?: string | null | undefined;
+        pageCount?: string | null | undefined;
+        price?: string | null | undefined;
+        publicationDate?: string | null | undefined;
+        summary?: string | null | undefined;
+        series?: { __typename?: "Series"; id: string } | null | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export type RankedBookListQueryVariables = Exact<{
-  limit?: Maybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
   field: Scalars["String"];
   direction: SortDirectionEnum;
 }>;
@@ -729,64 +760,71 @@ export type RankedBookListQuery = {
   __typename?: "Query";
   books: {
     __typename?: "BookConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Book";
-          id: string;
-          displayName: string;
-          publicationDate?: Maybe<string>;
-          publisherName?: Maybe<string>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Book";
+              id: string;
+              displayName: string;
+              publicationDate?: string | null | undefined;
+              publisherName?: string | null | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
 export type UpdateBookMutationVariables = Exact<{
   id: Scalars["ID"];
-  ageRating?: Maybe<Scalars["String"]>;
-  alternateTitle?: Maybe<Scalars["String"]>;
-  credits: Array<Maybe<CreditInput>> | Maybe<CreditInput>;
+  ageRating?: InputMaybe<Scalars["String"]>;
+  alternateTitle?: InputMaybe<Scalars["String"]>;
+  credits: Array<InputMaybe<CreditInput>> | InputMaybe<CreditInput>;
   format: Scalars["String"];
   issue: Scalars["String"];
-  pageCount?: Maybe<Scalars["String"]>;
-  price?: Maybe<Scalars["String"]>;
-  publicationDate?: Maybe<Scalars["String"]>;
+  pageCount?: InputMaybe<Scalars["String"]>;
+  price?: InputMaybe<Scalars["String"]>;
+  publicationDate?: InputMaybe<Scalars["String"]>;
   seriesId: Scalars["ID"];
-  summary?: Maybe<Scalars["String"]>;
+  summary?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type UpdateBookMutation = {
   __typename?: "Mutation";
-  updateBook?: Maybe<{
-    __typename?: "Book";
-    id: string;
-    ageRating?: Maybe<string>;
-    alternateTitle?: Maybe<string>;
-    displayName: string;
-    format?: Maybe<string>;
-    issue?: Maybe<string>;
-    pageCount?: Maybe<string>;
-    price?: Maybe<string>;
-    publicationDate?: Maybe<string>;
-    summary?: Maybe<string>;
-    credits?: Maybe<
-      Array<{
-        __typename?: "Credit";
+  updateBook?:
+    | {
+        __typename?: "Book";
         id: string;
-        featured: boolean;
-        position?: Maybe<number>;
-        role: string;
-        creator: {
-          __typename?: "Creator";
-          firstName?: Maybe<string>;
-          lastName?: Maybe<string>;
-        };
-      }>
-    >;
-    series?: Maybe<{ __typename?: "Series"; id: string }>;
-  }>;
+        ageRating?: string | null | undefined;
+        alternateTitle?: string | null | undefined;
+        displayName: string;
+        format?: string | null | undefined;
+        issue?: string | null | undefined;
+        pageCount?: string | null | undefined;
+        price?: string | null | undefined;
+        publicationDate?: string | null | undefined;
+        summary?: string | null | undefined;
+        credits?:
+          | Array<{
+              __typename?: "Credit";
+              id: string;
+              featured: boolean;
+              position?: number | null | undefined;
+              role: string;
+              creator: {
+                __typename?: "Creator";
+                firstName?: string | null | undefined;
+                lastName?: string | null | undefined;
+              };
+            }>
+          | null
+          | undefined;
+        series?: { __typename?: "Series"; id: string } | null | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export type UpdateCreditsMutationVariables = Exact<{
@@ -796,22 +834,23 @@ export type UpdateCreditsMutationVariables = Exact<{
 
 export type UpdateCreditsMutation = {
   __typename?: "Mutation";
-  updateCredits?: Maybe<
-    Array<{
-      __typename?: "Credit";
-      id: string;
-      createdAt: any;
-      featured: boolean;
-      position?: Maybe<number>;
-      role: string;
-      updatedAt: any;
-      creator: {
-        __typename?: "Creator";
+  updateCredits?:
+    | Array<{
+        __typename?: "Credit";
         id: string;
-        displayName?: Maybe<string>;
-      };
-    }>
-  >;
+        createdAt: any;
+        featured: boolean;
+        position?: number | null | undefined;
+        role: string;
+        updatedAt: any;
+        creator: {
+          __typename?: "Creator";
+          id: string;
+          displayName?: string | null | undefined;
+        };
+      }>
+    | null
+    | undefined;
 };
 
 export type CreateCreatorMutationVariables = Exact<{
@@ -821,12 +860,15 @@ export type CreateCreatorMutationVariables = Exact<{
 
 export type CreateCreatorMutation = {
   __typename?: "Mutation";
-  createCreator?: Maybe<{
-    __typename?: "Creator";
-    id: string;
-    firstName?: Maybe<string>;
-    lastName?: Maybe<string>;
-  }>;
+  createCreator?:
+    | {
+        __typename?: "Creator";
+        id: string;
+        firstName?: string | null | undefined;
+        lastName?: string | null | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export type CreatorQueryVariables = Exact<{
@@ -838,8 +880,8 @@ export type CreatorQuery = {
   creator: {
     __typename?: "Creator";
     id: string;
-    firstName?: Maybe<string>;
-    lastName?: Maybe<string>;
+    firstName?: string | null | undefined;
+    lastName?: string | null | undefined;
     createdAt: any;
     updatedAt: any;
     credits: Array<{
@@ -852,24 +894,27 @@ export type CreatorQuery = {
 };
 
 export type CreatorsSearchQueryVariables = Exact<{
-  search?: Maybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type CreatorsSearchQuery = {
   __typename?: "Query";
   creators: {
     __typename?: "CreatorConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Creator";
-          id: string;
-          displayName?: Maybe<string>;
-          firstName?: Maybe<string>;
-          lastName?: Maybe<string>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Creator";
+              id: string;
+              displayName?: string | null | undefined;
+              firstName?: string | null | undefined;
+              lastName?: string | null | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
@@ -879,18 +924,21 @@ export type CreatorsQuery = {
   __typename?: "Query";
   creators: {
     __typename?: "CreatorConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Creator";
-          id: string;
-          createdAt: any;
-          firstName?: Maybe<string>;
-          lastName?: Maybe<string>;
-          roles: Array<string>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Creator";
+              id: string;
+              createdAt: any;
+              firstName?: string | null | undefined;
+              lastName?: string | null | undefined;
+              roles: Array<string>;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
@@ -901,7 +949,7 @@ export type CreditRolesQuery = {
   creditRoles: Array<{
     __typename?: "CreditRole";
     id: string;
-    name?: Maybe<string>;
+    name?: string | null | undefined;
     createdAt: any;
     updatedAt: any;
   }>;
@@ -913,13 +961,16 @@ export type CreatePublisherMutationVariables = Exact<{
 
 export type CreatePublisherMutation = {
   __typename?: "Mutation";
-  createPublisher?: Maybe<{
-    __typename?: "Publisher";
-    id: string;
-    name: string;
-    createdAt: any;
-    updatedAt: any;
-  }>;
+  createPublisher?:
+    | {
+        __typename?: "Publisher";
+        id: string;
+        name: string;
+        createdAt: any;
+        updatedAt: any;
+      }
+    | null
+    | undefined;
 };
 
 export type PublisherQueryVariables = Exact<{
@@ -934,38 +985,41 @@ export type PublisherQuery = {
     createdAt: any;
     name: string;
     updatedAt: any;
-    logo?: Maybe<{ __typename?: "Image"; url: string }>;
+    logo?: { __typename?: "Image"; url: string } | null | undefined;
     series: Array<{ __typename?: "Series"; id: string; name: string }>;
   };
 };
 
 export type PublishersQueryVariables = Exact<{
-  field?: Maybe<Scalars["String"]>;
-  direction?: Maybe<SortDirectionEnum>;
-  limit?: Maybe<Scalars["Int"]>;
+  field?: InputMaybe<Scalars["String"]>;
+  direction?: InputMaybe<SortDirectionEnum>;
+  limit?: InputMaybe<Scalars["Int"]>;
 }>;
 
 export type PublishersQuery = {
   __typename?: "Query";
   publishers: {
     __typename?: "PublisherConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Publisher";
-          id: string;
-          name: string;
-          seriesCount: number;
-          logo?: Maybe<{ __typename?: "Image"; url: string }>;
-          series: Array<{ __typename?: "Series"; name: string }>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Publisher";
+              id: string;
+              name: string;
+              seriesCount: number;
+              logo?: { __typename?: "Image"; url: string } | null | undefined;
+              series: Array<{ __typename?: "Series"; name: string }>;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
 export type RankedPublisherListQueryVariables = Exact<{
-  limit?: Maybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
   field: Scalars["String"];
   direction: SortDirectionEnum;
 }>;
@@ -974,16 +1028,19 @@ export type RankedPublisherListQuery = {
   __typename?: "Query";
   publishers: {
     __typename?: "PublisherConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Publisher";
-          id: string;
-          name: string;
-          seriesCount: number;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Publisher";
+              id: string;
+              name: string;
+              seriesCount: number;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
@@ -994,20 +1051,26 @@ export type UpdatePublisherMutationVariables = Exact<{
 
 export type UpdatePublisherMutation = {
   __typename?: "Mutation";
-  updatePublisher?: Maybe<{
-    __typename?: "UpdatePublisherPayload";
-    publisher?: Maybe<{
-      __typename?: "Publisher";
-      id: string;
-      name: string;
-      updatedAt: any;
-    }>;
-    errors: Array<{
-      __typename?: "UserError";
-      path?: Maybe<Array<string>>;
-      message: string;
-    }>;
-  }>;
+  updatePublisher?:
+    | {
+        __typename?: "UpdatePublisherPayload";
+        publisher?:
+          | {
+              __typename?: "Publisher";
+              id: string;
+              name: string;
+              updatedAt: any;
+            }
+          | null
+          | undefined;
+        errors: Array<{
+          __typename?: "UserError";
+          path?: Array<string> | null | undefined;
+          message: string;
+        }>;
+      }
+    | null
+    | undefined;
 };
 
 export type CreateSeriesMutationVariables = Exact<{
@@ -1017,17 +1080,20 @@ export type CreateSeriesMutationVariables = Exact<{
 
 export type CreateSeriesMutation = {
   __typename?: "Mutation";
-  createSeries?: Maybe<{
-    __typename?: "Series";
-    id: string;
-    name: string;
-    createdAt: any;
-    updatedAt: any;
-  }>;
+  createSeries?:
+    | {
+        __typename?: "Series";
+        id: string;
+        name: string;
+        createdAt: any;
+        updatedAt: any;
+      }
+    | null
+    | undefined;
 };
 
 export type RankedSeriesListQueryVariables = Exact<{
-  limit?: Maybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars["Int"]>;
   field: Scalars["String"];
   direction: SortDirectionEnum;
 }>;
@@ -1036,42 +1102,48 @@ export type RankedSeriesListQuery = {
   __typename?: "Query";
   seriesList: {
     __typename?: "SeriesConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Series";
-          id: string;
-          name: string;
-          publisherName?: Maybe<string>;
-          bookCount: number;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Series";
+              id: string;
+              name: string;
+              publisherName?: string | null | undefined;
+              bookCount: number;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
 export type SeriesListQueryVariables = Exact<{
-  field?: Maybe<Scalars["String"]>;
-  direction?: Maybe<SortDirectionEnum>;
-  limit?: Maybe<Scalars["Int"]>;
+  field?: InputMaybe<Scalars["String"]>;
+  direction?: InputMaybe<SortDirectionEnum>;
+  limit?: InputMaybe<Scalars["Int"]>;
 }>;
 
 export type SeriesListQuery = {
   __typename?: "Query";
   seriesList: {
     __typename?: "SeriesConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "Series";
-          bookCount: number;
-          id: string;
-          name: string;
-          publisherName?: Maybe<string>;
-          logo?: Maybe<{ __typename?: "Image"; url: string }>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Series";
+              bookCount: number;
+              id: string;
+              name: string;
+              publisherName?: string | null | undefined;
+              logo?: { __typename?: "Image"; url: string } | null | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 
@@ -1086,29 +1158,31 @@ export type SeriesQuery = {
     id: string;
     name: string;
     createdAt: any;
-    publisherName?: Maybe<string>;
+    publisherName?: string | null | undefined;
     updatedAt: any;
-    books?: Maybe<
-      Array<{
-        __typename?: "Book";
-        id: string;
-        format?: Maybe<string>;
-        issue?: Maybe<string>;
-        price?: Maybe<string>;
-        publicationDate?: Maybe<string>;
-        pageCount?: Maybe<string>;
-        displayName: string;
-        credits?: Maybe<
-          Array<{
-            __typename?: "Credit";
-            id: string;
-            creatorName?: Maybe<string>;
-            role: string;
-          }>
-        >;
-      }>
-    >;
-    logo?: Maybe<{ __typename?: "Image"; url: string }>;
+    books?:
+      | Array<{
+          __typename?: "Book";
+          id: string;
+          format?: string | null | undefined;
+          issue?: string | null | undefined;
+          price?: string | null | undefined;
+          publicationDate?: string | null | undefined;
+          pageCount?: string | null | undefined;
+          displayName: string;
+          credits?:
+            | Array<{
+                __typename?: "Credit";
+                id: string;
+                creatorName?: string | null | undefined;
+                role: string;
+              }>
+            | null
+            | undefined;
+        }>
+      | null
+      | undefined;
+    logo?: { __typename?: "Image"; url: string } | null | undefined;
   };
 };
 
@@ -1136,18 +1210,21 @@ export type UsersQuery = {
   __typename?: "Query";
   users: {
     __typename?: "UserConnection";
-    nodes?: Maybe<
-      Array<
-        Maybe<{
-          __typename?: "User";
-          id: string;
-          avatar: string;
-          email: string;
-          roles: Array<string>;
-          username: string;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "User";
+              id: string;
+              avatar: string;
+              email: string;
+              roles: Array<string>;
+              username: string;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 

@@ -11,19 +11,25 @@ export type RegisterMutationVariables = Types.Exact<{
 
 export type RegisterMutation = {
   __typename?: "Mutation";
-  register?: Types.Maybe<{
-    __typename?: "AuthenticationResult";
-    accessToken: string;
-    refreshToken: string;
-    me?: Types.Maybe<{
-      __typename?: "User";
-      id: string;
-      avatar: string;
-      email: string;
-      roles: Array<string>;
-      username: string;
-    }>;
-  }>;
+  register?:
+    | {
+        __typename?: "AuthenticationResult";
+        accessToken: string;
+        refreshToken: string;
+        me?:
+          | {
+              __typename?: "User";
+              id: string;
+              avatar: string;
+              email: string;
+              roles: Array<string>;
+              username: string;
+            }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export const RegisterDocument = gql`

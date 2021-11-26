@@ -10,7 +10,7 @@ export type CreditRolesQuery = {
   creditRoles: Array<{
     __typename?: "CreditRole";
     id: string;
-    name?: Types.Maybe<string>;
+    name?: string | null | undefined;
     createdAt: any;
     updatedAt: any;
   }>;

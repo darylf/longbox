@@ -86,16 +86,14 @@ const PublisherForm = ({
               {errors.name && errors.name.message}
             </FormErrorMessage>
           </FormControl>
-          {showSubmitButton && (
-            <Button
-              mt={4}
-              colorScheme="teal"
-              isLoading={isSubmitting}
-              type="submit"
-            >
-              Submit
-            </Button>
-          )}
+          <Button
+            mt={4}
+            colorScheme="teal"
+            isLoading={isSubmitting}
+            type="submit"
+          >
+            Submit
+          </Button>
         </Stack>
       </form>
     </>

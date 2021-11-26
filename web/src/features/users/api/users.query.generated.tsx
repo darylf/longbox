@@ -9,18 +9,21 @@ export type UsersQuery = {
   __typename?: "Query";
   users: {
     __typename?: "UserConnection";
-    nodes?: Types.Maybe<
-      Array<
-        Types.Maybe<{
-          __typename?: "User";
-          id: string;
-          avatar: string;
-          email: string;
-          roles: Array<string>;
-          username: string;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "User";
+              id: string;
+              avatar: string;
+              email: string;
+              roles: Array<string>;
+              username: string;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 

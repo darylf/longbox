@@ -9,18 +9,21 @@ export type CreatorsQuery = {
   __typename?: "Query";
   creators: {
     __typename?: "CreatorConnection";
-    nodes?: Types.Maybe<
-      Array<
-        Types.Maybe<{
-          __typename?: "Creator";
-          id: string;
-          createdAt: any;
-          firstName?: Types.Maybe<string>;
-          lastName?: Types.Maybe<string>;
-          roles: Array<string>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Creator";
+              id: string;
+              createdAt: any;
+              firstName?: string | null | undefined;
+              lastName?: string | null | undefined;
+              roles: Array<string>;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 

@@ -9,13 +9,16 @@ export type CreatePublisherMutationVariables = Types.Exact<{
 
 export type CreatePublisherMutation = {
   __typename?: "Mutation";
-  createPublisher?: Types.Maybe<{
-    __typename?: "Publisher";
-    id: string;
-    name: string;
-    createdAt: any;
-    updatedAt: any;
-  }>;
+  createPublisher?:
+    | {
+        __typename?: "Publisher";
+        id: string;
+        name: string;
+        createdAt: any;
+        updatedAt: any;
+      }
+    | null
+    | undefined;
 };
 
 export const CreatePublisherDocument = gql`

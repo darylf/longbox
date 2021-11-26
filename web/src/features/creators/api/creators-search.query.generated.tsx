@@ -4,24 +4,27 @@ import * as Types from "../../../types";
 
 const defaultOptions = {};
 export type CreatorsSearchQueryVariables = Types.Exact<{
-  search?: Types.Maybe<Types.Scalars["String"]>;
+  search?: Types.InputMaybe<Types.Scalars["String"]>;
 }>;
 
 export type CreatorsSearchQuery = {
   __typename?: "Query";
   creators: {
     __typename?: "CreatorConnection";
-    nodes?: Types.Maybe<
-      Array<
-        Types.Maybe<{
-          __typename?: "Creator";
-          id: string;
-          displayName?: Types.Maybe<string>;
-          firstName?: Types.Maybe<string>;
-          lastName?: Types.Maybe<string>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Creator";
+              id: string;
+              displayName?: string | null | undefined;
+              firstName?: string | null | undefined;
+              lastName?: string | null | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 

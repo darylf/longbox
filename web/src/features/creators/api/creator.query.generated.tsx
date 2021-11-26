@@ -12,8 +12,8 @@ export type CreatorQuery = {
   creator: {
     __typename?: "Creator";
     id: string;
-    firstName?: Types.Maybe<string>;
-    lastName?: Types.Maybe<string>;
+    firstName?: string | null | undefined;
+    lastName?: string | null | undefined;
     createdAt: any;
     updatedAt: any;
     credits: Array<{

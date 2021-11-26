@@ -4,27 +4,30 @@ import * as Types from "../../../types";
 
 const defaultOptions = {};
 export type SeriesListQueryVariables = Types.Exact<{
-  field?: Types.Maybe<Types.Scalars["String"]>;
-  direction?: Types.Maybe<Types.SortDirectionEnum>;
-  limit?: Types.Maybe<Types.Scalars["Int"]>;
+  field?: Types.InputMaybe<Types.Scalars["String"]>;
+  direction?: Types.InputMaybe<Types.SortDirectionEnum>;
+  limit?: Types.InputMaybe<Types.Scalars["Int"]>;
 }>;
 
 export type SeriesListQuery = {
   __typename?: "Query";
   seriesList: {
     __typename?: "SeriesConnection";
-    nodes?: Types.Maybe<
-      Array<
-        Types.Maybe<{
-          __typename?: "Series";
-          bookCount: number;
-          id: string;
-          name: string;
-          publisherName?: Types.Maybe<string>;
-          logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
-        }>
-      >
-    >;
+    nodes?:
+      | Array<
+          | {
+              __typename?: "Series";
+              bookCount: number;
+              id: string;
+              name: string;
+              publisherName?: string | null | undefined;
+              logo?: { __typename?: "Image"; url: string } | null | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   };
 };
 

@@ -4,34 +4,37 @@ import * as Types from "../../../types";
 
 const defaultOptions = {};
 export type CreateBookMutationVariables = Types.Exact<{
-  ageRating?: Types.Maybe<Types.Scalars["String"]>;
-  alternateTitle?: Types.Maybe<Types.Scalars["String"]>;
+  ageRating?: Types.InputMaybe<Types.Scalars["String"]>;
+  alternateTitle?: Types.InputMaybe<Types.Scalars["String"]>;
   credits: Array<Types.CreditInput> | Types.CreditInput;
   format: Types.Scalars["String"];
   issue: Types.Scalars["String"];
-  pageCount?: Types.Maybe<Types.Scalars["String"]>;
-  price?: Types.Maybe<Types.Scalars["String"]>;
-  publicationDate?: Types.Maybe<Types.Scalars["String"]>;
+  pageCount?: Types.InputMaybe<Types.Scalars["String"]>;
+  price?: Types.InputMaybe<Types.Scalars["String"]>;
+  publicationDate?: Types.InputMaybe<Types.Scalars["String"]>;
   seriesId: Types.Scalars["ID"];
-  summary?: Types.Maybe<Types.Scalars["String"]>;
+  summary?: Types.InputMaybe<Types.Scalars["String"]>;
 }>;
 
 export type CreateBookMutation = {
   __typename?: "Mutation";
-  createBook?: Types.Maybe<{
-    __typename?: "Book";
-    id: string;
-    ageRating?: Types.Maybe<string>;
-    alternateTitle?: Types.Maybe<string>;
-    displayName: string;
-    format?: Types.Maybe<string>;
-    issue?: Types.Maybe<string>;
-    pageCount?: Types.Maybe<string>;
-    price?: Types.Maybe<string>;
-    publicationDate?: Types.Maybe<string>;
-    summary?: Types.Maybe<string>;
-    series?: Types.Maybe<{ __typename?: "Series"; id: string }>;
-  }>;
+  createBook?:
+    | {
+        __typename?: "Book";
+        id: string;
+        ageRating?: string | null | undefined;
+        alternateTitle?: string | null | undefined;
+        displayName: string;
+        format?: string | null | undefined;
+        issue?: string | null | undefined;
+        pageCount?: string | null | undefined;
+        price?: string | null | undefined;
+        publicationDate?: string | null | undefined;
+        summary?: string | null | undefined;
+        series?: { __typename?: "Series"; id: string } | null | undefined;
+      }
+    | null
+    | undefined;
 };
 
 export const CreateBookDocument = gql`

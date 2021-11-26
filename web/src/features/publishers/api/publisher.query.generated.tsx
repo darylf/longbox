@@ -15,7 +15,7 @@ export type PublisherQuery = {
     createdAt: any;
     name: string;
     updatedAt: any;
-    logo?: Types.Maybe<{ __typename?: "Image"; url: string }>;
+    logo?: { __typename?: "Image"; url: string } | null | undefined;
     series: Array<{ __typename?: "Series"; id: string; name: string }>;
   };
 };

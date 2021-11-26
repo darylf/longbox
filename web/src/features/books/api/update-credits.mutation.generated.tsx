@@ -10,22 +10,23 @@ export type UpdateCreditsMutationVariables = Types.Exact<{
 
 export type UpdateCreditsMutation = {
   __typename?: "Mutation";
-  updateCredits?: Types.Maybe<
-    Array<{
-      __typename?: "Credit";
-      id: string;
-      createdAt: any;
-      featured: boolean;
-      position?: Types.Maybe<number>;
-      role: string;
-      updatedAt: any;
-      creator: {
-        __typename?: "Creator";
+  updateCredits?:
+    | Array<{
+        __typename?: "Credit";
         id: string;
-        displayName?: Types.Maybe<string>;
-      };
-    }>
-  >;
+        createdAt: any;
+        featured: boolean;
+        position?: number | null | undefined;
+        role: string;
+        updatedAt: any;
+        creator: {
+          __typename?: "Creator";
+          id: string;
+          displayName?: string | null | undefined;
+        };
+      }>
+    | null
+    | undefined;
 };
 
 export const UpdateCreditsDocument = gql`

@@ -10,20 +10,26 @@ export type UpdatePublisherMutationVariables = Types.Exact<{
 
 export type UpdatePublisherMutation = {
   __typename?: "Mutation";
-  updatePublisher?: Types.Maybe<{
-    __typename?: "UpdatePublisherPayload";
-    publisher?: Types.Maybe<{
-      __typename?: "Publisher";
-      id: string;
-      name: string;
-      updatedAt: any;
-    }>;
-    errors: Array<{
-      __typename?: "UserError";
-      path?: Types.Maybe<Array<string>>;
-      message: string;
-    }>;
-  }>;
+  updatePublisher?:
+    | {
+        __typename?: "UpdatePublisherPayload";
+        publisher?:
+          | {
+              __typename?: "Publisher";
+              id: string;
+              name: string;
+              updatedAt: any;
+            }
+          | null
+          | undefined;
+        errors: Array<{
+          __typename?: "UserError";
+          path?: Array<string> | null | undefined;
+          message: string;
+        }>;
+      }
+    | null
+    | undefined;
 };
 
 export const UpdatePublisherDocument = gql`

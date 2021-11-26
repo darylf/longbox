@@ -1,5 +1,5 @@
 import { Box, Heading, Stack } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import FormDrawer from "../../../components/FormDrawer";
 import { Head } from "../../../components/Head";
 import ProtectedContent from "../../auth/components/ProtectedContent";
@@ -9,6 +9,10 @@ import { PublisherList } from "../components/PublishersList";
 const formHtmlId = "publisher-form";
 
 export const Publishers = (): React.ReactElement => {
+  const [isOpen, setIsOpen] = useState(false);
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+
   return (
     <>
       <Head title="All Publishers" />
@@ -16,7 +20,13 @@ export const Publishers = (): React.ReactElement => {
         <Stack>
           <Heading>Publishers</Heading>
           <ProtectedContent>
-            <FormDrawer id={formHtmlId} openButtonText="Create Publisher">
+            <FormDrawer
+              id={formHtmlId}
+              isOpen={isOpen}
+              onOpen={open}
+              onClose={close}
+              openButtonText="Create Publisher"
+            >
               <PublisherForm htmlId={formHtmlId} />
             </FormDrawer>
           </ProtectedContent>
