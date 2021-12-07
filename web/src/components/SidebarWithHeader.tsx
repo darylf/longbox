@@ -20,11 +20,14 @@ import { FiChevronDown as ChevronDownIcon } from "react-icons/fi";
 import { GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
 import { UserActions } from "../features/auth/components/UserDropDownMenu";
 
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 interface NavItem {
   label: string;
   children?: Array<NavItem>;
-  url?: string;
+  url: string | undefined;
 }
+/* eslint-enable react/no-unused-prop-types */
 
 const NAV_ITEMS: Array<NavItem> = [
   {
@@ -33,6 +36,7 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Explore",
+    url: undefined,
     children: [
       {
         label: "Browse Publishers",
@@ -57,6 +61,7 @@ const NAV_ITEMS: Array<NavItem> = [
     url: "/about",
   },
 ];
+/* eslint-enable react/require-default-props */
 
 const DesktopSubNav = ({ label, url }: NavItem) => {
   return (
