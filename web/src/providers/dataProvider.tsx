@@ -34,10 +34,10 @@ const client = new ApolloClient({
   link: concat(authMiddleware, httpLink),
 });
 
-const DataProvider = ({ children }: Props): ReactElement => (
-  <ApolloProvider client={client}>{children}</ApolloProvider>
-);
+const DataProvider = function ({ children }: Props): ReactElement {
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
 
-DataProvider.defaultProps = { children: <></> };
+DataProvider.defaultProps = { children: null };
 
 export default DataProvider;

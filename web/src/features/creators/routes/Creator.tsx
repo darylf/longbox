@@ -5,7 +5,7 @@ import { Creator as CreatorObj } from "../../../types";
 import { useCreatorQuery } from "../api/creator.query.generated";
 import ShowCreator from "../components/ShowCreator";
 
-function Creator(): React.ReactElement {
+const Creator = function (): React.ReactElement {
   const { id } = useParams();
   const creatorId = id ?? "";
   const { data, loading, error } = useCreatorQuery({
@@ -23,6 +23,6 @@ function Creator(): React.ReactElement {
       <ShowCreator creator={creator} />
     </>
   );
-}
+};
 
 export default Creator;

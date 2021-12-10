@@ -10,7 +10,7 @@ import SeriesForm from "../../series/components/SeriesForm";
 import { usePublisherQuery } from "../api/publisher.query.generated";
 import { ViewPublisher } from "../components/ViewPublisher";
 
-export const Publisher = (): React.ReactElement => {
+export const Publisher = function (): React.ReactElement {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const open = () => setIsOpen(true);

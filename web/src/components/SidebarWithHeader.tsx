@@ -63,7 +63,7 @@ const NAV_ITEMS: Array<NavItem> = [
 ];
 /* eslint-enable react/require-default-props */
 
-const DesktopSubNav = ({ label, url }: NavItem) => {
+const DesktopSubNav = function ({ label, url }: NavItem) {
   return (
     <Link
       href={url}
@@ -88,7 +88,7 @@ const DesktopSubNav = ({ label, url }: NavItem) => {
   );
 };
 
-const DesktopNav = () => {
+const DesktopNav = function () {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
@@ -144,7 +144,7 @@ const DesktopNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, url }: NavItem) => {
+const MobileNavItem = function ({ label, children, url }: NavItem) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -198,7 +198,7 @@ const MobileNavItem = ({ label, children, url }: NavItem) => {
   );
 };
 
-const MobileNav = () => {
+const MobileNav = function () {
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}

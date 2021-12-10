@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Creator from "./Creator";
 import Creators from "./Creators";
 
-export const CreatorsRoutes = (): ReactElement => {
+export const CreatorsRoutes = function (): ReactElement {
   return (
     <Routes>
       <Route path="" element={<Creators />} />

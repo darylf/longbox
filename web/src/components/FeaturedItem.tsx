@@ -9,7 +9,7 @@ interface FeaturedItemProps<T> {
   children: (item: T) => React.ReactNode;
   items: T[];
 }
-function FeaturedItem<T>({
+const FeaturedItem = function <T>({
   children,
   items,
   moreLinkText,
@@ -23,6 +23,6 @@ function FeaturedItem<T>({
       <Link to={moreLinkUrl}>{moreLinkText}</Link>
     </Box>
   );
-}
+};
 
 export default FeaturedItem;

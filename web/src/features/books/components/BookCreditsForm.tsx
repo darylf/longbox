@@ -22,7 +22,7 @@ interface BookCreditsFormProps {
   credits: Array<Credit>;
 }
 
-function BookCreditsForm({
+const BookCreditsForm = function ({
   bookId: bookIdParam,
   credits,
 }: BookCreditsFormProps): React.ReactElement {
@@ -174,6 +174,6 @@ function BookCreditsForm({
     </form>
   );
   /* eslint-enable react/jsx-props-no-spreading */
-}
+};
 
 export default BookCreditsForm;

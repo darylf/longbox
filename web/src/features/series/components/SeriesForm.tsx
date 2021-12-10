@@ -26,7 +26,7 @@ interface SeriesFormProps {
   showSubmitButton?: boolean;
 }
 
-function SeriesForm({
+const SeriesForm = function ({
   id,
   selectedPublisher,
   showSubmitButton,
@@ -73,47 +73,45 @@ function SeriesForm({
   });
 
   return (
-    <>
-      <form id={id} onSubmit={onSubmit}>
-        <Stack>
-          <Heading>Add Series</Heading>
-          {alert && (
-            <Box sx={{ mb: 2 }}>
-              <Alert severity="error">{alert}</Alert>
-            </Box>
-          )}
+    <form id={id} onSubmit={onSubmit}>
+      <Stack>
+        <Heading>Add Series</Heading>
+        {alert && (
+          <Box sx={{ mb: 2 }}>
+            <Alert severity="error">{alert}</Alert>
+          </Box>
+        )}
 
-          <FormControl isDisabled>
-            <FormLabel htmlFor="publisherId">Publisher</FormLabel>
-            <Input id="publisherId" value={selectedPublisher.name} />
-          </FormControl>
+        <FormControl isDisabled>
+          <FormLabel htmlFor="publisherId">Publisher</FormLabel>
+          <Input id="publisherId" value={selectedPublisher.name} />
+        </FormControl>
 
-          <FormControl isInvalid={errors.name !== undefined}>
-            <FormLabel htmlFor="name">Name</FormLabel>
-            <Input
-              id="name"
-              onBlur={nameField.onBlur}
-              onChange={nameField.onChange}
-              name={nameField.name}
-              ref={nameField.ref}
-            />
-            <FormErrorMessage>
-              {errors.name && errors.name.message}
-            </FormErrorMessage>
-          </FormControl>
-          <Button
-            mt={4}
-            colorScheme="teal"
-            isLoading={isSubmitting}
-            type="submit"
-          >
-            Submit
-          </Button>
-        </Stack>
-      </form>
-    </>
+        <FormControl isInvalid={errors.name !== undefined}>
+          <FormLabel htmlFor="name">Name</FormLabel>
+          <Input
+            id="name"
+            onBlur={nameField.onBlur}
+            onChange={nameField.onChange}
+            name={nameField.name}
+            ref={nameField.ref}
+          />
+          <FormErrorMessage>
+            {errors.name && errors.name.message}
+          </FormErrorMessage>
+        </FormControl>
+        <Button
+          mt={4}
+          colorScheme="teal"
+          isLoading={isSubmitting}
+          type="submit"
+        >
+          Submit
+        </Button>
+      </Stack>
+    </form>
   );
-}
+};
 
 SeriesForm.defaultProps = {
   id: "series-form",

@@ -49,7 +49,7 @@ export default function HomePage(): ReactElement {
   const latestBooks = convertToArray<Book>(latestBooksResult.data?.books.nodes);
 
   const { data, loading, error } = useBooksQuery({ variables: { limit: 25 } });
-  let bookTable = <></>;
+  let bookTable = null;
   if (loading) {
     bookTable = <>Loading...</>;
   } else if (error) {

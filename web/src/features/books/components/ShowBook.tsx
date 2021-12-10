@@ -24,7 +24,7 @@ import UpdateBookForm from "./UpdateBookForm";
 interface Props {
   book: Book;
 }
-function ShowBook({ book }: Props): React.ReactElement {
+const ShowBook = function ({ book }: Props): React.ReactElement {
   const [isOpen, setIsOpen] = useState(false);
   const formHtmlId = "edit-book";
 
@@ -129,6 +129,6 @@ function ShowBook({ book }: Props): React.ReactElement {
       </ProtectedContent>
     </>
   );
-}
+};
 
 export default ShowBook;

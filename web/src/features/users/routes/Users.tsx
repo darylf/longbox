@@ -4,7 +4,7 @@ import { Head } from "../../../components/Head";
 import Link from "../../../components/Link";
 import { useUsersQuery } from "../api/users.query.generated";
 
-function UserList(): React.ReactElement {
+const UserList = function (): React.ReactElement {
   const { data, loading, error } = useUsersQuery();
 
   if (loading) return <div>Loading...</div>;
@@ -24,7 +24,7 @@ function UserList(): React.ReactElement {
       ))}
     </List>
   );
-}
+};
 
 export default function Users(): React.ReactElement {
   return (

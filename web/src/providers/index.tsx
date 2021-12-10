@@ -10,7 +10,7 @@ import DataProvider from "./dataProvider";
 import HeadProvider from "./headProvider";
 import StyleProvider from "./styleProvider";
 
-const ErrorFallback = () => {
+const ErrorFallback = function () {
   return (
     <div
       className="text-red-500 w-screen h-screen flex flex-col justify-center items-center"
@@ -31,7 +31,7 @@ type AppProviderProps = {
   children: ReactElement;
 };
 
-const AppProvider = ({ children }: AppProviderProps): ReactElement => {
+const AppProvider = function ({ children }: AppProviderProps): ReactElement {
   const initialLoginState = getInitialLoginState();
   return (
     <React.Suspense

@@ -21,7 +21,7 @@ function getSuggestions(searchValue: string, suggestions: Item[]): Item[] {
 }
 
 type Item = { id: string; name: string };
-const TestComponent2 = (): ReactElement => {
+const TestComponent2 = function (): ReactElement {
   const suggestions: Array<Item> = [
     { id: "1", name: "Creator" },
     { id: "2", name: "Author" },
@@ -32,6 +32,7 @@ const TestComponent2 = (): ReactElement => {
   >();
 
   return (
+    /* eslint-disable react/jsx-no-useless-fragment */
     <ControlledAutoSuggest
       suggestions={suggestions}
       renderSuggestion={(suggestion) => <>{suggestion.name}</>}
@@ -41,10 +42,11 @@ const TestComponent2 = (): ReactElement => {
       getSuggestions={getSuggestions}
       value={selectedSuggestion}
     />
+    /* eslint-enable react/jsx-no-useless-fragment */
   );
 };
 
-const TestComponent3 = (): ReactElement => {
+const TestComponent3 = function (): ReactElement | null {
   // const suggestions: Array<Creator> = [];
   // const [selectedSuggestion, setSelectedSuggestion] = useState<
   //   Creator | undefined
@@ -67,10 +69,10 @@ const TestComponent3 = (): ReactElement => {
   //     value={selectedSuggestion}
   //   />
   // );
-  return <></>;
+  return null;
 };
 
-const AdminPage = (): ReactElement => {
+const AdminPage = function (): ReactElement {
   const { authenticated } = useLoginState();
   if (!authenticated) {
     return (

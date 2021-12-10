@@ -20,7 +20,11 @@ import React, {
 } from "react";
 import { useLogin, useLoginState } from "../../../hooks/useAuthentication";
 
-export function ErrorMessage({ message }: { message: string }): ReactElement {
+export const ErrorMessage = function ({
+  message,
+}: {
+  message: string;
+}): ReactElement {
   return (
     <Box my={4}>
       <Alert status="error" borderRadius={4}>
@@ -29,9 +33,9 @@ export function ErrorMessage({ message }: { message: string }): ReactElement {
       </Alert>
     </Box>
   );
-}
+};
 
-export function LoginForm(): ReactElement {
+export const LoginForm = function (): ReactElement {
   const login = useLogin();
   const { loading } = useLoginState();
   const emailRef = useRef<HTMLInputElement>(null);
@@ -98,4 +102,4 @@ export function LoginForm(): ReactElement {
       </Box>
     </Flex>
   );
-}
+};

@@ -23,10 +23,10 @@ interface PublisherFormProps {
   showSubmitButton?: boolean;
 }
 
-const CreatorForm = ({
+const CreatorForm = function ({
   htmlId,
   showSubmitButton,
-}: PublisherFormProps): React.ReactElement => {
+}: PublisherFormProps): React.ReactElement {
   const [alert, setAlert] = useState<string>();
   const toast = useToast();
   const {
@@ -68,55 +68,53 @@ const CreatorForm = ({
   });
 
   return (
-    <>
-      <form id={htmlId} onSubmit={onSubmit}>
-        <Stack>
-          <Heading>Add Creator</Heading>
-          {alert && (
-            <Box sx={{ mb: 2 }}>
-              <Alert severity="error">{alert}</Alert>
-            </Box>
-          )}
+    <form id={htmlId} onSubmit={onSubmit}>
+      <Stack>
+        <Heading>Add Creator</Heading>
+        {alert && (
+          <Box sx={{ mb: 2 }}>
+            <Alert severity="error">{alert}</Alert>
+          </Box>
+        )}
 
-          <FormControl isInvalid={errors.firstName !== undefined}>
-            <FormLabel htmlFor="name">First Name</FormLabel>
-            <Input
-              id="name"
-              onBlur={firstNameField.onBlur}
-              onChange={firstNameField.onChange}
-              name={firstNameField.name}
-              ref={firstNameField.ref}
-            />
-            <FormErrorMessage>
-              {errors.firstName && errors.firstName.message}
-            </FormErrorMessage>
-          </FormControl>
+        <FormControl isInvalid={errors.firstName !== undefined}>
+          <FormLabel htmlFor="name">First Name</FormLabel>
+          <Input
+            id="name"
+            onBlur={firstNameField.onBlur}
+            onChange={firstNameField.onChange}
+            name={firstNameField.name}
+            ref={firstNameField.ref}
+          />
+          <FormErrorMessage>
+            {errors.firstName && errors.firstName.message}
+          </FormErrorMessage>
+        </FormControl>
 
-          <FormControl isInvalid={errors.lastName !== undefined}>
-            <FormLabel htmlFor="name">First Name</FormLabel>
-            <Input
-              id="name"
-              onBlur={lastNameField.onBlur}
-              onChange={lastNameField.onChange}
-              name={lastNameField.name}
-              ref={lastNameField.ref}
-            />
-            <FormErrorMessage>
-              {errors.lastName && errors.lastName.message}
-            </FormErrorMessage>
-          </FormControl>
+        <FormControl isInvalid={errors.lastName !== undefined}>
+          <FormLabel htmlFor="name">First Name</FormLabel>
+          <Input
+            id="name"
+            onBlur={lastNameField.onBlur}
+            onChange={lastNameField.onChange}
+            name={lastNameField.name}
+            ref={lastNameField.ref}
+          />
+          <FormErrorMessage>
+            {errors.lastName && errors.lastName.message}
+          </FormErrorMessage>
+        </FormControl>
 
-          <Button
-            mt={4}
-            colorScheme="teal"
-            isLoading={isSubmitting}
-            type="submit"
-          >
-            Save
-          </Button>
-        </Stack>
-      </form>
-    </>
+        <Button
+          mt={4}
+          colorScheme="teal"
+          isLoading={isSubmitting}
+          type="submit"
+        >
+          Save
+        </Button>
+      </Stack>
+    </form>
   );
 };
 

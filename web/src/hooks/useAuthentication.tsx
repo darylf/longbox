@@ -168,22 +168,24 @@ function useAuthenticationManager(initialLoginState: LoginState): {
 export const AuthenticationProvider: React.FunctionComponent<{
   initialLoginState: LoginState;
   children?: React.ReactNode;
-}> = ({
+}> = function ({
   initialLoginState,
   children,
 }: {
   initialLoginState: LoginState;
   children?: React.ReactNode;
-}) => (
-  <AuthenticationContext.Provider
-    value={useAuthenticationManager(initialLoginState)}
-  >
-    {children}
-  </AuthenticationContext.Provider>
-);
+}) {
+  return (
+    <AuthenticationContext.Provider
+      value={useAuthenticationManager(initialLoginState)}
+    >
+      {children}
+    </AuthenticationContext.Provider>
+  );
+};
 
 AuthenticationProvider.defaultProps = {
-  children: <></>,
+  children: null,
 };
 
 export const useLoginState = (): LoginState => {

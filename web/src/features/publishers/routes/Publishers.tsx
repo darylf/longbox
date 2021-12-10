@@ -8,7 +8,7 @@ import { PublisherList } from "../components/PublishersList";
 
 const formHtmlId = "publisher-form";
 
-export const Publishers = (): React.ReactElement => {
+export const Publishers = function (): React.ReactElement {
   const [isOpen, setIsOpen] = useState(false);
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);

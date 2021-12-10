@@ -5,7 +5,7 @@ import Link from "../../../components/Link";
 import { Series, SortDirectionEnum } from "../../../types";
 import { useSeriesListQuery } from "../api/series-list.query.generated";
 
-function FeaturedSeriesList() {
+const FeaturedSeriesList = function () {
   const { data, loading, error } = useSeriesListQuery({
     variables: {
       direction: SortDirectionEnum.Desc,
@@ -42,6 +42,6 @@ function FeaturedSeriesList() {
       )}
     </FeaturedItem>
   );
-}
+};
 
 export default FeaturedSeriesList;

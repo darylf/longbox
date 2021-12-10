@@ -6,9 +6,9 @@ interface GridProps<T> {
   render(item: T): React.ReactElement;
 }
 
-export const Grid = <T extends unknown>({
+export const Grid = function <T extends unknown>({
   items,
   render,
-}: GridProps<T>): ReactElement => {
+}: GridProps<T>): ReactElement {
   return <SimpleGrid px={8}>{items?.map((item) => render(item))}</SimpleGrid>;
 };

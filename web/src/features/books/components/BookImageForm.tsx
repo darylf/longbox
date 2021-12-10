@@ -8,7 +8,7 @@ interface BookImageFormProps {
   images: Array<Image>;
 }
 
-function BookImageForm({
+const BookImageForm = function ({
   bookId,
   images,
 }: BookImageFormProps): React.ReactElement {
@@ -43,6 +43,6 @@ function BookImageForm({
       </Table>
     </Box>
   );
-}
+};
 
 export default BookImageForm;

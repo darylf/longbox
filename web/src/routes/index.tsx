@@ -39,7 +39,7 @@ const { UsersRoutes } = lazyImport(
   "UsersRoutes"
 );
 
-const AppRoutes = (): ReactElement => {
+const AppRoutes = function (): ReactElement {
   const { authenticated } = useLoginState();
 
   const commonRoutes = [

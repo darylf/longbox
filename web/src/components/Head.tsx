@@ -6,7 +6,7 @@ type HeadProps = {
   description?: string;
 };
 
-export const Head = ({ title, description }: HeadProps = {}) => {
+export const Head = function ({ title, description }: HeadProps = {}) {
   return (
     <Helmet
       title={title ? `Longbox - ${title}` : undefined}

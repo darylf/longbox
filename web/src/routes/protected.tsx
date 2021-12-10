@@ -9,7 +9,7 @@ import { Navigate, Outlet } from "react-router-dom";
 // const { Profile } = lazyImport(() => import('@/features/users'), 'Profile');
 // const { Users } = lazyImport(() => import('@/features/users'), 'Users');
 
-const App = () => {
+const App = function () {
   return (
     // <MainLayout>
     <Outlet />

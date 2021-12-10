@@ -3,7 +3,7 @@ import React from "react";
 import Link from "../../../components/Link";
 import { usePublishersQuery } from "../api/publishers.query.generated";
 
-export const PublisherList = (): React.ReactElement => {
+export const PublisherList = function (): React.ReactElement {
   const { data, loading, error } = usePublishersQuery();
 
   if (loading) return <div>Loading...</div>;

@@ -17,13 +17,9 @@ export default function User(): ReactElement {
 
   return (
     <>
-      {user && (
-        <>
-          <Head title={`${user.username}'s Comic Book Profile`} />
-          <Heading>{user.username}</Heading>
-          <Image src={user.avatar} />
-        </>
-      )}
+      <Head title={`${user?.username}'s Comic Book Profile`} />
+      <Heading>{user?.username}</Heading>
+      <Image src={user?.avatar} />
     </>
   );
 }

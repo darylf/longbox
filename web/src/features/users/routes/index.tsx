@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import User from "./User";
 import Users from "./Users";
 
-export const UsersRoutes = (): ReactElement => {
+export const UsersRoutes = function (): ReactElement {
   return (
     <Routes>
       <Route path="" element={<Users />} />

@@ -4,7 +4,7 @@ import { Publisher, SortDirectionEnum } from "../../../types";
 import { usePublishersQuery } from "../api/publishers.query.generated";
 import PublisherCard from "./PublisherCard";
 
-function FeaturedPublishers() {
+const FeaturedPublishers = function () {
   const { data, loading, error } = usePublishersQuery({
     variables: {
       direction: SortDirectionEnum.Desc,
@@ -29,6 +29,6 @@ function FeaturedPublishers() {
       {(publisher) => <PublisherCard publisher={publisher} />}
     </FeaturedItem>
   );
-}
+};
 
 export default FeaturedPublishers;
