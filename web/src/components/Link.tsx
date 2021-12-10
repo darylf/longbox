@@ -10,14 +10,16 @@ import {
 
 type LinkProps = RouterLinkProps & ChakraLinkProps;
 
-const Link = ({ children, to, color }: LinkProps): ReactElement => (
-  <ChakraLink as={RouterLink} to={to} color={color}>
-    {children}
-  </ChakraLink>
-);
+const Link = function ({ children, to, color }: LinkProps): ReactElement {
+  return (
+    <ChakraLink as={RouterLink} to={to} color={color}>
+      {children}
+    </ChakraLink>
+  );
+};
 
 Link.defaultProps = {
-  children: <></>,
+  children: null,
   color: "blue.500",
 };
 

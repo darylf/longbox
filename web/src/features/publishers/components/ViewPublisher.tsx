@@ -13,9 +13,9 @@ interface ViewPublisherProps {
   publisher: Publisher;
 }
 
-export const ViewPublisher = ({
+export const ViewPublisher = function ({
   publisher,
-}: ViewPublisherProps): React.ReactElement => {
+}: ViewPublisherProps): React.ReactElement {
   return (
     <Stack>
       <Heading size="2xl" fontWeight={500}>

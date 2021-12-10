@@ -6,7 +6,7 @@ import { Creator } from "../../../types";
 interface Props {
   creator: Creator;
 }
-function ShowCreator({ creator }: Props): React.ReactElement {
+const ShowCreator = function ({ creator }: Props): React.ReactElement {
   const displayName = `${creator.firstName} ${creator.lastName}`;
 
   return (
@@ -32,6 +32,6 @@ function ShowCreator({ creator }: Props): React.ReactElement {
       <Text>Last updated at{creator.updatedAt}</Text>
     </>
   );
-}
+};
 
 export default ShowCreator;

@@ -22,7 +22,7 @@ import {
   UserAttributes,
 } from "../../../hooks/useAuthentication";
 
-export function LoginControl(): ReactElement {
+export const LoginControl = function (): ReactElement {
   return (
     <Flex alignItems="center">
       <HStack>
@@ -45,7 +45,7 @@ export function LoginControl(): ReactElement {
       </HStack>
     </Flex>
   );
-}
+};
 
 const DEFAULT_ROLE: Readonly<string> = "User";
 
@@ -60,7 +60,7 @@ function getUserType(user: { roles: string[] } | null): string {
 interface UserDropDownMenuProps {
   user: UserAttributes | null;
 }
-export function UserDropDownMenu({
+export const UserDropDownMenu = function ({
   user,
 }: UserDropDownMenuProps): ReactElement {
   const logout = useLogout();
@@ -101,11 +101,11 @@ export function UserDropDownMenu({
       </Menu>
     </Flex>
   );
-}
+};
 
-export function UserActions(): ReactElement {
+export const UserActions = function (): ReactElement {
   const loginState = useLoginState();
   if (!loginState.authenticated) return <LoginControl />;
 
   return <UserDropDownMenu user={loginState.user} />;
-}
+};

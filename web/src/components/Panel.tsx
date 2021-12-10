@@ -11,7 +11,7 @@ interface ObjId {
   id: Key;
 }
 
-function Panel<T extends ObjId>({
+const Panel = function <T extends ObjId>({
   headerText,
   items,
   render,
@@ -30,6 +30,6 @@ function Panel<T extends ObjId>({
       </Stack>
     </Box>
   );
-}
+};
 
 export default Panel;

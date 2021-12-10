@@ -9,10 +9,10 @@ const colors = {};
 
 const theme = extendTheme({ colors });
 
-function StyleProvider({ children }: Props): ReactElement {
+const StyleProvider = function ({ children }: Props): ReactElement {
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
-}
+};
 
-StyleProvider.defaultProps = { children: <></> };
+StyleProvider.defaultProps = { children: null };
 
 export default StyleProvider;

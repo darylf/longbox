@@ -1,5 +1,3 @@
-import React from "react";
-
 // const AutoComplete = ({ suggestions }) => {
 //   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 //   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
@@ -28,8 +26,8 @@ import React from "react";
 //   );
 // };
 
-const AutoComplete = () => {
-  return <></>;
+const AutoComplete = function () {
+  return null;
 };
 
 export default AutoComplete;

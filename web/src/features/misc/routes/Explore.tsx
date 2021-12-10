@@ -4,7 +4,7 @@ import { Head } from "../../../components/Head";
 import FeaturedPublishers from "../../publishers/components/FeaturedPublishers";
 import FeaturedSeriesList from "../../series/components/FeaturedSeriesList";
 
-function BrowseCollection(): ReactElement {
+const BrowseCollection = function (): ReactElement {
   return (
     <>
       <Head title="Explore" />
@@ -14,6 +14,6 @@ function BrowseCollection(): ReactElement {
       </Stack>
     </>
   );
-}
+};
 
 export default BrowseCollection;

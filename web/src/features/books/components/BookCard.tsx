@@ -15,7 +15,7 @@ interface BookCardProps {
   book: Book;
 }
 
-const BookCard = ({ book }: BookCardProps) => {
+const BookCard = function ({ book }: BookCardProps) {
   const { id, credits, displayName, publisher, coverImage, publicationDate } =
     book;
   const coverImg: string =

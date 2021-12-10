@@ -11,7 +11,7 @@ export interface ControlledAutoSuggestProps<T> {
   suggestions: Array<T>;
 }
 
-function ControlledAutoSuggest<T>({
+const ControlledAutoSuggest = function <T>({
   displayValue,
   getSuggestions,
   renderSuggestion,
@@ -42,6 +42,6 @@ function ControlledAutoSuggest<T>({
       suggestions={suggestions}
     />
   );
-}
+};
 
 export default ControlledAutoSuggest;

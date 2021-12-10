@@ -24,10 +24,10 @@ interface PublisherFormProps {
   showSubmitButton?: boolean;
 }
 
-const PublisherForm = ({
+const PublisherForm = function ({
   htmlId,
   showSubmitButton,
-}: PublisherFormProps): React.ReactElement => {
+}: PublisherFormProps): React.ReactElement {
   const [alert, setAlert] = useState<string>();
   const toast = useToast();
   const {
@@ -64,39 +64,37 @@ const PublisherForm = ({
   });
 
   return (
-    <>
-      <form id={htmlId} onSubmit={onSubmit}>
-        <Stack>
-          <Heading>Add Publisher</Heading>
-          {alert && (
-            <Box sx={{ mb: 2 }}>
-              <Alert severity="error">{alert}</Alert>
-            </Box>
-          )}
-          <FormControl isInvalid={errors.name !== undefined}>
-            <FormLabel htmlFor="name">Name</FormLabel>
-            <Input
-              id="name"
-              onBlur={nameField.onBlur}
-              onChange={nameField.onChange}
-              name={nameField.name}
-              ref={nameField.ref}
-            />
-            <FormErrorMessage>
-              {errors.name && errors.name.message}
-            </FormErrorMessage>
-          </FormControl>
-          <Button
-            mt={4}
-            colorScheme="teal"
-            isLoading={isSubmitting}
-            type="submit"
-          >
-            Submit
-          </Button>
-        </Stack>
-      </form>
-    </>
+    <form id={htmlId} onSubmit={onSubmit}>
+      <Stack>
+        <Heading>Add Publisher</Heading>
+        {alert && (
+          <Box sx={{ mb: 2 }}>
+            <Alert severity="error">{alert}</Alert>
+          </Box>
+        )}
+        <FormControl isInvalid={errors.name !== undefined}>
+          <FormLabel htmlFor="name">Name</FormLabel>
+          <Input
+            id="name"
+            onBlur={nameField.onBlur}
+            onChange={nameField.onChange}
+            name={nameField.name}
+            ref={nameField.ref}
+          />
+          <FormErrorMessage>
+            {errors.name && errors.name.message}
+          </FormErrorMessage>
+        </FormControl>
+        <Button
+          mt={4}
+          colorScheme="teal"
+          isLoading={isSubmitting}
+          type="submit"
+        >
+          Submit
+        </Button>
+      </Stack>
+    </form>
   );
 };
 

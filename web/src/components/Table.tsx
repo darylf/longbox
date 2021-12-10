@@ -21,7 +21,9 @@ const renderColumn = <T extends unknown>(
   item: T,
   column: Column<T>
 ): ReactElement => {
+  /* eslint-disable react/jsx-no-useless-fragment */
   if (column.render === undefined) return <>{item[column.key]}</>;
+  /* eslint-enable react/jsx-no-useless-fragment */
   return column.render(item);
 };
 
@@ -30,10 +32,10 @@ interface TableProps<T> {
   columns: Array<Column<T>>;
 }
 
-export const Table = <T extends unknown>({
+export const Table = function <T extends unknown>({
   items,
   columns: columnDefs,
-}: TableProps<T>): ReactElement => {
+}: TableProps<T>): ReactElement {
   const columns = columnDefs.sort((a, b) =>
     nvl(a.position) > nvl(b.position) ? 1 : -1
   );

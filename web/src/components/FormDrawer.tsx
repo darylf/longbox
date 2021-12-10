@@ -22,7 +22,7 @@ interface FormDrawerProps {
   onClose?(): void;
 }
 
-function FormDrawer({
+const FormDrawer = function ({
   id,
   children,
   openButtonText,
@@ -58,7 +58,7 @@ function FormDrawer({
       </Drawer>
     </>
   );
-}
+};
 
 FormDrawer.defaultProps = {
   openButtonText: "Show Form",

@@ -7,7 +7,7 @@ interface PublisherCardProps {
   publisher: Publisher;
 }
 
-function PublisherCard({ publisher }: PublisherCardProps) {
+const PublisherCard = function ({ publisher }: PublisherCardProps) {
   return (
     <Flex p={50} w="full" alignItems="center" justifyContent="center">
       <Box
@@ -42,6 +42,6 @@ function PublisherCard({ publisher }: PublisherCardProps) {
       </Box>
     </Flex>
   );
-}
+};
 
 export default PublisherCard;

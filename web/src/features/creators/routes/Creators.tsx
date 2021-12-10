@@ -8,7 +8,7 @@ import { CreatorList } from "../components/CreatorList";
 
 const formHtmlId = "creator-form";
 
-export const Creators = (): React.ReactElement => {
+const Creators = function (): React.ReactElement {
   return (
     <>
       <Head title="All Creators" />

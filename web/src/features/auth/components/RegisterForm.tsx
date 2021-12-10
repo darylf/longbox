@@ -45,10 +45,8 @@ function RegisterForm(): ReactElement {
       Error:
       {error?.message}
     </div>
-  ) : (
-    <></>
-  );
-  const displaySuccess = data ? <div>Registration successful</div> : <></>;
+  ) : null;
+  const displaySuccess = data ? <div>Registration successful</div> : null;
 
   return (
     <div>

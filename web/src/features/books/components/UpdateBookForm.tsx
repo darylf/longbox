@@ -22,10 +22,10 @@ interface FormWithBookIdProps extends FormProps {
   bookId?: string;
 }
 
-const FormWithBookId = ({
+const FormWithBookId = function ({
   bookId,
   title,
-}: FormWithBookIdProps): ReactElement => {
+}: FormWithBookIdProps): ReactElement {
   if (bookId === undefined) return <>Missing book id</>;
 
   const { data, loading, error } = useBookQuery({

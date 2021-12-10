@@ -3,7 +3,7 @@ import React from "react";
 import Link from "../../../components/Link";
 import { useCreatorsQuery } from "../api/creators.query.generated";
 
-export const CreatorList = (): React.ReactElement => {
+export const CreatorList = function (): React.ReactElement {
   const { data, loading, error } = useCreatorsQuery();
 
   if (loading) return <div>Loading...</div>;

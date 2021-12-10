@@ -11,7 +11,7 @@ interface Props {
   series: Series;
 }
 
-function ShowSeries({ series }: Props): React.ReactElement {
+const ShowSeries = function ({ series }: Props): React.ReactElement {
   const [selectedBookId, setSelectedBookId] = useState<string | undefined>();
   const formHtmlId = "edit-book";
   const [isOpen, setIsOpen] = useState(false);
@@ -78,6 +78,6 @@ function ShowSeries({ series }: Props): React.ReactElement {
       <Text fontSize="sm">Last updated at {series.updatedAt}</Text>
     </>
   );
-}
+};
 
 export default ShowSeries;
