@@ -204,7 +204,7 @@ GEM
     rubocop-rspec (2.7.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
-    shoulda-matchers (5.0.0)
+    shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     simplecov (0.21.2)
       docile (~> 1.1)
@@ -260,7 +260,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   ruby-progressbar
-  shoulda-matchers (~> 5.0)
+  shoulda-matchers (~> 5.1)
   simplecov
   spring (~> 2.1)
   spring-watcher-listen (~> 2.0.0)
