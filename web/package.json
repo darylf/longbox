@@ -20,7 +20,7 @@
     "@emotion/styled": "^11",
     "@types/react-autosuggest": "^10.1.5",
     "framer-motion": "^5",
-    "graphql": "^15.8.0",
+    "graphql": "^16.2.0",
     "history": "^5.1.0",
     "react": "^17.0.0",
     "react-autosuggest": "^10.1.0",
