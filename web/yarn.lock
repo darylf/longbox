@@ -1942,14 +1942,14 @@
     change-case-all "1.0.14"
     tslib "~2.3.0"
 
-"@graphql-codegen/near-operation-file-preset@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/near-operation-file-preset/-/near-operation-file-preset-2.2.4.tgz#e85c76d98f68317e17b333532dc4519e98ed5f38"
-  integrity sha512-HGQ1updIl4xqG6OvByG32v9toAK8mrvW6WRZVfcexNb5+zTQjZ0He31NuUNL5GQs5MEZiusdzPP1m5MqWctqrw==
+"@graphql-codegen/near-operation-file-preset@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/near-operation-file-preset/-/near-operation-file-preset-2.2.6.tgz#f2a7f943b82a54199a2e8165c10bc461f6e9aba4"
+  integrity sha512-c72G08DDqTYGG1TWRbWfOxX3csjjuZciPOpyM0352tBF6otKIypnxFj+inEnenjWeIY5PrGOIU2J5Uyz8IGaAw==
   dependencies:
     "@graphql-codegen/add" "^3.1.1"
     "@graphql-codegen/plugin-helpers" "^2.4.0"
-    "@graphql-codegen/visitor-plugin-common" "2.6.0"
+    "@graphql-codegen/visitor-plugin-common" "2.7.1"
     "@graphql-tools/utils" "^8.5.2"
     parse-filepath "^1.0.2"
     tslib "~2.3.0"
@@ -8459,10 +8459,10 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-hook-form@^7.26.1:
-  version "7.26.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.26.1.tgz#8f5c0aa81a452f5ebcb6a2d7253800011e735b1c"
-  integrity sha512-/Qw/7IsCCVfYSGryJAMcouEpIDgWZJPeHR15J0IFSgo1BgofcfnY+AeUDcYD1E3yzzXYpR7NHyJehhkBKvjdMg==
+react-hook-form@^7.27.1:
+  version "7.27.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.27.1.tgz#fe5fbcb6bf58751f66d9569e998d671480cc57f6"
+  integrity sha512-N3a7A6zIQ8DJeThisVZGtOUabTbJw+7DHJidmB9w8m3chckv2ZWKb5MHps9d2pPJqmCDoWe53Bos56bYmJms5w==
 
 react-icons@^4.3.1:
   version "4.3.1"

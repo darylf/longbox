@@ -28,7 +28,7 @@
     "react-error-boundary": "^3.1.4",
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^1.2.2",
-    "react-hook-form": "^7.26.1",
+    "react-hook-form": "^7.27.1",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1"
   },
@@ -42,7 +42,7 @@
     "@graphql-codegen/import-types-preset": "^2.1.9",
     "@graphql-codegen/introspection": "^2.1.1",
     "@graphql-codegen/named-operations-object": "^2.2.1",
-    "@graphql-codegen/near-operation-file-preset": "^2.2.4",
+    "@graphql-codegen/near-operation-file-preset": "^2.2.6",
     "@graphql-codegen/typescript": "^2.4.5",
     "@graphql-codegen/typescript-operations": "^2.3.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.8",
