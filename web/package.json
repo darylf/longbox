@@ -14,7 +14,7 @@
     "test:watch": "jest  --config config/jest.config.js --watchAll"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.9",
+    "@apollo/client": "^3.5.10",
     "@chakra-ui/react": "^1.8.5",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -69,7 +69,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-plugin-testing-library": "^5.0.5",
+    "eslint-plugin-testing-library": "^5.0.6",
     "graphql-tag": "^2.12.6",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
