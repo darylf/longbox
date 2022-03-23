@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
-    "@chakra-ui/react": "^1.8.5",
+    "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@types/react-autosuggest": "^10.1.5",
@@ -42,7 +42,7 @@
     "@graphql-codegen/import-types-preset": "^2.1.14",
     "@graphql-codegen/introspection": "^2.1.1",
     "@graphql-codegen/named-operations-object": "^2.2.1",
-    "@graphql-codegen/near-operation-file-preset": "^2.2.6",
+    "@graphql-codegen/near-operation-file-preset": "^2.2.9",
     "@graphql-codegen/typescript": "^2.4.5",
     "@graphql-codegen/typescript-operations": "^2.3.5",
     "@graphql-codegen/typescript-react-apollo": "^3.2.11",
