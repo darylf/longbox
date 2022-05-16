@@ -22,7 +22,7 @@ gem "interactor"
 gem 'puma', '~> 5.6.4'
 
 group :development do
-  gem 'faker', '~> 2.20.0'
+  gem 'faker', '~> 2.21.0'
   gem 'graphiql-rails'
   gem 'listen', '>= 3.3'
   gem "rubocop", require: false
