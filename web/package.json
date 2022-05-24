@@ -14,7 +14,7 @@
     "test:watch": "jest  --config config/jest.config.js --watchAll"
   },
   "dependencies": {
-    "@apollo/client": "^3.6.4",
+    "@apollo/client": "^3.6.5",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -63,7 +63,7 @@
     "eslint-config-airbnb-typescript": "^14.0.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.1.5",
+    "eslint-plugin-jest": "^26.2.2",
     "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
