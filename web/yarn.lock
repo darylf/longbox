@@ -1975,14 +1975,14 @@
     "@graphql-codegen/plugin-helpers" "^2.3.2"
     tslib "~2.3.0"
 
-"@graphql-codegen/import-types-preset@^2.1.18":
-  version "2.1.18"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/import-types-preset/-/import-types-preset-2.1.18.tgz#f4bb6b3e8528434631082ed5977bdc8eafbcbaa2"
-  integrity sha512-b/lyeXp1GEbfzBjMW3aRBr1Fb9TZOH3GRf5R/kkyMHQUWhodfn+lXtlkos6Eh5NcK4Npavu4Jw6HWuQ7OwwFJw==
+"@graphql-codegen/import-types-preset@^2.1.20":
+  version "2.1.20"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/import-types-preset/-/import-types-preset-2.1.20.tgz#56300e4dd0152a62371fe25f6bb9ffd39586ed71"
+  integrity sha512-Mb1m+wRq/3+iaeaRGZIftYi6i3eNnRVg6QYkhtuSssJ2EA+o4CcUJ1J83FKoHQzT8umX309dsGnP91boZLel2Q==
   dependencies:
     "@graphql-codegen/add" "^3.1.1"
     "@graphql-codegen/plugin-helpers" "^2.4.0"
-    "@graphql-codegen/visitor-plugin-common" "2.8.0"
+    "@graphql-codegen/visitor-plugin-common" "2.9.1"
     tslib "~2.4.0"
 
 "@graphql-codegen/introspection@^2.1.1":
@@ -8539,10 +8539,10 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-hook-form@^7.31.3:
-  version "7.31.3"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.31.3.tgz#b61bafb9a7435f91695351a7a9f714d8c4df0121"
-  integrity sha512-NVZdCWViIWXXXlQ3jxVQH0NuNfwPf8A/0KvuCxrM9qxtP1qYosfR2ZudarziFrVOC7eTUbWbm1T4OyYCwv9oSQ==
+react-hook-form@^7.32.1:
+  version "7.32.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.32.1.tgz#103de7b7ef3a7d295264433e4464bd17c8e4bdc9"
+  integrity sha512-A0bsgZZUnGdG68sXLBNMN7zRYKbYc/ESjDkjrJZ8PZ8/96EQ0IwMfYY3wpopt+yn2+Mm3APEUkw+JdjYQSRVJA==
 
 react-icons@^4.4.0:
   version "4.4.0"
