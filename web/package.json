@@ -44,7 +44,7 @@
     "@graphql-codegen/named-operations-object": "^2.3.1",
     "@graphql-codegen/near-operation-file-preset": "^2.4.4",
     "@graphql-codegen/typescript": "^2.8.0",
-    "@graphql-codegen/typescript-operations": "^2.5.6",
+    "@graphql-codegen/typescript-operations": "^2.5.7",
     "@graphql-codegen/typescript-react-apollo": "^3.3.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
