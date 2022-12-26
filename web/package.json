@@ -57,7 +57,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "babel-jest": "^29.3.1",
     "clean-webpack-plugin": "^4.0.0",
-    "css-loader": "^6.7.2",
+    "css-loader": "^6.7.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^14.0.2",
